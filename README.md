@@ -1,1 +1,3 @@
 # nvim
+
+personal nvim configure
