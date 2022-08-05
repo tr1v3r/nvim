@@ -2,4 +2,5 @@
 .DS_Store
 view/
 plugged/
+tmp/
 _device.vim
