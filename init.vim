@@ -1,4 +1,11 @@
-" ==================== Auto load for first time uses ====================
+" =========================== vimrc ===========================
+"  ____  _       _____       __     _____ __  __ ____   ____
+" |  _ \/ |_   _|___ / _ __  \ \   / /_ _|  \/  |  _ \ / ___|
+" | |_) | \ \ / / |_ \| '__|  \ \ / / | || |\/| | |_) | |
+" |  _ <| |\ V / ___) | |      \ V /  | || |  | |  _ <| |___
+" |_| \_\_| \_/ |____/|_|       \_/  |___|_|  |_|_| \_\\____|
+"
+" ==================== Start up check ====================
 if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 	silent !curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -19,11 +26,10 @@ endif
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " ================ Settings ================
-syntax on
-colorscheme monokai
 set termguicolors
 set t_Co=256  " vim-monokai now only support 256 colours in terminal.
 
+syntax on
 set number
 set relativenumber
 set showcmd
@@ -168,10 +174,10 @@ noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap si :set splitright<CR>:vsplit<CR>
 
 " Resize window
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
+noremap <silent> <up> :res +5<CR>
+noremap <silent> <down> :res -5<CR>
+noremap <silent> <left> :vertical resize-5<CR>
+noremap <silent> <right> :vertical resize+5<CR>
 
 " Place the two screens up and down
 noremap sh <C-w>t<C-w>K
@@ -220,8 +226,12 @@ noremap \s :%s//g<left><left>
 " set wrap
 noremap <LEADER>sw :set wrap<CR>
 
+" ============ Language: golang ============
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap R :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
@@ -274,6 +284,7 @@ func! CompileRunGcc()
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
+		:res -5
 		:term go run .
 	endif
 endfunc
@@ -306,7 +317,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoInstallBinaries' }
 
 " HTML, CSS, JavaScript, Typescript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
@@ -347,6 +358,7 @@ Plug 'nvim-pack/nvim-spectre'
 
 " Color Theme
 Plug 'crusoexia/vim-monokai'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
@@ -359,5 +371,29 @@ call plug#end()
 "   syntax off            " Disable syntax highlighting
 
 " ============ airline ============
-let g:airline_theme='molokai'
+let g:airline_theme = 'material'
 " let g:airline#extensions#tabline#enabled = 1
+
+" ============ color theme ============
+let g:material_theme_style = 'ocean-community'
+" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
+color material
+
+" ============ vim-go ============
+let g:go_fmt_command = 'goimports'
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_doc_keywordprg_enabled = 0
+
