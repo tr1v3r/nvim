@@ -14,6 +14,10 @@ el
 	source $HOME/.config/nvim/_device.vim
 endif
 
+" 设置 vimrc 修改保存后立刻生效，不用在重新打开
+" 建议配置完成后将这个关闭
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 " ================ Settings ================
 syntax on
 set number
@@ -349,3 +353,4 @@ call plug#end()
 
 " ============ airline ============
 let g:airline_theme='molokai'
+" let g:airline#extensions#tabline#enabled = 1
