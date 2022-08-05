@@ -6,9 +6,12 @@ if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 endif
 
 let g:nvim_plugins_installation_completed=1
-if empty(glob($HOME.'/.config/nvim/plugged/wildfire.vim/autoload/wildfire.vim'))
-	let g:nvim_plugins_installation_completed=0
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+
+let device_specificed = 1
+if empty(glob($HOME.'/.config/nvim/_device.vim'))
+	echo 'device vim not found'
+el
+	source $HOME/.config/nvim/_device.vim
 endif
 
 " ================ Settings ================ 
