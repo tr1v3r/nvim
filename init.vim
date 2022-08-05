@@ -284,6 +284,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Airline bar
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Github Copilot
 Plug 'github/copilot.vim'
@@ -345,3 +346,6 @@ call plug#end()
 " You can revert the settings after the call like so:
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
+
+" ============ airline ============
+let g:airline_theme='molokai'
