@@ -20,6 +20,10 @@ endif
 
 " ================ Settings ================
 syntax on
+colorscheme monokai
+set termguicolors
+set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+
 set number
 set relativenumber
 set showcmd
@@ -340,6 +344,9 @@ Plug 'reedes/vim-wordy'
 " Find & Replace
 Plug 'nvim-lua/plenary.nvim' " nvim-spectre dep
 Plug 'nvim-pack/nvim-spectre'
+
+" Color Theme
+Plug 'crusoexia/vim-monokai'
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
