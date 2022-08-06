@@ -6,7 +6,7 @@
       "configuration": {
         "request": "launch",
         "program": "${workspaceRoot}",
-        "mode": "auto",
+        "mode": "debug",
         "dlvToolPath": "$HOME/go/bin/dlv"
       }
     }
@@ -17,7 +17,7 @@
       "configuration": {
         "request": "launch",
         "program": "${fileDirname}",
-        "mode": "auto",
+        "mode": "debug",
         "dlvToolPath": "$HOME/go/bin/dlv"
       }
     }
