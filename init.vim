@@ -112,6 +112,7 @@ nnoremap S :w<CR>
 "map R :source $MYVIMRC<CR>
 
 noremap ; :
+noremap ` ~
 
 " ==================== Cursor Movement ====================
 " New cursor movement (the default arrow keys are used for resizing windows)
@@ -309,13 +310,17 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'github/copilot.vim'
 
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
 Plug 'wellle/tmux-complete.vim'
 
+" Debugger
+Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go --enable-rust --enable-python --enable-bash' }
+
+" Golang
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoInstallBinaries' }
 
@@ -379,6 +384,31 @@ let g:material_theme_style = 'ocean-community'
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
 color material
 
+" ============ nerdtree ============
+
+" ==================== vimspector ====================
+let g:vimspector_enable_mappings = 'HUMAN'
+function! s:read_template_into_buffer(template)
+	" has to be a function to avoid the extra space fzf#run insers otherwise
+	execute '0r ~/.config/nvim/vimspector_sample_json/'.a:template
+endfunction
+command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
+			\   'source': 'ls -1 ~/.config/nvim/vimspector_sample_json',
+			\   'down': 20,
+			\   'sink': function('<sid>read_template_into_buffer')
+			\ })
+noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+sign define vimspectorBP text=☛ texthl=Normal
+sign define vimspectorBPDisabled text=☞ texthl=Normal
+sign define vimspectorPC text=🔶 texthl=SpellBad
+
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
 " ============ vim-go ============
 let g:go_fmt_command = 'goimports'
 let g:go_list_type = "quickfix"
@@ -396,4 +426,13 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 let g:go_doc_keywordprg_enabled = 0
+
+let g:go_debug_windows = {
+	\ 'vars':       'rightbelow 30vnew',
+	\ 'goroutines': '10new',
+	\ 'stack':      '20new',
+	\ 'out':        'bot 5new',
+\ }
+let g:go_debug_preserve_layout = 1
+let g:go_debug_log_output = ''
 
