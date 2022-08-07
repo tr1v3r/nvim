@@ -169,7 +169,7 @@ noremap <LEADER>i <C-w>l
 noremap qf <C-w>o
 
 " Split the screens to up/down/left/right
-noremap su :set nosliptbelow<CR>:split<CR>:set splitbelow<CR>
+noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap se :set splitbelow<CR>:split<CR>
 noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap si :set splitright<CR>:vsplit<CR>
@@ -211,7 +211,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " Open a new instance of st with the cwd
 nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 " Spelling Check with <space>sc
@@ -226,10 +226,10 @@ noremap tx :r !figlet
 noremap \s :%s//g<left><left>
 " set wrap
 noremap <LEADER>sw :set wrap<CR>
+" close tab
+noremap <LEADER>tw :tabclose<CR>
 
 " ============ Language: golang ============
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 " Compile function
 noremap R :call CompileRunGcc()<CR>
@@ -388,6 +388,9 @@ color material
 
 " ==================== vimspector ====================
 let g:vimspector_enable_mappings = 'HUMAN'
+sign define vimspectorBP text=⛔ texthl=Normal
+sign define vimspectorBPDisabled text=⭕ texthl=Normal
+sign define vimspectorPC text=👉 texthl=SpellBad
 function! s:read_template_into_buffer(template)
 	" has to be a function to avoid the extra space fzf#run insers otherwise
 	execute '0r ~/.config/nvim/vimspector_sample_json/'.a:template
@@ -397,19 +400,37 @@ command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
 			\   'down': 20,
 			\   'sink': function('<sid>read_template_into_buffer')
 			\ })
-noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-sign define vimspectorBP text=☛ texthl=Normal
-sign define vimspectorBPDisabled text=☞ texthl=Normal
-sign define vimspectorPC text=🔶 texthl=SpellBad
+noremap <LEADER>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+nnoremap <LEADER>dR :call vimspector#Reset()<CR>
+nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
+nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
+nnoremap <LEADER>dw :call AddToWatch()<CR>
+nnoremap <LEADER>dt :call DebugUnitTest()<CR>
 
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 
 " for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
+autocmd FileType go nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
+autocmd FileType go xmap <Leader>direferences <Plug>VimspectorBalloonEval
+
+func! AddToWatch()
+	let expr = expand("<cexpr>")
+	call vimspector#AddWatch(expr)
+endfunc
+" let go:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
+
+func! DebugUnitTest()
+	let funcName = CocAction("getCurrentFunctionSymbol")
+	call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: '^'.funcName.'$' })
+endfunc
+
+" "args": [ "*${CommandLineArgs}" ]
 
 " ============ vim-go ============
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
 let g:go_fmt_command = 'goimports'
 let g:go_list_type = "quickfix"
 
@@ -435,4 +456,9 @@ let g:go_debug_windows = {
 \ }
 let g:go_debug_preserve_layout = 1
 let g:go_debug_log_output = ''
+
+" ============ coc ============
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> rn <Plug>(coc-rename)
 

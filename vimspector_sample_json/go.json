@@ -7,7 +7,8 @@
         "request": "launch",
         "program": "${workspaceRoot}",
         "mode": "debug",
-        "dlvToolPath": "$HOME/go/bin/dlv"
+        "dlvToolPath": "$HOME/go/bin/dlv",
+        "dlvFlags": [ "--check-go-version=false" ]
       }
     },
     "Launch File": {
@@ -18,6 +19,20 @@
         "program": "${fileDirname}",
         "mode": "debug",
         "dlvToolPath": "$HOME/go/bin/dlv"
+      }
+    },
+    "Launch Test":{
+      "adapter": "vscode-go",
+      "filetypes": [ "go" ],
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "test",
+        "dlvToolPath": "$HOME/go/bin/dlv",
+        "args": [
+            "-test.v",
+            "-test.run", "${UnitTestFunc}"
+        ]
       }
     }
   }
