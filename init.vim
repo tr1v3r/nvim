@@ -202,6 +202,18 @@ noremap ti :+tabnext<CR>
 noremap tmn :-tabmove<CR>
 noremap tmi :+tabmove<CR>
 
+" Tab switch
+:nn <Leader>1 1gt
+:nn <Leader>2 2gt
+:nn <Leader>3 3gt
+:nn <Leader>4 4gt
+:nn <Leader>5 5gt
+:nn <Leader>6 6gt
+:nn <Leader>7 7gt
+:nn <Leader>8 8gt
+:nn <Leader>9 9gt
+:nn <Leader>0 :tablast<CR>
+
 " ==================== Markdown Settings ====================
 " Snippets
 source $HOME/.config/nvim/md-snippets.vim
@@ -225,10 +237,10 @@ autocmd BufEnter * silent! lcd %:p:h
 noremap tx :r !figlet 
 " Find and replace
 noremap \s :%s//g<left><left>
-" set wrap
+" Set wrap
 noremap <LEADER>sw :set wrap<CR>
-" close tab
-noremap <LEADER>tw :tabclose<CR>
+" Close tab
+noremap tw :tabclose<CR>
 
 " ============ Language: golang ============
 
@@ -310,11 +322,12 @@ Plug 'vim-airline/vim-airline-themes'
 " Github Copilot
 Plug 'github/copilot.vim'
 
-" On-demand loading
+" Outline and file manager
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'majutsushi/tagbar'
 
 " File navigation
 Plug 'ibhagwan/fzf-lua'
@@ -416,20 +429,26 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
+" let g:NERDTreeWinSize = 33
+" let g:NERDTreeShowLineNumbers = 1
+
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
 
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
 " Open the existing NERDTree on each new tab.
-"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+autocmd BufWinEnter * if tabpagenr('$') != 1 && getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 noremap tt :NERDTreeToggle<CR>
 let NERDTreeMapOpenExpl = ""
 let NERDTreeMapUpdir = "N"
 let NERDTreeMapUpdirKeepOpen = ""
-let NERDTreeMapOpenSplit = "s"
-" let NERDTreeMapPreviewSplit = "S"
+let NERDTreeMapOpenSplit = "gs"
+" let NERDTreeMapPreviewSplit = ""
 let NERDTreeMapOpenVSplit = "vs"
-" let NERDTreeMapPreviewVSplit = "VS"
+" let NERDTreeMapPreviewVSplit = ""
 let NERDTreeMapActivateNode = "i"
 let NERDTreeMapPreview = "I"
 let NERDTreeMapOpenInTab = "o"
