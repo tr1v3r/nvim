@@ -312,6 +312,9 @@ Plug 'github/copilot.vim'
 
 " On-demand loading
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " File navigation
 Plug 'ibhagwan/fzf-lua'
@@ -390,7 +393,48 @@ let g:material_theme_style = 'ocean-community'
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
 color material
 
+" ============ devicons ============
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+
 " ============ nerdtree ============
+" 忽略以下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+
+" Open the existing NERDTree on each new tab.
+"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+
+noremap tt :NERDTreeToggle<CR>
+let NERDTreeMapOpenExpl = ""
+let NERDTreeMapUpdir = "N"
+let NERDTreeMapUpdirKeepOpen = ""
+let NERDTreeMapOpenSplit = "s"
+" let NERDTreeMapPreviewSplit = "S"
+let NERDTreeMapOpenVSplit = "vs"
+" let NERDTreeMapPreviewVSplit = "VS"
+let NERDTreeMapActivateNode = "i"
+let NERDTreeMapPreview = "I"
+let NERDTreeMapOpenInTab = "o"
+let NERDTreeMapCloseDir = "n"
+let NERDTreeMapChangeRoot = "y"
 
 " ==================== vimspector ====================
 let g:vimspector_enable_mappings = 'HUMAN'
