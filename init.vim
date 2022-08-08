@@ -120,6 +120,7 @@ noremap ` ~
 "     u
 " < n   i >
 "     e
+"     v
 noremap <silent> n h
 noremap <silent> e j
 noremap <silent> u k
@@ -312,6 +313,11 @@ Plug 'github/copilot.vim'
 " On-demand loading
 Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 
+" File navigation
+Plug 'ibhagwan/fzf-lua'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
@@ -400,12 +406,13 @@ command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
 			\   'down': 20,
 			\   'sink': function('<sid>read_template_into_buffer')
 			\ })
-noremap <LEADER>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-nnoremap <LEADER>dR :call vimspector#Reset()<CR>
-nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
-nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
-nnoremap <LEADER>dw :call AddToWatch()<CR>
-nnoremap <LEADER>dt :call DebugUnitTest()<CR>
+
+autocmd FileType go noremap <LEADER>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+autocmd FileType go nnoremap <LEADER>dR :call vimspector#Reset()<CR>
+autocmd FileType go nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
+autocmd FileType go nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
+autocmd FileType go nnoremap <LEADER>dw :call AddToWatch()<CR>
+autocmd FileType go nnoremap <LEADER>dt :call DebugUnitTest()<CR>
 
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 
