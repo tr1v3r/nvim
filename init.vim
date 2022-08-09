@@ -5,6 +5,8 @@
 " |  _ <| |\ V / ___) | |      \ V /  | || |  | |  _ <| |___
 " |_| \_\_| \_/ |____/|_|       \_/  |___|_|  |_|_| \_\\____|
 "
+" Author: @riverchu(R1v3r)
+"
 " ==================== Start up check ====================
 if empty(glob($HOME.'/.config/nvim/autoload/plug.vim'))
 	silent !curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
@@ -70,7 +72,7 @@ set visualbell
 set colorcolumn=120
 set updatetime=100
 set virtualedit=block
-set signcolumn=number
+" set signcolumn=number
 
 let &t_ut=''
 silent !mkdir -p $HOME/.config/nvim/tmp/backup
@@ -199,9 +201,9 @@ noremap tU :tab split<CR>
 " Move around tabs with tn and ti
 noremap tn :-tabnext<CR>
 noremap ti :+tabnext<CR>
-" Move the tabs with tmn and tmi
-noremap tmn :-tabmove<CR>
-noremap tmi :+tabmove<CR>
+" Move the tabs with tN and tI
+noremap tN :-tabmove<CR>
+noremap tI :+tabmove<CR>
 
 " Tab switch
 :nn <Leader>1 1gt
@@ -324,11 +326,19 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'github/copilot.vim'
 
 " Outline and file manager
-Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'majutsushi/tagbar'
+
+" Git
+Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
+"Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'
+Plug 'kdheepak/lazygit.nvim'
 
 " File navigation
 Plug 'ibhagwan/fzf-lua'
@@ -413,48 +423,72 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 
-" ============ nerdtree ============
-" 忽略以下文件的显示
-let NERDTreeIgnore=['\.pyc','\~$','\.swp']
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
-let g:NERDTreeGitStatusUseNerdFonts = 1
+" " ============ nerdtree ============
+" " 忽略以下文件的显示
+" let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" let g:NERDTreeGitStatusIndicatorMapCustom = {
+"     \ "Modified"  : "✹",
+"     \ "Staged"    : "✚",
+"     \ "Untracked" : "✭",
+"     \ "Renamed"   : "➜",
+"     \ "Unmerged"  : "═",
+"     \ "Deleted"   : "✖",
+"     \ "Dirty"     : "✗",
+"     \ "Clean"     : "✔︎",
+"     \ 'Ignored'   : '☒',
+"     \ "Unknown"   : "?"
+"     \ }
+" let g:NERDTreeGitStatusUseNerdFonts = 1
+" 
+" " let g:NERDTreeWinSize = 33
+" " let g:NERDTreeShowLineNumbers = 1
+" 
+" " Start NERDTree and put the cursor back in the other window.
+" " autocmd VimEnter * NERDTree | wincmd p
+" 
+" " Exit Vim if NERDTree is the only window remaining in the only tab.
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" 
+" " Open the existing NERDTree on each new tab.
+" autocmd BufWinEnter * if tabpagenr('$') != 1 && getcmdwintype() == '' | silent NERDTreeMirror | endif
+" 
+" noremap tt :NERDTreeToggle<CR>
+" let NERDTreeMapOpenExpl = ""
+" let NERDTreeMapUpdir = "N"
+" let NERDTreeMapUpdirKeepOpen = ""
+" let NERDTreeMapOpenSplit = "gs"
+" " let NERDTreeMapPreviewSplit = ""
+" let NERDTreeMapOpenVSplit = "vs"
+" " let NERDTreeMapPreviewVSplit = ""
+" let NERDTreeMapActivateNode = "i"
+" let NERDTreeMapPreview = "I"
+" let NERDTreeMapOpenInTab = "o"
+" let NERDTreeMapCloseDir = "n"
+" let NERDTreeMapChangeRoot = "y"
 
-" let g:NERDTreeWinSize = 33
-" let g:NERDTreeShowLineNumbers = 1
+" ==================== GitGutter ====================
+" let g:gitgutter_signs = 0
+let g:gitgutter_sign_allow_clobber = 0
+let g:gitgutter_map_keys = 0
+let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '░'
+let g:gitgutter_sign_removed = '▏'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▒'
+nnoremap <LEADER>gf :GitGutterFold<CR>
+nnoremap H :GitGutterPreviewHunk<CR>
+nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
+nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+" ==================== lazygit.nvim ====================
+noremap <c-g> :LazyGit<CR>
+let g:lazygit_floating_window_winblend = 0 " transparency of floating window
+let g:lazygit_floating_window_scaling_factor = 1.0 " scaling factor for floating window
+let g:lazygit_floating_window_corner_chars = ['╭', '╮', '╰', '╯'] " customize lazygit popup window corner characters
+let g:lazygit_use_neovim_remote = 1 " for neovim-remote support
 
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if tabpagenr('$') != 1 && getcmdwintype() == '' | silent NERDTreeMirror | endif
-
-noremap tt :NERDTreeToggle<CR>
-let NERDTreeMapOpenExpl = ""
-let NERDTreeMapUpdir = "N"
-let NERDTreeMapUpdirKeepOpen = ""
-let NERDTreeMapOpenSplit = "gs"
-" let NERDTreeMapPreviewSplit = ""
-let NERDTreeMapOpenVSplit = "vs"
-" let NERDTreeMapPreviewVSplit = ""
-let NERDTreeMapActivateNode = "i"
-let NERDTreeMapPreview = "I"
-let NERDTreeMapOpenInTab = "o"
-let NERDTreeMapCloseDir = "n"
-let NERDTreeMapChangeRoot = "y"
 
 " ==================== vimspector ====================
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -530,7 +564,22 @@ let g:go_debug_log_output = ''
 
 " ============ coc ============
 " coc-marketplace
-let g:coc_global_extensions = [ 'coc-json', 'coc-vimlsp' ]
+let g:coc_global_extensions = [
+	\ 'coc-json',
+	\ 'coc-yaml',
+	\ 'coc-vimlsp',
+	\ 'coc-docker',
+	\ 'coc-explorer',
+	\ 'coc-gitignore',
+	\ 'coc-html',
+	\ 'coc-prettier',
+	\ 'coc-snippets',
+	\ 'coc-lists',
+	\ 'coc-yank',
+	\ 'coc-syntax',
+	\ 'coc-tasks',
+	\ 'coc-translator'
+\ ]
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -547,16 +596,61 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 inoremap <silent><expr> <c-o> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
+nnoremap <c-c> :CocCommand<CR>
+nmap tt :CocCommand explorer<CR>
+
+" Use `-` and `=` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nnoremap <silent><nowait> <LEADER>dd :CocList diagnostics<CR>
 nmap <silent> <LEADER>- <Plug>(coc-diagnostic-prev)
 nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> rn <Plug>(coc-rename)
 
+" Use K to show documentation in preview window.
+nnoremap <silent> <LEADER>h :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+  call CocActionAsync('highlight')
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Format selected code
+xmap <LEADER>f <Plug>(coc-format-selected)
+nmap <LEADER>f <Plug>(coc-format-selected)
+
+" Text Objects
+xmap kf <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap kf <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+xmap kc <Plug>(coc-classobj-i)
+omap kc <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
+
+" codeaction
+xmap <LEADER>a  <Plug>(coc-codeaction-selected)
+nmap <LEADER>aw  <Plug>(coc-codeaction-selected)w
+
+" coc-snippets
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-e> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-e>'
+let g:coc_snippet_prev = '<c-n>'
+imap <C-e> <Plug>(coc-snippets-expand-jump)
+
+" ==================== goyo ====================
+map <LEADER>gy :Goyo<CR>
