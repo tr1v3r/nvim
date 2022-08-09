@@ -172,12 +172,7 @@
 		"golang": {
 			"command": "gopls",
 			"rootPatterns": ["go.mod"],
-			"filetypes": ["go"],
-			"initializationOptions": {
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golangci-lint"
-			}
+			"filetypes": ["go"]
 		},
 		"bash": {
 			"command": "bash-language-server",
