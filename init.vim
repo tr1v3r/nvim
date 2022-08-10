@@ -609,7 +609,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 inoremap <silent><expr> <c-o> coc#refresh()
 
 nnoremap <c-c> :CocCommand<CR>
-nmap tt :CocCommand explorer<CR>
+nmap <silent> tt :CocCommand explorer<CR>
 
 " Use `-` and `=` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
