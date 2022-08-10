@@ -328,7 +328,6 @@ Plug 'github/copilot.vim'
 " Outline and file manager
 " Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'majutsushi/tagbar'
 
@@ -348,11 +347,13 @@ Plug 'ibhagwan/fzf-lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'pechorin/any-jump.vim'
+Plug 'kevinhwang91/rnvimr'
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
 Plug 'wellle/tmux-complete.vim'
+Plug 'jiangmiao/auto-pairs'
 
 " Debugger
 Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go --enable-rust --enable-python --enable-bash' }
@@ -401,6 +402,14 @@ Plug 'nvim-pack/nvim-spectre'
 " Color Theme
 Plug 'crusoexia/vim-monokai'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+
+" Other visual enhancement
+Plug 'luochen1990/rainbow'
+Plug 'mg979/vim-xtabline'
+Plug 'ryanoasis/vim-devicons'
+Plug 'wincent/terminus'
+Plug 'kyazdani42/nvim-web-devicons'
+
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
@@ -804,4 +813,38 @@ require'fzf-lua'.setup {
 }
 EOF
 endif
+
+" ==================== any-jump ====================
+nnoremap j :AnyJump<CR>
+let g:any_jump_window_width_ratio  = 0.8
+let g:any_jump_window_height_ratio = 0.9
+
+" ==================== rainbow ====================
+let g:rainbow_active = 1
+
+" ==================== nvim-spectre ====================
+nnoremap <LEADER>f <cmd>lua require('spectre').open()<CR>
+vnoremap <LEADER>f <cmd>lua require('spectre').open_visual()<CR>
+
+" ==================== rnvimr ====================
+let g:rnvimr_ex_enable = 1
+let g:rnvimr_pick_enable = 1
+let g:rnvimr_draw_border = 0
+" let g:rnvimr_bw_enable = 1
+highlight link RnvimrNormal CursorLine
+nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
+let g:rnvimr_layout = { 'relative': 'editor',
+            \ 'width': &columns,
+            \ 'height': &lines,
+            \ 'col': 0,
+            \ 'row': 0,
+            \ 'style': 'minimal' }
+let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
