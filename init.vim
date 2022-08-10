@@ -30,6 +30,7 @@ endif
 " ================ Settings ================
 set termguicolors
 set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 
 syntax on
 set number
