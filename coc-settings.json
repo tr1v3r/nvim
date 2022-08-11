@@ -172,8 +172,11 @@
 		"golang": {
 			// https://github.com/golang/tools/blob/master/gopls/doc/vim.md#cocnvim
 			"command": "gopls",
-			"rootPatterns": ["go.mod", ".git/"],
-			"filetypes": ["go"]
+			"rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
+			"filetypes": ["go"],
+			"initializationOptions": {
+				"usePlaceholders": true
+			}
 		},
 		"bash": {
 			"command": "bash-language-server",

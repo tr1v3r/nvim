@@ -539,8 +539,15 @@ endfunc
 " let go:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
 func! DebugUnitTest()
-	let funcName = CocAction("getCurrentFunctionSymbol")
-	call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: '^'.funcName.'$' })
+	" let funcName = CocAction("getCurrentFunctionSymbol")
+	" let funcName = trim(split(CocAction("getCurrentFunctionSymbol"),' ')[1])
+	" let funcName = trim(CocAction("getCurrentFunctionSymbol"), "𝑓 ")
+	let funcName = trim(CocAction("getCurrentFunctionSymbol")[3:])
+	if funcName != ""
+		let funcName = '^'.funcName.'$'
+	endif
+	echo "lanuch test: [".funcName."]"
+	call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: funcName })
 endfunc
 
 " "args": [ "*${CommandLineArgs}" ]
@@ -551,6 +558,8 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 let g:go_fmt_command = 'goimports'
 let g:go_list_type = "quickfix"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_chan_whitespace_error = 1
@@ -578,6 +587,7 @@ let g:go_debug_log_output = ''
 " ============ coc ============
 " coc-marketplace
 let g:coc_global_extensions = [
+	\ 'coc-go',
 	\ 'coc-json',
 	\ 'coc-yaml',
 	\ 'coc-vimlsp',

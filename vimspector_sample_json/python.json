@@ -1,11 +1,7 @@
 {
 	"adapters": {
 		"debugpy": {
-			"command": [
-				"python",
-				"-m",
-				"debugpy.adapter"
-			],
+			"command": ["python", "-m", "debugpy.adapter"],
 			"name": "debugpy",
 			"configuration": {
 				"python": "python"

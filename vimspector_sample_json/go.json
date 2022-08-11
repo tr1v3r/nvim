@@ -2,24 +2,18 @@
 	"configurations": {
 		"Launch Project": {
 			"adapter": "vscode-go",
-			"filetypes": [
-				"go"
-			],
+			"filetypes": ["go"],
 			"configuration": {
 				"request": "launch",
 				"program": "${workspaceRoot}",
 				"mode": "debug",
 				"dlvToolPath": "$HOME/go/bin/dlv",
-				"dlvFlags": [
-					"--check-go-version=false"
-				]
+				"dlvFlags": ["--check-go-version=false"]
 			}
 		},
 		"Launch File": {
 			"adapter": "vscode-go",
-			"filetypes": [
-				"go"
-			],
+			"filetypes": ["go"],
 			"configuration": {
 				"request": "launch",
 				"program": "${fileDirname}",
@@ -29,19 +23,13 @@
 		},
 		"Launch Test": {
 			"adapter": "vscode-go",
-			"filetypes": [
-				"go"
-			],
+			"filetypes": ["go"],
 			"configuration": {
 				"request": "launch",
 				"program": "${fileDirname}",
 				"mode": "test",
 				"dlvToolPath": "$HOME/go/bin/dlv",
-				"args": [
-					"-test.v",
-					"-test.run",
-					"${UnitTestFunc}"
-				]
+				"args": ["-test.v", "-test.run", "${UnitTestFunc}"]
 			}
 		}
 	}
