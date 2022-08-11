@@ -541,7 +541,7 @@ endfunc
 func! DebugUnitTest()
 	" let funcName = CocAction("getCurrentFunctionSymbol")
 	" let funcName = trim(split(CocAction("getCurrentFunctionSymbol"),' ')[1])
-	" let funcName = trim(CocAction("getCurrentFunctionSymbol"), "𝑓 ")
+	" let funcName = trim(CocAction("getCurrentFunctionSymbol"), "ƒ ")
 	let funcName = trim(CocAction("getCurrentFunctionSymbol")[3:])
 	if funcName != ""
 		let funcName = '^'.funcName.'$'
