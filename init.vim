@@ -857,5 +857,7 @@ let g:rnvimr_layout = { 'relative': 'editor',
             \ 'col': 0,
             \ 'row': 0,
             \ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+let g:rnvimr_presets = [
+	\ {'width': 1.0, 'height': 1.0},
+	\ {'width': 0.8, 'height': 0.8}]
 
