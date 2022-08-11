@@ -170,8 +170,9 @@
 			"settings": {}
 		},
 		"golang": {
+			// https://github.com/golang/tools/blob/master/gopls/doc/vim.md#cocnvim
 			"command": "gopls",
-			"rootPatterns": ["go.mod"],
+			"rootPatterns": ["go.mod", ".git/"],
 			"filetypes": ["go"]
 		},
 		"bash": {
