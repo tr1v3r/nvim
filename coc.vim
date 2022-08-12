@@ -61,8 +61,8 @@ function! ShowDocumentation()
 endfunction
 
 " Format selected code
-xmap <LEADER>f <Plug>(coc-format-selected)
-nmap <LEADER>f <Plug>(coc-format-selected)
+" xmap <LEADER>f <Plug>(coc-format-selected)
+" nmap <LEADER>f <Plug>(coc-format-selected)
 
 " Text Objects
 xmap kf <Plug>(coc-funcobj-i)
