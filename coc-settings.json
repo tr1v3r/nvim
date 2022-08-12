@@ -86,7 +86,7 @@
 		"variable": "\ue71b"
 	},
 	// explorer settings
-	"explorer.width": 38,
+	"explorer.width": 32,
 	"explorer.quitOnOpen": true,
 	"explorer.sources": [
 		{
@@ -156,6 +156,47 @@
 		"<<": "gitStage",
 		">>": "gitUnstage"
 	},
+	"explorer.presets": {
+		".nvim": {
+			"root-uri": "~/config/.nvim"
+		},
+		"tab": {
+			"position": "tab",
+			"quit-on-open": true
+		},
+		"floating": {
+			"position": "floating",
+			"open-action-strategy": "sourceWindow"
+		},
+		"floatingTop": {
+			"position": "floating",
+			"floating-position": "center-top",
+			"open-action-strategy": "sourceWindow"
+		},
+		"floatingLeftside": {
+			"position": "floating",
+			"floating-position": "left-center",
+			"floating-width": 50,
+			"open-action-strategy": "sourceWindow"
+		},
+		"floatingRightside": {
+			"position": "floating",
+			"floating-position": "right-center",
+			"floating-width": 50,
+			"open-action-strategy": "sourceWindow"
+		},
+		"simplify": {
+			"file-child-template": "[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]"
+		},
+		"simplifyFloating": {
+			"position": "floating",
+			"open-action-strategy": "sourceWindow",
+			"file-child-template": "[selection | clip | 1][indent][icon | 1] [filename growRight 1 omitCenter 1] [timeModified] [size]"
+		},
+		"buffer": {
+			"sources": [{ "name": "buffer", "expand": true }]
+		}
+	},
 	// languageserver
 	"languageserver": {
 		"lua": {
@@ -175,7 +216,12 @@
 			"rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
 			"filetypes": ["go"],
 			"initializationOptions": {
-				"usePlaceholders": true
+				"usePlaceholders": true,
+				"analyses": {
+					// "unreachable": false, // Disable the unreachable analyzer.
+					"unusedparams": true, // Enable the unusedparams analyzer.
+					"unusedvariable": true
+				}
 			}
 		},
 		"bash": {

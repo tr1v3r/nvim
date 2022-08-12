@@ -620,7 +620,6 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 inoremap <silent><expr> <c-o> coc#refresh()
 
 nnoremap <c-c> :CocCommand<CR>
-nmap <silent> tt :CocCommand explorer<CR>
 
 " Use `-` and `=` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -675,9 +674,14 @@ let g:coc_snippet_next = '<c-e>'
 let g:coc_snippet_prev = '<c-n>'
 imap <C-e> <Plug>(coc-snippets-expand-jump)
 
+" nmap <silent> tt :CocCommand explorer<CR>
+nmap <silent> tt :CocCommand explorer --preset simplifyFloating<CR>
+
+" List all presets
+nmap <space>el <Cmd>CocList explPresets<CR>
+
 " ==================== goyo ====================
 map <LEADER>gy :Goyo<CR>
-
 
 " ==================== FZF ====================
 let g:fzf_preview_window = 'right:40%'
