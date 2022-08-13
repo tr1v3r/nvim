@@ -190,8 +190,10 @@
 		},
 		"simplifyFloating": {
 			"position": "floating",
+			"floating-position": "center-top",
+			"floating-width": 80,
 			"open-action-strategy": "sourceWindow",
-			"file-child-template": "[selection | clip | 1][indent][icon | 1] [filename growRight 1 omitCenter 1] [timeModified] [size]"
+			"file-child-template": "[git | 2][selection | clip | 1][indent][icon | 1] [filename growRight 1 omitCenter 1] [timeModified] [size]"
 		},
 		"buffer": {
 			"sources": [{ "name": "buffer", "expand": true }]
