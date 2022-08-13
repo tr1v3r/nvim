@@ -318,8 +318,8 @@ let g:any_jump_window_height_ratio = 0.9
 let g:rainbow_active = 1
 
 " ==================== nvim-spectre ====================
-nnoremap <LEADER>f <cmd>lua require('spectre').open()<CR>
-vnoremap <LEADER>f <cmd>lua require('spectre').open_visual()<CR>
+nnoremap <LEADER>f <cmd>lua require('spectre').open()<CR>i
+vnoremap <LEADER>f <cmd>lua require('spectre').open_visual()<CR>i
 
 " ==================== rnvimr ====================
 let g:rnvimr_ex_enable = 1
