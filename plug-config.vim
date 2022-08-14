@@ -99,7 +99,7 @@ autocmd FileType go nnoremap <LEADER>dR :call vimspector#Reset()<CR>
 autocmd FileType go nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dw :call AddToWatch()<CR>
-autocmd FileType go nnoremap <LEADER>dt :call DebugUnitTest()<CR>
+autocmd FileType go nnoremap <LEADER>du :call DebugUnitTest()<CR>
 
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 
