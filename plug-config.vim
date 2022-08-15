@@ -160,6 +160,8 @@ let g:go_debug_windows = {
 let g:go_debug_preserve_layout = 1
 let g:go_debug_log_output = ''
 
+let g:go_metalinter_command = "golangci-lint"
+" let g:go_metalinter_autosave = 1
 " ==================== goyo ====================
 map <LEADER>gy :Goyo<CR>
 

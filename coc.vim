@@ -1,7 +1,6 @@
 " ============ coc ============
 " coc-marketplace
 let g:coc_global_extensions = [
-	\ 'coc-go',
 	\ 'coc-json',
 	\ 'coc-yaml',
 	\ 'coc-vimlsp',
