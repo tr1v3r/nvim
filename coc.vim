@@ -92,3 +92,6 @@ nmap <silent> tt :CocCommand explorer --preset simplifyFloating<CR>
 
 " List all presets
 nmap <space>el <Cmd>CocList explPresets<CR>
+
+" List all yank history
+nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
