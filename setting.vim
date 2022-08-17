@@ -17,7 +17,7 @@ set softtabstop=4
 set autoindent
 set indentexpr=
 set list
-set listchars=tab:\|\ ,trail:<
+set listchars=tab:\|\ ,trail:☒
 set scrolloff=4
 set ttimeoutlen=0
 set notimeout
@@ -55,4 +55,3 @@ set directory=$HOME/.config/nvim/tmp/backup,.
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 exec "nohlsearch"
-
