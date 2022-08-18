@@ -99,7 +99,9 @@ autocmd FileType go nnoremap <LEADER>dR :call vimspector#Reset()<CR>
 autocmd FileType go nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dw :call AddToWatch()<CR>
-autocmd FileType go nnoremap <LEADER>du :call DebugUnitTest()<CR>
+autocmd FileType go nnoremap <LEADER>dp :call LaunchProject()<CR>
+autocmd FileType go nnoremap <LEADER>df :call LaunchFile()<CR>
+autocmd FileType go nnoremap <LEADER>du :call DebugFunc()<CR>
 
 " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
 
@@ -114,7 +116,40 @@ func! AddToWatch()
 endfunc
 " let go:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
-func! DebugUnitTest()
+func! LaunchProject()
+	echo "launch project"
+	call vimspector#LaunchWithConfigurations({
+				\	"Launch Project": {
+				\		"adapter": "vscode-go",
+				\		"filetypes": ["go"],
+				\		"configuration": {
+				\			"request": "launch",
+				\			"program": "${workspaceRoot}",
+				\			"mode": "debug",
+				\			"dlvToolPath": "$HOME/go/bin/dlv",
+				\			"dlvFlags": ["--check-go-version=false"]
+				\		}
+				\	}
+				\ })
+endfunc
+
+func! LaunchFile()
+	echo "launch file"
+	call vimspector#LaunchWithConfigurations({
+				\	"Launch File": {
+				\		"adapter": "vscode-go",
+				\		"filetypes": ["go"],
+				\		"configuration": {
+				\			"request": "launch",
+				\			"program": "${fileDirname}",
+				\			"mode": "debug",
+				\			"dlvToolPath": "$HOME/go/bin/dlv"
+				\		}
+				\	}
+				\ })
+endfunc
+
+func! DebugFunc()
 	" let funcName = CocAction("getCurrentFunctionSymbol")
 	" let funcName = trim(split(CocAction("getCurrentFunctionSymbol"),' ')[1])
 	" let funcName = trim(CocAction("getCurrentFunctionSymbol")[3:])
@@ -123,7 +158,21 @@ func! DebugUnitTest()
 		let funcName = '^'.funcName.'$'
 	endif
 	echo "lanuch test: [".funcName."]"
-	call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: funcName })
+	silent call vimspector#LaunchWithConfigurations({
+				\	 "Launch Test": {
+				\	 	"adapter": "vscode-go",
+				\	 	"filetypes": ["go"],
+				\	 	"configuration": {
+				\	 		"request": "launch",
+				\	 		"program": "${fileDirname}",
+				\	 		"mode": "test",
+				\	 		"dlvToolPath": "$HOME/go/bin/dlv",
+				\	 		"args": ["-test.v", "-test.run", funcName]
+				\	 	}
+				\	 }
+				\ })
+	" call from file with settings
+	" call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: funcName })
 endfunc
 
 " "args": [ "*${CommandLineArgs}" ]
