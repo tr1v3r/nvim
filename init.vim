@@ -34,3 +34,4 @@ source $HOME/.config/nvim/lang.vim
 source $HOME/.config/nvim/plug.vim
 source $HOME/.config/nvim/plug-config.vim
 source $HOME/.config/nvim/coc.vim
+source $HOME/.config/nvim/md-snippets.vim

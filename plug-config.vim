@@ -397,3 +397,35 @@ let g:rnvimr_layout = { 'relative': 'editor',
 " 	\ {'width': 0.8, 'height': 0.8}]
 
 let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+
+" ==================== Markdown Settings ====================
+" auto spell
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+" ==================== vim-instant-markdown ====================
+" npm -g install instant-markdown-d
+" yarn global add instant-markdown-d not recommand
+let g:instant_markdown_slow = 0
+let g:instant_markdown_autostart = 0
+" let g:instant_markdown_open_to_the_world = 1
+" let g:instant_markdown_allow_unsafe_content = 1
+" let g:instant_markdown_allow_external_content = 0
+" let g:instant_markdown_mathjax = 1
+let g:instant_markdown_autoscroll = 1
+
+" ==================== Bullets.vim ====================
+" let g:bullets_set_mappings = 0
+let g:bullets_enabled_file_types = [
+			\ 'markdown',
+			\ 'text',
+			\ 'gitcommit',
+			\ 'scratch'
+			\]
+
+" ==================== vim-markdown-toc ====================
+"let g:vmt_auto_update_on_save = 0
+"let g:vmt_dont_insert_fence = 1
+let g:vmt_cycle_list_item_markers = 1
+let g:vmt_fence_text = 'TOC'
+let g:vmt_fence_closing_text = '/TOC'
+
