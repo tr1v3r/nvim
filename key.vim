@@ -26,6 +26,7 @@ noremap = nzz
 noremap - Nzz
 
 nnoremap S :w<CR>
+nnoremap Q :quitall<CR>
 "map R :source $MYVIMRC<CR>
 
 noremap ; :
