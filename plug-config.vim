@@ -117,7 +117,7 @@ endfunc
 " let go:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
 
 func! LaunchProject()
-	echo "launch project"
+	echo "Launch project"
 	call vimspector#LaunchWithConfigurations({
 				\	"Launch Project": {
 				\		"adapter": "vscode-go",
@@ -134,7 +134,7 @@ func! LaunchProject()
 endfunc
 
 func! LaunchFile()
-	echo "launch file"
+	echo "Launch file"
 	call vimspector#LaunchWithConfigurations({
 				\	"Launch File": {
 				\		"adapter": "vscode-go",
@@ -157,7 +157,7 @@ func! DebugFunc()
 	if funcName != ""
 		let funcName = '^'.funcName.'$'
 	endif
-	echo "lanuch test: [".funcName."]"
+	echo "Lanuch test: ".funcName
 	silent call vimspector#LaunchWithConfigurations({
 				\	 "Launch Test": {
 				\	 	"adapter": "vscode-go",
