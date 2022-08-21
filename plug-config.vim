@@ -70,6 +70,9 @@ let g:VM_maps["Redo"]               = '<C-r>'
 let g:VM_maps["Select Cursor Down"] = '<A-Down>'
 let g:VM_maps["Select Cursor Up"]   = '<A-Up>'
 
+" ==================== vim-snippets ====================
+let g:snips_author = '<++>'
+
 " " ============ nerdtree ============
 " " 忽略以下文件的显示
 " let NERDTreeIgnore=['\.pyc','\~$','\.swp']
@@ -485,4 +488,3 @@ let g:bullets_enabled_file_types = [
 let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
-

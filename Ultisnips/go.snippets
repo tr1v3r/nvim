@@ -47,7 +47,7 @@ snippet lt "Log Println"
 log.Println(${1})${0}
 endsnippet
 
-snippet hello "Hello Words"
+snippet /^hello$/ "Hello Words" r
 // Package main provides ...
 package main
 
@@ -56,7 +56,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello")
+	${0}fmt.Println("hello")
 }
 endsnippet
 
@@ -72,3 +72,6 @@ snippet cq "Current Question"
 app.result.questions[app.curResultIndex]${0}
 endsnippet
 
+snippet test "test snippets"
+date is `date`
+endsnippet

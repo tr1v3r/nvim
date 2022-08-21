@@ -16,13 +16,6 @@ endif
 
 let g:nvim_plugins_installation_completed=1
 
-let device_specificed = 1
-if empty(glob($HOME.'/.config/nvim/_device.vim'))
-	echo 'device vim not found'
-el
-	source $HOME/.config/nvim/_device.vim
-endif
-
 " 设置 vimrc 修改保存后立刻生效，不用在重新打开
 " 建议配置完成后将这个关闭
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -34,3 +27,11 @@ source $HOME/.config/nvim/lang.vim
 source $HOME/.config/nvim/plug.vim
 source $HOME/.config/nvim/plug-config.vim
 source $HOME/.config/nvim/coc.vim
+
+let device_specificed = 1
+if empty(glob($HOME.'/.config/nvim/_device.vim'))
+	echo 'device vim not found'
+el
+	source $HOME/.config/nvim/_device.vim
+endif
+
