@@ -81,6 +81,9 @@ Plug 'dkarter/bullets.vim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'ggandor/lightspeed.nvim'
+Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word` )
+Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
+Plug 'mg979/vim-visual-multi'
 
 " For general writing
 Plug 'junegunn/goyo.vim'
