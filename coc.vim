@@ -46,7 +46,7 @@ nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> <LEADER>rn <Plug>(coc-rename)
+nmap <silent> <LEADER>cw <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> <LEADER>h :call ShowDocumentation()<CR>
