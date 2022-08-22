@@ -1,3 +1,5 @@
+# https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
 snippet checke "Check Error"
 if err != nil {
 	return err
@@ -33,18 +35,18 @@ if err != nil {
 ${0}
 endsnippet
 
-snippet st "Println"
-fmt.Println(${1})${0}
+snippet st "Printf"
+fmt.Printf("${1:}\n", ${2:params})
 endsnippet
 
 snippet fn "Function"
 func ${1:function}() {
-	${0: // todo}
+	${0: //TODO}
 }
 endsnippet
 
-snippet lt "Log Println"
-log.Println(${1})${0}
+snippet li "Log Println"
+log.Info("${1}",${0})
 endsnippet
 
 snippet /^hello$/ "Hello Words" r
@@ -70,8 +72,4 @@ endsnippet
 
 snippet cq "Current Question"
 app.result.questions[app.curResultIndex]${0}
-endsnippet
-
-snippet test "test snippets"
-date is `date`
 endsnippet
