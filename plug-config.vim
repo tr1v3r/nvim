@@ -1,6 +1,8 @@
 " ============ airline ============
 let g:airline_theme = 'material'
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " ============ color theme ============
 let g:material_theme_style = 'ocean-community'
@@ -271,6 +273,39 @@ let g:go_debug_log_output = ''
 
 let g:go_metalinter_command = "golangci-lint"
 " let g:go_metalinter_autosave = 1
+
+" ==================== tagbar ====================
+" Toggle
+noremap <LEADER>T :TagbarToggle<CR>
+
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
 " ==================== goyo ====================
 map <LEADER>gy :Goyo<CR>
 

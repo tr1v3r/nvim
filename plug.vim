@@ -49,6 +49,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " Debugger
 Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go --enable-rust --enable-python --enable-bash' }
+Plug 'majutsushi/tagbar'
 
 " Golang
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
