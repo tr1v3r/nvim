@@ -14,16 +14,16 @@ for _, ${1:thing} := range ${2:things} {
 endsnippet
 
 snippet fori "For loop i"
-for i := 0; i < n; i++ {
-	${1://TODO}
+for i := 0; i < ${1:limit}; i++ {
+	${2://TODO}
 }
 endsnippet
 
 snippet fors "For loop select"
 for {
 	select{
-	case <-${1:chan}:
-	${2://TODO}
+	case ${1:<-${2:chan}}:
+	${3://TODO}
 	}
 }
 endsnippet
