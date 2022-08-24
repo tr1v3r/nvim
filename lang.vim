@@ -1,7 +1,7 @@
-" ============ Language: golang ============
+" ============ Language ============
 
 " Compile function
-noremap R :call CompileRunGcc()<CR>
+noremap <LEADER>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
@@ -58,4 +58,3 @@ func! CompileRunGcc()
 		:term go run .
 	endif
 endfunc
-
