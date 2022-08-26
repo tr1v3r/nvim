@@ -157,7 +157,8 @@ command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
 			\ })
 
 autocmd FileType go noremap <LEADER>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-autocmd FileType go nnoremap <LEADER>dR :call vimspector#Reset()<CR>
+autocmd FileType go nnoremap <LEADER>dr :call vimspector#Reset()<CR>
+autocmd FileType go nnoremap <LEADER>dR :call vimspector#Restart()<CR>
 autocmd FileType go nnoremap <LEADER>dC :call vimspector#ClearBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dL :call vimspector#ListBreakpoints()<CR>
 autocmd FileType go nnoremap <LEADER>dw :call AddToWatch()<CR>
