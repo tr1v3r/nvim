@@ -279,6 +279,16 @@ let g:go_metalinter_command = "golangci-lint"
 " Toggle
 noremap <LEADER>T :TagbarToggle<CR>
 
+" ctags
+" git clone https://github.com/universal-ctags/ctags.git
+" cd ctags
+" ./autogen.sh
+" ./configure --prefix=/where/you/want # defaults to /usr/local
+" make
+" make install # may require extra privileges depending on where to install
+
+" gotags
+" go install github.com/jstemmer/gotags@latest
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
 	\ 'kinds'     : [
