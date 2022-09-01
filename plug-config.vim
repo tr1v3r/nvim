@@ -230,7 +230,7 @@ func! DebugFunc()
 				\	 		"program": "${fileDirname}",
 				\	 		"mode": "test",
 				\	 		"dlvToolPath": "$HOME/go/bin/dlv",
-				\	 		"args": ["-test.v", "-test.run", funcName]
+				\	 		"args": ["-test.v", "-test.count", 1, "-test.run", funcName]
 				\	 	}
 				\	 }
 				\ })
