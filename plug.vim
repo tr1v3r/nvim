@@ -46,6 +46,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
 Plug 'wellle/tmux-complete.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'preservim/nerdcommenter'
 
 " Debugger
 Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go --enable-rust --enable-python --enable-bash' }
