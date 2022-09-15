@@ -243,7 +243,7 @@ endfunc
 " ============ vim-go ============
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go autocmd InsertLeave <buffer> GoFmt
+" autocmd FileType go autocmd InsertLeave * GoFmt
 
 let g:go_fmt_command = 'goimports'
 let g:go_list_type = "quickfix"
