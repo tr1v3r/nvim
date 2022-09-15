@@ -44,6 +44,8 @@ set visualbell
 set colorcolumn=120
 set updatetime=100
 set virtualedit=block
+set autochdir
+set autowriteall
 " set signcolumn=number
 
 let &t_ut=''
@@ -53,5 +55,7 @@ set backupdir=$HOME/.config/nvim/tmp/backup,.
 set directory=$HOME/.config/nvim/tmp/backup,.
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+au TextChanged,InsertLeave <buffer> silent write
 
 exec "nohlsearch"
