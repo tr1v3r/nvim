@@ -1,3 +1,6 @@
+" General
+autocmd VimEnter * UpdateRemotePlugins
+
 " ============ airline ============
 let g:airline_theme = 'material'
 let g:airline#extensions#tabline#enabled = 1
