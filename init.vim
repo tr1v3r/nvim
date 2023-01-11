@@ -34,4 +34,3 @@ if empty(glob($HOME.'/.config/nvim/_device.vim'))
 el
 	source $HOME/.config/nvim/_device.vim
 endif
-
