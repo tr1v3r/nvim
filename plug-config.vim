@@ -36,7 +36,11 @@ let g:airline#extensions#tabline#ctrlspace_show_tab_nr = 0
 let g:airline#extensions#tabline#tabnr_formatter = 'AirLineTabNrFormatter'
 func! AirLineTabNrFormatter(tab_nr_type, nr)
   let spc=g:airline_symbols.space
-  return spc. "(". a:nr. ")"
+  if (len(tabpagebuflist(a:nr)) > 1)
+    return spc. a:nr. '.[%{tabpagewinnr('.a:nr.')}/%{len(tabpagebuflist('.a:nr.'))}]'
+  else
+    return spc. a:nr. ":"
+  endif
 endfunc
 
 let g:airline#extensions#branch#enabled = 1

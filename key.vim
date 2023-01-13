@@ -14,9 +14,11 @@ noremap ,. %
 noremap <LEADER><CR> :nohlsearch<CR>
 " Adjacent duplicate words
 noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
+" Find and replace
+noremap \s :%s//g<left><left>
 " Space to Tab
-noremap <LEADER>tt :%s/    /\t/g
-noremap <LEADER>tt :s/    /\t/g
+nnoremap <LEADER>tt :%s/    /\t/g
+vnoremap <LEADER>tt :s/    /\t/g
 " Folding
 noremap <silent> <LEADER>o za
 
@@ -78,4 +80,3 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
-

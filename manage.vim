@@ -7,6 +7,8 @@ noremap <LEADER>i <C-w>l
 
 " Close all other windows
 noremap qf <C-w>o
+" Close all other tabs
+noremap qw :tabonly<CR>
 
 " Split the screens to up/down/left/right
 noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
@@ -29,6 +31,14 @@ noremap srh <C-w>b<C-w>K
 noremap srv <C-w>b<C-w>H
 " Press <SPACE> + q to close the window below the current window
 noremap <LEADER>q <C-w>j:q<CR>
+
+" Opening a terminal window
+noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
+
+" Open a new instance of st with the cwd
+" nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
+" Open a new terminal tab
+nnoremap \t :tabe<CR>:term<CR>i
 
 " ==================== Tab management ====================
 " Create a new tab with tu
@@ -53,6 +63,9 @@ noremap tI :+tabmove<CR>
 :nn <Leader>9 9gt
 :nn <Leader>0 :tablast<CR>
 
+" Close tab
+noremap tw :tabclose<CR>
+
 " ==================== Markdown Settings ====================
 " Snippets
 source $HOME/.config/nvim/md-snippets.vim
@@ -60,24 +73,20 @@ source $HOME/.config/nvim/md-snippets.vim
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 " ==================== Other useful stuff ====================
-" Open a new instance of st with the cwd
-nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
-" Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
-noremap ` ~
+
+" adjust current line to center of screen
 noremap <C-c> zz
+
 " Auto change directory to current dir
 autocmd BufEnter * silent! lcd %:p:h
+
 " Call figlet
-noremap tx :r !figlet 
-" Find and replace
-noremap \s :%s//g<left><left>
+noremap tx :r !figlet
+
 " Set wrap
 noremap <LEADER>sw :set wrap<CR>
-" Close tab
-noremap tw :tabclose<CR>
-

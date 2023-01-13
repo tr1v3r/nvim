@@ -73,8 +73,8 @@ omap kc <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" coc-translator
-nmap ts <Plug>(coc-translator-p)
+" coc-translator translate english to chinese
+nmap <LEADER>tr <Plug>(coc-translator-p)
 
 " codeaction
 xmap <LEADER>a  <Plug>(coc-codeaction-selected)
