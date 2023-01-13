@@ -6,9 +6,9 @@ noremap <LEADER>n <C-w>h
 noremap <LEADER>i <C-w>l
 
 " Close all other windows
-noremap qf <C-w>o
+noremap tq <C-w>o
 " Close all other tabs
-noremap qw :tabonly<CR>
+noremap to :tabonly<CR>
 
 " Split the screens to up/down/left/right
 noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
