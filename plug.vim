@@ -21,14 +21,14 @@ Plug 'github/copilot.vim'
 " Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Git
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'
+" Plug 'cohama/agit.vim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'tpope/vim-fugitive'
 
@@ -51,7 +51,6 @@ Plug 'preservim/nerdcommenter'
 
 " Debugger
 Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go --enable-rust --enable-python --enable-bash' }
-Plug 'majutsushi/tagbar'
 
 " Golang
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
