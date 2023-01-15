@@ -7,7 +7,8 @@ if err != nil {
 ${0}
 endsnippet
 
-snippet forr "For loop range"
+# ========== snippet for loop ==========
+snippet forr "For loop range array"
 for _, ${1:thing} := range ${2:things} {
 	${3://TODO}
 }
@@ -23,33 +24,91 @@ snippet fors "For loop select"
 for {
 	select{
 	case ${1:<-${2:chan}}:
-	${3://TODO}
+		${3://TODO}
+	default:
+		${4://TODO}
 	}
 }
 endsnippet
 
-snippet ie "Check Error"
+# ========== snippet for error ==========
+snippet ie "Check error"
 if err != nil {
-	panic(err)
+	${1://TODO}
 }
 ${0}
 endsnippet
 
-snippet st "Printf"
-fmt.Printf("${1:}\n", ${2:params})
+snippet re "Return error if any"
+if err != nil {
+	return err
+}
+${0}
 endsnippet
 
-snippet fn "Function"
-func ${1:function}() {
-	${0: //TODO}
-}
+# ========== snippet for print ==========
+snippet pf "Printf"
+fmt.Printf("${1:template}\n", ${2:params})
+endsnippet
+
+snippet pln "Println"
+fmt.Println("${1:text}", ${0})
 endsnippet
 
 snippet li "Log Println"
 log.Info("${1}",${0})
 endsnippet
 
-snippet /^hello$/ "Hello Words" r
+# ========== snippet for struct and interface ==========
+snippet st "struct"
+type ${1:name} struct {
+	${2:field}
+}
+endsnippet
+
+snippet I "interface"
+type ${1:name} interface {
+	${2:func()} ${3:return}
+}
+endsnippet
+
+# ========== snippet for function ==========
+snippet fn "Function"
+func ${1:function}() {
+	${0://TODO}
+}
+endsnippet
+
+snippet sfn "Struct Function"
+func (${1:recever}) ${2:function}() {
+	${0://TODO}
+}
+endsnippet
+
+snippet tfn "Test Function"
+func Test${1:func}(t *testing.T){
+	${0: //TODO}
+}
+endsnippet
+
+snippet tfnd "Test Function"
+func Test${1:func}(t *testing.T){
+	testdatas := []struct {
+		${2:Input} ${3:string}
+		${4:Expected} ${5:bool}
+	}{
+		{${6:data}},
+	}
+	for _, item := range testdatas {
+		if ${7:assert} {
+			t.Errorf("input %+v, expected %v, got %v", item.${2}, item.${4}, ${8:result})
+		}
+	}
+}
+endsnippet
+
+# ========== snippet for package ==========
+snippet /^start$/ "Hello Words" r
 // Package main provides ...
 package main
 
@@ -62,14 +121,20 @@ func main() {
 }
 endsnippet
 
+# ========== snippet for make ==========
 snippet mk "Make Something" i
-make(${1:Data}, ${2:len})
+make(${1:data}, ${2:len})
 endsnippet
 
 snippet mks "Make Slice" i
-make([]${1:Slice}, ${2:len})
+make([]${1:slice}, ${2:len}, ${3:cap})
 endsnippet
 
+# snippet wrap "wrap text"
+# {{{ ${0:}${VISUAL} }}}
+# endsnippet
+
+# ========== others ==========
 snippet cq "Current Question"
 app.result.questions[app.curResultIndex]${0}
 endsnippet
