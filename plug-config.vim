@@ -593,17 +593,34 @@ syntax enable
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
 let g:vimtex_view_method = 'zathura'
+" ======== for MacOS
+" $ brew tap zegervdv/zathura
+" $ brew install zathura
+"
+" # plug
+" $ brew install zathura-pdf-poppler
+" $ mkdir -p $(brew --prefix zathura)/lib/zathura
+" $ ln -s $(brew --prefix zathura-pdf-poppler)/libpdf-poppler.dylib $(brew --prefix zathura)/lib/zathura/libpdf-poppler.dylib
+"
+" # For mupdf:
+" $ brew install zathura-pdf-mupdf
+" $ mkdir -p $(brew --prefix zathura)/lib/zathura
+" $ ln -s $(brew --prefix zathura-pdf-mupdf)/libpdf-mupdf.dylib $(brew --prefix zathura)/lib/zathura/libpdf-mupdf.dylib
 
 " Or with a generic interface:
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+" for linux: https://okular.kde.org/zh-cn/build-it/
+" for MacOS https://gist.github.com/7468696e6b/ec8fa5d6cdb4e80633b9df95869b70c0
+" for MacOS https://binary-factory.kde.org/job/Okular_Release_macos/
 
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
 " want another compiler backend, you can change it as follows. The list of
 " supported backends and further explanation is provided in the documentation,
 " see ":help vimtex-compiler".
-let g:vimtex_compiler_method = 'latexrun'
+let g:vimtex_compiler_method = 'latexmk'
+" use MacTex for MacOS: https://www.tug.org/mactex/
 
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
