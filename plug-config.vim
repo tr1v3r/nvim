@@ -592,7 +592,8 @@ syntax enable
 
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
-let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_method = 'skim'
 " ======== for MacOS
 " $ brew tap zegervdv/zathura
 " $ brew install zathura
@@ -608,11 +609,16 @@ let g:vimtex_view_method = 'zathura'
 " $ ln -s $(brew --prefix zathura-pdf-mupdf)/libpdf-mupdf.dylib $(brew --prefix zathura)/lib/zathura/libpdf-mupdf.dylib
 
 " Or with a generic interface:
-let g:vimtex_view_general_viewer = 'okular'
-let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_viewer = 'zathura'
+" let g:vimtex_view_general_viewer = 'okular'
+" let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " for linux: https://okular.kde.org/zh-cn/build-it/
 " for MacOS https://gist.github.com/7468696e6b/ec8fa5d6cdb4e80633b9df95869b70c0
 " for MacOS https://binary-factory.kde.org/job/Okular_Release_macos/
+"
+" skim for MacOS https://sspai.com/post/64080
+" let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+" let g:vimtex_view_general_options = '-r @line @pdf @tex'
 
 " VimTeX uses latexmk as the default compiler backend. If you use it, which is
 " strongly recommended, you probably don't need to configure anything. If you
@@ -621,10 +627,11 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " see ":help vimtex-compiler".
 let g:vimtex_compiler_method = 'latexmk'
 " use MacTex for MacOS: https://www.tug.org/mactex/
+" or install slim version Basictex: brew install basictex
 
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
-let maplocalleader = ","
+let maplocalleader = " "
 
 " ==================== nerdcommenter ====================
 " Create default mappings
