@@ -593,7 +593,14 @@ syntax enable
 " Viewer options: One may configure the viewer either by specifying a built-in
 " viewer method:
 " let g:vimtex_view_method = 'zathura'
+" for skim
 let g:vimtex_view_method = 'skim'
+let g:vimtex_view_skim_activate = 1
+let g:vimtex_view_skim_sync = 1
+let g:vimtex_view_skim_reading_bar = 1
+" config for skim to inverse search
+" nvim --headless -c "VimtexInverseSearch %l '%f'"
+
 " ======== for MacOS
 " $ brew tap zegervdv/zathura
 " $ brew install zathura
@@ -609,7 +616,7 @@ let g:vimtex_view_method = 'skim'
 " $ ln -s $(brew --prefix zathura-pdf-mupdf)/libpdf-mupdf.dylib $(brew --prefix zathura)/lib/zathura/libpdf-mupdf.dylib
 
 " Or with a generic interface:
-let g:vimtex_view_general_viewer = 'zathura'
+" let g:vimtex_view_general_viewer = 'zathura'
 " let g:vimtex_view_general_viewer = 'okular'
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " for linux: https://okular.kde.org/zh-cn/build-it/
