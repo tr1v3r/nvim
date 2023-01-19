@@ -94,6 +94,9 @@ let g:wildfire_objects = {
     \ "html,xml" : ["at", "it"],
 \ }
 
+" ==================== nvim-hlslens ====================
+lua require('hlslens').setup()
+
 " ==================== lightspeed ====================
 nmap <expr> f reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_f" : "f"
 nmap <expr> F reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_F" : "F"
