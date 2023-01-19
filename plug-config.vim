@@ -19,7 +19,7 @@ let g:airline_symbols.dirty= '⚡'
 " extensions
 " let g:airline_extensions = ['branch', 'tabline']
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -71,9 +71,10 @@ let g:airline#extensions#branch#displayed_head_limit = 12
 let g:airline#extensions#branch#format = 2
 
 " ============ xtabline ============
-" let g:xtabline_lazy = 1
-let g:xtabline_settings = {}
-let g:xtabline_settings.use_devicons = 1
+let g:xtabline_lazy = 1
+let g:xtabline_settings = get(g:, 'xtabline_settings', {})
+let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.theme = 'codedark'
 
 " ============ color theme ============
 let g:material_theme_style = 'ocean-community'
