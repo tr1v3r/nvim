@@ -33,20 +33,46 @@ let g:airline#extensions#tabline#ctrlspace_show_tab_nr = 0
 " let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 
 " https://github.com/vim-airline/vim-airline/issues/2206
-let g:airline#extensions#tabline#tabnr_formatter = 'AirLineTabNrFormatter'
-func! AirLineTabNrFormatter(tab_nr_type, nr)
-  let spc=g:airline_symbols.space
-  if (len(tabpagebuflist(a:nr)) > 1)
-    return spc. a:nr. '.[%{tabpagewinnr('.a:nr.')}/%{len(tabpagebuflist('.a:nr.'))}]'
-  else
-    return spc. a:nr. ":"
-  endif
-endfunc
+" let g:airline#extensions#tabline#tabnr_formatter = 'AirLineTabNrFormatter'
+" func AirLineTabNrFormatter(tab_nr_type, nr)
+  " let nr = a:nr[0]
+  " let spc = g:airline_symbols.space
+  " if (len(tabpagebuflist(nr)) > 1)
+    " return spc. nr. ':[%{tabpagewinnr('.nr.')}/%{len(tabpagebuflist('.nr.'))}]'
+  " else
+    " return spc. nr. ":"
+  " endif
+" endfunc
+"
+" let g:airline#extensions#tabline#tabtitle_formatter = 'AirLineTabTitleFormatter'
+" func AirLineTabTitleFormatter(n)
+  " let buflist = tabpagebuflist(a:n)
+  " let winnr = tabpagewinnr(a:n)
+  " let bufnr = buflist[winnr - 1]
+  " let winid = win_getid(winnr, a:n)
+  " let title = bufname(bufnr)
+"
+  " if empty(title)
+    " if getqflist({'qfbufnr' : 0}).qfbufnr == bufnr
+      " let title = '[Quickfix List]'
+    " elseif winid && getloclist(winid, {'qfbufnr' : 0}).qfbufnr == bufnr
+      " let title = '[Location List]'
+    " else
+      " let title = '[No Name]'
+    " endif
+  " endif
+"
+  " return title
+" endfunc
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#displayed_head_limit = 12
 let g:airline#extensions#branch#format = 2
+
+" ============ xtabline ============
+let g:xtabline_lazy = 1
+let g:xtabline_settings.current_tab_paths = 1
 
 " ============ color theme ============
 let g:material_theme_style = 'ocean-community'

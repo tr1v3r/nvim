@@ -105,7 +105,7 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 
 " Other visual enhancement
 Plug 'luochen1990/rainbow'
-" Plug 'mg979/vim-xtabline'
+Plug 'mg979/vim-xtabline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
 Plug 'kyazdani42/nvim-web-devicons'
