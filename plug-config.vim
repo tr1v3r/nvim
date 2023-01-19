@@ -599,7 +599,7 @@ let g:vimtex_view_skim_activate = 1
 let g:vimtex_view_skim_sync = 1
 let g:vimtex_view_skim_reading_bar = 1
 " config for skim to inverse search
-" nvim --headless -c "VimtexInverseSearch %l '%f'"
+" nvim --headless -c "VimtexInverseSearch %line '%file'"
 
 " ======== for MacOS
 " $ brew tap zegervdv/zathura
