@@ -110,6 +110,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
 Plug 'kyazdani42/nvim-web-devicons'
 
+" if has('mac')
+  " " until issue closed: https://github.com/mrjones2014/dash.nvim/issues/137
+  " Plug 'mrjones2014/dash.nvim', { 'do': 'make install' }
+" endif
 
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
