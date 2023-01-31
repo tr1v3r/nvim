@@ -68,7 +68,7 @@ noremap tw :tabclose<CR>
 
 " ==================== Markdown Settings ====================
 " Snippets
-source $HOME/.config/nvim/md-snippets.vim
+source $HOME/.config/nvim/file-snippets.vim
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
 

@@ -1,3 +1,11 @@
+"  _____ _ _      _                      ____        _                  _
+" |  ___(_) | ___| |_ _   _ _ __   ___  / ___| _ __ (_)_ __  _ __   ___| |_ ___
+" | |_  | | |/ _ \ __| | | | '_ \ / _ \ \___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
+" |  _| | | |  __/ |_| |_| | |_) |  __/  ___) | | | | | |_) | |_) |  __/ |_\__ \
+" |_|   |_|_|\___|\__|\__, | .__/ \___| |____/|_| |_|_| .__/| .__/ \___|\__|___/
+"                     |___/|_|                        |_|   |_|
+
+" markdown snippets config
 "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
 autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
 autocmd Filetype markdown inoremap <buffer> <c-e> <Esc>/<++><CR>:nohlsearch<CR>"_c4l
@@ -16,3 +24,6 @@ autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,l --------<Enter>
+
+" tex snippets config
+autocmd Filetype tex inoremap <buffer> ,m $<++>$<Esc>N:nohlsearch<CR>
