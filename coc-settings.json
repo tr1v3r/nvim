@@ -159,7 +159,7 @@
 	},
 	"explorer.presets": {
 		".nvim": {
-			"root-uri": "~/config/.nvim"
+			"root-uri": "~/.config/nvim"
 		},
 		"tab": {
 			"position": "tab",
@@ -187,7 +187,7 @@
 			"open-action-strategy": "sourceWindow"
 		},
 		"simplify": {
-			"file-child-template": "[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]"
+			"file-child-template": "[git | 2][selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]"
 		},
 		"simplifyFloating": {
 			"position": "floating",

@@ -1,6 +1,7 @@
 " ============ coc ============
 " coc-marketplace
 let g:coc_global_extensions = [
+	\ 'coc-marketplace',
 	\ 'coc-json',
 	\ 'coc-yaml',
 	\ 'coc-vimlsp',
@@ -88,10 +89,11 @@ let g:coc_snippet_prev = '<c-n>'
 imap <C-e> <Plug>(coc-snippets-expand-jump)
 
 " nmap <silent> tt :CocCommand explorer<CR>
-nmap <silent> tt :CocCommand explorer --preset simplifyFloating<CR>
+nmap <silent> tt :CocCommand explorer --preset simplify<CR>
+" nmap <silent> tt :CocCommand explorer --preset simplifyFloating<CR>
 
 " List all presets
-nmap <space>el <Cmd>CocList explPresets<CR>
+nmap <LEADER>el <Cmd>CocList explPresets<CR>
 
 " List all yank history
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
