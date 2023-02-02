@@ -21,8 +21,7 @@ let g:nvim_plugins_installation_completed=1
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 source $HOME/.config/nvim/setting.vim
-source $HOME/.config/nvim/key.vim
-source $HOME/.config/nvim/manage.vim
+source $HOME/.config/nvim/keymap.vim
 source $HOME/.config/nvim/lang.vim
 source $HOME/.config/nvim/plug.vim
 source $HOME/.config/nvim/plug-config.vim
