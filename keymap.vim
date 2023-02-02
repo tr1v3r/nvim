@@ -16,7 +16,7 @@ noremap <LEADER><CR> :nohlsearch<CR>
 noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
 " Find and replace
 noremap \s :%s//g<left><left>
-" Find and delete
+" Find and delete (line)
 noremap \d :g//d<left><left>
 " Space to Tab
 nnoremap <LEADER>tt :%s/    /\t/g
