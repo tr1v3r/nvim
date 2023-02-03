@@ -86,6 +86,10 @@ let g:xtabline_settings.theme = 'codedark'
 let g:material_style = "deep ocean"
 colorscheme material
 
+" highlight Cursor guifg=#090B10 guibg=#002FA7
+" highlight Cursor guifg=#090B10 guibg=#F8F8F0
+" highlight iCursor guifg=#090B10 guibg=#002FA7
+
 " let g:monokai_term_italic = 1
 " let g:monokai_gui_italic = 1
 " colorscheme monokai
