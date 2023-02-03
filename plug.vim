@@ -100,8 +100,9 @@ Plug 'nvim-lua/plenary.nvim' " nvim-spectre dep
 Plug 'nvim-pack/nvim-spectre'
 
 " Color Theme
-Plug 'crusoexia/vim-monokai'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'crusoexia/vim-monokai'
+" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'marko-cerovac/material.nvim'
 
 " Other visual enhancement
 Plug 'luochen1990/rainbow'

@@ -1,5 +1,7 @@
 " ============ airline ============
-let g:airline_theme = 'material'
+" ~/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes
+let g:airline_theme = 'simple'
+" let g:airline_theme = 'monokai'
 
 " symbols
 if !exists('g:airline_symbols')
@@ -38,9 +40,9 @@ let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
   " let nr = a:nr[0]
   " let spc = g:airline_symbols.space
   " if (len(tabpagebuflist(nr)) > 1)
-    " return spc. nr. ':[%{tabpagewinnr('.nr.')}/%{len(tabpagebuflist('.nr.'))}]'
+	" return spc. nr. ':[%{tabpagewinnr('.nr.')}/%{len(tabpagebuflist('.nr.'))}]'
   " else
-    " return spc. nr. ":"
+	" return spc. nr. ":"
   " endif
 " endfunc
 "
@@ -53,13 +55,13 @@ let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
   " let title = bufname(bufnr)
 "
   " if empty(title)
-    " if getqflist({'qfbufnr' : 0}).qfbufnr == bufnr
-      " let title = '[Quickfix List]'
-    " elseif winid && getloclist(winid, {'qfbufnr' : 0}).qfbufnr == bufnr
-      " let title = '[Location List]'
-    " else
-      " let title = '[No Name]'
-    " endif
+	" if getqflist({'qfbufnr' : 0}).qfbufnr == bufnr
+	  " let title = '[Quickfix List]'
+	" elseif winid && getloclist(winid, {'qfbufnr' : 0}).qfbufnr == bufnr
+	  " let title = '[Location List]'
+	" else
+	  " let title = '[No Name]'
+	" endif
   " endif
 "
   " return title
@@ -77,9 +79,16 @@ let g:xtabline_settings.enable_mappings = 0
 let g:xtabline_settings.theme = 'codedark'
 
 " ============ color theme ============
-let g:material_theme_style = 'ocean-community'
+" let g:material_terminal_italics = 1
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-color material
+" let g:material_theme_style = 'ocean-community'
+" let g:material_style = "darker" | "lighter" | "oceanic" | "palenight" | "deep ocean"
+let g:material_style = "deep ocean"
+colorscheme material
+
+" let g:monokai_term_italic = 1
+" let g:monokai_gui_italic = 1
+" colorscheme monokai
 
 " ============ devicons ============
 let g:webdevicons_enable_airline_tabline = 1
@@ -94,8 +103,8 @@ let g:copilot_no_tab_map = v:true
 " ==================== wildfire ====================
 map <c-b> <Plug>(wildfire-quick-select)
 let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "it"],
-    \ "html,xml" : ["at", "it"],
+	\ "*" : ["i'", 'i"', "i)", "i]", "i}", "it"],
+	\ "html,xml" : ["at", "it"],
 \ }
 
 " ==================== nvim-hlslens ====================
@@ -124,29 +133,29 @@ require'lightspeed'.setup {
   safe_labels= {"a", "r", "s", "t", "n", "e", "i", "o", "w", "f", "u", "y", "x", 'c', "v", "k", "m"},
   -- labels = {},
   special_keys = {
-    next_match_group = '<space>',
-    prev_match_group = '<tab>',
+	next_match_group = '<space>',
+	prev_match_group = '<tab>',
   },
 }
 EOF
 endif
 
 " ==================== vim-visual-multi ====================
-"let g:VM_theme             = 'iceblue'
+"let g:VM_theme			 = 'iceblue'
 "let g:VM_default_mappings = 0
-let g:VM_leader                     = {'default': ',', 'visual': ',', 'buffer': ','}
-let g:VM_maps                       = {}
-let g:VM_custom_motions             = {'n': 'h', 'i': 'l', 'u': 'k', 'e': 'j', 'N': '0', 'I': '$', 'h': 'e'}
+let g:VM_leader					 = {'default': ',', 'visual': ',', 'buffer': ','}
+let g:VM_maps					   = {}
+let g:VM_custom_motions			 = {'n': 'h', 'i': 'l', 'u': 'k', 'e': 'j', 'N': '0', 'I': '$', 'h': 'e'}
 let g:VM_maps['i']				  = 'k'
 let g:VM_maps['I']				  = 'K'
 let g:VM_maps['Find Under']		 = '<C-k>'
 let g:VM_maps['Find subword under'] = '<C-k>'
-let g:VM_maps['Find Next']          = ''
-let g:VM_maps['Find Prev']          = ''
-let g:VM_maps['Remove Region']      = 'q'
-let g:VM_maps['Skip Region']        = '<c-n>'
-let g:VM_maps["Undo"]               = 'l'
-let g:VM_maps["Redo"]               = '<C-r>'
+let g:VM_maps['Find Next']		  = ''
+let g:VM_maps['Find Prev']		  = ''
+let g:VM_maps['Remove Region']	  = 'q'
+let g:VM_maps['Skip Region']		= '<c-n>'
+let g:VM_maps["Undo"]			   = 'l'
+let g:VM_maps["Redo"]			   = '<C-r>'
 " for MacOS
 let g:VM_maps["Select Cursor Down"] = '<A-Down>'
 let g:VM_maps["Select Cursor Up"]   = '<A-Up>'
@@ -158,17 +167,17 @@ let g:snips_author = '<++>'
 " " 忽略以下文件的显示
 " let NERDTreeIgnore=['\.pyc','\~$','\.swp']
 " let g:NERDTreeGitStatusIndicatorMapCustom = {
-"     \ "Modified"  : "✹",
-"     \ "Staged"    : "✚",
-"     \ "Untracked" : "✭",
-"     \ "Renamed"   : "➜",
-"     \ "Unmerged"  : "═",
-"     \ "Deleted"   : "✖",
-"     \ "Dirty"     : "✗",
-"     \ "Clean"     : "✔︎",
-"     \ 'Ignored'   : '☒',
-"     \ "Unknown"   : "?"
-"     \ }
+"	 \ "Modified"  : "✹",
+"	 \ "Staged"	: "✚",
+"	 \ "Untracked" : "✭",
+"	 \ "Renamed"   : "➜",
+"	 \ "Unmerged"  : "═",
+"	 \ "Deleted"   : "✖",
+"	 \ "Dirty"	 : "✗",
+"	 \ "Clean"	 : "✔︎",
+"	 \ 'Ignored'   : '☒',
+"	 \ "Unknown"   : "?"
+"	 \ }
 " let g:NERDTreeGitStatusUseNerdFonts = 1
 " 
 " " let g:NERDTreeWinSize = 33
@@ -230,10 +239,10 @@ function! s:read_template_into_buffer(template)
 	execute '0r ~/.config/nvim/vimspector_sample_json/'.a:template
 endfunction
 command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
-			\   'source': 'ls -1 ~/.config/nvim/vimspector_sample_json',
-			\   'down': 20,
-			\   'sink': function('<sid>read_template_into_buffer')
-			\ })
+	\   'source': 'ls -1 ~/.config/nvim/vimspector_sample_json',
+	\   'down': 20,
+	\   'sink': function('<sid>read_template_into_buffer')
+\ })
 
 autocmd FileType go noremap <LEADER>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
 autocmd FileType go nnoremap <LEADER>dr :call vimspector#Reset()<CR>
@@ -261,34 +270,34 @@ endfunc
 func! LaunchProject()
 	echo "Launch project"
 	call vimspector#LaunchWithConfigurations({
-				\	"Launch Project": {
-				\		"adapter": "vscode-go",
-				\		"filetypes": ["go"],
-				\		"configuration": {
-				\			"request": "launch",
-				\			"program": "${workspaceRoot}",
-				\			"mode": "debug",
-				\			"dlvToolPath": "$HOME/go/bin/dlv",
-				\			"dlvFlags": ["--check-go-version=false"]
-				\		}
-				\	}
-				\ })
+		\	"Launch Project": {
+		\		"adapter": "vscode-go",
+		\		"filetypes": ["go"],
+		\		"configuration": {
+		\			"request": "launch",
+		\			"program": "${workspaceRoot}",
+		\			"mode": "debug",
+		\			"dlvToolPath": "$HOME/go/bin/dlv",
+		\			"dlvFlags": ["--check-go-version=false"]
+		\		}
+		\	}
+	\ })
 endfunc
 
 func! LaunchFile()
 	echo "Launch file"
 	call vimspector#LaunchWithConfigurations({
-				\	"Launch File": {
-				\		"adapter": "vscode-go",
-				\		"filetypes": ["go"],
-				\		"configuration": {
-				\			"request": "launch",
-				\			"program": "${fileDirname}",
-				\			"mode": "debug",
-				\			"dlvToolPath": "$HOME/go/bin/dlv"
-				\		}
-				\	}
-				\ })
+		\	"Launch File": {
+		\		"adapter": "vscode-go",
+		\		"filetypes": ["go"],
+		\		"configuration": {
+		\			"request": "launch",
+		\			"program": "${fileDirname}",
+		\			"mode": "debug",
+		\			"dlvToolPath": "$HOME/go/bin/dlv"
+		\		}
+		\	}
+	\ })
 endfunc
 
 func! DebugFunc()
@@ -301,18 +310,18 @@ func! DebugFunc()
 	endif
 	echo "Lanuch test: ".funcName
 	silent call vimspector#LaunchWithConfigurations({
-				\	 "Launch Test": {
-				\	 	"adapter": "vscode-go",
-				\	 	"filetypes": ["go"],
-				\	 	"configuration": {
-				\	 		"request": "launch",
-				\	 		"program": "${fileDirname}",
-				\	 		"mode": "test",
-				\	 		"dlvToolPath": "$HOME/go/bin/dlv",
-				\	 		"args": ["-test.v", "-test.count", 1, "-test.run", funcName]
-				\	 	}
-				\	 }
-				\ })
+		\	 "Launch Test": {
+		\	 	"adapter": "vscode-go",
+		\	 	"filetypes": ["go"],
+		\	 	"configuration": {
+		\	 		"request": "launch",
+		\	 		"program": "${fileDirname}",
+		\	 		"mode": "test",
+		\	 		"dlvToolPath": "$HOME/go/bin/dlv",
+		\	 		"args": ["-test.v", "-test.count", 1, "-test.run", funcName]
+		\	 	}
+		\	 }
+	\ })
 	" call from file with settings
 	" call vimspector#LaunchWithSettings(#{ configuration: 'Launch Test', UnitTestFunc: funcName })
 endfunc
@@ -344,10 +353,10 @@ let g:go_highlight_variable_assignments = 1
 let g:go_doc_keywordprg_enabled = 0
 
 let g:go_debug_windows = {
-	\ 'vars':       'rightbelow 30vnew',
+	\ 'vars':	   'rightbelow 30vnew',
 	\ 'goroutines': '10new',
-	\ 'stack':      '20new',
-	\ 'out':        'bot 5new',
+	\ 'stack':	  '20new',
+	\ 'out':		'bot 5new',
 \ }
 let g:go_debug_preserve_layout = 1
 let g:go_debug_log_output = ''
@@ -371,7 +380,7 @@ noremap <LEADER>T :TagbarToggle<CR>
 " go install github.com/jstemmer/gotags@latest
 let g:tagbar_type_go = {
 	\ 'ctagstype' : 'go',
-	\ 'kinds'     : [
+	\ 'kinds'	 : [
 		\ 'p:package',
 		\ 'i:imports:1',
 		\ 'c:constants',
@@ -455,9 +464,9 @@ require'fzf-lua'.setup {
 			scrollbar = 'float',
 		},
 		fullscreen = false,
-		vertical       = 'down:45%',      -- up|down:size
-		horizontal     = 'right:60%',     -- right|left:size
-		hidden         = 'nohidden',
+		vertical	   = 'down:45%',	  -- up|down:size
+		horizontal	 = 'right:60%',	 -- right|left:size
+		hidden		 = 'nohidden',
 		title = true,
 	},
 	keymap = {
@@ -465,82 +474,82 @@ require'fzf-lua'.setup {
 		-- no need to set to `false` to disable a bind
 		-- delete or modify is sufficient
 		builtin = {
-			["<c-f>"]      = "toggle-fullscreen",
-			["<c-r>"]      = "toggle-preview-wrap",
-			["<c-p>"]      = "toggle-preview",
-			["<c-y>"]      = "preview-page-down",
-			["<c-l>"]      = "preview-page-up",
+			["<c-f>"]	  = "toggle-fullscreen",
+			["<c-r>"]	  = "toggle-preview-wrap",
+			["<c-p>"]	  = "toggle-preview",
+			["<c-y>"]	  = "preview-page-down",
+			["<c-l>"]	  = "preview-page-up",
 			["<S-left>"]   = "preview-page-reset",
 		},
 		fzf = {
-			["esc"]        = "abort",
-			["ctrl-h"]     = "unix-line-discard",
-			["ctrl-k"]     = "half-page-down",
-			["ctrl-b"]     = "half-page-up",
-			["ctrl-n"]     = "beginning-of-line",
-			["ctrl-a"]     = "end-of-line",
-			["alt-a"]      = "toggle-all",
-			["f3"]         = "toggle-preview-wrap",
-			["f4"]         = "toggle-preview",
+			["esc"]		= "abort",
+			["ctrl-h"]	 = "unix-line-discard",
+			["ctrl-k"]	 = "half-page-down",
+			["ctrl-b"]	 = "half-page-up",
+			["ctrl-n"]	 = "beginning-of-line",
+			["ctrl-a"]	 = "end-of-line",
+			["alt-a"]	  = "toggle-all",
+			["f3"]		 = "toggle-preview-wrap",
+			["f4"]		 = "toggle-preview",
 			["shift-down"] = "preview-page-down",
 			["shift-up"]   = "preview-page-up",
-			["ctrl-e"]     = "down",
-			["ctrl-u"]     = "up",
+			["ctrl-e"]	 = "down",
+			["ctrl-u"]	 = "up",
 		},
 	},
   previewers = {
-    cat = {
-      cmd             = "cat",
-      args            = "--number",
-    },
-    bat = {
-      cmd             = "bat",
-      args            = "--style=numbers,changes --color always",
-      theme           = 'Coldark-Dark', -- bat preview theme (bat --list-themes)
-      config          = nil,            -- nil uses $BAT_CONFIG_PATH
-    },
-    head = {
-      cmd             = "head",
-      args            = nil,
-    },
-    git_diff = {
-      cmd_deleted     = "git diff --color HEAD --",
-      cmd_modified    = "git diff --color HEAD",
-      cmd_untracked   = "git diff --color --no-index /dev/null",
-      -- pager        = "delta",      -- if you have `delta` installed
-    },
-    man = {
-      cmd             = "man -c %s | col -bx",
-    },
-    builtin = {
-      syntax          = true,         -- preview syntax highlight?
-      syntax_limit_l  = 0,            -- syntax limit (lines), 0=nolimit
-      syntax_limit_b  = 1024*1024,    -- syntax limit (bytes), 0=nolimit
-    },
+	cat = {
+	  cmd			 = "cat",
+	  args			= "--number",
+	},
+	bat = {
+	  cmd			 = "bat",
+	  args			= "--style=numbers,changes --color always",
+	  theme		   = 'Coldark-Dark', -- bat preview theme (bat --list-themes)
+	  config		  = nil,			-- nil uses $BAT_CONFIG_PATH
+	},
+	head = {
+	  cmd			 = "head",
+	  args			= nil,
+	},
+	git_diff = {
+	  cmd_deleted	 = "git diff --color HEAD --",
+	  cmd_modified	= "git diff --color HEAD",
+	  cmd_untracked   = "git diff --color --no-index /dev/null",
+	  -- pager		= "delta",	  -- if you have `delta` installed
+	},
+	man = {
+	  cmd			 = "man -c %s | col -bx",
+	},
+	builtin = {
+	  syntax		  = true,		 -- preview syntax highlight?
+	  syntax_limit_l  = 0,			-- syntax limit (lines), 0=nolimit
+	  syntax_limit_b  = 1024*1024,	-- syntax limit (bytes), 0=nolimit
+	},
   },
   files = {
-    -- previewer      = "bat",          -- uncomment to override previewer
-                                        -- (name from 'previewers' table)
-                                        -- set to 'false' to disable
-    prompt            = 'Files❯ ',
-    multiprocess      = true,           -- run command in a separate process
-    git_icons         = true,           -- show git icons?
-    file_icons        = true,           -- show file icons?
-    color_icons       = true,           -- colorize file|git icons
-    -- executed command priority is 'cmd' (if exists)
-    -- otherwise auto-detect prioritizes `fd`:`rg`:`find`
-    -- default options are controlled by 'fd|rg|find|_opts'
-    -- NOTE: 'find -printf' requires GNU find
-    -- cmd            = "find . -type f -printf '%P\n'",
-    find_opts         = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
-    rg_opts           = "--color=never --files --hidden --follow -g '!.git'",
-    fd_opts           = "--color=never --type f --hidden --follow --exclude .git",
+	-- previewer	  = "bat",		  -- uncomment to override previewer
+										-- (name from 'previewers' table)
+										-- set to 'false' to disable
+	prompt			= 'Files❯ ',
+	multiprocess	  = true,		   -- run command in a separate process
+	git_icons		 = true,		   -- show git icons?
+	file_icons		= true,		   -- show file icons?
+	color_icons	   = true,		   -- colorize file|git icons
+	-- executed command priority is 'cmd' (if exists)
+	-- otherwise auto-detect prioritizes `fd`:`rg`:`find`
+	-- default options are controlled by 'fd|rg|find|_opts'
+	-- NOTE: 'find -printf' requires GNU find
+	-- cmd			= "find . -type f -printf '%P\n'",
+	find_opts		 = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
+	rg_opts		   = "--color=never --files --hidden --follow -g '!.git'",
+	fd_opts		   = "--color=never --type f --hidden --follow --exclude .git",
   },
   buffers = {
-    prompt            = 'Buffers❯ ',
-    file_icons        = true,         -- show file icons?
-    color_icons       = true,         -- colorize file|git icons
-    sort_lastused     = true,         -- sort buffers() by last used
+	prompt			= 'Buffers❯ ',
+	file_icons		= true,		 -- show file icons?
+	color_icons	   = true,		 -- colorize file|git icons
+	sort_lastused	 = true,		 -- sort buffers() by last used
   },
 }
 EOF
@@ -566,18 +575,18 @@ let g:rnvimr_draw_border = 0
 highlight link RnvimrNormal CursorLine
 nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 let g:rnvimr_action = {
-            \ '<C-t>': 'NvimEdit tabedit',
-            \ '<C-x>': 'NvimEdit split',
-            \ '<C-v>': 'NvimEdit vsplit',
-            \ 'gw': 'JumpNvimCwd',
-            \ 'yw': 'EmitRangerCwd'
-            \ }
+	\ '<C-t>': 'NvimEdit tabedit',
+	\ '<C-x>': 'NvimEdit split',
+	\ '<C-v>': 'NvimEdit vsplit',
+	\ 'gw': 'JumpNvimCwd',
+	\ 'yw': 'EmitRangerCwd'
+	\ }
 let g:rnvimr_layout = { 'relative': 'editor',
-            \ 'width': &columns,
-            \ 'height': &lines,
-            \ 'col': 0,
-            \ 'row': 0,
-            \ 'style': 'minimal' }
+	\ 'width': &columns,
+	\ 'height': &lines,
+	\ 'col': 0,
+	\ 'row': 0,
+	\ 'style': 'minimal' }
 " let g:rnvimr_presets = [
 " 	\ {'width': 1.0, 'height': 1.0},
 " 	\ {'width': 0.8, 'height': 0.8}]
@@ -693,8 +702,8 @@ let g:NERDAltDelims_go = 1
 
 " Add your own custom formats or override the defaults
 let g:NERDCustomDelimiters = {
-    \	'c': { 'left': '/**','right': '*/' },
-    \	'go': { 'left': '//' },
+	\	'c': { 'left': '/**','right': '*/' },
+	\	'go': { 'left': '//' },
 \ }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
