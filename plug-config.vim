@@ -101,7 +101,7 @@ let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 
 " ==================== copilot ====================
-imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+imap <silent><script><expr> <c-i> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
 " ==================== wildfire ====================
