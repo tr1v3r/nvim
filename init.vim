@@ -16,6 +16,14 @@ endif
 
 let g:nvim_plugins_installation_completed=1
 
+" Check if in vscode
+" https://github.com/vscode-neovim/vscode-neovim
+if exists('g:vscode')
+    " VSCode extension
+else
+    " ordinary Neovim
+endif
+
 " 设置 vimrc 修改保存后立刻生效，不用在重新打开
 " 建议配置完成后将这个关闭
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC
