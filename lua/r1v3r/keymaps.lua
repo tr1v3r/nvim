@@ -3,14 +3,11 @@
 -- Leader key
 vim.g.mapleader = ' '
 
--- define common options
-local nsopts = {
-    noremap = true,      -- non-recursive
-    silent = true,       -- do not show message
-}
-local nopts = {
-    noremap = true,      -- non-recursive
-}
+-- Define common options
+-- noremap: non-recursive
+-- silent: do not show message
+local nsopts = {noremap = true, silent = true,}
+local nopts = {noremap = true}
 
 vim.keymap.set('n', 's', '<nop>', nsopts)
 
@@ -25,23 +22,23 @@ vim.keymap.set('n', ',.', '%', nsopts)
 -- Search
 vim.keymap.set('n', '<LEADER><CR>', ':nohlsearch<CR>', nsopts)
 -- Adjacent duplicate words
-vim.keymap.set('n', '<LEADER>dw', '/\\(\\<\\w\\+\\>\\)\\_s*\1', nopts)
+vim.keymap.set('n', '<LEADER>dw', [[/\(\<\w\+\>\)\_s*\1]], nopts)
 -- Find and replace
-vim.keymap.set('n', '\\s', ':%s//g<left><left>', nopts)
+vim.keymap.set('n', [[\s]], ':%s//g<left><left>', nopts)
 -- Find and delete (line)
-vim.keymap.set('n', '\\d', ':g//d<left><left>', nopts)
+vim.keymap.set('n', [[\d]], ':g//d<left><left>', nopts)
 -- Copy to system clipboard
 vim.keymap.set('v', 'Y', '"+y', nsopts)
 -- Space to Tab
-vim.keymap.set('n', '<LEADER>tt', ':%s/    /\\t/g', nopts)
-vim.keymap.set('v', '<LEADER>tt', ':s/    /\\t/g', nopts)
+vim.keymap.set('n', '<LEADER>tt', [[:%s/    /\t/g]], nopts)
+vim.keymap.set('v', '<LEADER>tt', [[:s/    /\t/g]], nopts)
 -- Folding
 vim.keymap.set('v', '<LEADER>o', 'za', nsopts)
 
 
 -- Move cursor in find results
-vim.keymap.set('n', '=', 'nzz', nsopts)
-vim.keymap.set('n', '-', 'Nzz', nsopts)
+vim.keymap.set('n', '=', 'nzz', nopts)
+vim.keymap.set('n', '-', 'Nzz', nopts)
 
 -- Quit key
 vim.keymap.set('n', 'S', ':w<CR>', nopts)
@@ -64,7 +61,7 @@ vim.keymap.set('n', 'u', 'k', nsopts)
 vim.keymap.set('n', 'i', 'l', nsopts)
 vim.keymap.set('n', 'gu', 'gk', nsopts)
 vim.keymap.set('n', 'ge', 'gj', nsopts)
-vim.keymap.set('n', '\\v', 'v$h', nsopts)
+vim.keymap.set('n', [[\v]], 'v$h', nsopts)
 
 vim.keymap.set('n', 'h', 'e', nsopts)
 
@@ -137,7 +134,7 @@ vim.keymap.set('n', '<C-`>', ':set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i
 -- Open a new instance of st with the cwd
 -- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 -- Open a new terminal tab
-vim.keymap.set('n', '\\t', ':tabe<CR>:term<CR>i', nsopts)
+vim.keymap.set('n', [[\t]], ':tabe<CR>:term<CR>i', nsopts)
 
 -- ==================== Tab management ====================
 -- Create a new tab with tu
@@ -193,3 +190,4 @@ vim.keymap.set('n', 'tx', ':r !figlet', nsopts)
 -- Set wrap
 vim.keymap.set('n', '<LEADER>sw', ':set wrap<CR>', nsopts)
 
+print(vim.loop.os_uname().sysname)
