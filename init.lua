@@ -2,6 +2,7 @@
 -- https://neovim.io/doc/user/lua.html
 -- https://neovim.io/doc/user/lua-guide.html#lua-guide
 
+-- go install -v github.com/rhysd/vim-startuptime@latest
 -- startbenchmark: `vim-startuptime -vimpath nvim`
 
 if not vim.g.vscode then
