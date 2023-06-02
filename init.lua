@@ -16,7 +16,3 @@ if vim.fn.empty(vim.fn.glob("$HOME/.config/nvim/_device.vim")) == 1 then
 else
 	vim.cmd("source $HOME/.config/nvim/_device.vim")
 end
-
-require("notify").setup({
-	background_colour = "#000000",
-})
