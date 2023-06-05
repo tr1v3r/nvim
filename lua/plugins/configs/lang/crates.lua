@@ -1,10 +1,10 @@
 return function()
 	local icons = {
-		diagnostics = require("modules.utils.icons").get("diagnostics", true),
-		git = require("modules.utils.icons").get("git", true),
-		misc = require("modules.utils.icons").get("misc", true),
-		ui = require("modules.utils.icons").get("ui", true),
-		kind = require("modules.utils.icons").get("kind", true),
+		diagnostics = require("r1v3r.icons").get("diagnostics", true),
+		git = require("r1v3r.icons").get("git", true),
+		misc = require("r1v3r.icons").get("misc", true),
+		ui = require("r1v3r.icons").get("ui", true),
+		kind = require("r1v3r.icons").get("kind", true),
 	}
 
 	require("crates").setup({

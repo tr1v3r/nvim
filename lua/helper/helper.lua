@@ -1,1 +1,0 @@
--- provide shortcuts for keymap and cmd

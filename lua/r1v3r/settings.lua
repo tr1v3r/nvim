@@ -15,4 +15,16 @@ settings["transparent_background"] = false
 ---@type "dark"|"light"
 settings["background"] = "dark"
 
+-- Change the colors of the global palette here.
+-- Settings will complete their replacement at initialization.
+-- Parameters will be automatically completed as you type.
+-- Example: { sky = "#04A5E5" }
+---@type palette
+settings["palette_overwrite"] = {}
+
+-- Set the command for handling external URLs here. The executable must be available on your $PATH.
+-- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
+---@type string
+settings["external_browser"] = "chrome-cli open"
+
 return settings
