@@ -1,7 +1,8 @@
 local settings = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, 
+-- `catppuccin-macchiato`, `edge`, `nord`, `material`.
 ---@type string
 settings["colorscheme"] = "catppuccin"
 

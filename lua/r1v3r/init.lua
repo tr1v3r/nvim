@@ -27,6 +27,11 @@ local init = function()
     require('r1v3r.options')
     require('r1v3r.keymaps')
     require('r1v3r.pack')
+
+    local colorscheme = require("r1v3r.settings").colorscheme
+	local background = require("r1v3r.settings").background
+	vim.api.nvim_command("set background=" .. background)
+	vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
 init()

@@ -4,6 +4,4 @@ return function()
     -- vim.g.material_theme_style = 'ocean-community'
     -- vim.g.material_style = "darker" | "lighter" | "oceanic" | "palenight" | "deep ocean"
     vim.g.material_style = "deep ocean"
-
-    vim.cmd("colorscheme material")
 end
