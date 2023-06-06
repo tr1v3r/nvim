@@ -1,13 +1,17 @@
 -- =============== Basic Key Mapping ================
-
 -- Leader key
 vim.g.mapleader = " "
 
 -- Define common options
 -- noremap: non-recursive
 -- silent: do not show message
-local nsopts = { noremap = true, silent = true }
-local nopts = { noremap = true }
+local nsopts = {
+    noremap = true,
+    silent = true
+}
+local nopts = {
+    noremap = true
+}
 
 vim.keymap.set("", "s", "<nop>", nsopts)
 
@@ -175,3 +179,5 @@ vim.keymap.set("", "tx", ":r !figlet ", nopts)
 
 -- Set wrap
 vim.keymap.set("", "<LEADER>sw", ":set wrap<CR>", nsopts)
+
+vim.keymap.set("", "tt", ":NvimTreeToggle<CR>", nsopts)
