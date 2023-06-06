@@ -182,3 +182,5 @@ vim.keymap.set("", "<LEADER>sw", ":set wrap<CR>", nsopts)
 
 vim.keymap.set("", "tt", ":NvimTreeToggle<CR>", nsopts)
 vim.keymap.set("", "tf", ":NvimTreeFocus<CR>", nsopts)
+
+vim.keymap.set("", "<C-g>", ":LazyGit<CR>", nsopts)
