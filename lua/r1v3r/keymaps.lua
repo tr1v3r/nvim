@@ -180,7 +180,13 @@ vim.keymap.set("", "tx", ":r !figlet ", nopts)
 -- Set wrap
 vim.keymap.set("", "<LEADER>sw", ":set wrap<CR>", nsopts)
 
-vim.keymap.set("", "tt", ":NvimTreeToggle<CR>", nsopts)
-vim.keymap.set("", "tf", ":NvimTreeFocus<CR>", nsopts)
+-- ==================== Plugins Keymaps ====================
+local setPluginKeys = function()
+    -- nvim tree
+    vim.keymap.set("", "tt", ":NvimTreeToggle<CR>", nsopts)
+    vim.keymap.set("", "tf", ":NvimTreeFocus<CR>", nsopts)
+    -- lazygit
+    vim.keymap.set("", "<C-g>", ":LazyGit<CR>", nsopts)
+end
 
-vim.keymap.set("", "<C-g>", ":LazyGit<CR>", nsopts)
+setPluginKeys()
