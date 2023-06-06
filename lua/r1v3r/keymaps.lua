@@ -181,3 +181,4 @@ vim.keymap.set("", "tx", ":r !figlet ", nopts)
 vim.keymap.set("", "<LEADER>sw", ":set wrap<CR>", nsopts)
 
 vim.keymap.set("", "tt", ":NvimTreeToggle<CR>", nsopts)
+vim.keymap.set("", "tf", ":NvimTreeFocus<CR>", nsopts)

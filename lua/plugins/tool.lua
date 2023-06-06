@@ -19,6 +19,12 @@ tool["nvim-tree/nvim-tree.lua"] = {
 	},
 	config = require("tool.nvim-tree"),
 }
+tool["gelguy/wilder.nvim"] = {
+	lazy = true,
+	event = "CmdlineEnter",
+	config = require("tool.wilder"),
+	dependencies = { "romgrk/fzy-lua-native" },
+}
 
 -- 	-- Unmanaged plugin (manually installed and updated)
 -- 	{ dir = "~/my-prototype-plugin" },

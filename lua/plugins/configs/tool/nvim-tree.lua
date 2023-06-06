@@ -33,7 +33,7 @@ return function()
             vim.keymap.set('n', 'n', api.node.open.edit, opts('Open'))
             vim.keymap.set('n', 'o', api.node.open.tab, opts('Open: New Tab'))
             vim.keymap.set('n', 'I', api.node.open.vertical, opts('Open: Vertical Split'))
-            vim.keymap.set('n', 'E', api.node.open.horizontal, opts('Open: Horizontal Split'))
+            -- vim.keymap.set('n', 'E', api.node.open.horizontal, opts('Open: Horizontal Split'))
         end,
         auto_reload_on_write = true,
         create_in_closed_folder = false,
