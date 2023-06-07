@@ -16,11 +16,6 @@ local createdir = function()
 end
 
 local init = function()
-    -- map = require'helper.mapping'.map
-    -- v = map("a", "b")
-    -- print(v.key, v.cmd, v.mode, v.options)
-    -- v.mode("n").print()
-
     createdir()
 
     require('r1v3r.lang')

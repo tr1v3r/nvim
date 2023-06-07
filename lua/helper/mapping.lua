@@ -1,5 +1,5 @@
 ---@class mapOption
----@field mode string
+---@field m string
 ---@field key string
 ---@field cmd string
 ---@field options table
@@ -10,12 +10,12 @@
 ---@field options.callback function
 ---@field options.desc string
 ---@field buffer boolean|number
-local option = {}
+local mapOption = {}
 
 ---@return mapOption
-function option:new(key, cmd)
+function mapOption:new(key, cmd)
     local instance = {
-        mode = "",
+        m = "",
         key = key,
         cmd = cmd,
         options = {
@@ -34,80 +34,84 @@ function option:new(key, cmd)
 end
 
 ---@return mapOption
-function option:cr()
+function mapOption:cr()
     self.cmd = (":%s<CR>"):format(self.cmd)
     return self
 end
 
 ---@return mapOption
-function option:space()
+function mapOption:space()
     self.cmd = (":%s<Space>"):format(self.cmd)
     return self
 end
 
 ---@return mapOption
-function option:pure()
+function mapOption:pure()
     -- <C-u> to eliminate the automatically inserted range in visual mode
-    self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
+    self.cmd = (":<C-u>%s<CR>"):format(self.cmd)
     return self
 end
 
----@param mode string
+---@param mode_string string
 ---@return mapOption
-function option:mode(mode)
-    self.mode = mode
+function mapOption:mode(mode_string)
+    self.m = mode_string
     return self
 end
 
 ---@param callback fun():nil
 --- Takes a callback that will be called when the key is pressed
 ---@return mapOption
-function option:callback(callback)
+function mapOption:callback(callback)
     self.cmd = ""
     self.options.callback = callback
     return self
 end
 
 ---@return mapOption
-function option:with_silent()
+function mapOption:silent()
     self.options.silent = true
     return self
 end
 
 ---@param description string
 ---@return mapOption
-function option:with_desc(description)
+function mapOption:desc(description)
     self.options.desc = description
     return self
 end
 
 ---@return mapOption
-function option:with_noremap()
+function mapOption:noremap()
     self.options.noremap = true
     return self
 end
 
 ---@return mapOption
-function option:expr()
+function mapOption:expr()
     self.options.expr = true
     return self
 end
 
 ---@return mapOption
-function option:nowait()
+function mapOption:nowait()
     self.options.nowait = true
     return self
 end
 
 ---@param num number
 ---@return mapOption
-function option:buffer(num)
+function mapOption:buffer(num)
     self.buffer = num
     return self
 end
 
-function option:set()
-    local mode = self.mode
+function mapOption:exec()
+    vim.cmd(self.cmd)
+end
+
+function mapOption:set()
+    local mode = self.m
     local lhs = self.key
     local rhs = self.cmd
     local options = self.options
@@ -119,8 +123,8 @@ function option:set()
     end
 end
 
-function option:print()
-    local mode = self.mode
+function mapOption:print()
+    local mode = self.m
     local lhs = self.key
     local rhs = self.cmd
     local options = self.options
@@ -130,6 +134,9 @@ function option:print()
     else
         print(mode, lhs, rhs, options)
     end
+    for k, v in pairs(options) do
+        print(k, v)
+    end
 end
 
 local bind = {}
@@ -138,7 +145,7 @@ local bind = {}
 ---@param cmd string
 ---@return mapOption
 function bind.map(key, cmd)
-    return option:new(key, cmd)
+    return mapOption:new(key, cmd)
 end
 
 ---@param cmd_string string
