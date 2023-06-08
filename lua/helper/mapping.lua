@@ -9,7 +9,7 @@
 ---@field options.nowait boolean
 ---@field options.callback function
 ---@field options.desc string
----@field buffer boolean|number
+---@field buf boolean|number
 local mapOption = {}
 
 ---@return mapOption
@@ -26,7 +26,7 @@ function mapOption:new(key, cmd)
             callback = nil,
             desc = ""
         },
-        buffer = false
+        buf = false
     }
     setmetatable(instance, self)
     self.__index = self
@@ -102,7 +102,7 @@ end
 ---@param num number
 ---@return mapOption
 function mapOption:buffer(num)
-    self.buffer = num
+    self.buf = num
     return self
 end
 
@@ -128,7 +128,7 @@ function mapOption:print()
     local lhs = self.key
     local rhs = self.cmd
     local options = self.options
-    local buf = self.buffer
+    local buf = self.buf
     if buf and type(buf) == "number" then
         print(buf, mode, lhs, rhs, options)
     else
