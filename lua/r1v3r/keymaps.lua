@@ -180,7 +180,7 @@ map("tx", ":r !figlet "):noremap():silent():set()
 map("<LEADER>sw", ":set wrap<CR>"):noremap():silent():set()
 
 -- ==================== Plugins Keymaps ====================
-local setPluginKeys = function()
+local setEditorPlugKeys = function()
     -- Plugin: vim-fugitive
     map("gps", "G push"):cr():noremap():silent():desc("git: Push"):set()
     map("gpl", "G pull"):cr():noremap():silent():desc("git: Pull"):set()
@@ -210,151 +210,94 @@ local setPluginKeys = function()
     map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
         "terminal: Toggle vertical"):set()
     map("<A-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
-    map("<F5>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
+    map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
         "terminal: Toggle vertical"):set()
-    map("<F5>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
+    map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
         "terminal: Toggle vertical"):set()
-    map("<F5>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
+    map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
     map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]]):mode("n"):noremap():silent():desc(
         "terminal: Toggle float"):set()
     map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
         :set()
     map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
-    map("<LEADER>g", ""):callback(function()
+    map("<LEADER>g"):mode("n"):callback(function()
         _toggle_lazygit()
     end):noremap():silent():desc("git: Toggle lazygit"):set()
 
-    -- -- Plugin: trouble
-    -- ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
-    -- ["n|<leader>tr"] = map_cr("TroubleToggle lsp_references")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("lsp: Show lsp references"),
-    -- ["n|<leader>td"] = map_cr("TroubleToggle document_diagnostics")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("lsp: Show document diagnostics"),
-    -- ["n|<leader>tw"] = map_cr("TroubleToggle workspace_diagnostics")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("lsp: Show workspace diagnostics"),
-    -- ["n|<leader>tq"] = map_cr("TroubleToggle quickfix")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("lsp: Show quickfix list"),
-    -- ["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
+    -- Plugin: trouble
+    map("gt", "TroubleToggle"):mode("n"):cr():noremap():silent():desc("lsp: Toggle trouble list"):set()
+    map("<LEADER>tr", "TroubleToggle lsp_references"):mode("n"):cr():noremap():silent():desc("lsp: Show lsp references")
+        :set()
+    map("<LEADER>td", "TroubleToggle document_diagnostics"):mode("n"):cr():noremap():silent():desc(
+        "lsp: Show document diagnostics"):set()
+    map("<LEAEDR>tw", "TroubleToggle workspace_diagnostics"):mode("n"):cr():noremap():silent():desc(
+        "lsp: Show workspace diagnostics"):set()
+    map("<LEADER>tq", "TroubleToggle quickfix"):mode("n"):cr():noremap():silent():desc("lsp: Show loclist"):set()
+    map("<LEADER>tl", "TroubleToggle loclist"):mode("n"):cr():noremap():silent():desc("lsp: Show loclist"):set()
 
-    -- -- Plugin: telescope
-    -- ["n|<C-p>"] = map_callback(function()
-    -- 		_command_panel()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("tool: Toggle command panel"),
-    -- ["n|<leader>u"] = map_callback(function()
-    -- 		require("telescope").extensions.undo.undo()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("edit: Show undo history"),
-    -- ["n|<leader>fp"] = map_callback(function()
-    -- 		require("telescope").extensions.projects.projects({})
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("find: Project"),
-    -- ["n|<leader>fr"] = map_callback(function()
-    -- 		require("telescope").extensions.frecency.frecency()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("find: File by frecency"),
-    -- ["n|<leader>fw"] = map_callback(function()
-    -- 		require("telescope").extensions.live_grep_args.live_grep_args()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("find: Word in project"),
-    -- ["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
-    -- ["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("find: File in project"),
-    -- ["n|<leader>fc"] = map_cu("Telescope colorscheme")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("ui: Change colorscheme for current session"),
-    -- ["n|<leader>fn"] = map_cu(":enew"):with_noremap():with_silent():with_desc("buffer: New"),
-    -- ["n|<leader>fg"] = map_cu("Telescope git_files")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("find: file in git project"),
-    -- ["n|<leader>fz"] = map_cu("Telescope zoxide list")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("edit: Change current direrctory by zoxide"),
-    -- ["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
-    -- ["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+    -- Plugin: telescope
+    map("<C-p>"):mode("n"):callback(function()
+        _command_panel()
+    end):noremap():silent():desc("tool: Toggle command panel"):set()
+    map("<LEADER>u"):mode("n"):callback(function()
+        require("telescope").extensions.undo.undo()
+    end):noremap():silent():desc("edit: Show undo history"):set()
+    map("<LEADER>fp"):mode("n"):callback(function()
+        require("telescope").extensions.projects.projects({})
+    end):noremap():silent():desc("find: Project"):set()
+    map("<LEADER>fr"):mode("n"):callback(function()
+        require("telescope").extensions.frecency.frecency()
+    end):noremap():silent():desc("find: File by frecency"):set()
+    map("<LEADER>fw"):mode("n"):callback(function()
+        require("telescope").extensions.live_grep_args.live_grep_args()
+    end):noremap():silent():desc("find: Word in project"):set()
+    map("<LEADER>fe", "Telescope oldfiles"):mode("n"):pure():noremap():silent():desc("find: File by history"):set()
+    map("<LEADER>ff", "Telescope find_files"):mode("n"):pure():noremap():silent():desc("find: File in project"):set()
+    map("<LEADER>fc", "Telescope colorscheme"):mode("n"):pure():noremap():silent():desc(
+        "ui: Change colorscheme for current session"):set()
+    map("<LEADER>fn", ":enew"):mode("n"):pure():noremap():silent():desc("buffer: New"):set()
+    map("<LEADER>fg", "Telescope git_files"):mode("n"):pure():noremap():silent():desc("find: File in git project"):set()
+    map("<LEADER>fz", "Telescope zoxide list"):mode("n"):pure():noremap():silent():desc(
+        "edit: Change current direrctory by zoxide"):set()
+    map("<LEADER>fb", "Telescope buffers"):mode("n"):pure():noremap():silent():desc("find: Buffer opened"):set()
+    map("<LEADER>fs", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
 
-    -- -- Plugin: dap
-    -- ["n|<F6>"] = map_callback(function()
-    -- 		require("dap").continue()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Run/Continue"),
-    -- ["n|<F7>"] = map_callback(function()
-    -- 		require("dap").terminate()
-    -- 		require("dapui").close()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Stop"),
-    -- ["n|<F8>"] = map_callback(function()
-    -- 		require("dap").toggle_breakpoint()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Toggle breakpoint"),
-    -- ["n|<F9>"] = map_callback(function()
-    -- 		require("dap").step_into()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Step into"),
-    -- ["n|<F10>"] = map_callback(function()
-    -- 		require("dap").step_out()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Step out"),
-    -- ["n|<F11>"] = map_callback(function()
-    -- 		require("dap").step_over()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Step over"),
-    -- ["n|<leader>db"] = map_callback(function()
-    -- 		require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Set breakpoint with condition"),
-    -- ["n|<leader>dc"] = map_callback(function()
-    -- 		require("dap").run_to_cursor()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Run to cursor"),
-    -- ["n|<leader>dl"] = map_callback(function()
-    -- 		require("dap").run_last()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Run last"),
-    -- ["n|<leader>do"] = map_callback(function()
-    -- 		require("dap").repl.open()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("debug: Open REPL"),
+    -- Plugin: dap
+    map("<F5>"):mode("n"):callback(function()
+        require("dap").continue()
+    end):noremap():silent():desc("debug: Run/Continue"):set()
+    map("<F6>"):mode("n"):callback(function()
+        require("dap").terminate()
+        require("dapui").close()
+    end):noremap():silent():desc("debug: Stop"):set()
+    map("<F8>"):mode("n"):callback(function()
+        require("dap").toggle_breakpoint()
+    end):noremap():silent():desc("debug: Toggle breakpoint"):set()
+    map("<F9>"):mode("n"):callback(function()
+        require("dap").step_into()
+    end):noremap():silent():desc("debug: Step into"):set()
+    map("<F10>"):mode("n"):callback(function()
+        require("dap").step_out()
+    end):noremap():silent():desc("debug: Step out"):set()
+    map("<F11>"):mode("n"):callback(function()
+        require("dap").step_over()
+    end):noremap():silent():desc("debug: Step over"):set()
+    map("<LEADER>db"):mode("n"):callback(function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end):noremap():silent():desc("debug: Set breakpoint with condition"):set()
+    map("<LEADER>dc"):mode("n"):callback(function()
+        require("dap").run_to_cursor()
+    end):noremap():silent():desc("debug: Run to cursor"):set()
+    map("<LEADER>dl"):mode("n"):callback(function()
+        require("dap").run_last()
+    end):noremap():silent():desc("debug: Run last"):set()
+    map("<LEADER>do"):mode("n"):callback(function()
+        require("dap").repl.open()
+    end):noremap():silent():desc("debug: Open REPL"):set()
 end
 
-setPluginKeys()
+local setPlugKeys = function()
+    setEditorPlugKeys()
+end
+
+setPlugKeys()
