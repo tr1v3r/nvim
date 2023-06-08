@@ -200,42 +200,29 @@ local setPluginKeys = function()
     -- -- Plugin: toggleterm
     map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
     map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
-    map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc("terminal: Toggle horizontal"):set()
-    map("<C-\\>","<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc():set()
+    map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc(
+        "terminal: Toggle horizontal"):set()
+    map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc(
+        "terminal: Toggle horizontal"):set()
     map("<C-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle horizontal"):set()
-    -- ["n|<A-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]])
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle vertical"),
-    -- ["i|<A-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle vertical"),
-    -- ["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-    -- ["n|<F5>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]])
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle vertical"),
-    -- ["i|<F5>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle vertical"),
-    -- ["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-    -- ["n|<A-d>"] = map_cr([[execute v:count . "ToggleTerm direction=float"]])
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle float"),
-    -- ["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("terminal: Toggle float"),
-    -- ["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
-    -- ["n|<leader>g"] = map_callback(function()
-    -- 		_toggle_lazygit()
-    -- 	end)
-    -- 	:with_noremap()
-    -- 	:with_silent()
-    -- 	:with_desc("git: Toggle lazygit"),
+    map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):cr():noremap():silent():desc(
+        "terminal: Toggle vertical"):set()
+    map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
+        "terminal: Toggle vertical"):set()
+    map("<A-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
+    map("<F5>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
+        "terminal: Toggle vertical"):set()
+    map("<F5>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
+        "terminal: Toggle vertical"):set()
+    map("<F5>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
+    map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]]):mode("n"):noremap():silent():desc(
+        "terminal: Toggle float"):set()
+    map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
+        :set()
+    map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
+    map("<LEADER>g", ""):callback(function()
+        _toggle_lazygit()
+    end):noremap():silent():desc("git: Toggle lazygit"):set()
 
     -- -- Plugin: trouble
     -- ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
