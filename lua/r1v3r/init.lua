@@ -21,6 +21,7 @@ local init = function()
     require('r1v3r.lang')
     require('r1v3r.options')
     require('r1v3r.keymaps')
+    require('r1v3r.event')
     require('r1v3r.pack')
 
     local colorscheme = require("r1v3r.settings").colorscheme
