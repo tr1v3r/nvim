@@ -174,7 +174,7 @@ map("<LEADER>sc", ":set spell!<CR>"):noremap():silent():set()
 map("<C-c>", "zz"):noremap():silent():set()
 
 -- Call figlet
-map("tx", ":r !figlet "):noremap():silent():set()
+map("tx", ":r !figlet"):space():noremap():set()
 
 -- Set wrap
 map("<LEADER>sw", ":set wrap<CR>"):noremap():silent():set()

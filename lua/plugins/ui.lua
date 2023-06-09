@@ -1,5 +1,10 @@
 local ui = {}
 
+ui["goolord/alpha-nvim"] = {
+	lazy = true,
+	event = "BufWinEnter",
+	config = require("ui.alpha"),
+}
 ui["marko-cerovac/material.nvim"] = {
     lazy = false,
     priority = 1000,

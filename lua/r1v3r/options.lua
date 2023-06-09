@@ -99,7 +99,7 @@ vim.cmd('syntax on')
 vim.cmd([[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- Save file on TextChanged and InsertLeave events
-vim.cmd([[au TextChanged,InsertLeave <buffer> silent write]])
+-- vim.cmd([[au TextChanged,InsertLeave <buffer> silent write]])
 
 -- Disable search highlighting after executing a search
 vim.cmd([[exec "nohlsearch"]])
