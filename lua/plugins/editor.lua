@@ -1,5 +1,11 @@
 local editor = {}
 
+editor["rainbowhxch/accelerated-jk.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	config = require("editor.accelerated-jk"),
+}
+
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------

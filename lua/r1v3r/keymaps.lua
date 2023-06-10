@@ -1,4 +1,5 @@
 local map = require"helper.mapping".map
+require "helper.plugins"
 
 -- =============== Basic Key Mapping ================
 -- Leader key
@@ -183,6 +184,14 @@ end
 
 -- ==================== Plugins Keymaps ====================
 local setEditorPlugKeys = function()
+    -- Plugin: accelerated-jk
+    map("u", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
+    map("e", "<Plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
+    map("gu", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():set()
+    map("ge", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():set()
+end
+
+local setToolPlugKeys = function()
     -- Plugin: vim-fugitive
     map("gps", "G push"):cr():noremap():silent():desc("git: Push"):set()
     map("gpl", "G pull"):cr():noremap():silent():desc("git: Pull"):set()
@@ -301,6 +310,7 @@ end
 local setPlugKeys = function()
     setGeneralKeys()
     setEditorPlugKeys()
+    setToolPlugKeys()
 end
 
 setPlugKeys()
