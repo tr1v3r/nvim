@@ -1,4 +1,5 @@
 local map = require"helper.mapping".map
+local et = require"helper.mapping".escape_termcode
 require "helper.plugins"
 
 -- =============== Basic Key Mapping ================
@@ -183,12 +184,48 @@ local setGeneralKeys = function()
 end
 
 -- ==================== Plugins Keymaps ====================
+local setCompletionPlugKeys = function()
+end
+
 local setEditorPlugKeys = function()
     -- Plugin: accelerated-jk
-    map("u", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
-    map("e", "<Plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
-    map("gu", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():set()
-    map("ge", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():set()
+    map("u", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():callback(function()
+        return et("<Plug>(accelerated_jk_gk)")
+    end):expr():set()
+    map("e", "<Plug>(accelerated_jk_gj)"):mode("n"):noremap():callback(function()
+        return et("<Plug>(accelerated_jk_gj)")
+    end):expr():set()
+    map("gu", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():callback(function()
+        return et("<Plug>(accelerated_jk_k)")
+    end):expr():set()
+    map("ge", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():callback(function()
+        return et("<Plug>(accelerated_jk_j)")
+    end):expr():set()
+
+    -- Plugin: clever-f
+    map(","):mode("n"):callback(function()
+        return et("<Plug>(clever-f-repeat-forward)")
+    end):expr():set()
+    -- map(","):mode("n"):callback(function()
+    --     return et("<Plug>(clever-f-repeat-back)")
+    -- end):expr():set()
+
+    -- Plugin: comment.nvim
+    map("gcc"):mode("n"):callback(function()
+        return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or
+                   et("<Plug>(comment_toggle_linewise_count)")
+    end):noremap():silent():expr():desc("edit: Toggle comment for line"):set()
+    map("gbc"):mode("n"):callback(function()
+        return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
+                   et("<Plug>(comment_toggle_blockwise_count)")
+    end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
+    map("gc", "<Plug>(comment_toggle_linewise)"):mode("n"):noremap():silent():desc("edit: Toggle comment for line with operator"):set()
+    map("gb", "<Plug>(comment_toggle_blockwise)"):mode("n"):noremap():silent():desc("edit: Toggle comment for block with operator"):set()
+    map("gc", "<Plug>(comment_toggle_linewise_visual)"):mode("x"):noremap():silent():desc("edit: Toggle comment for line with selection"):set()
+    map("gb", "<Plug>(comment_toggle_blockwise_visual)"):mode("x"):noremap():silent():desc("edit: Toggle comment for block with selection"):set()
+end
+
+local setLangPlugKeys = function()
 end
 
 local setToolPlugKeys = function()
@@ -305,6 +342,9 @@ local setToolPlugKeys = function()
     map("<LEADER>do"):mode("n"):callback(function()
         require("dap").repl.open()
     end):noremap():silent():desc("debug: Open REPL"):set()
+end
+
+local setUIPlugKeys = function()
 end
 
 local setPlugKeys = function()

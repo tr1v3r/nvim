@@ -28,6 +28,11 @@ settings["palette_overwrite"] = {}
 ---@type string
 settings["external_browser"] = "chrome-cli open"
 
+-- NOTE: The startup time will be slowed down when it's true.
+-- Set it to false if you don't use nvim to open big files.
+---@type boolean
+settings["load_big_files_faster"] = true
+
 -- Set the language servers that will be installed during bootstrap here.
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
