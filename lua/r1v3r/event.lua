@@ -128,11 +128,11 @@ end
 
 autocmd.init()
 
--- TODO check lsp config
--- local mapping = require("keymap.completion")
--- vim.api.nvim_create_autocmd("LspAttach", {
--- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
--- 	callback = function(event)
--- 		mapping.lsp(event.buf)
--- 	end,
--- })
+-- ================ LSP ================
+local mapping = require("r1v3r.keymaps")
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(event)
+		mapping.lsp(event.buf)
+	end,
+})

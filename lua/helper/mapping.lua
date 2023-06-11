@@ -111,7 +111,17 @@ function mapOption:exec()
 end
 
 function mapOption:set()
-    local mode = self.m
+    local modes = self.m
+    if modes == "" then
+        self:doSet("")
+    else
+        for _, mode in ipairs(vim.split(modes, "")) do
+            self:doSet(mode)
+        end
+    end
+end
+
+function mapOption:doSet(mode)
     local lhs = self.key
     local rhs = self.cmd
     local options = self.options

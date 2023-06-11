@@ -69,8 +69,8 @@ local setGeneralKeys = function()
     map("h", "e"):noremap():silent():set()
 
     -- scroll
-    map("U", "5k"):noremap():silent():set()
-    map("E", "5j"):noremap():silent():set()
+    map("U", "12k"):noremap():silent():set()
+    map("E", "12j"):noremap():silent():set()
     -- go to start/end of the line
     map("N", "0"):noremap():silent():set()
     map("I", "$"):noremap():silent():set()
@@ -130,8 +130,8 @@ local setGeneralKeys = function()
     map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():set()
 
     -- Opening a terminal window
-    -- noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res -5<CR>:term<CRs>i
-    map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():set()
+    map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():desc("open terminal panel"):set()
+    map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():desc("open terminal window"):set()
 
     -- Open a new instance of st with the cwd
     -- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
@@ -184,7 +184,22 @@ local setGeneralKeys = function()
 end
 
 -- ==================== Plugins Keymaps ====================
+local setLazyKeys = function()
+    -- Package manager: lazy.nvim
+    map("<LEADER>LL", "Lazy"):mode("n"):cr():noremap():silent():nowait():desc("package: Show"):set()
+    map("<LEADER>Ls", "Lazy sync"):mode("n"):cr():noremap():silent():nowait():desc("package: Sync"):set()
+    map("<LEADER>Lu", "Lazy update"):mode("n"):cr():noremap():silent():nowait():desc("package: Update"):set()
+    map("<LEADER>Li", "Lazy install"):mode("n"):cr():noremap():silent():nowait():desc("package: Install"):set()
+    map("<LEADER>Ll", "Lazy log"):mode("n"):cr():noremap():silent():nowait():desc("package: Log"):set()
+    map("<LEADER>Lc", "Lazy check"):mode("n"):cr():noremap():silent():nowait():desc("package: Check"):set()
+    map("<LEADER>Ld", "Lazy debug"):mode("n"):cr():noremap():silent():nowait():desc("package: Debug"):set()
+    map("<LEADER>Lp", "Lazy profile"):mode("n"):cr():noremap():silent():nowait():desc("package: Profile"):set()
+    map("<LEADER>Lr", "Lazy restore"):mode("n"):cr():noremap():silent():nowait():desc("package: Restore"):set()
+    map("<LEADER>Lx", "Lazy clean"):mode("n"):cr():noremap():silent():nowait():desc("package: Clean"):set()
+end
+
 local setCompletionPlugKeys = function()
+    map("<C-f>", "<Cmd>FormatToggle<CR>"):mode("n"):noremap():desc("Formater: Toggle format on save"):set()
 end
 
 local setEditorPlugKeys = function()
@@ -201,6 +216,14 @@ local setEditorPlugKeys = function()
     map("ge", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():callback(function()
         return et("<Plug>(accelerated_jk_j)")
     end):expr():set()
+
+    -- Plugin: auto_session
+    map("<LEADER>ss", "SessionSave"):mode("n"):pure():noremap():silent():desc("session: Save"):set()
+    map("<LEADER>sr", "SessionRestore"):mode("n"):pure():noremap():silent():desc("session: Restore"):set()
+    map("<LEADER>sd", "SessionDelete"):mode("n"):pure():noremap():silent():desc("session: Delete"):set()
+
+    -- Plugin: nvim-bufdel
+    map("<A-q>", "BufDel"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
 
     -- Plugin: clever-f
     map(","):mode("n"):callback(function()
@@ -219,13 +242,43 @@ local setEditorPlugKeys = function()
         return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
                    et("<Plug>(comment_toggle_blockwise_count)")
     end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
-    map("gc", "<Plug>(comment_toggle_linewise)"):mode("n"):noremap():silent():desc("edit: Toggle comment for line with operator"):set()
-    map("gb", "<Plug>(comment_toggle_blockwise)"):mode("n"):noremap():silent():desc("edit: Toggle comment for block with operator"):set()
-    map("gc", "<Plug>(comment_toggle_linewise_visual)"):mode("x"):noremap():silent():desc("edit: Toggle comment for line with selection"):set()
-    map("gb", "<Plug>(comment_toggle_blockwise_visual)"):mode("x"):noremap():silent():desc("edit: Toggle comment for block with selection"):set()
+    map("gc", "<Plug>(comment_toggle_linewise)"):mode("n"):noremap():silent():desc(
+        "edit: Toggle comment for line with operator"):set()
+    map("gb", "<Plug>(comment_toggle_blockwise)"):mode("n"):noremap():silent():desc(
+        "edit: Toggle comment for block with operator"):set()
+    map("gc", "<Plug>(comment_toggle_linewise_visual)"):mode("x"):noremap():silent():desc(
+        "edit: Toggle comment for line with selection"):set()
+    map("gb", "<Plug>(comment_toggle_blockwise_visual)"):mode("x"):noremap():silent():desc(
+        "edit: Toggle comment for block with selection"):set()
+
+    -- Plugin: diffview
+    map("<LEADER>DD", "DiffviewOpen"):mode("n"):cr():noremap():silent():desc("git: Show diff"):set()
+    map("<LEADER>DC", "DiffviewClose"):mode("n"):cr():noremap():silent():desc("git: Close diff"):set()
+
+    -- Plugin: vim-easy-align
+    map("gea", "EasyAlign"):mode("nx"):cr():desc("edit: Align with delimiter"):set()
+
+    -- Plugin: hop
+    map("<LEADER>W", "<Cmd>HopWord<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()
+    map("<LEADER>j", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
+    map("<LEADER>k", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
+    map("<LEADER>c", "<Cmd>HopChar1<CR>"):mode("nv"):noremap():desc("jump: Goto one char"):set()
+    map("<LEADER>cc", "<Cmd>HopChar2<CR>"):mode("nv"):noremap():desc("jump: Goto two chars"):set()
+
+    -- Plugin: treehopper
+    map("m", "lua require('tsht').nodes()"):mode("o"):pure():silent():desc("jump: Operate across syntax tree"):set()
+
+    -- Plugin: tabout
+    map("<A-n>", "<Plug>(TaboutMulti)"):mode("i"):noremap():silent():desc("edit: Goto end of pair"):set()
+    map("<A-i>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):set()
+
+    -- Plugin suda.vim
+    map("<A-s>", "SudaWrite"):mode("n"):pure():noremap():silent():desc("edit: Save file using sudo"):set()
 end
 
 local setLangPlugKeys = function()
+    -- Plugin MarkdownPreview
+    map("<F12>", "MarkdownPreviewToggle"):mode("n"):cr():noremap():silent():desc("tool: Preview markdown"):set()
 end
 
 local setToolPlugKeys = function()
@@ -239,7 +292,10 @@ local setToolPlugKeys = function()
     map("tf", ":NvimTreeFocus<CR>"):noremap():silent():set()
 
     --  Plugin:lazygit
-    map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
+    -- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
+    map("<C-g>"):mode("n"):callback(function()
+        _toggle_lazygit()
+    end):noremap():silent():desc("git: Toggle lazygit"):set()
 
     -- Plugin: sniprun
     map("<LEADER>r", ":SnipRun<CR>"):mode("v"):noremap():silent():desc("tool: Run code by range"):set()
@@ -268,9 +324,6 @@ local setToolPlugKeys = function()
     map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
         :set()
     map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
-    map("<LEADER>g"):mode("n"):callback(function()
-        _toggle_lazygit()
-    end):noremap():silent():desc("git: Toggle lazygit"):set()
 
     -- Plugin: trouble
     map("gt", "TroubleToggle"):mode("n"):cr():noremap():silent():desc("lsp: Toggle trouble list"):set()
@@ -287,7 +340,7 @@ local setToolPlugKeys = function()
     map("<C-p>"):mode("n"):callback(function()
         _command_panel()
     end):noremap():silent():desc("tool: Toggle command panel"):set()
-    map("<LEADER>u"):mode("n"):callback(function()
+    map("<LEADER>U"):mode("n"):callback(function()
         require("telescope").extensions.undo.undo()
     end):noremap():silent():desc("edit: Show undo history"):set()
     map("<LEADER>fp"):mode("n"):callback(function()
@@ -345,12 +398,108 @@ local setToolPlugKeys = function()
 end
 
 local setUIPlugKeys = function()
+    -- Plugin: bufferline
+    map("<A-j>", "BufferLineCycleNext"):mode("n"):noremap():silent():desc("buffer: Switch to next"):set()
+    map("<A-k>", "BufferLineCyclePrev"):mode("n"):noremap():silent():desc("buffer: Switch to prev"):set()
+    map("<A-S-j>", "BufferLineMoveNext"):mode("n"):noremap():silent():desc("buffer: Move current to next"):set()
+    map("<A-S-k>", "BufferLineMovePrev"):mode("n"):noremap():silent():desc("buffer: Move current to prev"):set()
+    map("<leader>be", "BufferLineSortByExtension"):mode("n"):noremap():silent():desc("buffer: Sort by extension"):set()
+    map("<leader>bd", "BufferLineSortByDirectory"):mode("n"):noremap():silent():desc("buffer: Sort by direrctory"):set()
+    map("<A-1>", "BufferLineGoToBuffer 1"):mode("n"):noremap():silent():desc("buffer: Goto buffer 1"):set()
+    map("<A-2>", "BufferLineGoToBuffer 2"):mode("n"):noremap():silent():desc("buffer: Goto buffer 2"):set()
+    map("<A-3>", "BufferLineGoToBuffer 3"):mode("n"):noremap():silent():desc("buffer: Goto buffer 3"):set()
+    map("<A-4>", "BufferLineGoToBuffer 4"):mode("n"):noremap():silent():desc("buffer: Goto buffer 4"):set()
+    map("<A-5>", "BufferLineGoToBuffer 5"):mode("n"):noremap():silent():desc("buffer: Goto buffer 5"):set()
+    map("<A-6>", "BufferLineGoToBuffer 6"):mode("n"):noremap():silent():desc("buffer: Goto buffer 6"):set()
+    map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):noremap():silent():desc("buffer: Goto buffer 7"):set()
+    map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):noremap():silent():desc("buffer: Goto buffer 8"):set()
+    map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):noremap():silent():desc("buffer: Goto buffer 9"):set()
 end
 
-local setPlugKeys = function()
+local setKeys = function()
     setGeneralKeys()
+    setLazyKeys()
+    setCompletionPlugKeys()
     setEditorPlugKeys()
+    setLangPlugKeys()
     setToolPlugKeys()
+    setUIPlugKeys()
 end
 
-setPlugKeys()
+setKeys()
+
+local mapping = {}
+
+function mapping.lsp(buf)
+    -- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
+    map("<LEADER>li", "LspInfo"):mode("n"):cr():buffer(buf):desc("lsp: Info"):set()
+    map("<LEADER>lr", "LspRestart"):mode("n"):cr():buffer(buf):nowait():desc("lsp: Restart"):set()
+    map("go", "Lspsaga outline"):mode("n"):cr():buffer(buf):desc("lsp: Toggle outline"):set()
+    map("g[", "Lspsaga diagnostic_jump_prev"):mode("n"):buffer(buf):desc("lsp: Prev diagnostic"):set()
+    map("g]", "Lspsaga diagnostic_jump_next"):mode("n"):buffer(buf):desc("lsp: Next diagnostic"):set()
+    map("<LEADER>ld", "Lspsaga show_line_diagnostics"):mode("n"):buffer(buf):desc("lsp: Line diagnostic"):set()
+    map("gs"):mode("n"):callback(function()
+        vim.lsp.buf.signature_help()
+    end):desc("lsp: Signature help"):set()
+    map("gr", "Lspsaga rename"):mode("n"):buffer(buf):desc("lsp: Rename in file range"):set()
+    map("gR", "Lspsaga rename ++project"):mode("n"):buffer(buf):desc("lsp: Rename in project range"):set()
+    map("K", "Lspsaga hover_doc"):mode("n"):buffer(buf):desc("lsp: Show doc"):set()
+    map("ga", "Lspsaga code_action"):mode("nv"):buffer(buf):desc("lsp: Code action for cursor"):set()
+    map("gd", "Lspsaga peek_definition"):mode("n"):buffer(buf):desc("lsp: Preview definition"):set()
+    map("gD", "Lspsaga goto_definition"):mode("n"):buffer(buf):desc("lsp: Goto definition"):set()
+    map("gh", "Lspsaga lsp_finder"):mode("n"):buffer(buf):desc("lsp: Show reference"):set()
+    map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):buffer(buf):desc("lsp: Show incoming calls"):set()
+    map("<LEADER>co", "Lspsaga outgoing_calls"):mode("n"):buffer(buf):desc("lsp: Show outgoing calls"):set()
+end
+
+function mapping.gitsigns(buf)
+    local actions = require("gitsigns.actions")
+    map("]g"):mode("n"):callback(function()
+        if vim.wo.diff then
+            return "]g"
+        end
+        vim.schedule(function()
+            actions.next_hunk()
+        end)
+        return "<Ignore>"
+    end):buffer(buf):expr():desc("git: Goto next hunk"):set()
+    map("[g"):mode("n"):callback(function()
+    		if vim.wo.diff then
+    			return "[g"
+    		end
+    		vim.schedule(function()
+    			actions.prev_hunk()
+    		end)
+    		return "<Ignore>"
+    end):buffer(buf):expr():desc("git: Goto prev hunk"):set()
+    map("<LEADER>hs"):mode("n"):callback(function()
+    	actions.stage_hunk()
+    end):buffer(buf):desc("git: Stage hunk"):set()
+    map("<LEADER>hs"):mode("v"):callback(function()
+    	actions.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end):buffer(buf):desc("git: Stage hunk"):set()
+    map("<LEADER>hu"):mode("n"):callback(function()
+    		actions.undo_stage_hunk()
+    end):buffer(buf):desc("git: Undo stage hunk"):set()
+    map("<LEADER>hr"):mode("n"):callback(function()
+    		actions.reset_hunk()
+    end):buffer(buf):desc("git: Reset hunk"):set()
+    map("<LEADER>hr"):mode("v"):callback(function()
+    		actions.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+    end):buffer(buf):desc("git: Reset hunk"):set()
+    map("<LEADER>hR"):mode("n"):callback(function()
+    		actions.reset_buffer()
+    end):buffer(buf):desc("git: Reset buffer"):set()
+    map("<LEADER>hp"):mode("n"):callback(function()
+    		actions.preview_hunk()
+    end):buffer(buf):desc("git: Preview buffer"):set()
+    map("<LEADER>hb"):mode("n"):callback(function()
+    		actions.blame_line({ full = true })
+    end):buffer(buf):desc("git: Blame line"):set()
+    -- Text objects
+    map("kn"):mode("ox"):callback(function()
+    		actions.text_object()
+    end):buffer(buf):set()
+end
+
+return mapping
