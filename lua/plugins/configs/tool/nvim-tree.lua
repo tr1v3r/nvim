@@ -44,6 +44,7 @@ return function()
         open_on_tab = false,
         respect_buf_cwd = false,
         sort_by = "name",
+        -- prefer_startup_root = true,
         sync_root_with_cwd = true,
         view = {
             adaptive_size = false,
