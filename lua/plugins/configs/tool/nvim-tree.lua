@@ -128,13 +128,13 @@ return function()
             auto_open = true
         },
         update_focused_file = {
-            enable = false,
+            enable = true,
             update_root = true,
             ignore_list = {}
         },
         filters = {
             dotfiles = false,
-            custom = {".DS_Store"},
+            custom = {".DS_Store", "^.git$"},
             exclude = {}
         },
         actions = {

@@ -132,6 +132,8 @@ local setGeneralKeys = function()
     -- Opening a terminal window
     map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():desc("open terminal panel"):set()
     map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():desc("open terminal window"):set()
+    map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
+    -- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
 
     -- Open a new instance of st with the cwd
     -- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
@@ -288,8 +290,8 @@ local setToolPlugKeys = function()
     map("<LEADER>G", "Git"):pure():noremap():silent():desc("git: Open git-fugitive"):set()
 
     -- Plugin: nvim-tree
-    map("tt", ":NvimTreeToggle<CR>"):noremap():silent():set()
-    map("tf", ":NvimTreeFocus<CR>"):noremap():silent():set()
+    map("tt", "NvimTreeFindFileToggle"):mode("n"):cr():noremap():silent():desc("tree: Locate file"):set()
+    map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
 
     --  Plugin:lazygit
     -- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
@@ -298,12 +300,10 @@ local setToolPlugKeys = function()
     end):noremap():silent():desc("git: Toggle lazygit"):set()
 
     -- Plugin: sniprun
-    map("<LEADER>r", ":SnipRun<CR>"):mode("v"):noremap():silent():desc("tool: Run code by range"):set()
-    map("<LEADER>r", ":SnipRun<CR>"):mode("n"):noremap():silent():desc("tool: Run code by file"):set()
+    map("<LEADER>r", "SnipRun"):mode("v"):cr():noremap():silent():desc("tool: Run code by range"):set()
+    map("<LEADER>r", "SnipRun"):mode("n"):cr():noremap():silent():desc("tool: Run code by file"):set()
 
     -- -- Plugin: toggleterm
-    map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
-    map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
     map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc(
         "terminal: Toggle horizontal"):set()
     map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc(
