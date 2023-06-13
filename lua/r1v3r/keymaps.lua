@@ -98,7 +98,7 @@ local setGeneralKeys = function()
 	map("<M-w>", "<S-Right>"):mode("c"):noremap():silent():set()
 
 	-- ==================== Window management ====================
-	map("<LEADER>w", "<C-w>w"):noremap():silent():set()
+	-- map("<LEADER>w", "<C-w>w"):noremap():silent():set()
 	map("<LEADER>u", "<C-w>k"):noremap():silent():set()
 	map("<LEADER>e", "<C-w>j"):noremap():silent():set()
 	map("<LEADER>n", "<C-w>h"):noremap():silent():set()
@@ -108,10 +108,10 @@ local setGeneralKeys = function()
 	map("tq", "<C-w>o"):noremap():silent():set()
 
 	-- Split the screens to up/down/left/right
-	map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):noremap():silent():set()
-	map("se", ":set splitbelow<CR>:split<CR>"):noremap():silent():set()
-	map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):noremap():silent():set()
-	map("si", ":set splitright<CR>:vsplit<CR>"):noremap():silent():set()
+	map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):noremap():silent():desc("split up"):set()
+	map("se", ":set splitbelow<CR>:split<CR>"):noremap():silent():desc("split down"):set()
+	map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):noremap():silent():desc("split left"):set()
+	map("si", ":set splitright<CR>:vsplit<CR>"):noremap():silent():desc("split right"):set()
 
 	-- Resize window
 	map("<up>", ":res +5<CR>"):noremap():silent():set()
@@ -140,24 +140,23 @@ local setGeneralKeys = function()
 		:silent()
 		:desc("open terminal window")
 		:set()
-	map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
-	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
-
-	-- Open a new instance of st with the cwd
+		-- Open a new instance of st with the cwd
 	-- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 	-- Open a new terminal tab
 	map([[\t]], ":tabe<CR>:term<CR>i"):noremap():silent():set()
+	map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
+	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
 
 	-- ==================== Tab management ====================
 	-- Create a new tab with tu
-	map("tu", ":tabe<CR>"):noremap():silent():set()
-	map("tU", ":tab split<CR>"):noremap():silent():set()
+	map("tu", ":tabe<CR>"):noremap():silent():desc("new tab"):set()
+	map("tU", ":tab split<CR>"):noremap():silent():desc("new tab and switch"):set()
 	-- Move around tabs with tn and ti
-	map("tn", ":-tabnext<CR>"):noremap():silent():set()
-	map("ti", ":+tabnext<CR>"):noremap():silent():set()
+	map("tn", ":-tabnext<CR>"):noremap():silent():desc("move to left tab"):set()
+	map("ti", ":+tabnext<CR>"):noremap():silent():desc("move to right tab"):set()
 	-- Move the tabs with tN and tI
-	map("tN", ":-tabmove<CR>"):noremap():silent():set()
-	map("tI", ":+tabmove<CR>"):noremap():silent():set()
+	map("tN", ":-tabmove<CR>"):noremap():silent():desc("move tab to left"):set()
+	map("tI", ":+tabmove<CR>"):noremap():silent():desc("move tab to right"):set()
 
 	-- Tab switch
 	map("", ":nn <Leader>1 1gt"):exec()
@@ -209,8 +208,8 @@ local setLazyKeys = function()
 end
 
 local setCompletionPlugKeys = function()
-	map("<C-f>", "<Cmd>FormatToggle<CR>"):mode("n"):noremap():desc("Formater: Toggle format on save"):set()
-end
+	-- map("<C-f>", "<Cmd>FormatToggle<CR>"):mode("n"):noremap():desc("Formater: Toggle format on save"):set()
+end 
 
 local setEditorPlugKeys = function()
 	-- Plugin: accelerated-jk
@@ -317,17 +316,17 @@ local setEditorPlugKeys = function()
 
 	-- Plugin: diffview
 	map("<LEADER>DD", "DiffviewOpen"):mode("n"):cr():noremap():silent():desc("git: Show diff"):set()
-	map("<LEADER>DC", "DiffviewClose"):mode("n"):cr():noremap():silent():desc("git: Close diff"):set()
+	map("<LEADER>DW", "DiffviewClose"):mode("n"):cr():noremap():silent():desc("git: Close diff"):set()
 
 	-- Plugin: vim-easy-align
 	map("gea", "EasyAlign"):mode("nx"):cr():desc("edit: Align with delimiter"):set()
 
 	-- Plugin: hop
-	map("<LEADER>W", "<Cmd>HopWord<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()
-	map("<LEADER>j", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
+	map("<LEADER>w", "<Cmd>HopWord<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()
+	-- map("<LEADER>j", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
 	map("<LEADER>k", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
-	map("<LEADER>c", "<Cmd>HopChar1<CR>"):mode("nv"):noremap():desc("jump: Goto one char"):set()
-	map("<LEADER>cc", "<Cmd>HopChar2<CR>"):mode("nv"):noremap():desc("jump: Goto two chars"):set()
+	-- map("<LEADER>c", "<Cmd>HopChar1<CR>"):mode("nv"):noremap():desc("jump: Goto one char"):set()
+	-- map("<LEADER>cc", "<Cmd>HopChar2<CR>"):mode("nv"):noremap():desc("jump: Goto two chars"):set()
 
 	-- Plugin: treehopper
 	map("m", "lua require('tsht').nodes()"):mode("o"):pure():silent():desc("jump: Operate across syntax tree"):set()
@@ -346,15 +345,15 @@ local setLangPlugKeys = function()
 end
 
 local setToolPlugKeys = function()
-	-- Plugin: vim-fugitive
-	map("gps", "G push"):cr():noremap():silent():desc("git: Push"):set()
-	map("gpl", "G pull"):cr():noremap():silent():desc("git: Pull"):set()
-	map("<LEADER>G", "Git"):pure():noremap():silent():desc("git: Open git-fugitive"):set()
+	-- Plugin: vim-fugitive ; using lazggit
+	-- map("gps", "G push"):cr():noremap():silent():desc("git: Push"):set()
+	-- map("gpl", "G pull"):cr():noremap():silent():desc("git: Pull"):set()
+	-- map("<LEADER>G", "Git"):pure():noremap():silent():desc("git: Open git-fugitive"):set()
 
 	-- Plugin: nvim-tree
 	map("tt", "NvimTreeFindFileToggle"):mode("n"):cr():noremap():silent():desc("tree: Locate file"):set()
 	-- map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
-	map("tr", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus"):set()
+	map("tr", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus tree"):set()
 
 	--  Plugin:lazygit
 	-- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
@@ -635,12 +634,16 @@ end
 
 local setKeys = function()
 	setGeneralKeys()
-	setLazyKeys()
-	setCompletionPlugKeys()
-	setEditorPlugKeys()
-	setLangPlugKeys()
-	setToolPlugKeys()
-	setUIPlugKeys()
+	if vim.g.vscode then
+		print("running in VSC")
+	else
+		setLazyKeys()
+		setCompletionPlugKeys()
+		setEditorPlugKeys()
+		setLangPlugKeys()
+		setToolPlugKeys()
+		setUIPlugKeys()
+	end
 end
 
 setKeys()
