@@ -3,8 +3,8 @@ local o = vim.o
 local wo = vim.wo
 local global = require("r1v3r.global")
 
--- Syntax highlighting
-vim.cmd('syntax on')
+-- Syntax highlighting, affect lsp load
+-- vim.cmd('syntax on')
 -- Disable search highlighting after executing a search
 vim.cmd([[exec "nohlsearch"]])
 
