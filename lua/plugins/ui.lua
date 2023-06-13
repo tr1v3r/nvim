@@ -36,12 +36,6 @@ ui["nvim-lualine/lualine.nvim"] = {
     event = {"BufReadPost", "BufAdd", "BufNewFile"},
     config = require("ui.lualine")
 }
-ui["zbirenbaum/neodim"] = {
-    lazy = true,
-    event = "LspAttach",
-    branch = v2,
-    config = require("ui.neodim")
-}
 ui["shaunsingh/nord.nvim"] = {
 	lazy = true,
 	config = require("ui.nord"),
@@ -77,3 +71,7 @@ ui["nvim-tree/nvim-web-devicons"] = {
 }
 
 return ui
+
+
+-- backup
+-- zbirenbaum/neodim : Neovim plugin for dimming the highlights of unused functions, variables, parameters, and more
