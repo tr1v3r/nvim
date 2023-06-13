@@ -76,14 +76,13 @@ settings["load_big_files_faster"] = true
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
-settings["lsp_deps"] = {"bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp" -- "gopls",
-}
+settings["lsp_deps"] = {"bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp", "gopls"}
 
 -- Set the general-purpose servers that will be installed during bootstrap here.
 -- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
-settings["null_ls_deps"] = {"clang_format", "prettier", "rustfmt", "shfmt", "stylua", "vint"}
+settings["null_ls_deps"] = {"clang_format", "prettier", "rustfmt", "shfmt", "stylua", "vint", "goimports"}
 
 return settings
