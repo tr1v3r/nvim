@@ -37,11 +37,11 @@ return function()
 		request_timeout = 3000,
 		finder = {
 			keys = {
-				jump_to = "e",
+				jump_to = "i",
 				expand_or_jump = "<CR>",
-				vsplit = "s",
-				split = "i",
-				tabe = "t",
+				vsplit = "I",
+				split = "e",
+				tabe = "o",
 				quit = { "q", "<ESC>" },
 				close_in_preview = "<ESC>",
 			},
