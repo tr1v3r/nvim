@@ -132,8 +132,11 @@ local setGeneralKeys = function()
     -- Opening a terminal window
     map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent()
         :desc("open terminal panel"):set()
-    map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent():desc("open terminal window")
-        :set()
+    local newTermCmd = ":term<CR>:set norelativenumber<CR>:set nonumber<CR>"
+    map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
+        "open terminal window"):set()
+    map("<C-\\>", ":set nosplitbelow<CR>:vsplit<CR>:vertical resize-30<CR>" .. newTermCmd .. "i"):noremap():silent()
+        :desc("open terminal window"):set()
     -- Open a new instance of st with the cwd
     -- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
     -- Open a new terminal tab
@@ -237,22 +240,22 @@ local setEditorPlugKeys = function()
     -- end):expr():set()
 
     -- Plugin: comment.nvim
-    map("gcc"):mode("n"):callback(function()
-        return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or
-                   et("<Plug>(comment_toggle_linewise_count)")
-    end):noremap():silent():expr():desc("edit: Toggle comment for line"):set()
-    map("gbc"):mode("n"):callback(function()
-        return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
-                   et("<Plug>(comment_toggle_blockwise_count)")
-    end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
-    map("gc", "<Plug>(comment_toggle_linewise)"):mode("n"):noremap():silent():desc(
-        "edit: Toggle comment for line with operator"):set()
-    map("gb", "<Plug>(comment_toggle_blockwise)"):mode("n"):noremap():silent():desc(
-        "edit: Toggle comment for block with operator"):set()
-    map("gc", "<Plug>(comment_toggle_linewise_visual)"):mode("x"):noremap():silent():desc(
+    map("<C-/>", "<Plug>(comment_toggle_linewise_current)"):mode("n"):noremap():silent():desc(
+        "edit: Toggle comment for line"):set()
+    map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_curent)"):mode("n"):noremap():silent():desc(
+        "edit: Toggle comment for block"):set()
+    map("<C-/>", "<Plug>(comment_toggle_linewise_visual)"):mode("x"):noremap():silent():desc(
         "edit: Toggle comment for line with selection"):set()
-    map("gb", "<Plug>(comment_toggle_blockwise_visual)"):mode("x"):noremap():silent():desc(
+    map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_visual)"):mode("x"):noremap():silent():desc(
         "edit: Toggle comment for block with selection"):set()
+    -- map("gcc"):mode("n"):callback(function()
+    --     return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or
+    --                et("<Plug>(comment_toggle_linewise_count)")
+    -- end):noremap():silent():expr():desc("edit: Toggle comment for line"):set()
+    -- map("gbc"):mode("n"):callback(function()
+    --     return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
+    --                et("<Plug>(comment_toggle_blockwise_count)")
+    -- end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
 
     -- Plugin: diffview
     map("<LEADER>DD", "DiffviewOpen"):mode("n"):cr():noremap():silent():desc("git: Show diff"):set()
@@ -306,26 +309,26 @@ local setToolPlugKeys = function()
     map("<LEADER>r", "SnipRun"):mode("n"):cr():noremap():silent():desc("tool: Run code by file"):set()
 
     -- -- Plugin: toggleterm
-    map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc(
-        "terminal: Toggle horizontal"):set()
-    map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc(
-        "terminal: Toggle horizontal"):set()
-    map("<C-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle horizontal"):set()
-    map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):cr():noremap():silent():desc(
-        "terminal: Toggle vertical"):set()
-    map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
-        "terminal: Toggle vertical"):set()
-    map("<A-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
-    map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
-        "terminal: Toggle vertical"):set()
-    map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
-        "terminal: Toggle vertical"):set()
-    map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
-    map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]]):mode("n"):noremap():silent():desc(
-        "terminal: Toggle float"):set()
-    map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
-        :set()
-    map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
+    -- map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc(
+    --     "terminal: Toggle horizontal"):set()
+    -- map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc(
+    --     "terminal: Toggle horizontal"):set()
+    -- map("<C-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle horizontal"):set()
+    -- map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):cr():noremap():silent():desc(
+    --     "terminal: Toggle vertical"):set()
+    -- map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
+    --     "terminal: Toggle vertical"):set()
+    -- map("<A-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
+    -- map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
+    --     "terminal: Toggle vertical"):set()
+    -- map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
+    --     "terminal: Toggle vertical"):set()
+    -- map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
+    -- map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]]):mode("n"):noremap():silent():desc(
+    --     "terminal: Toggle float"):set()
+    -- map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
+    --     :set()
+    -- map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
 
     -- Plugin: trouble
     map("gt", "TroubleToggle"):mode("n"):cr():noremap():silent():desc("lsp: Toggle trouble list"):set()
@@ -400,22 +403,6 @@ local setToolPlugKeys = function()
 end
 
 local setUIPlugKeys = function()
-    -- Plugin: bufferline
-    map("<A-j>", "BufferLineCycleNext"):mode("n"):noremap():silent():desc("buffer: Switch to next"):set()
-    map("<A-k>", "BufferLineCyclePrev"):mode("n"):noremap():silent():desc("buffer: Switch to prev"):set()
-    map("<A-S-j>", "BufferLineMoveNext"):mode("n"):noremap():silent():desc("buffer: Move current to next"):set()
-    map("<A-S-k>", "BufferLineMovePrev"):mode("n"):noremap():silent():desc("buffer: Move current to prev"):set()
-    map("<leader>be", "BufferLineSortByExtension"):mode("n"):noremap():silent():desc("buffer: Sort by extension"):set()
-    map("<leader>bd", "BufferLineSortByDirectory"):mode("n"):noremap():silent():desc("buffer: Sort by direrctory"):set()
-    map("<A-1>", "BufferLineGoToBuffer 1"):mode("n"):noremap():silent():desc("buffer: Goto buffer 1"):set()
-    map("<A-2>", "BufferLineGoToBuffer 2"):mode("n"):noremap():silent():desc("buffer: Goto buffer 2"):set()
-    map("<A-3>", "BufferLineGoToBuffer 3"):mode("n"):noremap():silent():desc("buffer: Goto buffer 3"):set()
-    map("<A-4>", "BufferLineGoToBuffer 4"):mode("n"):noremap():silent():desc("buffer: Goto buffer 4"):set()
-    map("<A-5>", "BufferLineGoToBuffer 5"):mode("n"):noremap():silent():desc("buffer: Goto buffer 5"):set()
-    map("<A-6>", "BufferLineGoToBuffer 6"):mode("n"):noremap():silent():desc("buffer: Goto buffer 6"):set()
-    map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):noremap():silent():desc("buffer: Goto buffer 7"):set()
-    map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):noremap():silent():desc("buffer: Goto buffer 8"):set()
-    map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):noremap():silent():desc("buffer: Goto buffer 9"):set()
 end
 
 local setKeys = function()
