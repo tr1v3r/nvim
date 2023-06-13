@@ -136,3 +136,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		mapping.lsp(event.buf)
 	end,
 })
+
+-- ================ FloatTerm ================
+vim.api.nvim_create_user_command("FloatTerm", require("helper").float_terminal, {
+    nargs = '*'
+})

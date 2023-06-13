@@ -43,12 +43,12 @@ tool["michaelb/sniprun"] = {
     cmd = {"SnipRun"},
     config = require("tool.sniprun")
 }
-tool["akinsho/toggleterm.nvim"] = {
-    lazy = true,
-    cmd = {"ToggleTerm", "ToggleTermSetName", "ToggleTermToggleAll", "ToggleTermSendVisualLines",
-           "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection"},
-    config = require("tool.toggleterm")
-}
+-- tool["akinsho/toggleterm.nvim"] = {
+--     lazy = true,
+--     cmd = {"ToggleTerm", "ToggleTermSetName", "ToggleTermToggleAll", "ToggleTermSendVisualLines",
+--            "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection"},
+--     config = require("tool.toggleterm")
+-- }
 tool["folke/trouble.nvim"] = {
     lazy = true,
     cmd = {"Trouble", "TroubleToggle", "TroubleRefresh"},
