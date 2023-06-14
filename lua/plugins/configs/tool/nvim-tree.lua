@@ -29,10 +29,11 @@ return function()
                 buffer = bufnr
             })
             -- open file/dir
-            vim.keymap.set('n', 'i', api.node.open.edit, opts('Open'))
-            vim.keymap.set('n', 'n', api.node.navigate.parent_close, opts('Close Directory'))
-            vim.keymap.set('n', 'o', api.node.open.tab, opts('Open: New Tab'))
-            vim.keymap.set('n', 'I', api.node.open.vertical, opts('Open: Vertical Split'))
+			vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
+			vim.keymap.set("n", "n", api.node.navigate.parent_close, opts("Close Directory"))
+			vim.keymap.set("n", "o", api.node.open.no_window_picker, opts("Open: No Window Picker"))
+			vim.keymap.set("n", "I", api.node.open.vertical, opts("Open: Vertical Split"))
+			vim.keymap.set("n", "O", api.node.open.tab, opts("Open: New Tab"))
             -- vim.keymap.set('n', 'E', api.node.open.horizontal, opts('Open: Horizontal Split'))
         end,
         auto_reload_on_write = true,
