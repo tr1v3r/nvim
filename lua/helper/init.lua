@@ -235,16 +235,15 @@ end
 -- Create a new terminal in a floating window
 -- @param cmd string @The command to run in the terminal
 function M.float_terminal(cmd)
-	print(type(cmd))
 	if type(cmd) == "table" then
 		cmd = table.concat(cmd.fargs, " ")
 	end
 
 	-- 获取当前窗口的尺寸和位置
-    maxWidth = vim.api.nvim_win_get_width(0) -- vim.o.columns
-    maxHeight = vim.api.nvim_win_get_height(0) -- vim.o.lines
+    local maxWidth = vim.api.nvim_win_get_width(0) -- vim.o.columns
+    local maxHeight = vim.api.nvim_win_get_height(0) -- vim.o.lines
     local width = math.floor(maxWidth * 0.9)
-    local height = math.floor(maxHeight * 0.8)
+    local height = math.floor(maxHeight * 0.9)
     local row = math.floor((maxHeight - height) / 2)
     local col = math.floor((maxWidth - width) / 2)
     local float_opts = {
