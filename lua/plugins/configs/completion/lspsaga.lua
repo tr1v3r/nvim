@@ -31,8 +31,8 @@ return function()
 			lines_below = 17,
 		},
 		scroll_preview = {
-			scroll_down = "<C-e>",
-			scroll_up = "<C-u>",
+			scroll_down = "e",
+			scroll_up = "u",
 		},
 		request_timeout = 3000,
 		finder = {
@@ -40,8 +40,8 @@ return function()
 				jump_to = "i",
 				expand_or_jump = "<CR>",
 				vsplit = "I",
-				split = "e",
-				tabe = "o",
+				split = "o",
+				tabe = "O",
 				quit = { "q", "<ESC>" },
 				close_in_preview = "<ESC>",
 			},
