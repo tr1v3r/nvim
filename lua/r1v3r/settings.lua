@@ -5,7 +5,7 @@ local home = require("r1v3r.global").home
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, 
 -- `catppuccin-macchiato`, `edge`, `nord`, `material`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "material"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
