@@ -400,6 +400,10 @@ local setToolPlugKeys = function()
     map("<LEADER>do"):mode("n"):callback(function()
         require("dap").repl.open()
     end):noremap():silent():desc("debug: Open REPL"):set()
+    
+    -- Plugin: spectre
+    map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]]):mode("n"):noremap():desc("tool: find and replace"):set()
+    map("<LEADER>F", [[<Cmd>lua require("spectre").open_visual()<CR>i]]):mode("v"):noremap():desc("tool: find and replace"):set()
 end
 
 local setUIPlugKeys = function()

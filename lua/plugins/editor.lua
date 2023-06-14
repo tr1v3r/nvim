@@ -68,6 +68,21 @@ editor["lambdalisue/suda.vim"] = {
 	cmd = { "SudaRead", "SudaWrite" },
 	config = require("editor.suda"),
 }
+editor["kevinhwang91/nvim-hlslens"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("editor.hlslens"),
+}
+editor["gcmt/wildfire.vim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("editor.wildfire"),
+}
+editor["tpope/vim-surround"] = {
+	lazy = true,
+	event = "BufReadPost",
+}
+-- mg979/vim-visual-multi
 
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --

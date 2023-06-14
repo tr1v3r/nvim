@@ -10,6 +10,14 @@ ui["marko-cerovac/material.nvim"] = {
     priority = 1000,
     config = require("ui.material")
 }
+ui["shaunsingh/nord.nvim"] = {
+	lazy = false,
+	config = require("ui.nord"),
+}
+ui["mg979/vim-xtabline"] = {
+	lazy = false,
+	config = require("ui.xtabline"),
+}
 ui["Jint-lzxy/nvim"] = {
     lazy = false,
     branch = "refactor/syntax-highlighting",
@@ -36,10 +44,6 @@ ui["nvim-lualine/lualine.nvim"] = {
     event = {"BufReadPost", "BufAdd", "BufNewFile"},
     config = require("ui.lualine")
 }
-ui["shaunsingh/nord.nvim"] = {
-	lazy = true,
-	config = require("ui.nord"),
-}
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
 	event = "VeryLazy",
@@ -55,23 +59,31 @@ ui["karb94/neoscroll.nvim"] = {
     -- event = "BufReadPost",
     config = require("ui.neoscroll")
 }
-ui["dstein64/nvim-scrollview"] = {
+-- backup: dstein64/nvim-scrollview
+ui["petertriho/nvim-scrollbar"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("ui.scrollview"),
+	config = require("ui.scrollbar"),
+	dependencies = {
+		{ "kevinhwang91/nvim-hlslens" },
+        { "lewis6991/gitsigns.nvim" },
+	}
 }
 ui["edluffy/specs.nvim"] = {
 	lazy = true,
 	-- event = "CursorMoved",
 	config = require("ui.specs"),
 }
-
 ui["nvim-tree/nvim-web-devicons"] = {
     lazy = true
 }
+ui["luochen1990/rainbow"] = {
+	lazy = true,
+    event = "BufReadPost",
+    config = require("ui.rainbow"),
+}
 
 return ui
-
 
 -- backup
 -- zbirenbaum/neodim : Neovim plugin for dimming the highlights of unused functions, variables, parameters, and more
