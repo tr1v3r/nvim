@@ -130,9 +130,9 @@ local setGeneralKeys = function()
     map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():set()
 
     -- Opening a terminal window
-    map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>:term<CR>i"):noremap():silent()
-        :desc("open terminal panel"):set()
     local newTermCmd = ":term<CR>:set norelativenumber<CR>:set nonumber<CR>"
+    map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent()
+        :desc("open terminal panel"):set()
     map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
         "open terminal window"):set()
     map("<C-\\>", ":set nosplitbelow<CR>:vsplit<CR>:vertical resize-30<CR>" .. newTermCmd .. "i"):noremap():silent()
