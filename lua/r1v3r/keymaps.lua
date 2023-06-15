@@ -295,8 +295,8 @@ local setToolPlugKeys = function()
 
     -- Plugin: nvim-tree
     map("tt", "NvimTreeFindFileToggle"):mode("n"):cr():noremap():silent():desc("tree: Locate file"):set()
-    -- map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
-    map("tr", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus tree"):set()
+    map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
+    -- map("tf", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus tree"):set()
 
     --  Plugin:lazygit
     -- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
