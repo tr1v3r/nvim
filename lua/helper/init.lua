@@ -240,8 +240,8 @@ function M.float_terminal(cmd)
 	end
 
 	-- 获取当前窗口的尺寸和位置
-    local maxWidth = vim.api.nvim_win_get_width(0) -- vim.o.columns
-    local maxHeight = vim.api.nvim_win_get_height(0) -- vim.o.lines
+    local maxWidth = vim.api.nvim_get_option("columns") -- vim.api.nvim_win_get_width(0) -- vim.o.columns
+    local maxHeight = vim.api.nvim_get_option("lines") -- vim.api.nvim_win_get_height(0) -- vim.o.lines
     local width = math.floor(maxWidth * 0.9)
     local height = math.floor(maxHeight * 0.9)
     local row = math.floor((maxHeight - height) / 2)
