@@ -2,10 +2,10 @@ local settings = {}
 local home = require("r1v3r.global").home
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, 
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`,
 -- `catppuccin-macchiato`, `edge`, `nord`, `material`.
 ---@type string
-settings["colorscheme"] = "material"
+settings["colorscheme"] = "catppuccin"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
@@ -27,20 +27,20 @@ settings["format_notify"] = true
 
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
 ---@type string[]
-settings["format_disabled_dirs"] = {home .. "/format_disabled_dir_under_home"}
+settings["format_disabled_dirs"] = { home .. "/format_disabled_dir_under_home" }
 
 -- Servers in this list will skip setting formatting capabilities if rhs is true.
 ---@type table<string, boolean>
 settings["server_formatting_block_list"] = {
-    lua_ls = true,
-    tsserver = true,
-    clangd = true
+	lua_ls = true,
+	tsserver = true,
+	clangd = true,
 }
 
 -- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
-    -- lua = false -- example
+	-- lua = false -- example
 }
 
 -- Set it to false if diagnostics virtual text is annoying.
@@ -76,13 +76,13 @@ settings["load_big_files_faster"] = true
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
-settings["lsp_deps"] = {"bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp", "gopls"}
+settings["lsp_deps"] = { "bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp", "gopls" }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.
 -- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
-settings["null_ls_deps"] = {"clang_format", "prettier", "rustfmt", "shfmt", "stylua", "vint", "goimports"}
+settings["null_ls_deps"] = { "clang_format", "prettier", "rustfmt", "shfmt", "stylua", "vint", "goimports" }
 
 return settings
