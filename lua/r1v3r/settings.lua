@@ -85,4 +85,14 @@ settings["lsp_deps"] = { "bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp"
 ---@type string[]
 settings["null_ls_deps"] = { "clang_format", "prettier", "rustfmt", "shfmt", "stylua", "vint", "goimports" }
 
+-- Set the Debug Adapter Protocal (DAP) clients that wil be installed and configured during bootstrap.
+-- Check the below link for all supported DAPs:
+-- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+---@type string[]
+settings["dap_deps"] = {
+	"codelldb", -- C-Family
+	"delve", -- Go
+	"python", -- Python (debugpy)
+}
+
 return settings

@@ -11,7 +11,7 @@ return function()
 			expand = { "<CR>", "<2-LeftMouse>" },
 			open = "o",
 			remove = "d",
-			edit = "e",
+			edit = "k",
 			repl = "r",
 		},
 		layouts = {

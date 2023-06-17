@@ -366,9 +366,15 @@ local setToolPlugKeys = function()
     map("<LEADER>fz", "Telescope zoxide list"):mode("n"):pure():noremap():silent():desc(
         "edit: Change current direrctory by zoxide"):set()
     map("<LEADER>fb", "Telescope buffers"):mode("n"):pure():noremap():silent():desc("find: Buffer opened"):set()
-    map("<LEADER>fs", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
+    map("<LEADER>f*", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
 
-    -- Plugin: dap
+    -- Plugin: dap & dap-go
+    map("<LEADER>du"):mode("n"):callback(function()
+        require("dap-go").debug_test()
+    end):noremap():silent():desc("debug: Run Current Unit Test"):set()
+    map("<LEADER>dU"):mode("n"):callback(function()
+        require("dap-go").debug_last_test()
+    end):noremap():silent():desc("debug: Run Last Unit Test"):set()
     map("<F5>"):mode("n"):callback(function()
         require("dap").continue()
     end):noremap():silent():desc("debug: Run/Continue"):set()

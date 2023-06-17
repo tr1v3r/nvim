@@ -240,39 +240,42 @@ function M.float_terminal(cmd)
 	end
 
 	-- 获取当前窗口的尺寸和位置
-    local maxWidth = vim.api.nvim_get_option("columns") -- vim.api.nvim_win_get_width(0) -- vim.o.columns
-    local maxHeight = vim.api.nvim_get_option("lines") -- vim.api.nvim_win_get_height(0) -- vim.o.lines
-    local width = math.floor(maxWidth * 0.9)
-    local height = math.floor(maxHeight * 0.9)
-    local row = math.floor((maxHeight - height) / 2)
-    local col = math.floor((maxWidth - width) / 2)
-    local float_opts = {
-        relative = 'editor',
-        width = width,
-        height = height,
-        row = row,
-        col = col,
-        style = "minimal",
-        border = 'single',
-        zindex = 50 -- 保证terminal在最上层
-    }
+	-- get current nvim size, set floating window size and position
+	local maxWidth = vim.api.nvim_get_option("columns") -- vim.api.nvim_win_get_width(0) -- vim.o.columns
+	local maxHeight = vim.api.nvim_get_option("lines") -- vim.api.nvim_win_get_height(0) -- vim.o.lines
+	local width = math.floor(maxWidth * 0.9)
+	local height = math.floor(maxHeight * 0.9)
+	local row = math.floor((maxHeight - height) / 2)
+	local col = math.floor((maxWidth - width) / 2)
+	local float_opts = {
+		relative = "editor",
+		width = width,
+		height = height,
+		row = row,
+		col = col,
+		style = "minimal",
+		border = "single",
+		zindex = 50, -- 保证terminal在最上层 Ensure the terminal is at the top level.
+	}
 
-    -- 创建一个新的空白缓冲区
-    local buf = vim.api.nvim_create_buf(false, true)
-    local terminal_window = vim.api.nvim_open_win(buf, true, float_opts)
-    vim.api.nvim_win_set_option(terminal_window, 'number', false)
-    vim.api.nvim_win_set_option(terminal_window, 'relativenumber', false)
-    vim.api.nvim_win_set_option(terminal_window, 'winhighlight', 'Normal:Normal') -- 设置浮动窗口的选项，避免影响底层窗口内容
-    vim.fn.termopen(cmd, {
-        detach = 1,
-        on_exit = function(_, code)
-            -- 在退出终端时关闭浮动窗口
-            if code == 0 then
-                vim.api.nvim_win_close(terminal_window, true)
-            end
-        end
-    })
-    vim.cmd('startinsert')
+	-- 创建一个新的空白缓冲区
+	-- create a new empty buffer
+	local buf = vim.api.nvim_create_buf(false, true)
+	local terminal_window = vim.api.nvim_open_win(buf, true, float_opts)
+	vim.api.nvim_win_set_option(terminal_window, "number", false)
+	vim.api.nvim_win_set_option(terminal_window, "relativenumber", false)
+	vim.api.nvim_win_set_option(terminal_window, "winhighlight", "Normal:Normal") -- 设置浮动窗口的选项，避免影响底层窗口内容
+	vim.fn.termopen(cmd, {
+		detach = 1,
+		on_exit = function(_, code)
+			-- 在退出终端时关闭浮动窗口
+			-- close window when quit
+			if code == 0 then
+				vim.api.nvim_win_close(terminal_window, true)
+			end
+		end,
+	})
+	vim.cmd("startinsert")
 end
 
 return M
