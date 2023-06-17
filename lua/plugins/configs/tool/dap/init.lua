@@ -1,6 +1,6 @@
 return function()
 	local icons = { dap = require("r1v3r.icons").get("dap") }
-	local colors = require("r1v3r").get_palette()
+	local colors = require("helper").get_palette()
 
 	local dap = require("dap")
 	local dapui = require("dapui")

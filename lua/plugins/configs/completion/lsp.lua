@@ -6,7 +6,7 @@ return function()
 	local mason = require("mason")
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
-	require("lspconfig.ui.windows").default_options.border = "single"
+	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	local icons = {
 		ui = require("r1v3r.icons").get("ui", true),
@@ -129,7 +129,7 @@ return function()
 
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
-	local function mason_handler(lsp_name)
+	local function mason_lsp_handler(lsp_name)
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
@@ -155,7 +155,7 @@ return function()
 		end
 	end
 
-	mason_lspconfig.setup_handlers({ mason_handler })
+	mason_lspconfig.setup_handlers({ mason_lsp_handler })
 
 	-- Setup lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
 	if vim.fn.executable("dart") == 1 then
