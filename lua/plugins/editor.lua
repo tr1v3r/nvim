@@ -78,7 +78,8 @@ editor["gcmt/wildfire.vim"] = {
 	event = "BufReadPost",
 	config = require("editor.wildfire"),
 }
-editor["tpope/vim-surround"] = {
+-- tpope/vim-surround old version by vimscript
+editor["kylechui/nvim-surround"] = {
 	lazy = true,
 	event = "BufReadPost",
 }
