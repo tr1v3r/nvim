@@ -88,6 +88,7 @@ editor["kylechui/nvim-surround"] = {
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
+-- nvim-treesitter/playground Run :TSPlaygroundToggle show AST of current file
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
 	build = function()
