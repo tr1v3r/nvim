@@ -27,12 +27,14 @@ local setGeneralKeys = function()
 
     -- Find and replace
     map([[\s]], ":%s//g<left><left>"):noremap():set()
+    map([[\S]], [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]):mode("n"):noremap():desc(
+        "edit: find and replace all current word"):set()
 
     -- Find and delete (line)
     map([[\d]], ":g//d<left><left>"):noremap():set()
 
     -- Copy to system clipboard
-    map("Y", '"+y'):mode("v"):noremap():silent():set()
+    map("Y", [["+y]]):mode("v"):noremap():silent():set()
 
     -- Space to Tab
     map("<LEADER>tt", [[:%s/    /\t/g]]):mode("n"):noremap():silent():set()
@@ -71,6 +73,8 @@ local setGeneralKeys = function()
     -- scroll
     map("U", "12k"):noremap():silent():set()
     map("E", "12j"):noremap():silent():set()
+    -- map("U", ":m '<-2<CR>gv=gv"):noremap():silent():set() -- move selected block move up
+    -- map("E", ":m '>+1<CR>gv=gv"):noremap():silent():set() -- move selected block move down
     -- go to start/end of the line
     map("N", "0"):noremap():silent():set()
     map("I", "$"):noremap():silent():set()
@@ -83,6 +87,9 @@ local setGeneralKeys = function()
 
     -- Custom cursor movement
     -- source $HOME/.config/nvim/cursor.vim
+
+    -- ==================== Copy/Paste ====================
+    map("<LEADER>p", [["_dp]]):mode("x"):noremap():silent():desc("edit: replace block without change clipboard"):set()
 
     -- ==================== Insert Mode Cursor Movement ====================
     map("<C-a>", "<ESC>A"):mode("i"):noremap():silent():set()
@@ -131,8 +138,8 @@ local setGeneralKeys = function()
 
     -- Opening a terminal window
     local newTermCmd = ":term<CR>:set norelativenumber<CR>:set nonumber<CR>"
-    map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent()
-        :desc("open terminal panel"):set()
+    map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
+        "open terminal panel"):set()
     map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
         "open terminal window"):set()
     map("<C-\\>", ":set nosplitbelow<CR>:vsplit<CR>:vertical resize-30<CR>" .. newTermCmd .. "i"):noremap():silent()
@@ -187,6 +194,7 @@ local setGeneralKeys = function()
 
     -- Set wrap
     map("<LEADER>sw", ":set wrap<CR>"):noremap():silent():set()
+
 end
 
 -- ==================== Plugins Keymaps ====================
@@ -406,10 +414,12 @@ local setToolPlugKeys = function()
     map("<LEADER>do"):mode("n"):callback(function()
         require("dap").repl.open()
     end):noremap():silent():desc("debug: Open REPL"):set()
-    
+
     -- Plugin: spectre
-    map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]]):mode("n"):noremap():desc("tool: find and replace"):set()
-    map("<LEADER>F", [[<Cmd>lua require("spectre").open_visual()<CR>i]]):mode("v"):noremap():desc("tool: find and replace"):set()
+    map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]]):mode("n"):noremap():desc("tool: find and replace")
+        :set()
+    map("<LEADER>F", [[<Cmd>lua require("spectre").open_visual()<CR>i]]):mode("v"):noremap():desc(
+        "tool: find and replace"):set()
 end
 
 local setUIPlugKeys = function()
