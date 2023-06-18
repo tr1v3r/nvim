@@ -1,3 +1,4 @@
+-- Run :set rtp? to list all nvim config dirs will be searched when neovim start
 local global = require("r1v3r.global")
 
 -- Create cache dir and data dirs
