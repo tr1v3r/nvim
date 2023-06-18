@@ -40,7 +40,7 @@ settings["server_formatting_block_list"] = {
 -- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
-	-- lua = false -- example
+	lua = true
 }
 
 -- Set it to false if diagnostics virtual text is annoying.
