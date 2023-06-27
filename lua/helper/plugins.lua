@@ -12,7 +12,7 @@ _G._command_panel = function()
 end
 
 local _lazygit = nil
-_G._toggle_lazygit = function()
+_G._open_lazygit = function()
     if vim.fn.executable("lazygit") == 1 then
         if not _lazygit then
             -- _lazygit = require("toggleterm.terminal").Terminal:new({

@@ -306,11 +306,14 @@ local setToolPlugKeys = function()
     map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
     -- map("tf", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus tree"):set()
 
-    --  Plugin:lazygit
+    --  Plugin: lazygit
     -- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
     map("<C-g>"):mode("n"):callback(function()
-        _toggle_lazygit()
+        _open_lazygit()
     end):noremap():silent():desc("git: Toggle lazygit"):set()
+
+    -- Plugin: ranger
+    map("R", "Ranger"):mode("n"):cr():noremap():silent():desc("ranger"):set()
 
     -- Plugin: sniprun
     map("<LEADER>r", "SnipRun"):mode("v"):cr():noremap():silent():desc("tool: Run code by range"):set()
