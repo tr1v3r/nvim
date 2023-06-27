@@ -8,7 +8,7 @@
 
 -- load general config
 if vim.g.vscode then
-	require("r1v3r.keymaps")
+	require("r1v3r.ide.vscode")
 else
 	require("r1v3r")
 end
