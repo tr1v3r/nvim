@@ -1,8 +1,8 @@
 -- Run :set rtp? to list all nvim config dirs will be searched when neovim start
 local global = require("r1v3r.global")
 
--- Create cache dir and data dirs
-local createdir = function()
+-- createDir cache dir and data dirs
+local createDir = function()
     local dataDir = {global.cacheDir .. "backup", global.cacheDir .. "undo", global.cacheDir .. "session",
                      global.cacheDir .. "swap", global.cacheDir .. "tags"}
     -- Only check whether cacheDir exists, this would be enough.
@@ -16,8 +16,18 @@ local createdir = function()
     end
 end
 
+-- deviceConfig load device config
+local deviceConfig = function()
+    local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
+    if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
+        print("device lua not found")
+    else
+        dofile(deviceConfig)
+    end
+end
+
 local init = function()
-    createdir()
+    createDir()
 
     require('r1v3r.lang')
     require('r1v3r.options')
@@ -29,6 +39,8 @@ local init = function()
     local background = require("r1v3r.settings").background
     vim.api.nvim_command("set background=" .. background)
     vim.cmd.colorscheme(colorscheme)
+
+    deviceConfig()
 end
 
 init()

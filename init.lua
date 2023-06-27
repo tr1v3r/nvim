@@ -13,11 +13,3 @@ else
 	require("r1v3r")
 end
 
--- load device config
-DeviceSpecificed = 1
-local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
-if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
-	print("device lua not found")
-else
-    dofile(deviceConfig)
-end
