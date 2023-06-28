@@ -59,6 +59,27 @@ return function()
 		return icons.ui.RootFolderOpened .. cwd
 	end
 
+    local function winbar_filepath()
+		local exclude = {
+			["terminal"] = true,
+			["toggleterm"] = true,
+			["prompt"] = true,
+			["NvimTree"] = true,
+			-- ["help"] = true,
+		}
+
+        if exclude[vim.bo.filetype] then
+            return ""
+        end
+
+        -- 获取当前工作目录和文件的绝对路径
+        local cwd = vim.fn.getcwd()
+        local filepath = vim.api.nvim_buf_get_name(0)
+
+        -- 从文件路径中删除 cwd
+        return filepath:gsub("^" .. cwd .. "/", "")
+    end
+
 	local mini_sections = {
 		lualine_a = { "filetype" },
 		lualine_b = {},
@@ -155,8 +176,9 @@ return function()
 			lualine_z = {},
 		},
 		tabline = {},
-		winbar = { lualine_c = { {'filename', path = 1 } } },
-		inactive_winbar = { lualine_c = { {'filename', path = 1 } } },
+		-- winbar = { lualine_c = {'filename', path = 1 } }, cannot ignore filetype NvimTree
+		winbar = { lualine_c = { winbar_filepath } },
+		inactive_winbar = { lualine_c = { winbar_filepath } },
 		extensions = {
 			"quickfix",
 			"nvim-tree",
