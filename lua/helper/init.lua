@@ -261,6 +261,7 @@ function M.float_terminal(cmd)
 	-- 创建一个新的空白缓冲区
 	-- create a new empty buffer
 	local buf = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_option(buf, "filetype", "terminal")
 	local terminal_window = vim.api.nvim_open_win(buf, true, float_opts)
 	vim.api.nvim_win_set_option(terminal_window, "number", false)
 	vim.api.nvim_win_set_option(terminal_window, "relativenumber", false)

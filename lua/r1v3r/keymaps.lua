@@ -137,7 +137,7 @@ local setGeneralKeys = function()
     map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():set()
 
     -- Opening a terminal window
-    local newTermCmd = ":term<CR>:set norelativenumber<CR>:set nonumber<CR>"
+    local newTermCmd = ":term<CR>:set filetype=terminal<CR>:set norelativenumber<CR>:set nonumber<CR>"
     map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
         "open terminal panel"):set()
     map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
