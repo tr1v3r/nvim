@@ -72,12 +72,7 @@ return function()
             return ""
         end
 
-        -- 获取当前工作目录和文件的绝对路径
-        local cwd = vim.fn.getcwd()
-        local filepath = vim.api.nvim_buf_get_name(0)
-
-        -- 从文件路径中删除 cwd
-        return filepath:gsub("^" .. cwd .. "/", "")
+        return vim.api.nvim_buf_get_name(0):gsub("^" .. vim.fn.getcwd() .. "/", "")
     end
 
 	local mini_sections = {
