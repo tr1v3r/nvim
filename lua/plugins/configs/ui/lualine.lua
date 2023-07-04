@@ -157,12 +157,12 @@ return function()
 					"fileformat",
 					icons_enabled = true,
 					symbols = {
-						unix = "", -- e712
-						dos = "", -- e70f
-						mac = "", -- e711
-						-- unix = "LF",
-						-- dos = "CRLF",
-						-- mac = "CR",
+						-- unix = "", -- e712
+						-- dos = "", -- e70f
+						-- mac = "", -- e711
+						unix = "LF",
+						dos = "CRLF",
+						mac = "CR",
 					},
 				},
 			},
