@@ -72,7 +72,13 @@ return function()
             return ""
         end
 
-        return vim.api.nvim_buf_get_name(0):gsub("^" .. vim.fn.getcwd() .. "/", "")
+        local path = vim.api.nvim_buf_get_name(0)
+            :gsub("^" .. vim.fn.getcwd() .. "/", "")
+            :gsub("/", icons.ui.ArrowClosed)
+        if path ~= "" then
+            return icons.ui.FileTree .. path
+        end
+        return path
     end
 
 	local mini_sections = {

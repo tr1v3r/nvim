@@ -91,6 +91,7 @@ local data = {
 		EmptyFolder = "",
 		EmptyFolderOpen = "",
 		File = "󰈤",
+		FileTree = "󰙅",
 		Fire = "",
 		Folder = "",
 		FolderOpen = "",
