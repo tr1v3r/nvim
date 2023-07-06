@@ -7,7 +7,7 @@ require("helper.plugins")
 vim.g.mapleader = " "
 
 local setGeneralKeys = function()
-    map("s", "<nop>"):noremap():silent():set()
+    -- map("s", "<nop>"):noremap():silent():set()
 
     -- Undo
     map("l", "u"):noremap():silent():set()
