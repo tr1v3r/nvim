@@ -134,6 +134,13 @@ return function()
 					fallback()
 				end
 			end, { "i", "s" }),
+			["<C-e>"] = cmp.mapping(function(fallback)
+				if require("luasnip").expand_or_locally_jumpable() then
+					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"))
+				else
+					fallback()
+				end
+			end, { "i" }),
 		}),
 		snippet = {
 			expand = function(args)

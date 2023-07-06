@@ -115,10 +115,10 @@ local setGeneralKeys = function()
     map("tq", "<C-w>o"):noremap():silent():set()
 
     -- Split the screens to up/down/left/right
-    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):noremap():silent():desc("split up"):set()
-    map("se", ":set splitbelow<CR>:split<CR>"):noremap():silent():desc("split down"):set()
-    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):noremap():silent():desc("split left"):set()
-    map("si", ":set splitright<CR>:vsplit<CR>"):noremap():silent():desc("split right"):set()
+    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):mode("n"):noremap():silent():desc("split up"):set()
+    map("se", ":set splitbelow<CR>:split<CR>"):mode("n"):noremap():silent():desc("split down"):set()
+    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):mode("n"):noremap():silent():desc("split left"):set()
+    map("si", ":set splitright<CR>:vsplit<CR>"):mode("n"):noremap():silent():desc("split right"):set()
 
     -- Resize window
     map("<up>", ":res +5<CR>"):noremap():silent():set()
@@ -127,12 +127,12 @@ local setGeneralKeys = function()
     map("<right>", ":vertical resize+5<CR>"):noremap():silent():set()
 
     -- Place the two screens up and down
-    map("sh", "<C-w>t<C-w>K"):noremap():silent():set()
+    map("sh", "<C-w>t<C-w>K"):mode("n"):noremap():silent():set()
     -- Place the two screens side by side
-    map("sv", "<C-w>t<C-w>H"):noremap():silent():set()
+    map("sv", "<C-w>t<C-w>H"):mode("n"):noremap():silent():set()
     -- Rotate screens
-    map("srh", "<C-w>b<C-w>K"):noremap():silent():set()
-    map("srv", "<C-w>b<C-w>H"):noremap():silent():set()
+    map("srh", "<C-w>b<C-w>K"):mode("n"):noremap():silent():set()
+    map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():silent():set()
     -- Press <SPACE> + q to close the window below the current window
     map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():set()
 
