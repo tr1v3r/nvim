@@ -140,7 +140,7 @@ return function()
 				else
 					fallback()
 				end
-			end, { "i" }),
+			end, { "i", "s" }),
 		}),
 		snippet = {
 			expand = function(args)
