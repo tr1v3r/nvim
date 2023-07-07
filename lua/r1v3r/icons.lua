@@ -1,3 +1,5 @@
+-- icons:    
+
 local icons = {}
 
 local data = {
@@ -95,6 +97,7 @@ local data = {
 		Fire = "",
 		Folder = "",
 		FolderOpen = "",
+		FolderWithHeart = "󱃪",
 		Gear = "",
 		History = "󰄉",
 		Incoming = "󰏷",
@@ -126,6 +129,7 @@ local data = {
 		Sort = "",
 		Spell = "󰓆",
 		Symlink = "",
+        Tab = "",
 		Table = "",
 		Telescope = "",
 	},
@@ -148,12 +152,14 @@ local data = {
 		EscapeST = "",
 		Gavel = "",
 		Glass = "󰂖",
+		NoActiveLsp = "󱚧",
 		PyEnv = "󰌠",
 		Squirrel = "",
 		Tag = "",
 		Tree = "",
 		Watch = "",
 		Lego = "",
+		LspAvailable = "󱜙",
 		Vbar = "│",
 		Add = "+",
 		Added = "",

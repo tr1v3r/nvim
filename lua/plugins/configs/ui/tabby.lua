@@ -1,5 +1,5 @@
 return function()
-    -- icons:   
+    -- icons:    
     local theme = {
         fill = 'TabLineFill',
         -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }

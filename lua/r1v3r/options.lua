@@ -17,6 +17,8 @@ function options.o()
 
         -- Show command in status line
         showcmd = true,
+        -- Cmmand-line height
+        cmdheight = 1, -- 0/1/2
         -- Enable wildmenu
         wildmenu = true,
         -- Enable reading configuration from current directory
