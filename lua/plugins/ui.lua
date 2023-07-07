@@ -15,10 +15,15 @@ ui["shaunsingh/nord.nvim"] = {
 	priority = 1000,
 	config = require("ui.nord"),
 }
-ui["nanozuki/tabby.nvim"] = {
+-- ui["nanozuki/tabby.nvim"] = {
+-- 	lazy = true,
+-- 	event = "BufReadPost",
+-- 	config = require("ui.tabby"),
+-- }
+ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
-	event = "BufReadPost",
-	config = require("ui.tabby"),
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	config = require("ui.bufferline"),
 }
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
