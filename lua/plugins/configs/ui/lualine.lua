@@ -11,6 +11,7 @@ return function()
     local function custom_theme()
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
+			pattern = "*",
 			callback = function()
 				require("lualine").setup({ options = { theme = custom_theme() } })
 			end,
@@ -94,9 +95,13 @@ return function()
 			return vim.bo.filetype ~= ""
 		end,
 		has_git = function()
-			local filepath = vim.fn.expand("%:p:h")
-			local gitdir = vim.fn.finddir(".git", filepath .. ";")
-			return gitdir and #gitdir > 0 and #gitdir < #filepath
+			local gitdir = vim.fs.find(".git", {
+				limit = 1,
+				upward = true,
+				type = "directory",
+				path = vim.fn.expand("%:p:h"),
+			})
+			return #gitdir > 0
 		end,
 	}
 
