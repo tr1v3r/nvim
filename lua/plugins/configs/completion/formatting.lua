@@ -1,9 +1,9 @@
 local M = {}
 
 local settings = require("r1v3r.settings")
-local format_notify = settings.format_notify
 local disabled_workspaces = settings.format_disabled_dirs
 local format_on_save = settings.format_on_save
+local format_notify = settings.format_notify
 local server_formatting_block_list = settings.server_formatting_block_list
 
 vim.api.nvim_create_user_command("FormatToggle", function()
@@ -100,17 +100,20 @@ function M.format_filter(clients)
 end
 
 function M.format(opts)
-	local cwd = vim.fn.getcwd()
+    local filedir = vim.fn.expand("%:p:h")
 	for i = 1, #disabled_workspaces do
-		if cwd.find(cwd, disabled_workspaces[i]) ~= nil then
+		if vim.regex(vim.fs.normalize(disabled_workspaces[i])):match_str(filedir) ~= nil then
 			vim.notify(
-				string.format("[LSP] Formatting support for all files under [%s] is disabled.", disabled_workspaces[i]),
+				string.format(
+					"[LSP] Formatting for all files under [%s] has been disabled.",
+					vim.fs.normalize(disabled_workspaces[i])
+				),
 				vim.log.levels.WARN,
 				{ title = "LSP Formatter Warning" }
 			)
 			return
 		end
-	end
+    end
 
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)
@@ -144,7 +147,7 @@ function M.format(opts)
 		if block_list[vim.bo.filetype] == true then
 			vim.notify(
 				string.format(
-					"[LSP][%s] Formatter for [%s] has been disabled. This file is not being processed.",
+					"[LSP][%s] Formatting for [%s] has been disabled. This file is not being processed.",
 					client.name,
 					vim.bo.filetype
 				),
