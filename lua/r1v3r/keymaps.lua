@@ -231,9 +231,9 @@ local setEditorPlugKeys = function()
         return et("<Plug>(accelerated_jk_j)")
     end):expr():set()
 
-    -- Plugin: auto_session
+    -- Plugin: persisted.nvim
     map("<LEADER>ss", "SessionSave"):mode("n"):pure():noremap():silent():desc("session: Save"):set()
-    map("<LEADER>sr", "SessionRestore"):mode("n"):pure():noremap():silent():desc("session: Restore"):set()
+    map("<LEADER>sl", "SessionLoad"):mode("n"):pure():noremap():silent():desc("session: Load current"):set()
     map("<LEADER>sd", "SessionDelete"):mode("n"):pure():noremap():silent():desc("session: Delete"):set()
 
     -- Plugin: nvim-bufdel
@@ -378,6 +378,7 @@ local setToolPlugKeys = function()
         "edit: Change current direrctory by zoxide"):set()
     map("<LEADER>fb", "Telescope buffers"):mode("n"):pure():noremap():silent():desc("find: Buffer opened"):set()
     map("<LEADER>f*", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
+    map("<LEADER>fd", "Telescope persisted"):mode("n"):pure():noremap():silent():desc("find: Session"):set()
 
     -- Plugin: dap & dap-go
     map("<LEADER>du"):mode("n"):callback(function()

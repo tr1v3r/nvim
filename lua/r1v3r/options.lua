@@ -83,7 +83,10 @@ function options.o()
         -- Automatically write all buffers when executing certain commands
         autowriteall = true,
         -- signcolumn = 'nubmer'
-        undodir = global.cacheDir .. "undo/"
+        undodir = global.cacheDir .. "undo/",
+
+        sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
+        shada = "!,'500,<50,@100,s10,h",
     }
 end
 

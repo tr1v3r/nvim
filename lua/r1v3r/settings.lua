@@ -26,8 +26,10 @@ settings["format_on_save"] = true
 settings["format_notify"] = true
 
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
+--- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
+--- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
 ---@type string[]
-settings["format_disabled_dirs"] = { home .. "/format_disabled_dir_under_home" }
+settings["format_disabled_dirs"] = { "~/format_disabled_dir" }
 
 -- Servers in this list will skip setting formatting capabilities if rhs is true.
 ---@type table<string, boolean>
@@ -35,6 +37,7 @@ settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
+    pylsp = true,
 }
 
 -- Filetypes in this list will skip lsp formatting if rhs is true.
@@ -46,7 +49,7 @@ settings["formatter_block_list"] = {
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
 ---@type boolean
-settings["diagnostics_virtual_text"] = false
+settings["diagnostics_virtual_text"] = true
 
 -- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
@@ -67,7 +70,6 @@ settings["palette_overwrite"] = {}
 ---@type string
 settings["external_browser"] = "chrome-cli open"
 
--- NOTE: The startup time will be slowed down when it's true.
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true
