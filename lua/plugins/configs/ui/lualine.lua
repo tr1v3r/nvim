@@ -48,28 +48,6 @@ return function()
 		}
 	end
 
-    local function winbar_filepath()
-		local exclude = {
-			["terminal"] = true,
-			["toggleterm"] = true,
-			["prompt"] = true,
-			["NvimTree"] = true,
-			-- ["help"] = true,
-		}
-
-        if exclude[vim.bo.filetype] then
-            return ""
-        end
-
-        local path = vim.api.nvim_buf_get_name(0)
-            :gsub("^" .. vim.fn.getcwd() .. "/", "")
-            :gsub("/", icons.ui.ArrowClosed)
-        if path ~= "" then
-            return icons.ui.FileTree .. path
-        end
-        return path
-    end
-
     local mini_sections = {
 		lualine_a = { "filetype" },
 		lualine_b = {},
@@ -150,6 +128,35 @@ return function()
 				modified = gitsigns.changed,
 				removed = gitsigns.removed,
 			}
+		end
+	end
+
+    local _cache = { context = "", bufnr = -1 }
+	local function lspsaga_symbols()
+		local exclude = {
+			["terminal"] = true,
+			["toggleterm"] = true,
+			["prompt"] = true,
+			["NvimTree"] = true,
+			["help"] = true,
+		}
+		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+			return "" -- Excluded filetypes
+		else
+			local currbuf = vim.api.nvim_get_current_buf()
+			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
+			if ok and lspsaga:get_winbar() ~= nil then
+				_cache.context = lspsaga:get_winbar()
+				_cache.bufnr = currbuf
+			elseif _cache.bufnr ~= currbuf then
+				_cache.context = "" -- Reset [invalid] cache (usually from another buffer)
+			end
+
+            -- detect content: %#SagaWinbar #
+            if _cache.context:sub(-1) == "#" then
+                return "..." -- maybe icons.ui.Search
+            end
+			return _cache.context
 		end
 	end
 
@@ -274,6 +281,35 @@ return function()
 				return string.format("%s · %3d:%-2d", position, cursorline, cursorcol)
 			end,
 		},
+
+        file_path = {
+            function()
+	        	local exclude = {
+	        		["terminal"] = true,
+	        		["toggleterm"] = true,
+	        		["prompt"] = true,
+	        		["NvimTree"] = true,
+	        		-- ["help"] = true,
+	        	}
+
+                if exclude[vim.bo.filetype] then
+                    return ""
+                end
+
+                local path = vim.api.nvim_buf_get_name(0)
+                if path == "" then
+                    return path
+                end
+                return icons.ui.FileTree .. vim.fs.normalize(path)
+                    :gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
+                    -- :gsub("/", icons.ui.ArrowClosed)
+                    :gsub("/", icons.ui.ChevronRight)
+                    -- :gsub("/", "> ")
+            end,
+			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
+            color = function() return { fg = "#61AFEF", gui = "bold" } end,
+			cond = conditionals.has_enough_room,
+        },
 	}
 
 	require("lualine").setup({
@@ -346,6 +382,9 @@ return function()
 				{
 					"fileformat",
 					symbols = {
+                        -- unix = "", -- e712
+						-- dos = "", -- e70f
+						-- mac = "", -- e71
 						unix = "LF",
 						dos = "CRLF",
 						mac = "CR", -- Legacy macOS
@@ -371,8 +410,11 @@ return function()
 		},
 		tabline = {},
 		-- winbar = { lualine_c = {'filename', path = 1 } }, cannot ignore filetype NvimTree
-		winbar = { lualine_c = { winbar_filepath } },
-		inactive_winbar = { lualine_c = { winbar_filepath } },
+		winbar = {
+            lualine_a = { components.file_path },
+            lualine_b = { lspsaga_symbols },
+        },
+		inactive_winbar = { lualine_a = { components.file_path } },
 		extensions = {
 			"quickfix",
 			"nvim-tree",
