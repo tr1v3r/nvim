@@ -303,7 +303,7 @@ return function()
                 return icons.ui.FileTree .. vim.fs.normalize(path)
                     :gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
                     -- :gsub("/", icons.ui.ArrowClosed)
-                    :gsub("/", icons.ui.ChevronRight)
+                    :gsub("/", icons.ui.Separator)
                     -- :gsub("/", "> ")
             end,
 			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
