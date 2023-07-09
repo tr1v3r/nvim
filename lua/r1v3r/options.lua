@@ -19,6 +19,8 @@ function options.o()
         showcmd = true,
         -- Cmmand-line height
         cmdheight = 1, -- 0/1/2
+        -- Commmad-line window height
+        cmdwinheight = 5,
         -- Enable wildmenu
         wildmenu = true,
         -- Enable reading configuration from current directory
@@ -33,6 +35,13 @@ function options.o()
 
         -- Enable autoindent
         autoindent = true,
+        -- Automatically load file when changed outside vim
+        autoread = true,
+        -- Automatically write file when changed outside vim
+        autowrite = true,
+        -- Do not create swap or backup files
+        backup = false,
+        swapfile = false,
         -- Disable indent expression
         indentexpr = '',
         -- Show whitespace characters
@@ -43,7 +52,7 @@ function options.o()
         ttimeoutlen = 0,
         timeout = false,
         -- Set view options for saving and restoring folds, slash search, Unix line endings
-        viewoptions = 'cursor,folds,slash,unix',
+        viewoptions = 'cursor,folds,curdir,slash,unix',
         -- Disable text width
         tw = 0,
         -- Set fold method to syntax
@@ -86,9 +95,18 @@ function options.o()
         autowriteall = true,
         -- signcolumn = 'nubmer'
         undodir = global.cacheDir .. "undo/",
+        -- Save undo history
+        undofile = true,
 
         sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
         shada = "!,'500,<50,@100,s10,h",
+        hidden = true,
+        -- Set the format of grep output
+        grepformat = "%f:%l:%c:%m",
+        -- Set grep program to ripgrep
+        greprg = "rg --hidden --vimgrep --smart-case",
+        -- Set command history recorded items
+        history = 2000,
     }
 end
 
