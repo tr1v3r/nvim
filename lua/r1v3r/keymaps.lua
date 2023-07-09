@@ -20,39 +20,39 @@ local setGeneralKeys = function()
     map(",.", "%"):noremap():silent():set()
 
     -- Search
-    map("<LEADER><CR>", ":nohlsearch<CR>"):noremap():silent():set()
+    map("<LEADER><CR>", ":nohlsearch<CR>"):noremap():silent():desc("edit: nohl"):set()
 
     -- Adjacent duplicate words
-    map("<LEADER>dw", [[/\(\<\w\+\>\)\_s*\1]]):noremap():set()
+    map("<LEADER>dw", [[/\(\<\w\+\>\)\_s*\1]]):noremap():desc("edit: find adjacent duplicate words"):set()
 
     -- Find and replace
-    map([[\s]], ":%s//g<left><left>"):noremap():set()
+    map([[\s]], ":%s//g<left><left>"):noremap():desc("edit: find and replace string in current file"):set()
     map([[\S]], [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]):mode("n"):noremap():desc(
         "edit: find and replace all current word"):set()
 
     -- Find and delete (line)
-    map([[\d]], ":g//d<left><left>"):noremap():set()
+    map([[\d]], ":g//d<left><left>"):noremap():desc("edit: find and delete"):set()
 
     -- Copy to system clipboard
-    map("Y", [["+y]]):mode("v"):noremap():silent():set()
+    -- map("Y", [["+y]]):mode("v"):noremap():silent():desc("edit: copy to system clipboard"):set()
 
     -- Space to Tab
-    map("<LEADER>tt", [[:%s/    /\t/g]]):mode("n"):noremap():silent():set()
-    map("<LEADER>tt", [[:s/    /\t/g]]):mode("v"):noremap():silent():set()
+    map("<LEADER>tt", [[:%s/    /\t/g]]):mode("n"):noremap():silent():desc("edit: replace space to tab"):set()
+    map("<LEADER>tt", [[:s/    /\t/g]]):mode("v"):noremap():silent():desc("edit: replace space to tab"):set()
 
     -- Folding
-    map("<LEADER>o", "za"):noremap():set()
+    map("<LEADER>o", "za"):noremap():desc("edit: folding"):set()
 
     -- Move cursor in find results
     map("=", "nzz"):noremap():set()
     map("-", "Nzz"):noremap():set()
 
     -- Quit key
-    map("S", ":w<CR>"):mode("n"):noremap():silent():set()
+    map("S", ":w<CR>"):mode("n"):noremap():silent():desc("edit: save file"):set()
     map("Q", ":quitall<CR>"):mode("n"):noremap():silent():set()
 
-    map(";", ":"):noremap():set()
-    map("`", "~"):noremap():set()
+    map(";", ":"):noremap():desc("edit: key replace"):set()
+    map("`", "~"):noremap():desc("edit: key replace"):set()
 
     -- ==================== Cursor Movement ====================
     -- New cursor movement (the default arrow keys are used for resizing windows)
@@ -67,8 +67,9 @@ local setGeneralKeys = function()
     map("i", "l"):noremap():silent():set()
     map("gu", "gk"):noremap():silent():set()
     map("ge", "gj"):noremap():silent():set()
-    map([[\v]], "v$h"):noremap():silent():set()
     map("h", "e"):noremap():silent():set()
+
+    map([[\v]], "v$h"):noremap():silent():desc("edit: select content from cursor to line end"):set()
 
     -- scroll
     map("U", "12k"):noremap():silent():set()
@@ -111,56 +112,52 @@ local setGeneralKeys = function()
     map("<LEADER>n", "<C-w>h"):noremap():silent():set()
     map("<LEADER>i", "<C-w>l"):noremap():silent():set()
 
-    -- Close all other windows
-    map("tq", "<C-w>o"):noremap():silent():set()
+    map("tq", "<C-w>o"):noremap():silent():desc("window: close or other windows"):set()
 
     -- Split the screens to up/down/left/right
-    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):mode("n"):noremap():silent():desc("split up"):set()
-    map("se", ":set splitbelow<CR>:split<CR>"):mode("n"):noremap():silent():desc("split down"):set()
-    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):mode("n"):noremap():silent():desc("split left"):set()
-    map("si", ":set splitright<CR>:vsplit<CR>"):mode("n"):noremap():silent():desc("split right"):set()
+    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):mode("n"):noremap():silent():desc("window: split up"):set()
+    map("se", ":set splitbelow<CR>:split<CR>"):mode("n"):noremap():silent():desc("window: split down"):set()
+    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):mode("n"):noremap():silent():desc("windown: split left"):set()
+    map("si", ":set splitright<CR>:vsplit<CR>"):mode("n"):noremap():silent():desc("window: split right"):set()
 
     -- Resize window
-    map("<up>", ":res +5<CR>"):noremap():silent():set()
-    map("<down>", ":res -5<CR>"):noremap():silent():set()
-    map("<left>", ":vertical resize-5<CR>"):noremap():silent():set()
-    map("<right>", ":vertical resize+5<CR>"):noremap():silent():set()
+    map("<up>", ":res +5<CR>"):noremap():silent():desc("window: expand window size"):set()
+    map("<down>", ":res -5<CR>"):noremap():silent():desc("window: shorten window size"):set()
+    map("<left>", ":vertical resize-5<CR>"):noremap():silent():desc("window: vertical expand window size"):set()
+    map("<right>", ":vertical resize+5<CR>"):noremap():silent():desc("window: vertical shorten window size"):set()
 
-    -- Place the two screens up and down
-    map("sh", "<C-w>t<C-w>K"):mode("n"):noremap():silent():set()
-    -- Place the two screens side by side
-    map("sv", "<C-w>t<C-w>H"):mode("n"):noremap():silent():set()
-    -- Rotate screens
-    map("srh", "<C-w>b<C-w>K"):mode("n"):noremap():silent():set()
-    map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():silent():set()
-    -- Press <SPACE> + q to close the window below the current window
-    map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():set()
+    map("sh", "<C-w>t<C-w>K"):mode("n"):noremap():silent():desc("window: place the two windows up and down"):set()
+    map("sv", "<C-w>t<C-w>H"):mode("n"):noremap():silent():desc("window: Place the two windows side by side"):set()
+    map("srh", "<C-w>b<C-w>K"):mode("n"):noremap():silent():desc("window: rotate windows"):set()
+    map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():silent():desc("window: rotate windows"):set()
+
+    map("<LEADER>q", "<C-w>j:q<CR>"):noremap():silent():desc("window: close current window"):set()
 
     -- Opening a terminal window
     local newTermCmd = ":term<CR>:set filetype=terminal<CR>:set norelativenumber<CR>:set nonumber<CR>"
     map("<LEADER>/", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
-        "open terminal panel"):set()
+        "window: open terminal window"):set()
     map("<C-`>", ":set splitbelow<CR>:split<CR>:res -5<CR>" .. newTermCmd .. "i"):noremap():silent():desc(
-        "open terminal window"):set()
+        "window: open terminal window"):set()
     map("<C-\\>", ":set nosplitbelow<CR>:vsplit<CR>:vertical resize-30<CR>" .. newTermCmd .. "i"):noremap():silent()
-        :desc("open terminal window"):set()
+        :desc("window: open terminal window"):set()
     -- Open a new instance of st with the cwd
     -- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
     -- Open a new terminal tab
-    map([[\t]], ":tabe<CR>:term<CR>i"):noremap():silent():set()
-    map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
+    map([[\t]], ":tabe<CR>:term<CR>i"):noremap():silent():desc("window: open terminal window in new tab"):set()
+    map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():silent():desc("edit: switch to normal mode"):set() -- switch to normal mode in terminal.
     -- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():silent():set() -- switch to normal mode in terminal.
 
     -- ==================== Tab management ====================
     -- Create a new tab with tu
-    map("tu", ":tabe<CR>"):noremap():silent():desc("new tab"):set()
-    map("tU", ":tab split<CR>"):noremap():silent():desc("new tab and switch"):set()
+    map("tu", ":tabe<CR>"):noremap():silent():desc("tab: new tab"):set()
+    map("tU", ":tab split<CR>"):noremap():silent():desc("tab: new tab and switch"):set()
     -- Move around tabs with tn and ti
-    map("tn", ":-tabnext<CR>"):noremap():silent():desc("move to left tab"):set()
-    map("ti", ":+tabnext<CR>"):noremap():silent():desc("move to right tab"):set()
+    map("tn", ":-tabnext<CR>"):noremap():silent():desc("tab: move to left tab"):set()
+    map("ti", ":+tabnext<CR>"):noremap():silent():desc("tab: move to right tab"):set()
     -- Move the tabs with tN and tI
-    map("tN", ":-tabmove<CR>"):noremap():silent():desc("move tab to left"):set()
-    map("tI", ":+tabmove<CR>"):noremap():silent():desc("move tab to right"):set()
+    map("tN", ":-tabmove<CR>"):noremap():silent():desc("tab: move tab to left"):set()
+    map("tI", ":+tabmove<CR>"):noremap():silent():desc("tab: move tab to right"):set()
 
     -- Tab switch
     map("", ":nn <Leader>1 1gt"):exec()
@@ -174,27 +171,23 @@ local setGeneralKeys = function()
     map("", ":nn <Leader>9 9gt"):exec()
     map("", ":nn <Leader>0 :tablast<CR>"):exec()
 
-    -- Close tab
-    map("tw", ":tabclose<CR>"):noremap():silent():set()
-    -- Close all other tabs
-    map("to", ":tabonly<CR>"):noremap():silent():set()
+    map("tw", ":tabclose<CR>"):noremap():silent():desc("tab: close current tab"):set()
+    map("to", ":tabonly<CR>"):noremap():silent():desc("tab: close all other tabs"):set()
 
     -- ==================== Other useful stuff ====================
-    -- Press space twice to jump to the next '<++>' and edit it
-    map("<LEADER><LEADER>", "<Esc>/<++><CR>:nohlsearch<CR>c4l"):noremap():silent():set()
+    map("<LEADER><LEADER>", "<Esc>/<++><CR>:nohlsearch<CR>c4l"):noremap():silent():desc("edit: jump to the next '<++>' and edit it"):set()
 
     -- Spelling Check with <space>sc
-    map("<LEADER>sc", ":set spell!<CR>"):noremap():silent():set()
+    map("<LEADER>sc", ":set spell!<CR>"):noremap():silent():desc("edit: spelling check"):set()
 
     -- adjust current line to center of screen
-    map("<C-c>", "zz"):noremap():silent():set()
-
-    -- Call figlet
-    map("tx", ":r !figlet"):space():noremap():set()
+    map("<C-c>", "zz"):noremap():silent():desc("edit: adjust current line to center of screen"):set()
 
     -- Set wrap
-    map("<LEADER>sw", ":set wrap<CR>"):noremap():silent():set()
+    map("<LEADER>sw", ":set wrap<CR>"):noremap():silent():desc("edit: set wrap"):set()
 
+    -- Call figlet
+    map("tx", ":r !figlet"):space():noremap():desc("tool: call figlet"):set()
 end
 
 -- ==================== Plugins Keymaps ====================
@@ -232,9 +225,9 @@ local setEditorPlugKeys = function()
     end):expr():set()
 
     -- Plugin: persisted.nvim
-    map("<LEADER>ss", "SessionSave"):mode("n"):pure():noremap():silent():desc("session: Save"):set()
-    map("<LEADER>sl", "SessionLoad"):mode("n"):pure():noremap():silent():desc("session: Load current"):set()
-    map("<LEADER>sd", "SessionDelete"):mode("n"):pure():noremap():silent():desc("session: Delete"):set()
+    map("<LEADER>ss", "SessionSave"):mode("n"):pure():noremap():silent():desc("session: save"):set()
+    map("<LEADER>sl", "SessionLoad"):mode("n"):pure():noremap():silent():desc("session: load current"):set()
+    map("<LEADER>sd", "SessionDelete"):mode("n"):pure():noremap():silent():desc("session: delete"):set()
 
     -- Plugin: nvim-bufdel
     map("<A-q>", "BufDel"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
@@ -302,18 +295,18 @@ local setToolPlugKeys = function()
     -- map("<LEADER>G", "Git"):pure():noremap():silent():desc("git: Open git-fugitive"):set()
 
     -- Plugin: nvim-tree
-    map("tt", "NvimTreeFindFileToggle"):mode("n"):cr():noremap():silent():desc("tree: Locate file"):set()
-    map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tree: Refresh"):set()
+    map("tt", "NvimTreeFindFileToggle"):mode("n"):cr():noremap():silent():desc("tool: Locate file in nvim-tree"):set()
+    map("tr", "NvimTreeRefresh"):mode("n"):cr():noremap():silent():desc("tool: Refresh nvim-Tree"):set()
     -- map("tf", "NvimTreeFocus"):mode("n"):cr():noremap():silent():desc("tree: Focus tree"):set()
 
     --  Plugin: lazygit
     -- map("<C-g>", ":LazyGit<CR>"):noremap():silent():set()
     map("<C-g>"):mode("n"):callback(function()
         _open_lazygit()
-    end):noremap():silent():desc("git: Toggle lazygit"):set()
+    end):noremap():silent():desc("tool: Toggle lazygit"):set()
 
     -- Plugin: ranger
-    map("R", "Ranger"):mode("n"):cr():noremap():silent():desc("ranger"):set()
+    map("R", "Ranger"):mode("n"):cr():noremap():silent():desc("tool: Toggle ranger"):set()
 
     -- Plugin: sniprun
     map("<LEADER>r", "SnipRun"):mode("v"):cr():noremap():silent():desc("tool: Run code by range"):set()
@@ -430,8 +423,8 @@ local setUIPlugKeys = function()
     -- Plugin: bufferline
     map("bw", "bdelete"):mode("n"):cr():noremap():silent():desc("buffer: Close current buffer"):set()
     map("bq", "BufferLineCloseOthers"):mode("n"):cr():noremap():silent():desc("buffer: Close other buffer"):set()
-    map("bi", "BufferLineCycleNext"):mode("n"):cr():noremap():silent():desc("buffer: Switch to next"):set()
-    map("bn", "BufferLineCyclePrev"):mode("n"):cr():noremap():silent():desc("buffer: Switch to prev"):set()
+    map("<A-i>", "BufferLineCycleNext"):mode("n"):cr():noremap():silent():desc("buffer: Switch to next"):set()
+    map("<A-n>", "BufferLineCyclePrev"):mode("n"):cr():noremap():silent():desc("buffer: Switch to prev"):set()
     map("bI", "BufferLineMoveNext"):mode("n"):cr():noremap():silent():desc("buffer: Move current to next"):set()
     map("bN", "BufferLineMovePrev"):mode("n"):cr():noremap():silent():desc("buffer: Move current to prev"):set()
     map("<LEADER>be", "BufferLineSortByExtension"):mode("n"):cr():noremap():desc("buffer: Sort by extension"):set()
