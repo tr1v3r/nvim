@@ -55,6 +55,7 @@ function Lazy:loadPlugins()
         local plugins = require(p:sub(0, #p - #".lua"))
         if type(plugins) == "table" then
             for name, conf in pairs(plugins) do
+                -- TODO check conf and decide install plugin or not
                 pluginsSpec[#pluginsSpec + 1] = vim.tbl_extend("force", {name}, conf)
             end
         end
