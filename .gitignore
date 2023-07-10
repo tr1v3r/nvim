@@ -4,3 +4,4 @@ view/
 plugged/
 tmp/
 _device.vim
+_device.lua

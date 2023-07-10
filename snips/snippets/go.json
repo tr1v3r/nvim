@@ -1,0 +1,43 @@
+{
+    "check error": {
+        "prefix": "ce",
+        "body": "if err != nil {\n\t${1://TODO}\n}\n$0",
+        "description": "Snippet for check error"
+    },
+    "check and return error": {
+        "prefix": "re",
+        "body": "if err != nil {\n\treturn err\n}\n$0",
+        "description": "Snippet for check and return error"
+    },
+    "for loop select": {
+        "prefix": "fors",
+        "body": "for {\n\tselect{\n\tcase ${1:<-${2:ch}}:\n\t\t${3://TODO}\n\tdefault:\n\t\t${4://TODO}\n\t}\n}\n$0",
+        "description": "Snippet for select from channel in for loop"
+    },
+    "println": {
+        "prefix": "Println",
+        "body": "fmt.Println(${1:text})\n$0",
+        "description": "Snippet for print text with new line"
+    },
+    "printf": {
+        "prefix": "Printf",
+        "body": "fmt.Printf(\"${1:template}\", ${2:params})\n$0",
+        "description": "Snippet for print text with new line"
+    },
+    "log": {
+        "prefix": "Log",
+        "body": "log.Info(\"${1:info}\", ${2:params})\n$0",
+        "description": "Snippet for log info"
+    },
+    "struct function": {
+        "prefix": "sf",
+        "body": "func (${1:receiver}) ${2:function}(${3:params}) {\n\t${0://TODO}\n}",
+        "description": "Snippet for log info"
+    },
+    "fully test function": {
+        "prefix": "TF",
+        "body": "func Test${1:func}(t *testing.T){\n\ttestdatas := []struct {\n\t\t${2:Input} ${3:string}\n\t\t${4:Expected} ${5:bool}\n\t}{\n\t\t{$0},\n\t}\n\tfor _, item := range testdatas {\n\t\tif ${6:assert} {\n\t\t\tt.Errorf(\"input %+v, expected %v, got %v\", item.${2}, item.${4}, ${7:result})\n\t\t}\n\t}\n}\n
+",
+        "description": "Snippet for fully test function"
+    }
+}
