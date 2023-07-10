@@ -421,7 +421,7 @@ end
 
 local setUIPlugKeys = function()
     -- Plugin: bufferline
-    map("<A-w>", "bdelete"):mode("n"):cr():noremap():silent():desc("buffer: Close current buffer"):set()
+    map("<A-w>", "bdelete!"):mode("n"):cr():noremap():silent():desc("buffer: Close current buffer"):set()
     map("<A-q>", "BufferLineCloseOthers"):mode("n"):cr():noremap():silent():desc("buffer: Close other buffer"):set()
     map("<A-i>", "BufferLineCycleNext"):mode("n"):cr():noremap():silent():desc("buffer: Switch to next"):set()
     map("<A-n>", "BufferLineCyclePrev"):mode("n"):cr():noremap():silent():desc("buffer: Switch to prev"):set()
