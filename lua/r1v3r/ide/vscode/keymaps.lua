@@ -37,16 +37,16 @@ function setGeneralKeys()
     map("<LEADER>7", "workbench.action.openEditorAtIndex7"):mode("n"):vscNotify():noremap():silent():desc("editor: jump to editor 7"):set()
     map("<LEADER>8", "workbench.action.openEditorAtIndex8"):mode("n"):vscNotify():noremap():silent():desc("editor: jump to editor 8"):set()
     map("<LEADER>9", "workbench.action.openEditorAtIndex9"):mode("n"):vscNotify():noremap():silent():desc("editor: jump to editor 9"):set()
-    
+
     -- editor jump
     map("<LEADER>u", "workbench.action.focusAboveGroup"):vscNotify():noremap():silent():set()
     map("<LEADER>e", "workbench.action.focusBelowGroup"):vscNotify():noremap():silent():set()
     map("<LEADER>n", "workbench.action.focusLeftGroup"):vscNotify():noremap():silent():set()
     map("<LEADER>i", "workbench.action.focusRightGroup"):vscNotify():noremap():silent():set()
-    
+
     -- file explorer
     -- map("tt", "workbench.view.explorer"):mode("n"):vscNotify():noremap():silent():desc("view: toggle file explorer"):set()
-    
+
     -- save and quit
     map("S", "workbench.action.files.save"):mode("n"):vscNotify():noremap():silent():desc("editor: save files"):set()
     map("Q", "workbench.action.quit"):mode("n"):vscNotify():noremap():silent():desc("editor: quit all"):set()
