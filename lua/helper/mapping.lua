@@ -110,6 +110,12 @@ function mapOption:exec()
     vim.cmd(self.cmd)
 end
 
+---@return mapOption
+function mapOption:vscNotify()
+    self.cmd = ("<Cmd>call VSCodeNotify('%s')<CR>"):format(self.cmd)
+    return self
+end
+
 function mapOption:set()
     local modes = self.m
     if modes == "" then

@@ -115,9 +115,11 @@ local setGeneralKeys = function()
     map("tq", "<C-w>o"):noremap():silent():desc("window: close or other windows"):set()
 
     -- Split the screens to up/down/left/right
-    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):mode("n"):noremap():silent():desc("window: split up"):set()
+    map("su", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>"):mode("n"):noremap():silent()
+        :desc("window: split up"):set()
     map("se", ":set splitbelow<CR>:split<CR>"):mode("n"):noremap():silent():desc("window: split down"):set()
-    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):mode("n"):noremap():silent():desc("windown: split left"):set()
+    map("sn", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>"):mode("n"):noremap():silent():desc(
+        "windown: split left"):set()
     map("si", ":set splitright<CR>:vsplit<CR>"):mode("n"):noremap():silent():desc("window: split right"):set()
 
     -- Resize window
@@ -175,7 +177,8 @@ local setGeneralKeys = function()
     map("to", ":tabonly<CR>"):noremap():silent():desc("tab: close all other tabs"):set()
 
     -- ==================== Other useful stuff ====================
-    map("<LEADER><LEADER>", "<Esc>/<++><CR>:nohlsearch<CR>c4l"):noremap():silent():desc("edit: jump to the next '<++>' and edit it"):set()
+    map("<LEADER><LEADER>", "<Esc>/<++><CR>:nohlsearch<CR>c4l"):noremap():silent():desc(
+        "edit: jump to the next '<++>' and edit it"):set()
 
     -- Spelling Check with <space>sc
     map("<LEADER>sc", ":set spell!<CR>"):noremap():silent():desc("edit: spelling check"):set()
@@ -440,11 +443,9 @@ local setUIPlugKeys = function()
     map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):cr():noremap():silent():desc("buffer: Goto buffer 9"):set()
 end
 
-local setKeys = function()
+local setKeys = function(vscode)
     setGeneralKeys()
-    if vim.g.vscode then
-        print("running in VSC")
-    else
+    if not vscode then
         setLazyKeys()
         setCompletionPlugKeys()
         setEditorPlugKeys()
@@ -454,7 +455,7 @@ local setKeys = function()
     end
 end
 
-setKeys()
+setKeys(vim.g.vscode)
 
 local mapping = {}
 
