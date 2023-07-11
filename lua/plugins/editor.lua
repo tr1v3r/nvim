@@ -96,7 +96,8 @@ editor["gcmt/wildfire.vim"] = {
 editor["kylechui/nvim-surround"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("editor.nvim-surround")
+	config = require("editor.nvim-surround"),
+	vsc = true,
 }
 -- mg979/vim-visual-multi
 

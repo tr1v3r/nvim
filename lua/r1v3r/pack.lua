@@ -55,8 +55,9 @@ function Lazy:loadPlugins()
         local plugins = require(p:sub(0, #p - #".lua"))
         if type(plugins) == "table" then
             for name, conf in pairs(plugins) do
-                -- TODO check conf and decide install plugin or not
-                pluginsSpec[#pluginsSpec + 1] = vim.tbl_extend("force", {name}, conf)
+                if not vim.g.vscode or conf["vsc"] then
+                    pluginsSpec[#pluginsSpec + 1] = vim.tbl_extend("force", {name}, conf)
+                end
             end
         end
     end
@@ -67,7 +68,7 @@ end
 function Lazy:opts()
     local opts = {
         ui = {
-            -- a number <1 is a percentage., >1 is a fixed size
+            -- a number<1 is a percentage., >1 is a fixed size
             size = {
                 width = 0.88,
                 height = 0.8
