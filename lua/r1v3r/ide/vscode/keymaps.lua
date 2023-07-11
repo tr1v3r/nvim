@@ -1,6 +1,5 @@
 local map = require("helper.mapping").map
 
-
 function unsetNvimkeys()
     vim.cmd[[nunmap <up>]]
     vim.cmd[[nunmap <down>]]
@@ -46,6 +45,9 @@ function setGeneralKeys()
 
     -- file explorer
     -- map("tt", "workbench.view.explorer"):mode("n"):vscNotify():noremap():silent():desc("view: toggle file explorer"):set()
+    
+    -- UI
+    map("<LEADER>fc", "workbench.action.selectTheme"):vscNotify():noremap():silent():set()
 
     -- save and quit
     map("S", "workbench.action.files.save"):mode("n"):vscNotify():noremap():silent():desc("editor: save files"):set()
