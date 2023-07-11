@@ -1,13 +1,11 @@
 local map = require("helper.mapping").map
 
-function unsetNvimkeys()
+function setKeys()
     vim.cmd[[nunmap <up>]]
     vim.cmd[[nunmap <down>]]
     vim.cmd[[nunmap <left>]]
     vim.cmd[[nunmap <right>]]
-end
 
-function setGeneralKeys()
     -- Split the screens to up/down/left/right
     map("su", "workbench.action.splitEditorUp"):mode("n"):vscNotify():noremap():silent():desc("editor: split up"):set()
     map("se", "workbench.action.splitEditorDown"):mode("n"):vscNotify():noremap():silent():desc("editor: split down"):set()
@@ -43,11 +41,11 @@ function setGeneralKeys()
     map("<LEADER>n", "workbench.action.focusLeftGroup"):vscNotify():noremap():silent():set()
     map("<LEADER>i", "workbench.action.focusRightGroup"):vscNotify():noremap():silent():set()
 
-    -- file explorer
-    -- map("tt", "workbench.view.explorer"):mode("n"):vscNotify():noremap():silent():desc("view: toggle file explorer"):set()
-
-    -- UI
+    -- misc action
     map("<LEADER>fc", "workbench.action.selectTheme"):vscNotify():noremap():silent():set()
+    map("<LEADER>ff", "workbench.action.quickOpen"):vscNotify():noremap():silent():set()
+    map("<LEADER>fw", "workbench.action.findInFiles"):vscNotify():noremap():silent():set()
+    -- map("tt", "workbench.view.explorer"):mode("n"):vscNotify():noremap():silent():desc("view: toggle file explorer"):set()
 
     -- Code Action
     map("<LEADER>cw", "editor.action.refactor"):vscNotify():noremap():silent():set()
@@ -57,5 +55,4 @@ function setGeneralKeys()
     map("Q", "workbench.action.quit"):mode("n"):vscNotify():noremap():silent():desc("editor: quit all"):set()
 end
 
-unsetNvimkeys()
-setGeneralKeys()
+setKeys()
