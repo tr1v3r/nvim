@@ -131,35 +131,6 @@ return function()
 		end
 	end
 
-    local _cache = { context = "", bufnr = -1 }
-	local function lspsaga_symbols()
-		local exclude = {
-			["terminal"] = true,
-			["toggleterm"] = true,
-			["prompt"] = true,
-			["NvimTree"] = true,
-			["help"] = true,
-		}
-		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-			return "" -- Excluded filetypes
-		else
-			local currbuf = vim.api.nvim_get_current_buf()
-			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
-			if ok and lspsaga:get_winbar() ~= nil then
-				_cache.context = lspsaga:get_winbar()
-				_cache.bufnr = currbuf
-			elseif _cache.bufnr ~= currbuf then
-				_cache.context = "" -- Reset [invalid] cache (usually from another buffer)
-			end
-
-            -- detect content: %#SagaWinbar #
-            if _cache.context:sub(-1) == "#" then
-                return "..." -- maybe icons.ui.Search
-            end
-			return _cache.context
-		end
-	end
-
     local components = {
 		separator = { -- use as section separators
 			function()
@@ -310,6 +281,25 @@ return function()
             color = function() return { fg = "#61AFEF", gui = "bold" } end,
 			cond = conditionals.has_enough_room,
         },
+
+        lspsaga_symbols = function()
+		    local exclude = {
+		    	["terminal"] = true,
+		    	["toggleterm"] = true,
+		    	["prompt"] = true,
+		    	["NvimTree"] = true,
+		    	["help"] = true,
+		    }
+		    if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+		    	return "" -- Excluded filetypes
+            end
+
+            local symbols =require("lspsaga.symbol.winbar").get_bar()
+            if symbols == nil then
+                return ""
+            end
+            return symbols
+        end
 	}
 
 	require("lualine").setup({
@@ -412,7 +402,7 @@ return function()
 		-- winbar = { lualine_c = {'filename', path = 1 } }, cannot ignore filetype NvimTree
 		winbar = {
             lualine_a = { components.file_path },
-            lualine_b = { lspsaga_symbols },
+            lualine_b = { components.lspsaga_symbols },
         },
 		inactive_winbar = { lualine_a = { components.file_path } },
 		extensions = {
