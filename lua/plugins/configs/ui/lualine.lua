@@ -282,24 +282,26 @@ return function()
 			cond = conditionals.has_enough_room,
         },
 
-        lspsaga_symbols = function()
-		    local exclude = {
-		    	["terminal"] = true,
-		    	["toggleterm"] = true,
-		    	["prompt"] = true,
-		    	["NvimTree"] = true,
-		    	["help"] = true,
-		    }
-		    if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-		    	return "" -- Excluded filetypes
-            end
+        lspsaga_symbols = {
+			function()
+		    	local exclude = {
+		    		["terminal"] = true,
+		    		["toggleterm"] = true,
+		    		["prompt"] = true,
+		    		["NvimTree"] = true,
+		    		["help"] = true,
+		    	}
+		    	if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+		    		return "" -- Excluded filetypes
+            	end
 
-            local symbols =require("lspsaga.symbol.winbar").get_bar()
-            if symbols == nil then
-                return ""
-            end
-            return symbols
-        end
+            	local symbols = require("lspsaga.symbol.winbar").get_bar()
+            	if symbols == nil then
+            	    return ""
+            	end
+            	return symbols
+        	end
+		},
 	}
 
 	require("lualine").setup({
