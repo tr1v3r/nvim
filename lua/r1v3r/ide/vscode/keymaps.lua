@@ -53,6 +53,9 @@ function setKeys()
     -- save and quit
     map("S", "workbench.action.files.save"):mode("n"):vscNotify():noremap():silent():desc("editor: save files"):set()
     map("Q", "workbench.action.quit"):mode("n"):vscNotify():noremap():silent():desc("editor: quit all"):set()
+
+    -- plugins
+    map("<CR><CR>", "<Plug>(wildfire-fuel)"):noremap():silent():set()
 end
 
 setKeys()
