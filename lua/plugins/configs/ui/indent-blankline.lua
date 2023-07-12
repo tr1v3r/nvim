@@ -20,7 +20,7 @@ return function()
 			"startify",
 			"todoist",
 			"txt",
-            "undotree",
+			"undotree",
 			"vimwiki",
 			"vista",
 		},

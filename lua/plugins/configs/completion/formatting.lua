@@ -100,7 +100,7 @@ function M.format_filter(clients)
 end
 
 function M.format(opts)
-    local filedir = vim.fn.expand("%:p:h")
+	local filedir = vim.fn.expand("%:p:h")
 	for i = 1, #disabled_workspaces do
 		if vim.regex(vim.fs.normalize(disabled_workspaces[i])):match_str(filedir) ~= nil then
 			vim.notify(
@@ -113,7 +113,7 @@ function M.format(opts)
 			)
 			return
 		end
-    end
+	end
 
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)

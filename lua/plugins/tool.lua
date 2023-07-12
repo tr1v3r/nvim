@@ -44,10 +44,10 @@ tool["michaelb/sniprun"] = {
 	config = require("tool.sniprun"),
 }
 -- tool["akinsho/toggleterm.nvim"] = {
---     lazy = true,
---     cmd = {"ToggleTerm", "ToggleTermSetName", "ToggleTermToggleAll", "ToggleTermSendVisualLines",
---            "ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection"},
---     config = require("tool.toggleterm")
+--	 lazy = true,
+--	 cmd = {"ToggleTerm", "ToggleTermSetName", "ToggleTermToggleAll", "ToggleTermSendVisualLines",
+--			"ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection"},
+--	 config = require("tool.toggleterm")
 -- }
 tool["folke/trouble.nvim"] = {
 	lazy = true,
@@ -74,9 +74,9 @@ tool["ron89/thesaurus_query.vim"] = {
 	cmd = { "ThesaurusQueryReplaceCurrentWord", "ThesaurusQueryLookupCurrentWord", "ThesaurusQueryReplace", "ThesaurusQueryReset" },
 }
 tool["kelly-lin/ranger.nvim"] = {
-    lazy = true,
-    cmd = { "Ranger" },
-    config = require("tool.ranger")
+	lazy = true,
+	cmd = { "Ranger" },
+	config = require("tool.ranger")
 }
 -- kevinhwang91/rnvimr another plugin for ranger
 
@@ -127,12 +127,12 @@ tool["mfussenegger/nvim-dap"] = {
 	},
 	config = require("tool.dap"),
 	dependencies = { {
-		    "rcarriga/nvim-dap-ui",
-		    config = require("tool.dap.dapui"),
-	    },
-        { "jay-babu/mason-nvim-dap.nvim" },
+			"rcarriga/nvim-dap-ui",
+			config = require("tool.dap.dapui"),
+		},
+		{ "jay-babu/mason-nvim-dap.nvim" },
 		{ "leoluz/nvim-dap-go" },
-    },
+	},
 }
 
 -- 	-- Unmanaged plugin (manually installed and updated)

@@ -1,12 +1,12 @@
 {
-    "table header": {
-        "prefix": "th",
-        "body": "| ${1:Key} | ${2:Value} |\n|-|-|\n$0",
-        "descrpition": "Snippet for table header"
-    },
-    "table row": {
-        "prefix": "tr",
-        "body": "| ${1:Term} | ${2:Definition} |\n$0",
-        "descrpition": "Snippet for table row"
-    }
+	"table header": {
+		"prefix": "th",
+		"body": "| ${1:Key} | ${2:Value} |\n|-|-|\n$0",
+		"descrpition": "Snippet for table header"
+	},
+	"table row": {
+		"prefix": "tr",
+		"body": "| ${1:Term} | ${2:Definition} |\n$0",
+		"descrpition": "Snippet for table row"
+	}
 }
