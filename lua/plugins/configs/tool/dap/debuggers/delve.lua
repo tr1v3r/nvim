@@ -2,21 +2,21 @@
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 -- https://github.com/leoluz/nvim-dap-go#nvim-dap-go
 return function()
-    require("dap-go").setup()
-    -- {
-    --     -- Additional dap configurations can be added.
-    --     -- dap_configurations accepts a list of tables where each entry
-    --     -- represents a dap configuration. For more details do:
-    --     -- :help dap-configuration
-    --     -- dap_configurations = {{
-    --     --     -- Must be "go" or it will be ignored by the plugin
-    --     --     -- type = "go",
-    --     --     -- name = "Debug test (go.mod)",
-    --     --     -- request = "launch",
-    --     --     -- mode = "test",
-    --     --     -- program = "./${relativeFileDirname}",
-    --     -- }}
-    -- }
+	require("dap-go").setup()
+	-- {
+	--	 -- Additional dap configurations can be added.
+	--	 -- dap_configurations accepts a list of tables where each entry
+	--	 -- represents a dap configuration. For more details do:
+	--	 -- :help dap-configuration
+	--	 -- dap_configurations = {{
+	--	 --	 -- Must be "go" or it will be ignored by the plugin
+	--	 --	 -- type = "go",
+	--	 --	 -- name = "Debug test (go.mod)",
+	--	 --	 -- request = "launch",
+	--	 --	 -- mode = "test",
+	--	 --	 -- program = "./${relativeFileDirname}",
+	--	 -- }}
+	-- }
 end
 -- DIY version
 -- return function()

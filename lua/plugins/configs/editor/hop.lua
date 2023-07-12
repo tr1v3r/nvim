@@ -1,5 +1,5 @@
 return function()
-    require("hop").setup({
-        keys = "tsrneidhaogjplfuwyqvbkcm"
-    })
+	require("hop").setup({
+		keys = "tsrneidhaogjplfuwyqvbkcm"
+	})
 end

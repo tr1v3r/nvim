@@ -129,7 +129,7 @@ local data = {
 		Sort = "",
 		Spell = "󰓆",
 		Symlink = "",
-        Tab = "",
+		Tab = "",
 		Table = "",
 		Telescope = "",
 	},

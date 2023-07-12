@@ -8,7 +8,7 @@ return function()
 		ui = require("r1v3r.icons").get("ui", true),
 	}
 
-    local function custom_theme()
+	local function custom_theme()
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
 			pattern = "*",
@@ -48,7 +48,7 @@ return function()
 		}
 	end
 
-    local mini_sections = {
+	local mini_sections = {
 		lualine_a = { "filetype" },
 		lualine_b = {},
 		lualine_c = {},
@@ -131,7 +131,7 @@ return function()
 		end
 	end
 
-    local components = {
+	local components = {
 		separator = { -- use as section separators
 			function()
 				return "│"
@@ -253,54 +253,54 @@ return function()
 			end,
 		},
 
-        file_path = {
-            function()
-	        	local exclude = {
-	        		["terminal"] = true,
-	        		["toggleterm"] = true,
-	        		["prompt"] = true,
-	        		["NvimTree"] = true,
-	        		-- ["help"] = true,
-	        	}
-
-                if exclude[vim.bo.filetype] then
-                    return ""
-                end
-
-                local path = vim.api.nvim_buf_get_name(0)
-                if path == "" then
-                    return path
-                end
-                return icons.ui.FileTree .. vim.fs.normalize(path)
-                    :gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
-                    -- :gsub("/", icons.ui.ArrowClosed)
-                    :gsub("/", icons.ui.Separator)
-                    -- :gsub("/", "> ")
-            end,
-			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
-            color = function() return { fg = "#61AFEF", gui = "bold" } end,
-			cond = conditionals.has_enough_room,
-        },
-
-        lspsaga_symbols = {
+		file_path = {
 			function()
-		    	local exclude = {
-		    		["terminal"] = true,
-		    		["toggleterm"] = true,
-		    		["prompt"] = true,
-		    		["NvimTree"] = true,
-		    		["help"] = true,
-		    	}
-		    	if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-		    		return "" -- Excluded filetypes
-            	end
+				local exclude = {
+					["terminal"] = true,
+					["toggleterm"] = true,
+					["prompt"] = true,
+					["NvimTree"] = true,
+					-- ["help"] = true,
+				}
 
-            	local symbols = require("lspsaga.symbol.winbar").get_bar()
-            	if symbols == nil then
-            	    return ""
-            	end
-            	return symbols
-        	end
+				if exclude[vim.bo.filetype] then
+					return ""
+				end
+
+				local path = vim.api.nvim_buf_get_name(0)
+				if path == "" then
+					return path
+				end
+				return icons.ui.FileTree .. vim.fs.normalize(path)
+					:gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
+					-- :gsub("/", icons.ui.ArrowClosed)
+					:gsub("/", icons.ui.Separator)
+					-- :gsub("/", "> ")
+			end,
+			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
+			color = function() return { fg = "#61AFEF", gui = "bold" } end,
+			cond = conditionals.has_enough_room,
+		},
+
+		lspsaga_symbols = {
+			function()
+				local exclude = {
+					["terminal"] = true,
+					["toggleterm"] = true,
+					["prompt"] = true,
+					["NvimTree"] = true,
+					["help"] = true,
+				}
+				if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+					return "" -- Excluded filetypes
+				end
+
+				local symbols = require("lspsaga.symbol.winbar").get_bar()
+				if symbols == nil then
+					return ""
+				end
+				return symbols
+			end
 		},
 	}
 
@@ -374,7 +374,7 @@ return function()
 				{
 					"fileformat",
 					symbols = {
-                        -- unix = "", -- e712
+						-- unix = "", -- e712
 						-- dos = "", -- e70f
 						-- mac = "", -- e71
 						unix = "LF",
@@ -403,9 +403,9 @@ return function()
 		tabline = {},
 		-- winbar = { lualine_c = {'filename', path = 1 } }, cannot ignore filetype NvimTree
 		winbar = {
-            lualine_a = { components.file_path },
-            lualine_b = { components.lspsaga_symbols },
-        },
+			lualine_a = { components.file_path },
+			lualine_b = { components.lspsaga_symbols },
+		},
 		inactive_winbar = { lualine_a = { components.file_path } },
 		extensions = {
 			"quickfix",

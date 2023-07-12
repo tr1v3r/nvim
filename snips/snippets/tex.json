@@ -1,12 +1,12 @@
 {
-    "mid": {
-        "prefix": "mid",
-        "body": "\\mid ${1} \\mid ${0}",
-        "description": ""
-    },
-    "srt": {
-        "prefix": "sqrt",
-        "body": "\\sqrt{${1}} ${0}",
-        "descrpition": ""
-    }
+	"mid": {
+		"prefix": "mid",
+		"body": "\\mid ${1} \\mid ${0}",
+		"description": ""
+	},
+	"srt": {
+		"prefix": "sqrt",
+		"body": "\\sqrt{${1}} ${0}",
+		"descrpition": ""
+	}
 }

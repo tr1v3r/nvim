@@ -37,7 +37,7 @@ settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
-    pylsp = true,
+	pylsp = true,
 }
 
 -- Filetypes in this list will skip lsp formatting if rhs is true.

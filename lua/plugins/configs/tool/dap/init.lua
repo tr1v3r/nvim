@@ -34,7 +34,7 @@ return function()
 	)
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
-    ---A handler to setup all clients defined under `tool/dap/clients/*.lua`
+	---A handler to setup all clients defined under `tool/dap/clients/*.lua`
 	---@param config table
 	local function mason_dap_handler(config)
 		local dap_name = config.name

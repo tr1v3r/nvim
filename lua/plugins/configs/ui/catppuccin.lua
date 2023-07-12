@@ -112,7 +112,7 @@ return function()
 					-- For mason.nvim
 					MasonNormal = { link = "NormalFloat" },
 
-                    -- For indent-blankline
+					-- For indent-blankline
 					IndentBlanklineChar = { fg = cp.surface0 },
 					IndentBlanklineContextChar = { fg = cp.surface2, style = { "bold" } },
 
@@ -128,7 +128,7 @@ return function()
 						bg = transparent_background and cp.none or cp.mantle,
 					},
 
-                    -- For lspsaga.nvim
+					-- For lspsaga.nvim
 					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
 					OutlineWinSeparator = {
 						bg = transparent_background and cp.none or cp.base,
@@ -147,7 +147,7 @@ return function()
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 
 					-- For telescope.nvim
-                    TelescopeBorder = {
+					TelescopeBorder = {
 						fg = transparent_background and cp.blue or cp.mantle,
 						bg = transparent_background and cp.none or cp.mantle,
 					},
@@ -186,7 +186,7 @@ return function()
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
 
-                    -- For nvim-treehopper
+					-- For nvim-treehopper
 					TSNodeKey = {
 						fg = cp.peach,
 						bg = transparent_background and cp.none or cp.base,
