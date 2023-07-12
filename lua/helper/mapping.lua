@@ -111,8 +111,8 @@ function mapOption:exec()
 end
 
 ---@return mapOption
-function mapOption:vscNotify()
-    self.cmd = ("<Cmd>call VSCodeNotify('%s')<CR>"):format(self.cmd)
+function mapOption:vscCall()
+    self.cmd = ("<Cmd>call VSCodeCall('%s')<CR>"):format(self.cmd)
     return self
 end
 
