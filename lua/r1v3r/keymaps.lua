@@ -232,6 +232,9 @@ local setEditorPlugKeys = function()
 	map("<LEADER>sl", "SessionLoad"):mode("n"):pure():noremap():silent():desc("session: load current"):set()
 	map("<LEADER>sd", "SessionDelete"):mode("n"):pure():noremap():silent():desc("session: delete"):set()
 
+    -- Plugin: gcmt/wildfire.vim
+    -- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):set()
+
 	-- Plugin: nvim-bufdel
 	map("<A-q>", "BufDel"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
 
@@ -476,7 +479,7 @@ function mapping.lsp(buf)
 	map("ga", "Lspsaga code_action"):mode("nv"):cr():buffer(buf):desc("lsp: Code action for cursor"):set()
 	map("gD", "Lspsaga peek_definition"):mode("n"):cr():buffer(buf):desc("lsp: Preview definition"):set()
 	map("gd", "Lspsaga goto_definition"):mode("n"):cr():buffer(buf):desc("lsp: Goto definition"):set()
-	map("gr", "Lspsaga lsp_finder"):mode("n"):cr():buffer(buf):desc("lsp: Show reference"):set()
+	map("gr", "Lspsaga finder"):mode("n"):cr():buffer(buf):desc("lsp: Show reference"):set()
 	map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):cr():buffer(buf):desc("lsp: Show incoming calls"):set()
 	map("<LEADER>co", "Lspsaga outgoing_calls"):mode("n"):cr():buffer(buf):desc("lsp: Show outgoing calls"):set()
 end

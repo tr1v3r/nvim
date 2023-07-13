@@ -1,6 +1,6 @@
 local map = require("helper.mapping").map
 
-function setKeys()
+local function setGeneralKeys()
 	vim.cmd[[nunmap <up>]]
 	vim.cmd[[nunmap <down>]]
 	vim.cmd[[nunmap <left>]]
@@ -54,8 +54,14 @@ function setKeys()
 	map("S", "workbench.action.files.save"):mode("n"):vscCall():noremap():silent():desc("editor: save files"):set()
 	map("Q", "workbench.action.quit"):mode("n"):vscCall():noremap():silent():desc("editor: quit all"):set()
 
-	-- plugins
-	map("<CR><CR>", "<Plug>(wildfire-fuel)"):noremap():silent():set()
 end
 
-setKeys()
+local function setPluginsKeys()
+    -- Plugin: gcmt/wildfire.vim
+	map("<CR><CR>", "<Plug>(wildfire-fuel)"):mode("n"):noremap():silent():desc("edit: select closet"):set()
+    map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: quick select"):set()
+end
+
+setGeneralKeys()
+setPluginsKeys()
+
