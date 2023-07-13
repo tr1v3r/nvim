@@ -235,9 +235,6 @@ local setEditorPlugKeys = function()
     -- Plugin: gcmt/wildfire.vim
     -- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):set()
 
-	-- Plugin: nvim-bufdel
-	map("<A-q>", "BufDel"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
-
 	-- Plugin: clever-f
 	map(","):mode("n"):callback(function()
 		return et("<Plug>(clever-f-repeat-forward)")
@@ -282,8 +279,8 @@ local setEditorPlugKeys = function()
 	map("m", "lua require('tsht').nodes()"):mode("o"):pure():silent():desc("jump: Operate across syntax tree"):set()
 
 	-- Plugin: tabout
-	map("<A-n>", "<Plug>(TaboutMulti)"):mode("i"):noremap():silent():desc("edit: Goto end of pair"):set()
-	map("<A-i>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):set()
+	-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):set()
+	map("<C-i>", "<Plug>(TaboutMulti)"):mode("i"):noremap():silent():desc("edit: Goto end of pair"):set()
 
 	-- Plugin suda.vim
 	map("<A-s>", "SudaWrite"):mode("n"):pure():noremap():silent():desc("edit: Save file using sudo"):set()
@@ -427,10 +424,10 @@ end
 
 local setUIPlugKeys = function()
 	-- Plugin: bufferline
-	map("<A-w>", "bdelete!"):mode("n"):cr():noremap():silent():desc("buffer: Close current buffer"):set()
-	map("<A-q>", "BufferLineCloseOthers"):mode("n"):cr():noremap():silent():desc("buffer: Close other buffer"):set()
+	-- map("<A-w>", "BufDel!"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
+	-- map("<A-q>", "BufferLineCloseOthers"):mode("n"):cr():noremap():silent():desc("buffer: Close others"):set()
 	map("<A-i>", "BufferLineCycleNext"):mode("n"):cr():noremap():silent():desc("buffer: Switch to next"):set()
-	map("<A-n>", "BufferLineCyclePrev"):mode("n"):cr():noremap():silent():desc("buffer: Switch to prev"):set()
+	-- map("<A-n>", "BufferLineCyclePrev"):mode("n"):cr():noremap():silent():desc("buffer: Switch to prev"):set()
 	map("<A-I>", "BufferLineMoveNext"):mode("n"):cr():noremap():silent():desc("buffer: Move current to next"):set()
 	map("<A-N>", "BufferLineMovePrev"):mode("n"):cr():noremap():silent():desc("buffer: Move current to prev"):set()
 	map("<LEADER>be", "BufferLineSortByExtension"):mode("n"):cr():noremap():desc("buffer: Sort by extension"):set()
@@ -444,6 +441,10 @@ local setUIPlugKeys = function()
 	map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):cr():noremap():silent():desc("buffer: Goto buffer 7"):set()
 	map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):cr():noremap():silent():desc("buffer: Goto buffer 8"):set()
 	map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):cr():noremap():silent():desc("buffer: Goto buffer 9"):set()
+
+	-- Plugin: nvim-bufdel
+	map("<A-w>", "BufDel"):mode("n"):cr():noremap():silent():desc("buffer: Close current"):set()
+	map("<A-o>", "BufDelOthers"):mode("n"):cr():noremap():silent():desc("buffer: Close others"):set()
 end
 
 local setKeys = function(vscode)
@@ -457,8 +458,6 @@ local setKeys = function(vscode)
 		setUIPlugKeys()
 	end
 end
-
-setKeys(vim.g.vscode)
 
 local mapping = {}
 
@@ -535,5 +534,7 @@ function mapping.gitsigns(buf)
 		actions.text_object()
 	end):buffer(buf):set()
 end
+
+setKeys(vim.g.vscode)
 
 return mapping
