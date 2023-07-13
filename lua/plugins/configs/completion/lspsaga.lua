@@ -103,9 +103,9 @@ return function()
 			auto_close = true,
 			close_after_jump = true,
 			keys = {
-				expand_or_jump = "<Tab>",
+				expand_or_jump = "o",
 				quit = "q",
-                jump = 'o',
+				jump = 'i',
 			},
 		},
 		symbol_in_winbar = {
