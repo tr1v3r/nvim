@@ -269,7 +269,7 @@ local setEditorPlugKeys = function()
 	map("<LEADER>DW", "DiffviewClose"):mode("n"):cr():noremap():silent():desc("git: Close diff"):set()
 
 	-- Plugin: vim-easy-align
-	map("gea", "EasyAlign"):mode("nx"):cr():desc("edit: Align with delimiter"):set()
+	map("<LEADER>a", "EasyAlign"):mode("nx"):cr():desc("edit: Align with delimiter"):set()
 
 	-- Plugin: hop
 	map("<LEADER>w", "<Cmd>HopWord<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()
