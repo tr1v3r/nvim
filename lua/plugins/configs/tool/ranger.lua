@@ -1,7 +1,7 @@
 return function()
 	local ranger = require("ranger-nvim")
 	ranger.setup({
-		replace_netrw = true,
+		replace_netrw = false, -- useless, unknown bug
 		enable_cmds = true,
 		keybinds = {
 			["ov"] = ranger.OPEN_MODE.vsplit,
