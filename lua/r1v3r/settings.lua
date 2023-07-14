@@ -1,6 +1,10 @@
 local settings = {}
 local home = require("r1v3r.global").home
 
+-- Set it to false if you want to use https to update plugins and treesitter parsers.
+---@type boolean
+settings["use_ssh"] = true
+
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`,
 -- `catppuccin-macchiato`, `edge`, `nord`, `material`.

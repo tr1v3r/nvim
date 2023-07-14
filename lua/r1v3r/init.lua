@@ -3,11 +3,11 @@ local global = require("r1v3r.global")
 
 -- createDir cache dir and data dirs
 local createDir = function()
-	local dataDir = {global.cacheDir .. "backup", global.cacheDir .. "undo", global.cacheDir .. "session",
-					 global.cacheDir .. "swap", global.cacheDir .. "tags"}
-	-- Only check whether cacheDir exists, this would be enough.
-	if vim.fn.isdirectory(global.cacheDir) == 0 then
-		os.execute("mkdir -p " .. global.cacheDir)
+	local dataDir = {global.cache_dir .. "backup", global.cache_dir .. "undo", global.cache_dir .. "session",
+					 global.cache_dir .. "swap", global.cache_dir .. "tags"}
+	-- Only check whether cache_dir exists, this would be enough.
+	if vim.fn.isdirectory(global.cache_dir) == 0 then
+		os.execute("mkdir -p " .. global.cache_dir)
 		for _, v in pairs(dataDir) do
 			if vim.fn.isdirectory(v) == 0 then
 				os.execute("mkdir -p " .. v)
