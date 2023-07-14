@@ -244,7 +244,7 @@ local setEditorPlugKeys = function()
 	-- end):expr():set()
 
 	-- Plugin: comment.nvim
-	map("<C-/>", "<Plug>(comment_toggle_linewise_current)"):mode("n"):noremap():silent():desc(
+	map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>"):mode("n"):noremap():silent():desc(
 		"edit: Toggle comment for line"):set()
 	map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_curent)"):mode("n"):noremap():silent():desc(
 		"edit: Toggle comment for block"):set()
