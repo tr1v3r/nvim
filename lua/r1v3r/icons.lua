@@ -16,6 +16,7 @@ local data = {
 		Folder = "󰉋",
 		Function = "󰊕",
 		Interface = "",
+		Implementation = "",
 		Keyword = "󰌋",
 		Method = "󰆧",
 		Module = "",
