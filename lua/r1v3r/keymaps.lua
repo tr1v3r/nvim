@@ -309,7 +309,9 @@ local setToolPlugKeys = function()
 	end):noremap():silent():desc("tool: Toggle lazygit"):set()
 
 	-- Plugin: ranger
-	map("R", "Ranger"):mode("n"):cr():noremap():silent():desc("tool: Toggle ranger"):set()
+	-- map("R", "Ranger"):mode("n"):cr():noremap():silent():desc("tool: Toggle ranger"):set()
+	map("R", "RnvimrToggle<CR><C-\\><C-n>:RnvimrResize 2"):mode("n"):cr():noremap():silent():desc("tool: Toggle ranger"):set()
+	map("<A-=>", "<C-\\><C-n>:RnvimrResize<CR>"):mode("t"):noremap():silent():desc("tool: Resize ranger float window"):set()
 
 	-- Plugin: sniprun
 	map("<LEADER>r", "SnipRun"):mode("v"):cr():noremap():silent():desc("tool: Run code by range"):set()

@@ -73,12 +73,13 @@ tool["ron89/thesaurus_query.vim"] = {
 	lazy = true,
 	cmd = { "ThesaurusQueryReplaceCurrentWord", "ThesaurusQueryLookupCurrentWord", "ThesaurusQueryReplace", "ThesaurusQueryReset" },
 }
-tool["kelly-lin/ranger.nvim"] = {
-	lazy = true,
-	cmd = { "Ranger" },
+tool["kevinhwang91/rnvimr"] = {
+	lazy = false,
+	-- cmd = { "RnvimrToggle" },
 	config = require("tool.ranger")
 }
 -- kevinhwang91/rnvimr another plugin for ranger
+-- kelly-lin/ranger.nvim toggle with command: Ranger
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
