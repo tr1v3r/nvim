@@ -69,49 +69,49 @@ return function()
 	end
 
 	local leader = " "
-	dashboard.section.buttons.val = {button("space fc", " Scheme change", leader, nil, {
+	dashboard.section.buttons.val = {button("space tc", " Scheme change", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			require("telescope.builtin").colorscheme()
 		end
-	}), button("space fr", " File frecency", leader, nil, {
+	}), button("space tr", " File frecency", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			require("telescope").extensions.frecency.frecency()
 		end
-	}), button("space fe", "󰋚 File history", leader, nil, {
+	}), button("space te", "󰋚 File history", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			require("telescope.builtin").oldfiles()
 		end
-	}), button("space fp", " Project find", leader, nil, {
+	}), button("space tp", " Project find", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			require("telescope").extensions.projects.projects({})
 		end
-	}), button("space ff", "󰈞 File find", leader, nil, {
+	}), button("space tf", "󰈞 File find", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			require("telescope.builtin").find_files()
 		end
-	}), button("space fn", " File new", leader, nil, {
+	}), button("space tn", " File new", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
 		callback = function()
 			vim.api.nvim_command("enew")
 		end
-	}), button("space fw", " Word find", leader, nil, {
+	}), button("space tw", " Word find", leader, nil, {
 		noremap = true,
 		silent = true,
 		nowait = true,
