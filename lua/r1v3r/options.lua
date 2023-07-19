@@ -1,6 +1,5 @@
 -- ================ Options ================
-local o = vim.o
-local wo = vim.wo
+local o, wo, g = vim.o, vim.wo, vim.g
 local global = require("r1v3r.global")
 
 -- Syntax highlighting, affect lsp load
@@ -9,6 +8,10 @@ local global = require("r1v3r.global")
 vim.cmd([[exec "nohlsearch"]])
 
 local options = {}
+
+function options.g()
+    return {}
+end
 
 function options.o()
 	return {
@@ -127,6 +130,9 @@ function options.wo()
 end
 
 function options.init()
+	for k, v in pairs(options.g()) do
+		g[k] = v
+	end
 	for k, v in pairs(options.o()) do
 		o[k] = v
 	end
