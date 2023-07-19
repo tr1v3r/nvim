@@ -339,11 +339,11 @@ local setToolPlugKeys = function()
 
 	-- Plugin: trouble
 	map("gt", "TroubleToggle"):mode("n"):cr():noremap():silent():desc("lsp: Toggle trouble list"):set()
-	map("<LEADER>tr", "TroubleToggle lsp_references"):mode("n"):cr():noremap():silent():desc("lsp: Show lsp references")
+	map("<LEADER>ta", "TroubleToggle lsp_references"):mode("n"):cr():noremap():silent():desc("lsp: Show lsp references")
 		:set()
 	map("<LEADER>td", "TroubleToggle document_diagnostics"):mode("n"):cr():noremap():silent():desc(
 		"lsp: Show document diagnostics"):set()
-	map("<LEAEDR>tw", "TroubleToggle workspace_diagnostics"):mode("n"):cr():noremap():silent():desc(
+	map("<LEAEDR>ta", "TroubleToggle workspace_diagnostics"):mode("n"):cr():noremap():silent():desc(
 		"lsp: Show workspace diagnostics"):set()
 	map("<LEADER>tq", "TroubleToggle quickfix"):mode("n"):cr():noremap():silent():desc("lsp: Show loclist"):set()
 	map("<LEADER>tl", "TroubleToggle loclist"):mode("n"):cr():noremap():silent():desc("lsp: Show loclist"):set()
@@ -355,26 +355,26 @@ local setToolPlugKeys = function()
 	map("<LEADER>U"):mode("n"):callback(function()
 		require("telescope").extensions.undo.undo()
 	end):noremap():silent():desc("edit: Show undo history"):set()
-	map("<LEADER>fp"):mode("n"):callback(function()
+	map("<LEADER>tp"):mode("n"):callback(function()
 		require("telescope").extensions.projects.projects({})
 	end):noremap():silent():desc("find: Project"):set()
-	map("<LEADER>fr"):mode("n"):callback(function()
+	map("<LEADER>tr"):mode("n"):callback(function()
 		require("telescope").extensions.frecency.frecency()
 	end):noremap():silent():desc("find: File by frecency"):set()
-	map("<LEADER>fw"):mode("n"):callback(function()
+	map("<LEADER>tw"):mode("n"):callback(function()
 		require("telescope").extensions.live_grep_args.live_grep_args()
 	end):noremap():silent():desc("find: Word in project"):set()
-	map("<LEADER>fe", "Telescope oldfiles"):mode("n"):pure():noremap():silent():desc("find: File by history"):set()
-	map("<LEADER>ff", "Telescope find_files"):mode("n"):pure():noremap():silent():desc("find: File in project"):set()
-	map("<LEADER>fc", "Telescope colorscheme"):mode("n"):pure():noremap():silent():desc(
+	map("<LEADER>te", "Telescope oldfiles"):mode("n"):pure():noremap():silent():desc("find: File by history"):set()
+	map("<LEADER>tf", "Telescope find_files"):mode("n"):pure():noremap():silent():desc("find: File in project"):set()
+	map("<LEADER>tc", "Telescope colorscheme"):mode("n"):pure():noremap():silent():desc(
 		"ui: Change colorscheme for current session"):set()
-	map("<LEADER>fn", ":enew"):mode("n"):pure():noremap():silent():desc("buffer: New"):set()
-	map("<LEADER>fg", "Telescope git_files"):mode("n"):pure():noremap():silent():desc("find: File in git project"):set()
-	map("<LEADER>fz", "Telescope zoxide list"):mode("n"):pure():noremap():silent():desc(
+	map("<LEADER>tn", ":enew"):mode("n"):pure():noremap():silent():desc("buffer: New"):set()
+	map("<LEADER>tg", "Telescope git_files"):mode("n"):pure():noremap():silent():desc("find: File in git project"):set()
+	map("<LEADER>tz", "Telescope zoxide list"):mode("n"):pure():noremap():silent():desc(
 		"edit: Change current direrctory by zoxide"):set()
-	map("<LEADER>fb", "Telescope buffers"):mode("n"):pure():noremap():silent():desc("find: Buffer opened"):set()
-	map("<LEADER>f*", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
-	map("<LEADER>fd", "Telescope persisted"):mode("n"):pure():noremap():silent():desc("find: Session"):set()
+	map("<LEADER>tb", "Telescope buffers"):mode("n"):pure():noremap():silent():desc("find: Buffer opened"):set()
+	map("<LEADER>t*", "Telescope grep_string"):mode("n"):pure():noremap():silent():desc("find: Current word"):set()
+	map("<LEADER>ts", "Telescope persisted"):mode("n"):pure():noremap():silent():desc("find: Session"):set()
 
 	-- Plugin: dap & dap-go
 	map("<LEADER>du"):mode("n"):callback(function()
