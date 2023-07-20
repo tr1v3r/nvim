@@ -74,6 +74,7 @@ editor["smoka7/hop.nvim"] = {
 	version = "*",
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.hop"),
+	vsc = true,
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
