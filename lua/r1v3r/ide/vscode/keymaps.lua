@@ -49,6 +49,7 @@ local function setGeneralKeys()
 
 	-- Code Action
 	map("<LEADER>cw", "editor.action.refactor"):vscCall():noremap():silent():set()
+	map("<C-/>", "editor.action.commentLine"):vscCall():noremap():silent():set()
 
 	-- save and quit
 	map("S", "workbench.action.files.save"):mode("n"):vscCall():noremap():silent():desc("editor: save files"):set()
