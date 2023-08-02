@@ -27,6 +27,7 @@ local setGeneralKeys = function()
 
 	-- Find and replace
 	map([[\s]], ":%s//g<left><left>"):noremap():desc("edit: find and replace string in current file"):set()
+	map([[\s]], ":s//g<left><left>"):mode("v"):noremap():desc("edit: find and replace string in current file"):set()
 	map([[\S]], [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]):mode("n"):noremap():desc(
 		"edit: find and replace all current word"):set()
 
