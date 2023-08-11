@@ -29,6 +29,10 @@ settings["format_on_save"] = true
 ---@type boolean
 settings["format_notify"] = true
 
+-- Set it to false if you don't use copilot
+---@type boolean
+settings["use_copilot"] = true
+
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
 --- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
 --- NOTE: Directories are automatically normalized. |vim.fs.normalize()|

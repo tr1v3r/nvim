@@ -1,8 +1,9 @@
 local completion = {}
+local use_copilot = require("r1v3r.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "williamboman/mason.nvim" },
@@ -18,6 +19,16 @@ completion["nvimdev/lspsaga.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.lspsaga"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+}
+completion["dnlhc/glance.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.glance"),
+}
+completion["simrat39/symbols-outline.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.symbols-outline"),
 }
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
@@ -60,6 +71,7 @@ completion["jose-elias-alvarez/null-ls.nvim"] = {
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
+    enabled = use_copilot,
 	lazy = true,
 	cmd = "Copilot",
 	event = "InsertEnter",

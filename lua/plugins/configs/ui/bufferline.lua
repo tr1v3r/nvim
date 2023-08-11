@@ -16,7 +16,7 @@ return function()
 			show_buffer_close_icons = false,
 			show_close_icon = true,
 			show_tab_indicators = true,
-			enforce_regular_tabs = true,
+			enforce_regular_tabs = false,
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
 			separator_style = "thin", -- slant/padded_slant/slope/padded_slope/thick/thin
@@ -32,8 +32,8 @@ return function()
 					padding = 0,
 				},
 				{
-					filetype = "lspsagaoutline",
-					text = "Lspsaga Outline",
+					filetype = "Outline",
+					text = "Symbol Outline",
 					text_align = "center",
 					padding = 0,
 				},
@@ -51,7 +51,7 @@ return function()
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
 				styles = { "italic", "bold" },
 				custom = {
-					mocha = {
+					all = {
 						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
