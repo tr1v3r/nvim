@@ -29,8 +29,8 @@ return function()
 		winbar = { enable = true },
 		mappings = {
 			list = {
-				["k"] = actions.previous,
-				["j"] = actions.next,
+				["u"] = actions.previous,
+				["e"] = actions.next,
 				["<Up>"] = actions.previous,
 				["<Down>"] = actions.next,
 				["<S-Tab>"] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
