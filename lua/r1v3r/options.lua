@@ -10,7 +10,7 @@ vim.cmd([[exec "nohlsearch"]])
 local options = {}
 
 function options.g()
-    return {}
+	return {}
 end
 
 function options.o()
@@ -129,7 +129,28 @@ function options.wo()
 	}
 end
 
+local function isempty(s)
+	return s == nil or s == ""
+end
+local function use_if_defined(val, fallback)
+	return val ~= nil and val or fallback
+end
+
+function options.set_provider()
+	-- custom python provider
+	local conda_prefix = os.getenv("CONDA_PREFIX")
+	if not isempty(conda_prefix) then
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python")
+	else
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
+	end
+end
+
 function options.init()
+	options.set_provider()
+
 	for k, v in pairs(options.g()) do
 		g[k] = v
 	end

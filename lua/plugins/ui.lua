@@ -63,11 +63,12 @@ ui["folke/paint.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }
-ui["karb94/neoscroll.nvim"] = {
-	lazy = true,
+-- scroll ui movement
+-- ui["karb94/neoscroll.nvim"] = {
+	-- lazy = true,
 	-- event = "BufReadPost",
-	config = require("ui.neoscroll"),
-}
+	-- config = require("ui.neoscroll"),
+-- }
 -- backup: dstein64/nvim-scrollview
 ui["petertriho/nvim-scrollbar"] = {
 	lazy = true,

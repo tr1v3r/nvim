@@ -26,40 +26,45 @@ return function()
 	set_sidebar_icons()
 
 	require("lspsaga").setup({
+		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
 			scroll_down = "e",
 			scroll_up = "u",
 		},
 		request_timeout = 3000,
-		finder = {
-			silent = true,
-			default = "def+ref+imp",
-			layout = "float",
-			filter = {},
-			keys = {
-				shuttle = "[]",
-				toggle_or_open = "<CR>",
-				jump_to = "i",
-				vsplit = "I",
-				split = "o",
-				tabe = "O",
-				tabenew = "n",
-				quit = "q",
-				close = "<Esc>",
-			},
-		},
-		definition = {
-			keys = {
-				edit = "<C-c>o",
-				vsplit = "<C-c>v",
-				split = "<C-c>s",
-				tabe = "<C-c>t",
-				close = "<C-c>q",
-				quit = "q",
-			},
-		},
+		-- -- https://dev.neovim.pro/lspsaga/finder/
+		-- finder = {
+		-- 	silent = true,
+		-- 	default = "def+ref+imp",
+		-- 	layout = "float",
+		-- 	filter = {},
+		-- 	keys = {
+		-- 		shuttle = "[]",
+		-- 		toggle_or_open = "<CR>",
+		-- 		jump_to = "i",
+		-- 		vsplit = "I",
+		-- 		split = "o",
+		-- 		tabe = "O",
+		-- 		tabenew = "n",
+		-- 		quit = "q",
+		-- 		close = "<Esc>",
+		-- 	},
+		-- },
+		-- -- https://dev.neovim.pro/lspsaga/definition/
+		-- definition = {
+		-- 	keys = {
+		-- 		edit = "<C-c>o",
+		-- 		vsplit = "<C-c>v",
+		-- 		split = "<C-c>s",
+		-- 		tabe = "<C-c>t",
+		-- 		close = "<C-c>q",
+		-- 		quit = "q",
+		-- 	},
+		-- },
+		-- https://dev.neovim.pro/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
+            only_in_cursor = false,
 			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {
@@ -67,12 +72,14 @@ return function()
 				exec = "<CR>",
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/lightbulb/
 		lightbulb = {
 			enable = false,
 			sign = true,
 			sign_priority = 20,
 			virtual_text = false,
 		},
+		-- https://dev.neovim.pro/lspsaga/diagnostic/
 		diagnostic = {
 			max_width = 0.5,
 			max_height = 0.6,
@@ -90,6 +97,7 @@ return function()
 				quit_in_show = { "q", "<Esc>" },
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/rename/
 		rename = {
 			in_select = false,
 			auto_save = false,
@@ -99,26 +107,29 @@ return function()
 				exec = "<CR>",
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/hover/
 		hover = {
 			max_width = 0.3,
 			max_height = 0.7,
 			open_link = "gl",
 			open_browser = "silent !" .. require("r1v3r.settings").external_browser,
 		},
-		outline = {
-			win_position = "right",
-			win_width = 30,
-			auto_preview = false,
-			auto_close = true,
-			close_after_jump = true,
-			detail = false,
-			layout = "normal",
-			keys = {
-				toggle_or_jump = "o",
-				jump = 'i',
-				quit = "q",
-			},
-		},
+		-- -- https://dev.neovim.pro/lspsaga/outline/
+		-- outline = {
+		-- 	win_position = "right",
+		-- 	win_width = 30,
+		-- 	auto_preview = false,
+		-- 	auto_close = true,
+		-- 	close_after_jump = true,
+		-- 	detail = false,
+		-- 	layout = "normal",
+		-- 	keys = {
+		-- 		toggle_or_jump = "o",
+		-- 		jump = 'i',
+		-- 		quit = "q",
+		-- 	},
+		-- },
+		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = false,
 			separator = " " .. icons.ui.Separator,
@@ -126,11 +137,13 @@ return function()
 			show_file = false,
 			color_mode = true,
 		},
+		-- https://dev.neovim.pro/lspsaga/implement/
 		implement = {
 			enable = true,
 			sign = true,
 			virtual_text = false,
 		},
+		-- https://dev.neovim.pro/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
 			keys = {
@@ -144,18 +157,21 @@ return function()
 				close = "<Esc>",
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/misc/#beacon
 		beacon = {
 			enable = true,
 			frequency = 12,
 		},
+		-- https://dev.neovim.pro/lspsaga/misc/#generic-ui-options
 		ui = {
-			title = false,
+			title = true,
 			devicon = true,
 			border = "single", -- Can be single, double, rounded, solid, shadow.
 			actionfix = icons.ui.Spell,
 			expand = icons.ui.ArrowClosed,
 			collapse = icons.ui.ArrowOpen,
 			code_action = icons.ui.CodeAction,
+			lines = { "┗", "┣", "┃", "━", "┏" },
 			imp_sign = icons.kind.Implementation,
 			kind = {
 				-- Kind
