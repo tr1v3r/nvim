@@ -1,5 +1,5 @@
 return function()
-	local icons = { ui = require("modules.utils.icons").get("ui", true) }
+	local icons = { ui = require("r1v3r.icons").get("ui", true) }
 	local glance = require("glance")
 	local actions = glance.actions
 
@@ -12,7 +12,7 @@ return function()
 			wrap = true,
 		},
 		border = {
-			enable = require("core.settings").transparent_background,
+			enable = require("r1v3r.settings").transparent_background,
 			top_char = "―",
 			bottom_char = "―",
 		},
