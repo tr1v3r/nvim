@@ -1,5 +1,5 @@
 local settings = {}
-local home = require("r1v3r.global").home
+-- local home = require("r1v3r.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
 ---@type boolean
@@ -51,7 +51,7 @@ settings["server_formatting_block_list"] = {
 -- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
-	lua = true
+	-- lua = true
 }
 
 -- Set it to false if diagnostics virtual text is annoying.

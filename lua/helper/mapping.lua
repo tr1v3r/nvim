@@ -46,6 +46,12 @@ function mapOption:space()
 end
 
 ---@return mapOption
+function mapOption:Cmd()
+	self.cmd = ("<Cmd>%s<CR>"):format(self.cmd)
+	return self
+end
+
+---@return mapOption
 function mapOption:pure()
 	-- <C-u> to eliminate the automatically inserted range in visual mode
 	self.cmd = (":<C-u>%s<CR>"):format(self.cmd)
