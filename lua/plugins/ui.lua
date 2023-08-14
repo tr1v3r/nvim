@@ -22,7 +22,9 @@ ui["shaunsingh/nord.nvim"] = {
 -- }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
+	version = "*",
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	dependencies = "nvim-tree/nvim-web-devicons",
 	config = require("ui.bufferline"),
 }
 ui["Jint-lzxy/nvim"] = {
@@ -65,9 +67,9 @@ ui["folke/paint.nvim"] = {
 }
 -- scroll ui movement
 -- ui["karb94/neoscroll.nvim"] = {
-	-- lazy = true,
-	-- event = "BufReadPost",
-	-- config = require("ui.neoscroll"),
+-- lazy = true,
+-- event = "BufReadPost",
+-- config = require("ui.neoscroll"),
 -- }
 -- backup: dstein64/nvim-scrollview
 ui["petertriho/nvim-scrollbar"] = {
