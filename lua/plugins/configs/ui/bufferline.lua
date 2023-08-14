@@ -3,6 +3,7 @@ return function()
 
 	local opts = {
 		options = {
+			mode = "tabs", -- set to "buffers" to only show bufferpages instead
 			number = nil,
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
@@ -69,4 +70,3 @@ return function()
 
 	require("bufferline").setup(opts)
 end
-

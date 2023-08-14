@@ -108,8 +108,7 @@ return function()
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
 			return function()
 				local guifg = colors[fg]
-				local guibg = gen_bg and require("helper").hl_to_rgb("StatusLine", true, colors.mantle)
-					or colors[bg]
+				local guibg = gen_bg and require("helper").hl_to_rgb("StatusLine", true, colors.mantle) or colors[bg]
 				local nobg = special_nobg and require("r1v3r.settings").transparent_background
 				return {
 					fg = guifg and guifg or colors.none,
@@ -168,7 +167,7 @@ return function()
 
 		lsp = {
 			function()
-                local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
+				local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
 				local clients = vim.lsp.get_active_clients()
 				local lsp_lists = {}
 				local available_servers = {}
@@ -256,10 +255,6 @@ return function()
 		file_path = {
 			function()
 				local exclude = {
-					["terminal"] = true,
-					["toggleterm"] = true,
-					["prompt"] = true,
-					["NvimTree"] = true,
 					-- ["help"] = true,
 				}
 
@@ -271,14 +266,19 @@ return function()
 				if path == "" then
 					return path
 				end
-				return icons.ui.FileTree .. vim.fs.normalize(path)
-					:gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
-					-- :gsub("/", icons.ui.ArrowClosed)
-					:gsub("/", icons.ui.Separator)
-					-- :gsub("/", "> ")
+				return icons.ui.FileTree
+					.. vim
+						.fs
+						.normalize(path)
+						:gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
+						-- :gsub("/", icons.ui.ArrowClosed)
+						:gsub("/", icons.ui.Separator)
+				-- :gsub("/", "> ")
 			end,
 			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
-			color = function() return { fg = "#61AFEF", gui = "bold" } end,
+			color = function()
+				return { fg = "#61AFEF", gui = "bold" }
+			end,
 			cond = conditionals.has_enough_room,
 		},
 
@@ -300,7 +300,7 @@ return function()
 					return ""
 				end
 				return symbols
-			end
+			end,
 		},
 	}
 
@@ -309,7 +309,16 @@ return function()
 			icons_enabled = true,
 			-- theme = "catppuccin",
 			theme = custom_theme(),
-			disabled_filetypes = { statusline = { "alpha" } },
+			disabled_filetypes = {
+				"dap-repl",
+				"dapui_scopes",
+				"dapui_breakpoints",
+				"dapui_watches",
+				"dapui_stacks",
+				"dapui_console",
+				statusline = { "alpha" },
+				winbar = { "terminal", "toggleterm", "prompt", "NvimTree" },
+			},
 			component_separators = "",
 			section_separators = { left = "", right = "" },
 		},
@@ -395,7 +404,7 @@ return function()
 		inactive_sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = { {'filename', path = 1 } },
+			lualine_c = { { "filename", path = 1 } },
 			lualine_x = { "location" },
 			lualine_y = {},
 			lualine_z = {},
