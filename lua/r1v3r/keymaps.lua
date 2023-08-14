@@ -210,7 +210,7 @@ local setLazyKeys = function()
 end
 
 local setCompletionPlugKeys = function()
-	-- map("<C-f>", "<Cmd>FormatToggle<CR>"):mode("n"):noremap():desc("Formater: Toggle format on save"):set()
+	-- map("<C-f>", "FormatToggle"):mode("n"):Cmd()::noremap():desc("Formater: Toggle format on save"):set()
 end
 
 local setEditorPlugKeys = function()
@@ -270,11 +270,11 @@ local setEditorPlugKeys = function()
 	map("<LEADER>a", "EasyAlign"):mode("nx"):cr():desc("edit: Align with delimiter"):set()
 
 	-- Plugin: hop
-	map("<LEADER>w", "<Cmd>HopWordMW<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()
-	-- map("<LEADER>j", "<Cmd>HopLine<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
-	map("<LEADER>k", "<Cmd>HopLineMW<CR>"):mode("nv"):noremap():desc("jump: Goto line"):set()
-	-- map("<LEADER>c", "<Cmd>HopChar1<CR>"):mode("nv"):noremap():desc("jump: Goto one char"):set()
-	-- map("<LEADER>cc", "<Cmd>HopChar2<CR>"):mode("nv"):noremap():desc("jump: Goto two chars"):set()
+	map("<LEADER>w", "HopWordMW"):mode("nv"):Cmd():noremap():desc("jump: Goto word"):set()
+	-- map("<LEADER>j", "HopLine"):mode("nv"):Cmd()::noremap():desc("jump: Goto line"):set()
+	map("<LEADER>k", "HopLineMW"):mode("nv"):Cmd():noremap():desc("jump: Goto line"):set()
+	-- map("<LEADER>c", "HopChar1"):mode("nv"):Cmd()::noremap():desc("jump: Goto one char"):set()
+	-- map("<LEADER>cc", "HopChar2"):mode("nv"):Cmd()::noremap():desc("jump: Goto two chars"):set()
 
 	-- Plugin: treehopper
 	map("m", "lua require('tsht').nodes()"):mode("o"):pure():silent():desc("jump: Operate across syntax tree"):set()
