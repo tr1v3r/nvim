@@ -5,7 +5,7 @@ return function()
 
 	local icons = { dap = require("r1v3r.icons").get("dap") }
 	local colors = require("helper").get_palette()
-	local mappings = require("tool.dap.dap-keymap")
+	local mappings = require("tool.dap.dap-keymaps")
 
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
