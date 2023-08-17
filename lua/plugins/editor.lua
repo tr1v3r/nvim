@@ -35,9 +35,9 @@ editor["max397574/better-escape.nvim"] = {
 	config = require("editor.better-escape"),
 }
 editor["LunarVim/bigfile.nvim"] = {
+	cond = require("r1v3r.settings").load_big_files_faster,
 	lazy = false,
 	config = require("editor.bigfile"),
-	cond = require("r1v3r.settings").load_big_files_faster,
 }
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
@@ -81,10 +81,10 @@ editor["RRethy/vim-illuminate"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.vim-illuminate"),
 }
-editor["romainl/vim-cool"] = {
-	lazy = true,
-	event = { "CursorMoved", "InsertEnter" },
-}
+-- editor["romainl/vim-cool"] = { -- auto no highlight
+-- 	lazy = true,
+-- 	event = { "CursorMoved", "InsertEnter" },
+-- }
 editor["lambdalisue/suda.vim"] = {
 	lazy = true,
 	cmd = { "SudaRead", "SudaWrite" },
