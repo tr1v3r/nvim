@@ -97,7 +97,12 @@ function options.o()
 		-- Automatically write all buffers when executing certain commands
 		autowriteall = true,
 		-- signcolumn = 'nubmer'
-		undodir = global.cache_dir .. "undo/",
+		-- Set backup file dir
+		backupdir = global.cache_dir .. "backup//",
+		-- Set swap file dir
+		directory = global.cache_dir .. "swap//",
+		-- Set undo file dir
+		undodir = global.cache_dir .. "undo//",
 		-- Save undo history
 		undofile = true,
 
