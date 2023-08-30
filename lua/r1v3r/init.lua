@@ -3,8 +3,13 @@ local global = require("r1v3r.global")
 
 -- createDir cache dir and data dirs
 local createDir = function()
-	local dataDir = {global.cache_dir .. "backup", global.cache_dir .. "undo", global.cache_dir .. "session",
-					 global.cache_dir .. "swap", global.cache_dir .. "tags"}
+	local dataDir = {
+		global.cache_dir .. "backup",
+		global.cache_dir .. "undo",
+		global.cache_dir .. "session",
+		global.cache_dir .. "swap",
+		global.cache_dir .. "tags",
+	}
 	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
 		os.execute("mkdir -p " .. global.cache_dir)
@@ -29,11 +34,11 @@ end
 local init = function()
 	createDir()
 
-	require('r1v3r.lang')
-	require('r1v3r.options')
-	require('r1v3r.keymaps')
-	require('r1v3r.event')
-	require('r1v3r.pack')
+	require("r1v3r.lang")
+	require("r1v3r.options")
+	require("r1v3r.keymaps")
+	require("r1v3r.event")
+	require("r1v3r.pack")
 
 	local colorscheme = require("r1v3r.settings").colorscheme
 	local background = require("r1v3r.settings").background
