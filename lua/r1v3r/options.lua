@@ -46,26 +46,26 @@ function options.o()
 		backup = false,
 		swapfile = false,
 		-- Disable indent expression
-		indentexpr = '',
+		indentexpr = "",
 		-- Show whitespace characters
-		listchars = 'tab:| ,trail:☒',
+		listchars = "tab:| ,trail:☒",
 		-- Set the number of lines to keep above and below the cursor in scroll off
 		scrolloff = 4,
 		-- Disable the time delay for key codes
 		ttimeoutlen = 0,
 		timeout = false,
 		-- Set view options for saving and restoring folds, slash search, Unix line endings
-		viewoptions = 'cursor,folds,curdir,slash,unix',
+		viewoptions = "cursor,folds,curdir,slash,unix",
 		-- Disable text width
 		tw = 0,
 		-- Set fold method to syntax
-		foldmethod = 'syntax',
+		foldmethod = "syntax",
 		-- Set fold level to maximum
 		foldlevel = 99,
 		-- Enable folding
 		foldenable = true,
 		-- Disable automatic formatting for comments
-		formatoptions = o.formatoptions:gsub('tc', ''),
+		formatoptions = o.formatoptions:gsub("tc", ""),
 		-- Split windows to the right and below
 		splitright = true,
 		splitbelow = true,
@@ -79,11 +79,11 @@ function options.o()
 		ignorecase = true,
 		smartcase = true,
 		-- Shorten error messages
-		shortmess = o.shortmess .. 'flnrwx',
+		shortmess = o.shortmess .. "flnrwx",
 		-- Open command-line window in split mode
-		inccommand = 'split',
+		inccommand = "split",
 		-- Set completion options
-		completeopt = 'noinsert,longest,menuone,noselect,preview',
+		completeopt = "noinsert,longest,menuone,noselect,preview",
 		-- Enable lazy redraw
 		lazyredraw = true,
 		-- Use visual bell instead of beeping sound
@@ -91,7 +91,7 @@ function options.o()
 		-- Set the time interval for writing swap and backup files
 		updatetime = 100,
 		-- Enable blockwise virtual editing
-		virtualedit = 'block',
+		virtualedit = "block",
 		-- Automatically change the current directory to the directory of the current file
 		autochdir = true,
 		-- Automatically write all buffers when executing certain commands
@@ -125,7 +125,7 @@ function options.wo()
 		-- Enable line wrapping
 		wrap = true,
 		-- Highlight a column at a specific width
-		colorcolumn = '120'
+		colorcolumn = "120",
 	}
 end
 
