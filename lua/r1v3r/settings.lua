@@ -93,7 +93,15 @@ settings["lsp_deps"] = { "bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp"
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
-settings["null_ls_deps"] = { "clang_format", "prettier", "shfmt", "stylua", "vint", "goimports" } -- rustfmt
+settings["null_ls_deps"] = {
+	"prettier",
+	"shfmt",
+	"stylua",
+	"vint",
+	"goimports",
+}
+-- rustfmt
+-- clang_format
 
 -- Set the Debug Adapter Protocal (DAP) clients that wil be installed and configured during bootstrap.
 -- Check the below link for all supported DAPs:
