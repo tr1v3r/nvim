@@ -108,6 +108,11 @@ editor["kylechui/nvim-surround"] = {
 	config = require("editor.nvim-surround"),
 	vsc = true,
 }
+editor["JoosepAlviste/nvim-ts-context-commentstring"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("editor.ts-context-commentstring"),
+}
 -- mg979/vim-visual-multi
 
 ----------------------------------------------------------------------
@@ -125,16 +130,11 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
 		{
 			"hiphish/rainbow-delimiters.nvim",
 			config = require("editor.rainbow_delims"),
-		},
-		{
-			"nvim-treesitter/nvim-treesitter-context",
-			config = require("editor.ts-context"),
 		},
 		{
 			"windwp/nvim-ts-autotag",

@@ -12,4 +12,3 @@ if vim.g.vscode then
 else
 	require("r1v3r")
 end
-
