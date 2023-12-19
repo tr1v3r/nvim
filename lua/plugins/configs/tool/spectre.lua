@@ -125,7 +125,11 @@ return function()
 		replace_engine = {
 			['sed'] = {
 				cmd = "sed",
-				args = nil,
+				args = {
+					"-i",
+					"",
+					"-E",
+				},
 				options = {
 					['ignore-case'] = {
 						value = "--ignore-case",
