@@ -10,6 +10,11 @@ return function()
 			filetypes = { "c", "cpp" },
 			extra_args = require("completion.formatters.clang_format"),
 		}),
+		btns.formatting.goimports_reviser.with({
+			filetypes = { "go" },
+			extra_args = require("completion.formatters.goimports-reviser"),
+		}),
+
 		btns.formatting.prettier.with({
 			filetypes = {
 				"vue",

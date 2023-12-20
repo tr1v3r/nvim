@@ -4,7 +4,8 @@ local settings = require("r1v3r.settings")
 local disabled_workspaces = settings.format_disabled_dirs
 local format_on_save = settings.format_on_save
 local format_notify = settings.format_notify
-local server_formatting_block_list = settings.server_formatting_block_list
+local server_formatting_blocks = settings.server_formatting_blocks
+local disabled_formatters = settings.disabled_null_ls_formatters
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
@@ -93,7 +94,7 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "null-ls" then
 			return "null-ls"
-		elseif not server_formatting_block_list[client.name] and status_ok and formatting_supported then
+		elseif not server_formatting_blocks[client.name] and status_ok and formatting_supported then
 			return client.name
 		end
 	end, clients)
@@ -144,6 +145,9 @@ function M.format(opts)
 
 	local timeout_ms = opts.timeout_ms
 	for _, client in pairs(clients) do
+		if disabled_formatters[client.name] == true then
+			goto continue
+		end
 		if block_list[vim.bo.filetype] == true then
 			vim.notify(
 				string.format(
@@ -174,6 +178,7 @@ function M.format(opts)
 				{ title = "LSP Format Error" }
 			)
 		end
+		::continue::
 	end
 end
 

@@ -41,7 +41,7 @@ settings["format_disabled_dirs"] = { "~/format_disabled_dir" }
 
 -- Servers in this list will skip setting formatting capabilities if rhs is true.
 ---@type table<string, boolean>
-settings["server_formatting_block_list"] = {
+settings["server_formatting_blocks"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
@@ -98,10 +98,17 @@ settings["null_ls_deps"] = {
 	"shfmt",
 	"stylua",
 	"vint",
-	"goimports",
+	"goimports-reviser",
 }
 -- rustfmt
+-- goimports,
 -- clang_format
+
+-- Skip client for formatting
+---@type table<string, boolean>
+settings["disabled_null_ls_formatters"] = {
+	gopls = true,
+}
 
 -- Set the Debug Adapter Protocal (DAP) clients that wil be installed and configured during bootstrap.
 -- Check the below link for all supported DAPs:
