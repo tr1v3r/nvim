@@ -10,4 +10,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
-          args: --check --config-path=stylua.toml .
+          args: --check .
+          # args: --check --config-path=stylua.toml .
