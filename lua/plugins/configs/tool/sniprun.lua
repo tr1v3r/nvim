@@ -25,4 +25,3 @@ return function()
 		-- " possible values are 'none', 'single', 'double', or 'shadow'
 	})
 end
-

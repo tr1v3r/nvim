@@ -71,7 +71,7 @@ completion["jose-elias-alvarez/null-ls.nvim"] = {
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
-    enabled = use_copilot,
+	enabled = use_copilot,
 	lazy = true,
 	cmd = "Copilot",
 	event = "InsertEnter",

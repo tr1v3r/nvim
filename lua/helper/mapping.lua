@@ -24,9 +24,9 @@ function mapOption:new(key, cmd)
 			expr = false,
 			nowait = false,
 			callback = nil,
-			desc = ""
+			desc = "",
 		},
-		buf = false
+		buf = false,
 	}
 	setmetatable(instance, self)
 	self.__index = self
