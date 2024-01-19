@@ -12,7 +12,7 @@ local icons = {
 	documents = require("r1v3r.icons").get("documents"),
 	ui = require("r1v3r.icons").get("ui"),
 	ui_sep = require("r1v3r.icons").get("ui", true),
-	misc = require("r1v3r.icons").get("misc")
+	misc = require("r1v3r.icons").get("misc"),
 }
 
 local Lazy = {}
@@ -21,14 +21,15 @@ local Lazy = {}
 function Lazy:check()
 	if not vim.loop.fs_stat(lazy_path) then
 		local lazy_repo = use_ssh and "git@github.com:folke/lazy.nvim.git" or "https://github.com/folke/lazy.nvim.git"
-		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo  .. " ".. lazy_path)
+		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. " " .. lazy_path)
 	end
 	vim.opt.rtp:prepend(lazy_path)
 end
 
 -- prepare: extend RTP
 function Lazy:prepare()
-	package.path = string.format("%s;%s;", plugins_dir .. "/configs/?.lua", plugins_dir .. "/configs/?/init.lua") .. package.path
+	package.path = string.format("%s;%s;", plugins_dir .. "/configs/?.lua", plugins_dir .. "/configs/?/init.lua")
+		.. package.path
 end
 
 -- plugins: get plugins table
@@ -56,7 +57,7 @@ function Lazy:plugins()
 		if type(plugins) == "table" then
 			for name, conf in pairs(plugins) do
 				if not vim.g.vscode or conf["vsc"] then
-					pluginsSpec[#pluginsSpec + 1] = vim.tbl_extend("force", {name}, conf)
+					pluginsSpec[#pluginsSpec + 1] = vim.tbl_extend("force", { name }, conf)
 				end
 			end
 		end
@@ -106,7 +107,7 @@ function Lazy:opts()
 					icons.ui_sep.Square,
 					icons.ui_sep.ChevronRight,
 				},
-			}
+			},
 		},
 		performance = {
 			cache = {
@@ -123,7 +124,7 @@ function Lazy:opts()
 				---@type string[]
 				paths = {}, -- add any custom paths here that you want to include in the rtp
 			},
-		}
+		},
 	}
 
 	if is_mac then
@@ -137,7 +138,7 @@ end
 function Lazy:load_lazy()
 	self:check()
 	self:prepare()
-	require('lazy').setup(self:plugins(), self:opts())
+	require("lazy").setup(self:plugins(), self:opts())
 end
 
 Lazy:load_lazy()
