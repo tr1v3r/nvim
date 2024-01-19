@@ -34,7 +34,7 @@ return function()
 			request = "launch",
 			name = "Debug",
 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-            console = "integratedTerminal",
+			console = "integratedTerminal",
 			program = helper.input_file_path(),
 			pythonPath = function()
 				if not is_empty(vim.env.CONDA_PREFIX) then

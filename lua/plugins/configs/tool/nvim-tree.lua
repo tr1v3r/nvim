@@ -3,19 +3,19 @@ return function()
 		diagnostics = require("r1v3r.icons").get("diagnostics"),
 		documents = require("r1v3r.icons").get("documents"),
 		git = require("r1v3r.icons").get("git"),
-		ui = require("r1v3r.icons").get("ui")
+		ui = require("r1v3r.icons").get("ui"),
 	}
 
 	require("nvim-tree").setup({
 		on_attach = function(bufnr)
-			local api = require "nvim-tree.api"
+			local api = require("nvim-tree.api")
 			local function opts(desc)
 				return {
 					desc = "nvim-tree: " .. desc,
 					buffer = bufnr,
 					noremap = true,
 					silent = true,
-					nowait = true
+					nowait = true,
 				}
 			end
 
@@ -23,10 +23,10 @@ return function()
 			api.config.mappings.default_on_attach(bufnr)
 
 			-- custom mappings
-			vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 			-- delete mappings e
-			vim.keymap.del('n', 'e', { buffer = bufnr })
-			vim.keymap.del('n', 'u', { buffer = bufnr })
+			vim.keymap.del("n", "e", { buffer = bufnr })
+			vim.keymap.del("n", "u", { buffer = bufnr })
 			-- open file/dir
 			vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
 			vim.keymap.set("n", "n", api.node.navigate.parent_close, opts("Close Directory"))
@@ -64,9 +64,9 @@ return function()
 					width = 30,
 					height = 30,
 					row = 1,
-					col = 1
-				}
-			}
+					col = 1,
+				},
+			},
 		},
 		renderer = {
 			add_trailing = false,
@@ -74,7 +74,7 @@ return function()
 			highlight_git = true,
 			full_name = false,
 			highlight_opened_files = "none",
-			special_files = {"Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt"},
+			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
 			symlink_destination = true,
 			indent_markers = {
 				enable = true,
@@ -82,8 +82,8 @@ return function()
 					corner = "└ ",
 					edge = "│ ",
 					item = "│ ",
-					none = "  "
-				}
+					none = "  ",
+				},
 			},
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
@@ -93,7 +93,7 @@ return function()
 					file = true,
 					folder = true,
 					folder_arrow = true,
-					git = true
+					git = true,
 				},
 				padding = " ",
 				symlink_arrow = " 󰁔 ",
@@ -108,7 +108,7 @@ return function()
 						renamed = icons.git.Rename, -- 󰁔
 						untracked = icons.git.Untracked, -- "󰞋"
 						deleted = icons.git.Remove, -- 
-						ignored = icons.git.Ignore -- ◌
+						ignored = icons.git.Ignore, -- ◌
 					},
 					folder = {
 						arrow_open = icons.ui.ArrowOpen,
@@ -120,30 +120,30 @@ return function()
 						empty = icons.ui.EmptyFolder,
 						empty_open = icons.ui.EmptyFolderOpen,
 						symlink = icons.ui.SymlinkFolder,
-						symlink_open = icons.ui.FolderOpen
-					}
-				}
-			}
+						symlink_open = icons.ui.FolderOpen,
+					},
+				},
+			},
 		},
 		hijack_directories = {
 			enable = true,
-			auto_open = true
+			auto_open = true,
 		},
 		update_focused_file = {
 			enable = true,
 			update_root = true,
-			ignore_list = {}
+			ignore_list = {},
 		},
 		filters = {
 			dotfiles = false,
-			custom = {".DS_Store", "^.git$"},
-			exclude = {}
+			custom = { ".DS_Store", "^.git$" },
+			exclude = {},
 		},
 		actions = {
 			use_system_clipboard = true,
 			change_dir = {
 				enable = true,
-				global = false
+				global = false,
 			},
 			open_file = {
 				quit_on_open = false,
@@ -152,14 +152,14 @@ return function()
 					enable = true,
 					chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 					exclude = {
-						filetype = {"notify", "qf", "diff", "fugitive", "fugitiveblame"},
-						buftype = {"terminal", "help"}
-					}
-				}
+						filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
+						buftype = { "terminal", "help" },
+					},
+				},
 			},
 			remove_file = {
-				close_window = true
-			}
+				close_window = true,
+			},
 		},
 		diagnostics = {
 			enable = false,
@@ -169,26 +169,26 @@ return function()
 				hint = icons.diagnostics.Hint_alt,
 				info = icons.diagnostics.Information_alt,
 				warning = icons.diagnostics.Warning_alt,
-				error = icons.diagnostics.Error_alt
-			}
+				error = icons.diagnostics.Error_alt,
+			},
 		},
 		filesystem_watchers = {
 			enable = true,
-			debounce_delay = 50
+			debounce_delay = 50,
 		},
 		git = {
 			enable = true,
 			ignore = false,
 			show_on_dirs = true,
-			timeout = 400
+			timeout = 400,
 		},
 		trash = {
 			cmd = "gio trash",
-			require_confirm = true
+			require_confirm = true,
 		},
 		live_filter = {
 			prefix = "[FILTER]: ",
-			always_show_folders = true
+			always_show_folders = true,
 		},
 		log = {
 			enable = false,
@@ -201,8 +201,8 @@ return function()
 				diagnostics = false,
 				git = false,
 				profile = false,
-				watcher = false
-			}
-		}
+				watcher = false,
+			},
+		},
 	})
 end

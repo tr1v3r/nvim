@@ -13,4 +13,3 @@ return function()
 		handler_opts = { border = "single" },
 	})
 end
-

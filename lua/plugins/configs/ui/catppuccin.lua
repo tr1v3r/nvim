@@ -55,14 +55,14 @@ return function()
 			coc_nvim = false,
 			dap = { enabled = true, enable_ui = true },
 			dashboard = false,
-            dropbar = { enbale = true, color_mode = true },
+			dropbar = { enbale = true, color_mode = true },
 			fern = false,
 			fidget = true,
-            flash = true,
+			flash = true,
 			gitgutter = false,
 			gitsigns = true,
 			harpoon = false,
-            headlines = false,
+			headlines = false,
 			hop = true,
 			illuminate = true,
 			indent_blankline = { enabled = true, colored_indent_levels = false },
@@ -83,7 +83,7 @@ return function()
 			overseer = false,
 			pounce = false,
 			rainbow_delimiters = true,
-            sandwich = false,
+			sandwich = false,
 			semantic_tokens = true,
 			symbols_outline = true,
 			telekasten = false,
@@ -150,7 +150,7 @@ return function()
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
 
-                    -- For glance.nvim
+					-- For glance.nvim
 					GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },
 					GlanceWinBarFilepath = { fg = cp.subtext0, style = { "italic" } },
 					GlanceWinBarTitle = { fg = cp.teal, style = { "bold" } },
@@ -169,7 +169,7 @@ return function()
 
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },
-                    ["@error.c"] = { fg = cp.none, style = clear },
+					["@error.c"] = { fg = cp.none, style = clear },
 					["@error.cpp"] = { fg = cp.none, style = clear },
 				}
 			end,

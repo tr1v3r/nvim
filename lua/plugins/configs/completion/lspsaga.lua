@@ -64,7 +64,7 @@ return function()
 		-- https://dev.neovim.pro/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
-            only_in_cursor = false,
+			only_in_cursor = false,
 			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {

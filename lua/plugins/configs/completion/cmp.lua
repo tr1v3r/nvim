@@ -32,7 +32,7 @@ return function()
 		return (diff < 0)
 	end
 
-    local use_copilot = require("r1v3r.settings").use_copilot
+	local use_copilot = require("r1v3r.settings").use_copilot
 	local comparators = use_copilot == true
 			and {
 				require("copilot_cmp.comparators").prioritize,

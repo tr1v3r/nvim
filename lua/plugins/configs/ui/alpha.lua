@@ -3,31 +3,32 @@ return function()
 	local dashboard = require("alpha.themes.dashboard")
 	require("helper").gen_alpha_hl()
 
-	local headerAsciiArt =
-		{[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⢄⢢⢒⢤⢠⣐⢠⢠⡀⡄⡠⡀⡄⡀⠄⡀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠠⢐⢨⢔⢜⢭⢪⢪⢪⢪⢪⢪⢪⢲⢱⢱⢱⢱⢱⢍⢇⢇⢗⢜⢔⢔⣀⠀⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⢀⠠⠁⡪⢸⢸⢸⢸⢸⢸⢸⢸⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⠄⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠄⠀⠅⢌⢆⢇⢇⢇⢇⢇⢇⢇⢇⢧⢳⢱⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢭⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠂⢀⠡⢈⠆⠃⠃⡁⠅⠡⠡⠡⡉⡊⠪⡪⡪⡪⡪⡣⡳⡱⡕⣕⢕⢕⢕⠕⠕⠕⠵⢱⡱⢅⠀⠀⠀]],
-		 [[⠀⠀⠀⠂⠀⠐⠀⠄⠈⠀⠀⠀⠀⠀⠀⠀⠀⠁⠊⢎⢮⢪⡪⡪⡪⡪⡪⠊⠁⠀⠀⠀⢀⢀⢀⠈⠑⠀⠀⠀]],
-		 [[⠀⠀⠀⠠⠈⠀⠠⠐⡐⢕⢕⢕⢬⠢⣄⢀⠀⠀⠀⠀⡱⡱⡱⡹⡸⡪⠀⠀⡀⡰⡌⡎⡎⡎⡎⡎⣖⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠄⠂⠀⠁⠌⡘⠜⡜⡜⡜⡜⡜⡔⠄⠀⠀⠑⢕⢕⢕⢕⢝⢨⢰⢪⢪⢪⡪⡪⣪⢪⡪⡪⡃⠀⠀]],
-		 [[⠀⠀⠀⢀⠀⠀⠀⠐⠀⠀⠂⠀⠀⠀⠀⠈⠈⠁⠀⠄⠀⡜⡜⡕⣕⢕⢜⠜⠘⠈⠐⠈⠈⠀⠑⢕⢕⠅⠀⠀]],
-		 [[⠀⠀⠀⠀⠐⠀⢀⣀⠀⠀⠀⠀⠀⡀⢀⠀⡀⠀⢀⢀⠪⡘⡜⡜⡜⡜⣅⠀⡀⠀⡀⠀⡀⡀⡀⣀⢑⠅⠀⠀]],
-		 [[⠀⠀⠀⠀⠄⠪⡑⡎⡭⡣⡣⣓⣒⢲⢸⢸⢸⢱⢱⠡⡑⠠⢣⢣⢣⢣⢣⢳⢸⢢⢲⢰⢔⢔⢜⢔⢕⢅⠀⠀]],
-		 [[⠀⠀⠀⠠⠐⠀⠌⢈⠊⡊⠎⡖⡜⡜⡜⡜⡜⡜⡜⠜⠄⠅⡑⡕⡕⣕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⢀⠀⠠⠀⠨⠐⡱⠱⡱⠑⠅⠡⡨⡪⡡⠁⠂⢣⢣⢣⢣⢳⢱⢕⢕⢕⢕⢕⢕⢕⢕⢕⠅⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠂⠄⠁⢀⠠⡰⠈⠈⠂⠀⠈⠀⠀⠱⢱⠱⠣⢣⢣⢳⠱⡕⣕⢕⢕⢕⢕⠁⠀]],
-		 [[⠀⠀⠀⠀⠀⠐⡀⠀⠈⠀⠈⢀⠀⡐⠔⡕⢜⢔⠈⠠⠀⠀⠀⠀⠈⠈⠸⡢⡣⡣⡣⡣⡢⡈⠈⠣⢳⠑⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠘⡀⠀⢀⠀⠀⠑⠌⢌⠪⠢⠱⠱⠐⠀⠀⠀⡠⡄⠀⠀⠘⠸⢜⢎⠮⠊⠀⢰⠅⢸⠁⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠨⠀⠀⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠕⠕⠆⠁⠀⠀⠀⠀⠀⠀⡰⡕⢁⠎⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠑⡀⠀⠈⠐⠠⠠⠠⠠⡀⢄⠄⡄⢄⢄⢄⠄⡠⢠⢠⢠⡈⡖⡕⡝⡜⠄⡪⠂⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠄⠀⠨⠈⠌⡪⣘⢔⢕⢕⢕⢕⠅⡜⡜⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠑⠥⡀⠀⠂⢀⠡⢐⢀⢄⢐⠀⠀⠀⢰⢸⢸⢸⢸⢸⢸⢸⢸⠸⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠊⢆⠈⠀⡂⢆⢢⠱⡐⠀⠀⠀⠈⡎⡎⡎⡎⡎⡇⡇⡇⠃⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⢀⠨⠘⡜⡜⡌⠀⠀⠀⠀⡸⡸⡸⡸⡸⡸⡘⠀⠀⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡑⢕⠁⠀⠀⠀⡎⡎⡎⡮⡪⠊⠀⠀⠀⠀⠀⠀⠀⠀]],
-		 [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀⠄⠁⠀⠀⠀⡇⡇⠇⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]]}
+	local headerAsciiArt = {
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⢄⢢⢒⢤⢠⣐⢠⢠⡀⡄⡠⡀⡄⡀⠄⡀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠠⢐⢨⢔⢜⢭⢪⢪⢪⢪⢪⢪⢪⢲⢱⢱⢱⢱⢱⢍⢇⢇⢗⢜⢔⢔⣀⠀⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⢀⠠⠁⡪⢸⢸⢸⢸⢸⢸⢸⢸⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⢜⠄⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠄⠀⠅⢌⢆⢇⢇⢇⢇⢇⢇⢇⢇⢧⢳⢱⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢭⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠂⢀⠡⢈⠆⠃⠃⡁⠅⠡⠡⠡⡉⡊⠪⡪⡪⡪⡪⡣⡳⡱⡕⣕⢕⢕⢕⠕⠕⠕⠵⢱⡱⢅⠀⠀⠀]],
+		[[⠀⠀⠀⠂⠀⠐⠀⠄⠈⠀⠀⠀⠀⠀⠀⠀⠀⠁⠊⢎⢮⢪⡪⡪⡪⡪⡪⠊⠁⠀⠀⠀⢀⢀⢀⠈⠑⠀⠀⠀]],
+		[[⠀⠀⠀⠠⠈⠀⠠⠐⡐⢕⢕⢕⢬⠢⣄⢀⠀⠀⠀⠀⡱⡱⡱⡹⡸⡪⠀⠀⡀⡰⡌⡎⡎⡎⡎⡎⣖⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠄⠂⠀⠁⠌⡘⠜⡜⡜⡜⡜⡜⡔⠄⠀⠀⠑⢕⢕⢕⢕⢝⢨⢰⢪⢪⢪⡪⡪⣪⢪⡪⡪⡃⠀⠀]],
+		[[⠀⠀⠀⢀⠀⠀⠀⠐⠀⠀⠂⠀⠀⠀⠀⠈⠈⠁⠀⠄⠀⡜⡜⡕⣕⢕⢜⠜⠘⠈⠐⠈⠈⠀⠑⢕⢕⠅⠀⠀]],
+		[[⠀⠀⠀⠀⠐⠀⢀⣀⠀⠀⠀⠀⠀⡀⢀⠀⡀⠀⢀⢀⠪⡘⡜⡜⡜⡜⣅⠀⡀⠀⡀⠀⡀⡀⡀⣀⢑⠅⠀⠀]],
+		[[⠀⠀⠀⠀⠄⠪⡑⡎⡭⡣⡣⣓⣒⢲⢸⢸⢸⢱⢱⠡⡑⠠⢣⢣⢣⢣⢣⢳⢸⢢⢲⢰⢔⢔⢜⢔⢕⢅⠀⠀]],
+		[[⠀⠀⠀⠠⠐⠀⠌⢈⠊⡊⠎⡖⡜⡜⡜⡜⡜⡜⡜⠜⠄⠅⡑⡕⡕⣕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⢀⠀⠠⠀⠨⠐⡱⠱⡱⠑⠅⠡⡨⡪⡡⠁⠂⢣⢣⢣⢣⢳⢱⢕⢕⢕⢕⢕⢕⢕⢕⢕⠅⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠂⠄⠁⢀⠠⡰⠈⠈⠂⠀⠈⠀⠀⠱⢱⠱⠣⢣⢣⢳⠱⡕⣕⢕⢕⢕⢕⠁⠀]],
+		[[⠀⠀⠀⠀⠀⠐⡀⠀⠈⠀⠈⢀⠀⡐⠔⡕⢜⢔⠈⠠⠀⠀⠀⠀⠈⠈⠸⡢⡣⡣⡣⡣⡢⡈⠈⠣⢳⠑⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠘⡀⠀⢀⠀⠀⠑⠌⢌⠪⠢⠱⠱⠐⠀⠀⠀⡠⡄⠀⠀⠘⠸⢜⢎⠮⠊⠀⢰⠅⢸⠁⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠨⠀⠀⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠕⠕⠆⠁⠀⠀⠀⠀⠀⠀⡰⡕⢁⠎⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠑⡀⠀⠈⠐⠠⠠⠠⠠⡀⢄⠄⡄⢄⢄⢄⠄⡠⢠⢠⢠⡈⡖⡕⡝⡜⠄⡪⠂⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠢⡀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠄⠀⠨⠈⠌⡪⣘⢔⢕⢕⢕⢕⠅⡜⡜⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠑⠥⡀⠀⠂⢀⠡⢐⢀⢄⢐⠀⠀⠀⢰⢸⢸⢸⢸⢸⢸⢸⢸⠸⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠊⢆⠈⠀⡂⢆⢢⠱⡐⠀⠀⠀⠈⡎⡎⡎⡎⡎⡇⡇⡇⠃⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⢀⠨⠘⡜⡜⡌⠀⠀⠀⠀⡸⡸⡸⡸⡸⡸⡘⠀⠀⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⡑⢕⠁⠀⠀⠀⡎⡎⡎⡮⡪⠊⠀⠀⠀⠀⠀⠀⠀⠀]],
+		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠀⠀⠀⠀⠀⠀⠄⠁⠀⠀⠀⡇⡇⠇⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
+	}
 	dashboard.section.header.val = headerAsciiArt
 	dashboard.section.header.opts.hl = "AlphaHeader"
 
@@ -41,7 +42,7 @@ return function()
 			width = 50,
 			align_shortcut = "right",
 			hl = "AlphaButtons",
-			hl_shortcut = "AlphaShortcut"
+			hl_shortcut = "AlphaShortcut",
 		}
 
 		if nil == keybind then
@@ -50,9 +51,9 @@ return function()
 		keybind_opts = vim.F.if_nil(keybind_opts, {
 			noremap = true,
 			silent = true,
-			nowait = true
+			nowait = true,
 		})
-		opts.keymap = {"n", sc_after, keybind, keybind_opts}
+		opts.keymap = { "n", sc_after, keybind, keybind_opts }
 
 		local function on_press()
 			-- local key = vim.api.nvim_replace_termcodes(keybind .. '<Ignore>', true, false, true)
@@ -64,68 +65,86 @@ return function()
 			type = "button",
 			val = txt,
 			on_press = on_press,
-			opts = opts
+			opts = opts,
 		}
 	end
 
 	local leader = " "
-	dashboard.section.buttons.val = {button("space tc", " Scheme change", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope.builtin").colorscheme()
-		end
-	}), button("space tr", " File frecency", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope").extensions.frecency.frecency({})
-		end
-	}), button("space te", "󰋚 File history", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope.builtin").oldfiles()
-		end
-	}), button("space tp", " Project find", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope").extensions.projects.projects({})
-		end
-	}), button("space tf", "󰈞 File find", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope.builtin").find_files()
-		end
-	}), button("space tn", " File new", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			vim.api.nvim_command("enew")
-		end
-	}), button("space tw", " Word find", leader, nil, {
-		noremap = true,
-		silent = true,
-		nowait = true,
-		callback = function()
-			require("telescope.builtin").live_grep()
-		end
-	})}
+	dashboard.section.buttons.val = {
+		button("space tc", " Scheme change", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").colorscheme()
+			end,
+		}),
+		button("space tr", " File frecency", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.frecency.frecency({})
+			end,
+		}),
+		button("space te", "󰋚 File history", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").oldfiles()
+			end,
+		}),
+		button("space tp", " Project find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.projects.projects({})
+			end,
+		}),
+		button("space tf", "󰈞 File find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").find_files()
+			end,
+		}),
+		button("space tn", " File new", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				vim.api.nvim_command("enew")
+			end,
+		}),
+		button("space tw", " Word find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").live_grep()
+			end,
+		}),
+	}
 	dashboard.section.buttons.opts.hl = "AlphaButtons"
 
 	local function footer()
 		local stats = require("lazy").stats()
 		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-		return "   Have Fun with neovim" .. "  󰀨 v" .. vim.version().major .. "." .. vim.version().minor .. "." ..
-				   vim.version().patch .. "  󰂖 " .. stats.count .. " plugins in " .. ms .. "ms"
+		return "   Have Fun with neovim"
+			.. "  󰀨 v"
+			.. vim.version().major
+			.. "."
+			.. vim.version().minor
+			.. "."
+			.. vim.version().patch
+			.. "  󰂖 "
+			.. stats.count
+			.. " plugins in "
+			.. ms
+			.. "ms"
 	end
 
 	dashboard.section.footer.val = footer()
@@ -136,16 +155,23 @@ return function()
 	local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.25))
 	local foot_butt_padding = 1
 
-	dashboard.config.layout = {{
-		type = "padding",
-		val = header_padding
-	}, dashboard.section.header, {
-		type = "padding",
-		val = head_butt_padding
-	}, dashboard.section.buttons, {
-		type = "padding",
-		val = foot_butt_padding
-	}, dashboard.section.footer}
+	dashboard.config.layout = {
+		{
+			type = "padding",
+			val = header_padding,
+		},
+		dashboard.section.header,
+		{
+			type = "padding",
+			val = head_butt_padding,
+		},
+		dashboard.section.buttons,
+		{
+			type = "padding",
+			val = foot_butt_padding,
+		},
+		dashboard.section.footer,
+	}
 
 	alpha.setup(dashboard.opts)
 
@@ -154,7 +180,7 @@ return function()
 		callback = function()
 			dashboard.section.footer.val = footer()
 			pcall(vim.cmd.AlphaRedraw)
-		end
+		end,
 	})
 end
 

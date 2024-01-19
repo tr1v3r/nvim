@@ -62,7 +62,7 @@ tool["folke/which-key.nvim"] = {
 tool["nvim-pack/nvim-spectre"] = {
 	lazy = true,
 	dependencies = { { "nvim-lua/plenary.nvim" } },
-	config = require("tool.spectre")
+	config = require("tool.spectre"),
 }
 -- general writing
 tool["reedes/vim-wordy"] = {
@@ -71,12 +71,17 @@ tool["reedes/vim-wordy"] = {
 }
 tool["ron89/thesaurus_query.vim"] = {
 	lazy = true,
-	cmd = { "ThesaurusQueryReplaceCurrentWord", "ThesaurusQueryLookupCurrentWord", "ThesaurusQueryReplace", "ThesaurusQueryReset" },
+	cmd = {
+		"ThesaurusQueryReplaceCurrentWord",
+		"ThesaurusQueryLookupCurrentWord",
+		"ThesaurusQueryReplace",
+		"ThesaurusQueryReset",
+	},
 }
 tool["kevinhwang91/rnvimr"] = {
 	lazy = false,
 	-- cmd = { "RnvimrToggle" },
-	config = require("tool.ranger")
+	config = require("tool.ranger"),
 }
 -- kevinhwang91/rnvimr another plugin for ranger
 -- kelly-lin/ranger.nvim toggle with command: Ranger
@@ -127,7 +132,8 @@ tool["mfussenegger/nvim-dap"] = {
 		"DapTerminate",
 	},
 	config = require("tool.dap"),
-	dependencies = { {
+	dependencies = {
+		{
 			"rcarriga/nvim-dap-ui",
 			config = require("tool.dap.dapui"),
 		},
