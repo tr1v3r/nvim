@@ -371,7 +371,7 @@ local setToolPlugKeys = function()
 	map("<C-g>")
 		:mode("n")
 		:callback(function()
-			_open_lazygit()
+			_open_lazygit() -- luacheck: ignore
 		end)
 		:noremap()
 		:silent()

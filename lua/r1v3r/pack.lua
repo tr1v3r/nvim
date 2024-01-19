@@ -18,7 +18,7 @@ local icons = {
 local Lazy = {}
 
 -- check: check if lazy.nvim exists, if not, download it
-function Lazy:check()
+function Lazy.check()
 	if not vim.loop.fs_stat(lazy_path) then
 		local lazy_repo = use_ssh and "git@github.com:folke/lazy.nvim.git" or "https://github.com/folke/lazy.nvim.git"
 		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. " " .. lazy_path)
@@ -27,13 +27,13 @@ function Lazy:check()
 end
 
 -- prepare: extend RTP
-function Lazy:prepare()
+function Lazy.prepare()
 	package.path = string.format("%s;%s;", plugins_dir .. "/configs/?.lua", plugins_dir .. "/configs/?/init.lua")
 		.. package.path
 end
 
 -- plugins: get plugins table
-function Lazy:plugins()
+function Lazy.plugins()
 	local get_plugins = function()
 		local list = {}
 		local pluginsFiles = vim.split(fn.glob(plugins_dir .. "/*.lua"), "\n")
@@ -67,7 +67,7 @@ function Lazy:plugins()
 end
 
 -- opts: get lazy opts
-function Lazy:opts()
+function Lazy.opts()
 	local clone_prefix = use_ssh and "git@github.com:%s.git" or "https://github.com/%s.git"
 	local opts = {
 		root = data_dir .. "lazy", -- directory where plugins will be installed

@@ -11,9 +11,9 @@ return function()
 		stages = "fade",
 		---@usage Function called when a new window is opened, use for changing win settings/config
 		on_open = function(win)
-            -- vim.api.nvim_set_option_vale("winblend", 0, { scope = "local", win = win })
-            vim.api.nvim_win_set_config(win, { zindex = 90 })
-        end,
+			-- vim.api.nvim_set_option_vale("winblend", 0, { scope = "local", win = win })
+			vim.api.nvim_win_set_config(win, { zindex = 90 })
+		end,
 		---@usage Function called when a window is closed
 		on_close = nil,
 		---@usage timeout for notifications in ms, default 5000
@@ -23,7 +23,7 @@ return function()
 		-- Render function for notifications. See notify-render()
 		render = "default",
 		---@usage highlight behind the window for stages that change opacity
-		background_colour = colors.base, 
+		background_colour = colors.base,
 		---@usage minimum width for notification windows
 		minimum_width = 50,
 		---@usage notifications with level lower than this would be ignored. [ERROR > WARN > INFO > DEBUG > TRACE]

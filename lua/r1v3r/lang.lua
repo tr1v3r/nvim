@@ -1,7 +1,7 @@
 -- ============ Language ============
 
 -- Compile function
-function CompileRunGcc()
+local function CompileRunGcc()
 	vim.cmd("w")
 	local filetype = vim.bo.filetype
 	if filetype == "c" then
@@ -59,4 +59,5 @@ function CompileRunGcc()
 	end
 end
 
-vim.api.nvim_set_keymap("n", "<LEADER>r", ":lua CompileRunGcc()<CR>", { noremap = true })
+vim.api.nvim_create_user_command("CompileRunGcc", CompileRunGcc, {})
+vim.api.nvim_set_keymap("n", "<LEADER>r", ":CompileRunGcc()<CR>", { noremap = true })

@@ -6,8 +6,8 @@ _G._command_panel = function()
 		layout_config = {
 			width = 0.6,
 			height = 0.6,
-			prompt_position = "top"
-		}
+			prompt_position = "top",
+		},
 	})
 end
 
@@ -26,7 +26,7 @@ _G._open_lazygit = function()
 		-- _lazygit:toggle()
 	else
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, {
-			title = "lazygit"
+			title = "lazygit",
 		})
 	end
 end
