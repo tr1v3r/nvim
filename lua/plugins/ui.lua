@@ -48,7 +48,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
 	main = "ibl",
 	opts = {},
-	event = "BufReadPost",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.indent-blankline"),
 }
 ui["nvim-lualine/lualine.nvim"] = {
