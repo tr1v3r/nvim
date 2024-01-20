@@ -1,5 +1,5 @@
 -- ================ Debug ================
-function GetAutocmdsForEvent(event_name)
+local function GetAutocmdsForEvent(event_name)
 	-- 使用 pcall 来安全地调用 API，并捕获可能的错误
 	local status, autocmds = pcall(vim.api.nvim_get_autocmds, { event = event_name })
 	if status then
@@ -16,7 +16,7 @@ vim.api.nvim_create_user_command(
 	{ nargs = 1, desc = "check autocmds for event" }
 )
 
-function GetAutocmdsForGroup(group_name)
+local function GetAutocmdsForGroup(group_name)
 	local status, autocmds =
 		pcall(vim.api.nvim_get_autocmds, { group = vim.api.nvim_create_augroup(group_name, { clear = false }) })
 	if status then
