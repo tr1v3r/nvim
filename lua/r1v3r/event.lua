@@ -193,12 +193,11 @@ autocmd.init()
 
 -- ================ LSP ================
 -- defer setting LSP-related keymaps till LspAttach
-local mapping = require("r1v3r.keymaps")
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
 		if not _G._debugging then
-			mapping.lsp(event.buf)
+			require("r1v3r.keymaps").lsp(event.buf)
 		end
 	end,
 })
