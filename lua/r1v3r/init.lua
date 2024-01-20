@@ -1,8 +1,9 @@
 -- Run :set rtp? to list all nvim config dirs will be searched when neovim start
 local global = require("r1v3r.global")
+local settings = require("r1v3r.settings")
 
--- createDir cache dir and data dirs
-local createDir = function()
+-- create_dir cache dir and data dirs
+local create_dir = function()
 	local dataDir = {
 		global.cache_dir .. "backup",
 		global.cache_dir .. "undo",
@@ -25,8 +26,98 @@ local createDir = function()
 	end
 end
 
--- deviceConfig load device config
-local deviceConfig = function()
+local disable_distribution_plugins = function()
+	-- Disable menu loading
+	vim.g.did_install_default_menus = 1
+	vim.g.did_install_syntax_menu = 1
+
+	-- Comment this if you define your own filetypes in `after/ftplugin`
+	-- vim.g.did_load_filetypes = 1
+
+	-- Do not load native syntax completion
+	vim.g.loaded_syntax_completion = 1
+
+	-- Do not load spell files
+	vim.g.loaded_spellfile_plugin = 1
+
+	-- Whether to load netrw by default
+	-- vim.g.loaded_netrw = 1
+	-- vim.g.loaded_netrwFileHandlers = 1
+	-- vim.g.loaded_netrwPlugin = 1
+	-- vim.g.loaded_netrwSettings = 1
+	-- newtrw liststyle: https://medium.com/usevim/the-netrw-style-options-3ebe91d42456
+	vim.g.netrw_liststyle = 3
+
+	-- Do not load tohtml.vim
+	vim.g.loaded_2html_plugin = 1
+
+	-- Do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all of these plugins are
+	-- related to reading files inside compressed containers)
+	vim.g.loaded_gzip = 1
+	vim.g.loaded_tar = 1
+	vim.g.loaded_tarPlugin = 1
+	vim.g.loaded_vimball = 1
+	vim.g.loaded_vimballPlugin = 1
+	vim.g.loaded_zip = 1
+	vim.g.loaded_zipPlugin = 1
+
+	-- Do not use builtin matchit.vim and matchparen.vim because we're using vim-matchup
+	vim.g.loaded_matchit = 1
+	vim.g.loaded_matchparen = 1
+
+	-- Disable sql omni completion
+	vim.g.loaded_sql_completion = 1
+
+	-- Set this to 0 in order to disable native EditorConfig support
+	vim.g.editorconfig = 1
+
+	-- Disable remote plugins
+	-- NOTE:
+	--  > Disabling rplugin.vim will make `wilder.nvim` complain about missing rplugins during :checkhealth,
+	--  > but since it's config doesn't require python rtp (strictly), it's fine to ignore that for now.
+	-- vim.g.loaded_remote_plugins = 1
+end
+
+local neovide_config = function()
+	for name, config in pairs(settings.neovide_config) do
+		vim.g["neovide_" .. name] = config
+	end
+end
+
+local gui_config = function()
+	vim.api.nvim_set_option_value("guifont", settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size, {})
+
+	if vim.g.neovide then
+		neovide_config()
+	end
+end
+
+local clipboard_config = function()
+	if global.is_mac then
+		vim.g.clipboard = {
+			name = "macOS-clipboard",
+			copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+			paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+			cache_enabled = 0,
+		}
+	elseif global.is_wsl then
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
+		}
+	end
+end
+
+-- device_config load device config
+local device_config = function()
 	local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
 	if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
 		print("device lua not found")
@@ -36,7 +127,11 @@ local deviceConfig = function()
 end
 
 local init = function()
-	createDir()
+	create_dir()
+	disable_distribution_plugins()
+
+	gui_config()
+	clipboard_config()
 
 	require("r1v3r.lang")
 	require("r1v3r.options")
@@ -44,12 +139,10 @@ local init = function()
 	require("r1v3r.event")
 	require("r1v3r.pack")
 
-	local colorscheme = require("r1v3r.settings").colorscheme
-	local background = require("r1v3r.settings").background
-	vim.api.nvim_command("set background=" .. background)
-	vim.cmd.colorscheme(colorscheme)
+	vim.api.nvim_command("set background=" .. settings.background)
+	vim.cmd.colorscheme(settings.colorscheme)
 
-	deviceConfig()
+	device_config()
 end
 
 init()
