@@ -217,19 +217,20 @@ function M.gen_alpha_hl()
 	vim.api.nvim_set_hl(0, "AlphaFooter", { fg = colors.yellow, default = true })
 end
 
--- Generate blend_color for neodim.
-function M.gen_neodim_blend_attr()
-	local trans_bg = require("r1v3r.settings").transparent_background
-	local appearance = require("r1v3r.settings").background
+-- neodim is disabled for now
+-- -- Generate blend_color for neodim.
+-- function M.gen_neodim_blend_attr()
+-- 	local trans_bg = require("r1v3r.settings").transparent_background
+-- 	local appearance = require("r1v3r.settings").background
 
-	if trans_bg and appearance == "dark" then
-		return "#000000"
-	elseif trans_bg and appearance == "light" then
-		return "#FFFFFF"
-	else
-		return M.hl_to_rgb("Normal", true)
-	end
-end
+-- 	if trans_bg and appearance == "dark" then
+-- 		return "#000000"
+-- 	elseif trans_bg and appearance == "light" then
+-- 		return "#FFFFFF"
+-- 	else
+-- 		return M.hl_to_rgb("Normal", true)
+-- 	end
+-- end
 
 ---Convert number (0/1) to boolean
 ---@param value number @The value to check

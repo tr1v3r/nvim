@@ -88,7 +88,7 @@ settings["load_big_files_faster"] = true
 ---@type string[]
 settings["lsp_deps"] = { "bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp", "gopls" }
 
--- Set the Treesitter that will be installed and configured during boot.
+-- Set the Treesitter deps that will be installed and configured during boot.
 -- Check the below link for all supported languages:
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 ---@type string[]
