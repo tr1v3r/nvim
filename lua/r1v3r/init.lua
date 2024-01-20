@@ -13,6 +13,10 @@ local createDir = function()
 	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
 		os.execute("mkdir -p " .. global.cache_dir)
+		local success, _, code = os.execute("mkdir -p " .. global.cache_dir)
+		if not success then
+			print("Error: Unable to create directory " .. global.cache_dir .. ". Exit code:", code)
+		end
 		for _, v in pairs(dataDir) do
 			if vim.fn.isdirectory(v) == 0 then
 				os.execute("mkdir -p " .. v)
