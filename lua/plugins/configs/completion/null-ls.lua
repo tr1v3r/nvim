@@ -13,6 +13,10 @@ return function()
 			filetypes = { "go" },
 			extra_args = require("completion.formatters.goimports-reviser"),
 		}),
+		btns.formatting.stylua.with({
+			filetypes = { "lua" },
+			extra_args = require("completion.formatters.stylua"),
+		}),
 
 		btns.formatting.prettier.with({
 			filetypes = {
@@ -27,6 +31,7 @@ return function()
 				"scss",
 				"sh",
 				"markdown",
+				"thrift",
 			},
 		}),
 		btns.formatting.rustfmt,
