@@ -1,37 +1,17 @@
 ---@class mapOption
----@field m string
+---@field m string mode
 ---@field key string
----@field cmd string
+---@field cmd string|function
 ---@field options table
----@field options.noremap boolean
+---@field options.remap boolean
+---@field options.nowait boolean
 ---@field options.silent boolean
 ---@field options.expr boolean
----@field options.nowait boolean
----@field options.callback function
+---@field options.script boolean
+---@field options.unique boolean
+---@field options.buffer integer|boolean
 ---@field options.desc string
----@field buf boolean|number
 local mapOption = {}
-
----@return mapOption
-function mapOption:new(key, cmd)
-	local instance = {
-		m = "",
-		key = key,
-		cmd = cmd,
-		options = {
-			noremap = false,
-			silent = false,
-			expr = false,
-			nowait = false,
-			callback = nil,
-			desc = "",
-		},
-		buf = false,
-	}
-	setmetatable(instance, self)
-	self.__index = self
-	return instance
-end
 
 ---@return mapOption
 function mapOption:cr()
@@ -65,15 +45,6 @@ function mapOption:mode(mode_string)
 	return self
 end
 
----@param callback fun():nil
---- Takes a callback that will be called when the key is pressed
----@return mapOption
-function mapOption:callback(callback)
-	self.cmd = ""
-	self.options.callback = callback
-	return self
-end
-
 ---@return mapOption
 function mapOption:silent()
 	self.options.silent = true
@@ -89,7 +60,7 @@ end
 
 ---@return mapOption
 function mapOption:noremap()
-	self.options.noremap = true
+	self.options.remap = false
 	return self
 end
 
@@ -113,7 +84,11 @@ function mapOption:buffer(num)
 end
 
 function mapOption:exec()
-	vim.cmd(self.cmd)
+	if type(self.cmd) == "string" then
+		vim.cmd(tostring(self.cmd))
+	else
+		vim.notify("[Keymap] exec cmd failed, cmd is not string.", vim.log.levels.ERROR, { title = "Exec failed" })
+	end
 end
 
 ---@return mapOption
@@ -122,58 +97,54 @@ function mapOption:vscCall()
 	return self
 end
 
+-- set keymap
 function mapOption:set()
-	local modes = self.m
-	if modes == "" then
-		self:doSet("")
+	-- vim.keymap doc: https://neovim.io/doc/user/lua.html#vim.keymap
+	if self.m == "" then
+		vim.keymap.set("", self.key, self.cmd, self.options)
 	else
-		for _, mode in ipairs(vim.split(modes, "")) do
-			self:doSet(mode)
-		end
+		vim.keymap.set(vim.split(self.m, ""), self.key, self.cmd, self.options)
 	end
 end
 
-function mapOption:doSet(mode)
-	local lhs = self.key
-	local rhs = self.cmd
-	local options = self.options
-	local buf = self.buffer
-	if buf and type(buf) == "number" then
-		vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
-	else
-		vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-	end
-end
-
+-- print keymap
 function mapOption:print()
-	local mode = self.m
-	local lhs = self.key
-	local rhs = self.cmd
-	local options = self.options
-	local buf = self.buf
-	if buf and type(buf) == "number" then
-		print(buf, mode, lhs, rhs, options)
+	if self.m ~= "" then
+		print(vim.inspect(vim.split(self.m, "")), self.key, self.cmd, vim.inspect(self.options))
 	else
-		print(mode, lhs, rhs, options)
-	end
-	for k, v in pairs(options) do
-		print(k, v)
+		print("n", self.key, self.cmd, vim.inspect(self.options))
 	end
 end
-
-local bind = {}
 
 ---@param key string
----@param cmd string
+---@param cmd string|function
 ---@return mapOption
-function bind.map(key, cmd)
-	return mapOption:new(key, cmd)
+function mapOption.map(key, cmd)
+	local instance = {
+		m = "",
+		key = key,
+		cmd = cmd,
+		options = {
+			remap = true,
+			nowait = false,
+			silent = false,
+			expr = false,
+			script = false,
+			unique = false,
+			buffer = false,
+			desc = "",
+		},
+	}
+
+	setmetatable(instance, { __index = mapOption })
+
+	return instance
 end
 
 ---@param cmd_string string
 ---@return string escaped_string
-function bind.escape_termcode(cmd_string)
+function mapOption.escape_termcode(cmd_string)
 	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
 end
 
-return bind
+return mapOption
