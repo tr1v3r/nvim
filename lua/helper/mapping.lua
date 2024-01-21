@@ -1,7 +1,7 @@
 ---@class mapOption
 ---@field m string mode
----@field key string
----@field cmd string|function
+---@field lhs string
+---@field rhs string|function
 ---@field options table
 ---@field options.remap boolean
 ---@field options.nowait boolean
@@ -14,27 +14,14 @@
 local mapOption = {}
 
 ---@return mapOption
-function mapOption:cr()
-	self.cmd = (":%s<CR>"):format(self.cmd)
-	return self
-end
-
----@return mapOption
 function mapOption:space()
-	self.cmd = (":%s<Space>"):format(self.cmd)
+	self.rhs = (":%s<Space>"):format(self.rhs)
 	return self
 end
 
 ---@return mapOption
-function mapOption:Cmd()
-	self.cmd = ("<Cmd>%s<CR>"):format(self.cmd)
-	return self
-end
-
----@return mapOption
-function mapOption:pure()
-	-- <C-u> to eliminate the automatically inserted range in visual mode
-	self.cmd = (":<C-u>%s<CR>"):format(self.cmd)
+function mapOption:cmd()
+	self.rhs = ("<Cmd>%s<CR>"):format(self.rhs)
 	return self
 end
 
@@ -84,46 +71,46 @@ function mapOption:buffer(num)
 end
 
 function mapOption:exec()
-	if type(self.cmd) == "string" then
-		vim.cmd(tostring(self.cmd))
+	if type(self.rhs) == "string" then
+		vim.cmd(tostring(self.rhs))
 	else
-		vim.notify("[Keymap] exec cmd failed, cmd is not string.", vim.log.levels.ERROR, { title = "Exec failed" })
+		vim.notify("[keymap] exec rhs failed, rhs is not string.", vim.log.levels.ERROR, { title = "Exec failed" })
 	end
 end
 
 ---@return mapOption
 function mapOption:vscCall()
-	self.cmd = ("<Cmd>call VSCodeCall('%s')<CR>"):format(self.cmd)
-	return self
+	self.rhs = ("call VSCodeCall('%s')"):format(self.rhs)
+	return self:cmd()
 end
 
 -- set keymap
 function mapOption:set()
 	-- vim.keymap doc: https://neovim.io/doc/user/lua.html#vim.keymap
 	if self.m == "" then
-		vim.keymap.set("", self.key, self.cmd, self.options)
+		vim.keymap.set("", self.lhs, self.rhs, self.options)
 	else
-		vim.keymap.set(vim.split(self.m, ""), self.key, self.cmd, self.options)
+		vim.keymap.set(vim.split(self.m, ""), self.lhs, self.rhs, self.options)
 	end
 end
 
 -- print keymap
 function mapOption:print()
 	if self.m ~= "" then
-		print(vim.inspect(vim.split(self.m, "")), self.key, self.cmd, vim.inspect(self.options))
+		print(vim.inspect(vim.split(self.m, "")), self.lhs, self.rhs, vim.inspect(self.options))
 	else
-		print("n", self.key, self.cmd, vim.inspect(self.options))
+		print("n", self.lhs, self.rhs, vim.inspect(self.options))
 	end
 end
 
----@param key string
----@param cmd string|function
+---@param lhs string
+---@param rhs string|function
 ---@return mapOption
-function mapOption.map(key, cmd)
+function mapOption.map(lhs, rhs)
 	local instance = {
 		m = "",
-		key = key,
-		cmd = cmd,
+		lhs = lhs,
+		rhs = rhs,
 		options = {
 			remap = true,
 			nowait = false,
@@ -141,10 +128,10 @@ function mapOption.map(key, cmd)
 	return instance
 end
 
----@param cmd_string string
+---@param rhs_string string
 ---@return string escaped_string
-function mapOption.escape_termcode(cmd_string)
-	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
+function mapOption.escape_termcode(rhs_string)
+	return vim.api.nvim_replace_termcodes(rhs_string, true, true, true)
 end
 
 return mapOption

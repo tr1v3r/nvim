@@ -8,7 +8,7 @@ function M.load_extras()
 	if not did_load_debug_mappings then
 		map("W", "lua require('dapui').eval()")
 			:mode("nv")
-			:Cmd()
+			:cmd()
 			:noremap()
 			:nowait()
 			:desc("dap: Evaluate expression under cursor")
