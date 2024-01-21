@@ -1,21 +1,22 @@
 return function()
 	local null_ls = require("null-ls")
 	local btns = null_ls.builtins
+	local formatter_config_dir = "completion.formatters."
 
 	-- Please set additional flags for the supported servers here
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
 		btns.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
-			extra_args = require("completion.formatters.clang_format"),
+			extra_args = require(formatter_config_dir .. "clang_format"),
 		}),
 		btns.formatting.goimports_reviser.with({
 			filetypes = { "go" },
-			extra_args = require("completion.formatters.goimports-reviser"),
+			extra_args = require(formatter_config_dir .. "goimports-reviser"),
 		}),
 		btns.formatting.stylua.with({
 			filetypes = { "lua" },
-			extra_args = require("completion.formatters.stylua"),
+			extra_args = require(formatter_config_dir .. "stylua"),
 		}),
 
 		btns.formatting.prettier.with({
