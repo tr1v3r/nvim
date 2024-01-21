@@ -1,5 +1,13 @@
 return function()
 	local icons = { ui = require("r1v3r.icons").get("ui") }
+	local filter_filetypes = {
+		"aerial",
+		"help",
+		"terminal",
+		"NvimTree",
+		"TelescopePrompt",
+		"lazy",
+	}
 
 	local opts = {
 		options = {
@@ -41,6 +49,18 @@ return function()
 					padding = 0,
 				},
 			},
+			-- https://github.com/akinsho/bufferline.nvim/blob/main/doc/bufferline.txt#L486
+			custom_filter = function(buf, _) -- second should be buf_nums
+				local ft = vim.bo[buf].filetype
+				-- vim.print("current filetype: " .. ft)
+
+				for _, filetype in ipairs(filter_filetypes) do
+					if ft == filetype then
+						return false
+					end
+				end
+				return true
+			end,
 		},
 		-- Change bufferline's highlights here! See `:h bufferline-highlights` for detailed explanation.
 		-- Note: If you use catppuccin then modify the colors below!
