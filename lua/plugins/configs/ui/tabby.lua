@@ -9,7 +9,7 @@ return function()
 		win = "TabLine",
 		tail = "TabLine",
 	}
-	require("tabby.tabline").set(function(line)
+	require("tabby.tabline").setup(function(line)
 		return {
 			{ {
 				"  ",

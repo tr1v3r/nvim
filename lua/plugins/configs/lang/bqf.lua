@@ -1,5 +1,5 @@
 return function()
-	require("bqf").set({
+	require("bqf").setup({
 		preview = {
 			border = "single",
 			wrap = true,
