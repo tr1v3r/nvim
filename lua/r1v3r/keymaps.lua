@@ -19,7 +19,15 @@ local setGeneralKeys = function()
 	map(",.", "%"):noremap():silent():set()
 
 	-- Search
-	map("<LEADER><CR>", ":nohlsearch<CR>"):noremap():silent():desc("edit: nohl"):set()
+	-- map("<LEADER><CR>", function()
+	map("<ESC>", function()
+			_flash_esc_or_noh()
+		end)
+		:mode("n")
+		:noremap()
+		:silent()
+		:desc("edit: clear highlight")
+		:set()
 
 	-- Adjacent duplicate words
 	map("<LEADER>dw", [[/\(\<\w\+\>\)\_s*\1]]):noremap():desc("edit: find adjacent duplicate words"):set()
@@ -249,12 +257,6 @@ local setEditorPlugKeys = function()
 
 	-- Plugin: gcmt/wildfire.vim
 	-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):set()
-
-	-- Plugin: clever-f
-	map(",", "<Plug>(clever-f-repeat-forward)"):mode("n"):set()
-	-- map(","):mode("n"):callback(function()
-	--	 return et("<Plug>(clever-f-repeat-back)")
-	-- end):expr():set()
 
 	-- Plugin: comment.nvim
 	map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>")
