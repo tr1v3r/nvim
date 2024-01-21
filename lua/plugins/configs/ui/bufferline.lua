@@ -29,7 +29,7 @@ return function()
 			show_tab_indicators = true,
 			enforce_regular_tabs = false,
 			persist_buffer_sort = true,
-			always_show_bufferline = true,
+			always_show_bufferline = false,
 			separator_style = "thin", -- slant/padded_slant/slope/padded_slope/thick/thin
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count)
