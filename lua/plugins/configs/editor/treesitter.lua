@@ -1,6 +1,6 @@
 return vim.schedule_wrap(function()
-	vim.api.nvim_set_option_value("foldmethod", "expr", {})
-	vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
+	vim.o.foldmethod = "expr"
+	vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = require("r1v3r.settings").treesitter_deps,

@@ -84,8 +84,11 @@ local neovide_config = function()
 	end
 end
 
+-- https://neovim.io/doc/user/lua-guide.html#_-vim.opt
+-- https://neovim.io/doc/user/lua.html#vim.o
+-- https://neovim.io/doc/user/lua.html#vim.opt
 local gui_config = function()
-	vim.api.nvim_set_option_value("guifont", settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size, {})
+	vim.o.guifont = settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size
 
 	if vim.g.neovide then
 		neovide_config()

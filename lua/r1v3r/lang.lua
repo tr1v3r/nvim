@@ -59,5 +59,4 @@ local function CompileRunGcc()
 	end
 end
 
-vim.api.nvim_create_user_command("CompileRunGcc", CompileRunGcc, {})
-vim.api.nvim_set_keymap("n", "<LEADER>r", ":CompileRunGcc()<CR>", { noremap = true })
+require("helper.mapping").map("<LEADER>r", CompileRunGcc):mode("n"):noremap():desc("compile and run"):set()
