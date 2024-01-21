@@ -66,7 +66,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		-- },
 	},
 }
-completion["jose-elias-alvarez/null-ls.nvim"] = {
+completion["nvimtools/none-ls.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.null-ls"),
