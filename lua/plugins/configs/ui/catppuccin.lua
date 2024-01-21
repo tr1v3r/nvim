@@ -138,6 +138,9 @@ return function()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
+					-- For nvim-notify
+					NotifyBackground = { bg = cp.base },
+
 					-- For nvim-tree
 					NvimTreeRootFolder = { fg = cp.pink },
 					NvimTreeIndentMarker = { fg = cp.surface2 },

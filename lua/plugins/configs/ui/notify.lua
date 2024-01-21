@@ -1,6 +1,5 @@
 return function()
 	local notify = require("notify")
-	local colors = require("helper").get_palette() -- Get the palette.
 	local icons = {
 		diagnostics = require("r1v3r.icons").get("diagnostics"),
 		ui = require("r1v3r.icons").get("ui"),
@@ -23,7 +22,7 @@ return function()
 		-- Render function for notifications. See notify-render()
 		render = "default",
 		---@usage highlight behind the window for stages that change opacity
-		background_colour = colors.base,
+		background_colour = "NotifyBackground",
 		---@usage minimum width for notification windows
 		minimum_width = 50,
 		---@usage notifications with level lower than this would be ignored. [ERROR > WARN > INFO > DEBUG > TRACE]
