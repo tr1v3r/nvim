@@ -35,7 +35,6 @@ ui["Jint-lzxy/nvim"] = {
 }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
-	branch = "legacy",
 	event = "LspAttach",
 	config = require("ui.fidget"),
 }
