@@ -116,7 +116,7 @@ return function()
 			},
 		},
 		excluded_buftypes = { "terminal" },
-		excluded_filetypes = { "cmp_docs", "cmp_menu", "noice", "prompt", "TelescopePrompt" },
+		excluded_filetypes = { "cmp_docs", "cmp_menu", "noice", "prompt", "TelescopePrompt", "aerial" },
 		autocmd = {
 			render = {
 				"BufWinEnter",
