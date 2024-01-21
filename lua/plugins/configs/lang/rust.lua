@@ -9,4 +9,5 @@ return function()
 			},
 		},
 	}
+	require("rustaceanvim").setup({})
 end
