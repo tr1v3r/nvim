@@ -2,7 +2,9 @@ return function()
 	local icons = { ui = require("r1v3r.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
 
-	require("telescope").setup({
+	local telescope = require("telescope")
+
+	telescope.setup({
 		defaults = {
 			vimgrep_arguments = {
 				"rg",
@@ -90,12 +92,12 @@ return function()
 		},
 	})
 
-	require("telescope").load_extension("frecency")
-	require("telescope").load_extension("fzf")
-	require("telescope").load_extension("live_grep_args")
-	require("telescope").load_extension("notify")
-	require("telescope").load_extension("projects")
-	require("telescope").load_extension("undo")
-	require("telescope").load_extension("zoxide")
-	require("telescope").load_extension("persisted")
+	telescope.load_extension("frecency")
+	telescope.load_extension("fzf")
+	telescope.load_extension("live_grep_args")
+	telescope.load_extension("notify")
+	telescope.load_extension("projects")
+	telescope.load_extension("undo")
+	telescope.load_extension("zoxide")
+	telescope.load_extension("persisted")
 end
