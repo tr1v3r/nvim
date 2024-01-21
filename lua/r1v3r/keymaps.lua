@@ -576,7 +576,9 @@ function mapping.lsp(buf)
 	-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 	map("<LEADER>li", "LspInfo"):mode("n"):cr():buffer(buf):desc("lsp: Info"):set()
 	map("<LEADER>lr", "LspRestart"):mode("n"):cr():buffer(buf):nowait():desc("lsp: Restart"):set()
-	map("go", "AerialToggle!"):mode("n"):cr():silent():buffer(buf):desc("lsp: Toggle outline"):set()
+
+	-- AerialToggle! with ! toggle aesial outline window and do not move cursor to outline window
+	map("go", "AerialToggle"):mode("n"):cr():silent():buffer(buf):desc("lsp: Toggle outline"):set()
 	map("gO", function()
 			require("telescope").extensions.aerial.aerial()
 		end)
@@ -585,6 +587,7 @@ function mapping.lsp(buf)
 		:buffer(buf)
 		:desc("lsp: Toggle outline in Telescope")
 		:set()
+
 	map("g[", "Lspsaga diagnostic_jump_prev"):mode("n"):cr():buffer(buf):desc("lsp: Prev diagnostic"):set()
 	map("g]", "Lspsaga diagnostic_jump_next"):mode("n"):cr():buffer(buf):desc("lsp: Next diagnostic"):set()
 	map("<LEADER>ld", "Lspsaga show_line_diagnostics ++unfocus")
