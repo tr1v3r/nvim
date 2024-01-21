@@ -100,4 +100,5 @@ return function()
 	telescope.load_extension("undo")
 	telescope.load_extension("zoxide")
 	telescope.load_extension("persisted")
+	telescope.load_extension("aerial")
 end
