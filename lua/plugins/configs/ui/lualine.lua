@@ -321,6 +321,11 @@ return function()
 			},
 			component_separators = "",
 			section_separators = { left = "", right = "" },
+			refresh = {
+				tabline = 1000,
+				winbar = 100,
+				statusline = 1000,
+			},
 		},
 		sections = {
 			lualine_a = { "mode" },
