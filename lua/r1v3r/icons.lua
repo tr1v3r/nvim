@@ -169,6 +169,7 @@ local data = {
 		Ghost = "󰊠",
 		ManUp = "",
 		Vim = "",
+		NeoVim = "",
 	},
 	cmp = {
 		Codeium = "",
