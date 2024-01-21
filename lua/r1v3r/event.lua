@@ -120,14 +120,6 @@ function autocmd.cmd_init()
 				})
 			end,
 		},
-		BufRead = { -- Fix fold issue of files opened by telescope
-			callback = function()
-				vim.api.nvim_create_autocmd("BufWinEnter", {
-					once = true,
-					command = "normal! zx",
-				})
-			end,
-		},
 	})
 end
 
