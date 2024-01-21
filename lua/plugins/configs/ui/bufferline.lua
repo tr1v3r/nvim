@@ -5,6 +5,8 @@ return function()
 		options = {
 			mode = "tabs", -- set to "buffers" to only show bufferpages instead
 			number = nil,
+			close_command = "BufDel! %d",
+			right_mouse_command = "BufDel! %d",
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
 			left_trunc_marker = icons.ui.Left,
