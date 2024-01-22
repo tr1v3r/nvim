@@ -1,12 +1,12 @@
 return function()
 	local null_ls = require("null-ls")
-	local builtins = null_ls.builtins
+	local formatting = null_ls.builtins.formatting
 	local formatter_config_dir = "completion.formatters."
 
 	-- Please set additional flags for the supported servers here
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
-		builtins.formatting.prettier.with({
+		formatting.prettier.with({
 			filetypes = {
 				"vue",
 				"typescript",
@@ -22,19 +22,19 @@ return function()
 				"thrift",
 			},
 		}),
-		builtins.formatting.clang_format.with({
+		formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
 			extra_args = require(formatter_config_dir .. "clang_format"),
 		}),
-		builtins.formatting.stylua.with({
+		formatting.stylua.with({
 			filetypes = { "lua" },
 			extra_args = require(formatter_config_dir .. "stylua"),
 		}),
-		builtins.formatting.rustfmt,
-		builtins.formatting.goimports,
-		builtins.formatting.goimports_reviser.with({
+		formatting.rustfmt,
+		formatting.goimports_reviser.with({
 			extra_args = require(formatter_config_dir .. "goimports-reviser"),
 		}),
+		formatting.goimports,
 	}
 	null_ls.setup({
 		border = "rounded",
