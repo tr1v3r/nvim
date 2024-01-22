@@ -15,18 +15,18 @@ local _lazygit = nil
 _G._open_lazygit = function()
 	if vim.fn.executable("lazygit") == 1 then
 		if not _lazygit then
+			require("helper").float_terminal("lazygit")
 			-- _lazygit = require("toggleterm.terminal").Terminal:new({
 			-- 	cmd = "lazygit",
 			-- 	direction = "float",
 			-- 	close_on_exit = true,
 			-- 	hidden = true,
 			-- })
-			require("helper").float_terminal("lazygit")
 		end
 		-- _lazygit:toggle()
 	else
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, {
-			title = "lazygit",
+			title = "Command not found",
 		})
 	end
 end

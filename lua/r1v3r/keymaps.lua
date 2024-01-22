@@ -1,5 +1,5 @@
-local map = require("helper.mapping").map
 require("helper.plugins")
+local map = require("helper.mapping").map
 
 -- =============== Basic Key Mapping ================
 -- Leader key
