@@ -1,8 +1,7 @@
 name: update lockfile
 on:
   # Scheduled update (each day)
-  # schedule: [{ cron: "30 01 * * *" }]
-  [push, pull_request]
+  schedule: [{ cron: "30 01 * * *" }]
 
 jobs:
   update-lockfile:
@@ -36,7 +35,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         with:
-          commit_message: "chore(lockfile): auto update lazy-lock.json"
+          commit_message: "chore(deps): auto update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
