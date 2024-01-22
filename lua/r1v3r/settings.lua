@@ -154,9 +154,9 @@ settings["null_ls_deps"] = {
 	"shfmt",
 	"stylua",
 	"vint",
+	"goimports",
 	"goimports-reviser",
 	-- "rustfmt",
-	-- "goimports",
 	-- "clang_format",
 }
 
