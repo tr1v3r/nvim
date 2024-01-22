@@ -28,12 +28,14 @@ jobs:
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         timeout-minutes: 5
         run: |
+          mkdir -p "${HOME}/.config" && cd "${HOME}/.config" && git clone https://github.com/tr1v3r/nvim.git
+          sed -i 's/settings\["use_ssh"\] = true/settings["use_ssh"] = false/' "${HOME}/.config/nvim/lua/r1v3r/settings.lua"
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         with:
-          commit_message: "chore(lockfile): auto update lazy-lock.json"
+          commit_message: "chore(deps): auto update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
