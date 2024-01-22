@@ -50,6 +50,8 @@ local setGeneralKeys = function()
 	map("=", "nzz"):noremap():set()
 	map("-", "Nzz"):noremap():set()
 
+	map("<LEADER>R", "e!"):mode("n"):noremap():cmd():desc("edit: reload current file"):set()
+
 	-- Quit key
 	map("S", "w"):mode("n"):cmd():noremap():desc("edit: save file"):set()
 	map("Q", "quitall"):mode("n"):cmd():noremap():desc("edit: quit all files"):set()
