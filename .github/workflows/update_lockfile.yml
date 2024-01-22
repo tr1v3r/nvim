@@ -29,7 +29,7 @@ jobs:
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         timeout-minutes: 5
         run: |
-          mkdir -p "${HOME}/.config" && cd "${HOME}/.config" && git clone git@github.com:tr1v3r/nvim.git
+          mkdir -p "${HOME}/.config" && cd "${HOME}/.config" && git clone https://github.com/tr1v3r/nvim.git
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
       - uses: stefanzweifel/git-auto-commit-action@v5
