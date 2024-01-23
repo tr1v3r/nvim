@@ -19,6 +19,13 @@ function mapOption:space()
 	return self
 end
 
+---@param s string
+---@return mapOption
+function mapOption:append(s)
+	self.rhs = self.rhs .. s
+	return self
+end
+
 ---@return mapOption
 function mapOption:cmd()
 	self.rhs = ("<Cmd>%s<CR>"):format(self.rhs)
@@ -35,13 +42,6 @@ end
 ---@return mapOption
 function mapOption:silent()
 	self.options.silent = true
-	return self
-end
-
----@param description string
----@return mapOption
-function mapOption:desc(description)
-	self.options.desc = description
 	return self
 end
 
@@ -67,6 +67,13 @@ end
 ---@return mapOption
 function mapOption:buffer(num)
 	self.buf = num
+	return self
+end
+
+---@param description string
+---@return mapOption
+function mapOption:desc(description)
+	self.options.desc = description
 	return self
 end
 
