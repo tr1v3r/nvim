@@ -95,7 +95,7 @@ local setGeneralKeys = function()
 	-- source $HOME/.config/nvim/cursor.vim
 
 	-- ==================== Copy/Paste ====================
-	map("<LEADER>p", [["_dp]]):mode("x"):noremap():desc("edit: replace block without change clipboard"):set()
+	map("<LEADER>p", [["_dP]]):mode("x"):noremap():desc("edit: replace block without change clipboard"):set()
 
 	-- ==================== Insert Mode Cursor Movement ====================
 	map("<C-a>", "<ESC>A"):mode("i"):noremap():set()
@@ -434,6 +434,8 @@ local setToolPlugKeys = function()
 	map("<LEADER>tb", "Telescope buffers"):mode("n"):cmd():noremap():desc("find: Buffer opened"):set()
 	map("<LEADER>t*", "Telescope grep_string"):mode("n"):cmd():noremap():desc("find: Current word"):set()
 	map("<LEADER>ts", "Telescope persisted"):mode("n"):cmd():noremap():desc("find: Session"):set()
+	map("<LEADER>th", "Telescope help_tags"):mode("n"):cmd():noremap():desc("help: Show helps"):set()
+	map("<LEADER>tG", "Telescope git_status"):mode("n"):cmd():noremap():desc("help: Show helps"):set()
 
 	-- Plugin: dap & dap-go
 	local lazy_call = function(module, funcName)
@@ -476,12 +478,17 @@ local setToolPlugKeys = function()
 		:set()
 
 	-- Plugin: spectre
-	map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]])
+	-- map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]])
+	map("<LEADER>F", 'lua require("spectre").open()')
+		:cmd()
+		:append("i")
 		:mode("n")
 		:noremap()
 		:desc("tool: find and replace")
 		:set()
-	map("<LEADER>F", [[<Cmd>lua require("spectre").open_visual()<CR>i]])
+	map("<LEADER>F", 'lua require("spectre").open_visual()')
+		:cmd()
+		:append("i")
 		:mode("v")
 		:noremap()
 		:desc("tool: find and replace")

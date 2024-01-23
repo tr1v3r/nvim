@@ -1,11 +1,31 @@
 return function()
 	local icons = { ui = require("r1v3r.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
-
 	local telescope = require("telescope")
 
 	telescope.setup({
 		defaults = {
+			mappings = {
+				n = {
+					["u"] = require("telescope.actions").move_selection_previous,
+					["e"] = require("telescope.actions").move_selection_next,
+					["U"] = require("telescope.actions").preview_scrolling_up,
+					["E"] = require("telescope.actions").preview_scrolling_down,
+					["N"] = require("telescope.actions").preview_scrolling_left,
+					["I"] = require("telescope.actions").preview_scrolling_right,
+
+					["<C-d>"] = false,
+					["<C-e>"] = require("telescope.actions").preview_scrolling_down,
+					["<C-n>"] = require("telescope.actions").preview_scrolling_left,
+					["<C-i>"] = require("telescope.actions").preview_scrolling_right,
+				},
+				i = {
+					["<C-d>"] = false,
+					["<C-e>"] = require("telescope.actions").preview_scrolling_down,
+					["<C-n>"] = require("telescope.actions").preview_scrolling_left,
+					["<C-i>"] = require("telescope.actions").preview_scrolling_right,
+				},
+			},
 			vimgrep_arguments = {
 				"rg",
 				"--no-heading",
