@@ -138,7 +138,16 @@ tool["mfussenegger/nvim-dap"] = {
 
 -- 	-- Unmanaged plugin (manually installed and updated)
 -- 	{ dir = "~/my-prototype-plugin" },
--- 	},
+
+tool["work.nvim"] = {
+	lazy = true,
+	-- dev = true,
+	dir = require("r1v3r.settings").private_plugins_dir .. "/work.nvim",
+	cmd = "MyGreet",
+	config = function()
+		require("work").greet()
+	end,
+}
 
 return tool
 

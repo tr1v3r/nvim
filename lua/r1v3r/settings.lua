@@ -1,5 +1,4 @@
 local settings = {}
--- local home = require("r1v3r.global").home
 
 ----------------------------------------------------------------------
 --                          Use Settings                            --
@@ -169,6 +168,8 @@ settings["dap_deps"] = {
 	"delve", -- Go
 	"python", -- Python (debugpy)
 }
+
+settings["private_plugins_dir"] = require("r1v3r.global").vim_path .. "/plugins"
 
 ----------------------------------------------------------------------
 --                          Other Settings                          --
