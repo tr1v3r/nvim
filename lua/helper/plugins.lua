@@ -38,6 +38,6 @@ _G._flash_esc_or_noh = function()
 	if flash_active and state then
 		state:hide()
 	else
-		pcall(vim.cmd.noh)
+		vim.cmd.noh()
 	end
 end
