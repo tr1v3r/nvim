@@ -1,7 +1,7 @@
 *.swp
 .DS_Store
 view/
-plugins/
+/plugins/
 tmp/
 _device.vim
 _device.lua
