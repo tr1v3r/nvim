@@ -35,7 +35,7 @@ _G._flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state
 	end)
-	if flash_active and state then
+	if flash_active and state and state.visible then
 		state:hide()
 	else
 		vim.cmd.noh()
