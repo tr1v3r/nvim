@@ -69,20 +69,6 @@ editor["junegunn/vim-easy-align"] = {
 	lazy = true,
 	cmd = "EasyAlign",
 }
--- old one
--- editor["phaazon/hop.nvim"] = {
--- 	lazy = true,
--- 	branch = "v2",
--- 	event = "BufReadPost",
--- 	config = require("editor.hop"),
--- }
-editor["smoka7/hop.nvim"] = {
-	lazy = true,
-	version = "*",
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.hop"),
-	vsc = true,
-}
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
@@ -156,5 +142,9 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 	},
 }
+
+-- deprecated plugins
+-- phaazon/hop.nvim v2
+-- smoka7/hop.nvim
 
 return editor
