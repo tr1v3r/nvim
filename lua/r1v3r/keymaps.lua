@@ -1,6 +1,17 @@
 require("helper.plugins")
 local map = require("helper.mapping").map
 
+local lazy_call = function(module, funcName, opts)
+	if opts == nil then
+		return function()
+			require(module)[funcName]()
+		end
+	end
+	return function()
+		require(module)[funcName](opts)
+	end
+end
+
 -- =============== Basic Key Mapping ================
 -- Leader key
 vim.g.mapleader = " "
@@ -47,8 +58,8 @@ local setGeneralKeys = function()
 	map("<LEADER>o", "za"):noremap():desc("edit: folding"):set()
 
 	-- Move cursor in find results
-	map("=", "nzz"):noremap():set()
-	map("-", "Nzz"):noremap():set()
+	map("=", "nzz"):noremap():desc("move to next find result"):set()
+	map("-", "Nzz"):noremap():desc("move to last find result"):set()
 
 	map("<LEADER>R", "e!"):mode("n"):noremap():cmd():desc("edit: reload current file"):set()
 
@@ -56,8 +67,8 @@ local setGeneralKeys = function()
 	map("S", "w"):mode("n"):cmd():noremap():desc("edit: save file"):set()
 	map("Q", "quitall"):mode("n"):cmd():noremap():desc("edit: quit all files"):set()
 
-	map(";", ":"):noremap():desc("edit: key replace"):set()
-	map("`", "~"):noremap():desc("edit: key replace"):set()
+	map(";", ":"):noremap():desc("edit: key replace to ':'"):set()
+	map("`", "~"):noremap():desc("edit: key replace to '~'"):set()
 
 	-- ==================== Cursor Movement ====================
 	-- New cursor movement (the default arrow keys are used for resizing windows)
@@ -112,10 +123,10 @@ local setGeneralKeys = function()
 
 	-- ==================== Window management ====================
 	-- map("<LEADER>w", "<C-w>w"):noremap():set()
-	map("<LEADER>u", "<C-w>k"):noremap():set()
-	map("<LEADER>e", "<C-w>j"):noremap():set()
-	map("<LEADER>n", "<C-w>h"):noremap():set()
-	map("<LEADER>i", "<C-w>l"):noremap():set()
+	map("<LEADER>u", "<C-w>k"):noremap():desc("window: move to above window"):set()
+	map("<LEADER>e", "<C-w>j"):noremap():desc("window: move to below window"):set()
+	map("<LEADER>n", "<C-w>h"):noremap():desc("window: move to left window"):set()
+	map("<LEADER>i", "<C-w>l"):noremap():desc("window: move to right window"):set()
 
 	map("tq", "<C-w>o"):noremap():desc("window: close or other windows"):set()
 
@@ -290,13 +301,16 @@ local setEditorPlugKeys = function()
 	-- Plugin: vim-easy-align
 	map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):set()
 
-	-- Plugin: hop
-	map("<LEADER>w", "HopWordMW"):mode("nv"):cmd():noremap():desc("jump: Goto word"):set()
-	-- map("<LEADER>j", "HopLine"):mode("nv"):cmd()::noremap():desc("jump: Goto line"):set()
-	map("<LEADER>k", "HopLineMW"):mode("nv"):cmd():noremap():desc("jump: Goto line"):set()
-	-- map("<LEADER>c", "HopChar1"):mode("nv"):cmd()::noremap():desc("jump: Goto one char"):set()
-	-- map("<LEADER>cc", "HopChar2"):mode("nv"):cmd()::noremap():desc("jump: Goto two chars"):set()
+	-- Plugin: flash
+	local flash_lazy_call = function(funcName)
+		return lazy_call("flash", funcName, nil)
+	end
 
+	map("<LEADER>f", flash_lazy_call("jump")):mode("nv"):noremap():desc("jump: Goto word"):set()
+	map("<LEADER>w", [[TwoCharJump \<]]):mode("nv"):cmd():noremap():desc("jump: 2 char goto word"):set()
+	map("<LEADER>k", [[TwoCharJump ^]]):mode("nv"):cmd():noremap():desc("jump: Goto line"):set()
+
+	-- TODO remove this plugin
 	-- Plugin: treehopper
 	map("m", "lua require('tsht').nodes()"):mode("o"):cmd():desc("jump: Operate across syntax tree"):set()
 
@@ -435,14 +449,9 @@ local setToolPlugKeys = function()
 	map("<LEADER>t*", "Telescope grep_string"):mode("n"):cmd():noremap():desc("find: Current word"):set()
 	map("<LEADER>ts", "Telescope persisted"):mode("n"):cmd():noremap():desc("find: Session"):set()
 	map("<LEADER>th", "Telescope help_tags"):mode("n"):cmd():noremap():desc("help: Show helps"):set()
-	map("<LEADER>tG", "Telescope git_status"):mode("n"):cmd():noremap():desc("help: Show helps"):set()
+	map("<LEADER>tG", "Telescope git_status"):mode("n"):cmd():append("<ESC>"):noremap():desc("help: Show helps"):set()
 
 	-- Plugin: dap & dap-go
-	local lazy_call = function(module, funcName)
-		return function()
-			require(module)[funcName]()
-		end
-	end
 	local dap_lazy_call = function(funcName)
 		return lazy_call("dap", funcName)
 	end
