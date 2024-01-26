@@ -2,28 +2,38 @@ return function()
 	local icons = { ui = require("r1v3r.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
 	local telescope = require("telescope")
+	local actions = require("telescope.actions")
 
 	telescope.setup({
 		defaults = {
 			mappings = {
+				-- below is default keymaps
+				-- `<c-v>`: opens a diff in a vertical split
+				-- `<c-x>`: opens a diff in a horizontal split
+				-- `<c-t>`: opens a diff in a new tab
+				-- ["<C-v>"] = actions.select_vertical,
+				-- ["<C-x>"] = actions.select_horizontal,
+				-- ["<C-t>"] = actions.select_tab,
 				n = {
-					["u"] = require("telescope.actions").move_selection_previous,
-					["e"] = require("telescope.actions").move_selection_next,
-					["U"] = require("telescope.actions").preview_scrolling_up,
-					["E"] = require("telescope.actions").preview_scrolling_down,
-					["N"] = require("telescope.actions").preview_scrolling_left,
-					["I"] = require("telescope.actions").preview_scrolling_right,
+					["u"] = actions.move_selection_previous,
+					["e"] = actions.move_selection_next,
+					["U"] = actions.preview_scrolling_up,
+					["E"] = actions.preview_scrolling_down,
+					["N"] = actions.preview_scrolling_left,
+					["I"] = actions.preview_scrolling_right,
 
 					["<C-d>"] = false,
-					["<C-e>"] = require("telescope.actions").preview_scrolling_down,
-					["<C-n>"] = require("telescope.actions").preview_scrolling_left,
-					["<C-i>"] = require("telescope.actions").preview_scrolling_right,
+					["<C-e>"] = actions.preview_scrolling_down,
+					["<C-n>"] = actions.preview_scrolling_left,
+					["<C-i>"] = actions.preview_scrolling_right,
+
+					["q"] = actions.close,
 				},
 				i = {
 					["<C-d>"] = false,
-					["<C-e>"] = require("telescope.actions").preview_scrolling_down,
-					["<C-n>"] = require("telescope.actions").preview_scrolling_left,
-					["<C-i>"] = require("telescope.actions").preview_scrolling_right,
+					["<C-e>"] = actions.preview_scrolling_down,
+					["<C-n>"] = actions.preview_scrolling_left,
+					["<C-i>"] = actions.preview_scrolling_right,
 				},
 			},
 			vimgrep_arguments = {
