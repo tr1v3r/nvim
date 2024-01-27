@@ -1,7 +1,7 @@
 require("helper.plugins")
 local map = require("helper.mapping").map
 
-local lazy_call = function(module, funcName, opts)
+local function lazy_call(module, funcName, opts)
 	if opts == nil then
 		return function()
 			require(module)[funcName]()
@@ -10,6 +10,17 @@ local lazy_call = function(module, funcName, opts)
 	return function()
 		require(module)[funcName](opts)
 	end
+end
+
+--- @param prefix string
+--- @param cmd string
+local function cmdWithPrefix(prefix, cmd)
+	return prefix .. " " .. cmd
+end
+
+--- @param cmd string
+local function tele(cmd)
+	return cmdWithPrefix("Telescope", cmd)
 end
 
 -- =============== Basic Key Mapping ================
@@ -33,7 +44,7 @@ local setGeneralKeys = function()
 	map("<ESC>", _flash_esc_or_noh):mode("n"):noremap():desc("edit: clear highlight"):set()
 
 	-- Adjacent duplicate words
-	map("<LEADER>dw", [[/\(\<\w\+\>\)\_s*\1]]):noremap():desc("edit: find adjacent duplicate words"):set()
+	map("<LEADER>DW", [[/\(\<\w\+\>\)\_s*\1]]):noremap():desc("edit: find adjacent duplicate words"):set()
 
 	-- Find and replace
 	map([[\s]], ":%s//g<left><left>"):noremap():desc("edit: find and replace string in current file"):set()
@@ -295,15 +306,15 @@ local setEditorPlugKeys = function()
 	-- end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
 
 	-- Plugin: diffview
-	map("<LEADER>DD", "DiffviewOpen"):mode("n"):cmd():noremap():desc("git: Show diff"):set()
-	map("<LEADER>DW", "DiffviewClose"):mode("n"):cmd():noremap():desc("git: Close diff"):set()
+	map("<LEADER>dd", "DiffviewOpen"):mode("n"):cmd():noremap():desc("git: Show diff"):set()
+	map("<LEADER>dw", "DiffviewClose"):mode("n"):cmd():noremap():desc("git: Close diff"):set()
 
 	-- Plugin: vim-easy-align
 	map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):set()
 
 	-- Plugin: flash
-	local flash_lazy_call = function(funcName)
-		return lazy_call("flash", funcName, nil)
+	local flash_lazy_call = function(funcName, opts)
+		return lazy_call("flash", funcName, opts)
 	end
 
 	map("<LEADER>f", flash_lazy_call("jump")):mode("nv"):noremap():desc("jump: Goto word"):set()
@@ -377,7 +388,7 @@ local setToolPlugKeys = function()
 	-- map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
 
 	-- Plugin: trouble
-	map("gt", "TroubleToggle"):mode("n"):cmd():noremap():desc("lsp: Toggle trouble list"):set()
+	map("tl", "TroubleToggle"):mode("n"):cmd():noremap():desc("lsp: Toggle trouble list"):set()
 	map("<LEADER>ta", "TroubleToggle lsp_references")
 		:mode("n")
 		:cmd()
@@ -405,22 +416,22 @@ local setToolPlugKeys = function()
 	-- Plugin: telescope
 	map("<C-p>", _command_panel):mode("n"):noremap():desc("tool: Toggle command panel"):set()
 
-	local extensions = function()
+	local function extensions()
 		return require("telescope").extensions
 	end
-	local undo = function()
+	local function undo()
 		extensions().undo.undo()
 	end
-	local projects = function()
+	local function projects()
 		extensions().projects.projects({})
 	end
-	local frecency = function()
+	local function frecency()
 		extensions().frecency.frecency({})
 	end
-	local grep = function()
+	local function grep()
 		extensions().live_grep_args.live_grep_args()
 	end
-	local colorscheme = function()
+	local function colorscheme()
 		require("telescope.builtin").colorscheme({ enable_preview = true })
 	end
 
@@ -428,22 +439,17 @@ local setToolPlugKeys = function()
 	map("<LEADER>tp", projects):mode("n"):noremap():desc("find: Project"):set()
 	map("<LEADER>tr", frecency):mode("n"):noremap():desc("find: File by frecency"):set()
 	map("<LEADER>tw", grep):mode("n"):noremap():desc("find: Word in project"):set()
-	map("<LEADER>te", "Telescope oldfiles"):mode("n"):cmd():noremap():desc("find: File by history"):set()
-	map("<LEADER>tf", "Telescope find_files"):mode("n"):cmd():noremap():desc("find: File in project"):set()
+	map("<LEADER>te", tele("oldfiles")):mode("n"):cmd():noremap():desc("find: File by history"):set()
+	map("<LEADER>tf", tele("find_files")):mode("n"):cmd():noremap():desc("find: File in project"):set()
 	map("<LEADER>tc", colorscheme):mode("n"):noremap():desc("ui: Change colorscheme for current session"):set()
 	map("<LEADER>tn", "enew"):mode("n"):cmd():noremap():desc("buffer: New"):set()
-	map("<LEADER>tg", "Telescope git_files"):mode("n"):cmd():noremap():desc("find: File in git project"):set()
-	map("<LEADER>tz", "Telescope zoxide list")
-		:mode("n")
-		:cmd()
-		:noremap()
-		:desc("edit: Change current direrctory by zoxide")
-		:set()
-	map("<LEADER>tb", "Telescope buffers"):mode("n"):cmd():noremap():desc("find: Buffer opened"):set()
-	map("<LEADER>t*", "Telescope grep_string"):mode("n"):cmd():noremap():desc("find: Current word"):set()
-	map("<LEADER>ts", "Telescope persisted"):mode("n"):cmd():noremap():desc("find: Session"):set()
-	map("<LEADER>th", "Telescope help_tags"):mode("n"):cmd():noremap():desc("help: Show helps"):set()
-	map("<LEADER>tG", "Telescope git_status"):mode("n"):cmd():append("<ESC>"):noremap():desc("help: Show helps"):set()
+	map("<LEADER>tg", tele("git_files")):mode("n"):cmd():noremap():desc("find: File in git project"):set()
+	map("<LEADER>tz", tele("zoxide list")):mode("n"):cmd():noremap():desc("edit: Change current dir by zoxide"):set()
+	map("<LEADER>tb", tele("buffers")):mode("n"):cmd():noremap():desc("find: Buffer opened"):set()
+	map("<LEADER>t*", tele("grep_string")):mode("n"):cmd():noremap():desc("find: Current word"):set()
+	map("<LEADER>ts", tele("persisted")):mode("n"):cmd():noremap():desc("find: Session"):set()
+	map("<LEADER>th", tele("help_tags")):mode("n"):cmd():noremap():desc("help: Show helps"):set()
+	map("<LEADER>tG", tele("git_status")):mode("n"):cmd():append("<ESC>"):noremap():desc("help: Show helps"):set()
 
 	-- Plugin: dap & dap-go
 	local dap_lazy_call = function(funcName)
@@ -594,13 +600,24 @@ function mapping.lsp(buf)
 		:set()
 	-- map("<LEADER>cw", "Lspsaga rename"):mode("n"):cmd():buffer(buf):desc("lsp: Rename in file range"):set()
 	map("<LEADER>cw", "Lspsaga rename ++project"):mode("n"):cmd():buffer(buf):desc("lsp: Rename in project range"):set()
-	map("<LEADER>hh", "Lspsaga hover_doc"):mode("n"):cmd():buffer(buf):desc("lsp: Show doc"):set()
+	map("h", "Lspsaga hover_doc"):mode("n"):cmd():buffer(buf):desc("lsp: Show doc"):set()
 	map("ga", "Lspsaga code_action"):mode("nv"):cmd():buffer(buf):desc("lsp: Code action for cursor"):set()
 	map("gD", "Lspsaga peek_definition"):mode("n"):cmd():buffer(buf):desc("lsp: Preview definition"):set()
 	map("gd", "Glance definitions"):mode("n"):cmd():buffer(buf):desc("lsp: Goto definition"):set()
 	map("gr", "Glance references"):mode("n"):cmd():buffer(buf):desc("lsp: Show reference"):set()
-	map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
-	map("<LEADER>co", "Lspsaga outgoing_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show outgoing calls"):set()
+	map("gi", "Glance implementations"):mode("n"):cmd():buffer(buf):desc("lsp: Show implementations"):set()
+	map("gn", "Glance type_definitions"):mode("n"):cmd():buffer(buf):desc("lsp: Show type_definitions"):set()
+	-- map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
+	-- map("<LEADER>co", "Lspsaga outgoing_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show outgoing calls"):set()
+
+	map("<LEADER>ci", tele("lsp_incoming_calls")):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
+	map("<LEADER>co", tele("lsp_outgoing_calls")):mode("n"):cmd():buffer(buf):desc("lsp: Show outgoing calls"):set()
+	map("<LEADER>tS", tele("lsp_dynamic_workspace_symbols"))
+		:mode("n")
+		:cmd()
+		:buffer(buf)
+		:desc("lsp: Show workspace symbols")
+		:set()
 end
 
 function mapping.gitsigns(buf)

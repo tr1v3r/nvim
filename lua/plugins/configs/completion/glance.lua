@@ -26,7 +26,7 @@ return function()
 			fold_open = icons.ui.ArrowOpen,
 		},
 		indent_lines = { enable = true },
-		winbar = { enable = true },
+		winbar = { enable = false },
 		mappings = {
 			list = {
 				["u"] = actions.previous,
@@ -36,21 +36,23 @@ return function()
 				["<S-Tab>"] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
 				["<Tab>"] = actions.next_location, -- Bring the cursor to the next location skipping groups in the list
 				["<C-u>"] = actions.preview_scroll_win(8),
-				["<C-d>"] = actions.preview_scroll_win(-8),
+				["<C-e>"] = actions.preview_scroll_win(-8),
 				["<CR>"] = actions.jump,
 				["v"] = actions.jump_vsplit,
 				["s"] = actions.jump_split,
 				["t"] = actions.jump_tab,
 				["c"] = actions.close_fold,
 				["o"] = actions.open_fold,
-				["[]"] = actions.enter_win("preview"), -- Focus preview window
+				["i"] = actions.open_fold,
+				["right"] = actions.open_fold,
+				["n"] = actions.enter_win("preview"), -- Focus preview window
+				["<Left>"] = actions.enter_win("preview"), -- Focus preview window
 				["q"] = actions.close,
-				["Q"] = actions.close,
 				["<Esc>"] = actions.close,
-				["gq"] = actions.quickfix,
+				["l"] = actions.quickfix,
 			},
 			preview = {
-				["Q"] = actions.close,
+				["<ESC><ESC>"] = actions.close,
 				["<C-c>q"] = actions.close,
 				["<C-c>o"] = actions.jump,
 				["<C-c>v"] = actions.jump_vsplit,
@@ -58,7 +60,7 @@ return function()
 				["<C-c>t"] = actions.jump_tab,
 				["<C-p>"] = actions.previous_location,
 				["<C-n>"] = actions.next_location,
-				["[]"] = actions.enter_win("list"), -- Focus list window
+				["q"] = actions.enter_win("list"), -- Focus list window
 			},
 		},
 		hooks = {
