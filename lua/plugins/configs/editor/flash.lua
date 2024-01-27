@@ -62,12 +62,12 @@ return function()
 	local function TwoCharJump(opts)
 		local Flash = require("flash")
 
-		---@param opts Flash.Format
-		local function format(opts)
+		---@param fmt_opts Flash.Format
+		local function format(fmt_opts)
 			-- always show first and second label
 			return {
-				{ opts.match.label1, "FlashMatch" },
-				{ opts.match.label2, "FlashLabel" },
+				{ fmt_opts.match.label1, "FlashMatch" },
+				{ fmt_opts.match.label2, "FlashLabel" },
 			}
 		end
 

@@ -338,7 +338,7 @@ local setToolPlugKeys = function()
 
 	--  Plugin: lazygit
 	-- map("<C-G>", "LazyGit"):noremap():set()
-	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set()
+	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
 
 	-- Plugin: ranger
 	-- map("R", "Ranger"):mode("n"):cmd():noremap():desc("tool: Toggle ranger"):set()
