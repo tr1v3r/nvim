@@ -15,5 +15,5 @@ return function()
 		nvim_lsp.dartls.setup(final_opts)
 	end
 
-	vim.api.nvim_command([[LspStart]]) -- Start LSPs
+	vim.cmd([[LspStart]]) -- Start LSPs
 end

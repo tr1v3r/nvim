@@ -7,6 +7,7 @@ return function()
 		"NvimTree",
 		"TelescopePrompt",
 		"lazy",
+		"Glance",
 	}
 
 	local opts = {

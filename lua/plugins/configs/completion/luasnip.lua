@@ -1,4 +1,5 @@
 return function()
+	-- TODO update snippets
 	local snippet_path = vim.fn.stdpath("config") .. "/snips/"
 	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
 		vim.opt.rtp:append(snippet_path)

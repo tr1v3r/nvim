@@ -25,6 +25,7 @@ completion["dnlhc/glance.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.glance"),
 }
+-- Neovim plugin for a code outline window
 completion["stevearc/aerial.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
