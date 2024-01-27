@@ -8,7 +8,8 @@ return function()
 	-- default config: https://github.com/folke/flash.nvim/tree/main#%EF%B8%8F-configuration
 	require("flash").setup({
 		-- labels = "asdfghjklqwertyuiopzxcvbnm",
-		labels = "tsrneidhaogjplfuwyqvbkcmxz", -- for colemak keymaps
+		-- labels = "tsrneidhaogjplfuwyqvbkcmxz",
+		labels = "neitshdrlvkfmuypgjbaocwqxz", -- for colemak keymaps
 		label = {
 			-- allow uppercase labels
 			uppercase = false,
@@ -19,10 +20,25 @@ return function()
 			distance = true,
 			-- position of the label extmark
 			style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+			rainbow = {
+				enabled = true,
+				-- number between 1 and 9
+				shade = 7,
+			},
 		},
 		jump = {
 			-- automatically jump when there is only one match
 			autojump = true,
+		},
+		treesitter = {
+			labels = "neitshdrlvkfmuypgjbaocwqxz",
+			jump = { pos = "range" },
+			search = { incremental = false },
+			label = { before = true, after = true, style = "inline" },
+			highlight = {
+				backdrop = false,
+				matches = false,
+			},
 		},
 		modes = {
 			search = { enabled = false },

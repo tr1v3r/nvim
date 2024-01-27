@@ -309,10 +309,8 @@ local setEditorPlugKeys = function()
 	map("<LEADER>f", flash_lazy_call("jump")):mode("nv"):noremap():desc("jump: Goto word"):set()
 	map("<LEADER>w", [[TwoCharJump \<]]):mode("nv"):cmd():noremap():desc("jump: 2 char goto word"):set()
 	map("<LEADER>k", [[TwoCharJump ^]]):mode("nv"):cmd():noremap():desc("jump: Goto line"):set()
-
-	-- TODO remove this plugin
-	-- Plugin: treehopper
-	map("m", "lua require('tsht').nodes()"):mode("o"):cmd():desc("jump: Operate across syntax tree"):set()
+	map("m", flash_lazy_call("treesitter")):mode("o"):desc("edit: select by treesitter"):set()
+	map("M", flash_lazy_call("treesitter_search")):mode("o"):desc("edit: select by treesitter"):set()
 
 	-- Plugin: tabout
 	-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):set()
@@ -340,11 +338,7 @@ local setToolPlugKeys = function()
 
 	--  Plugin: lazygit
 	-- map("<C-G>", "LazyGit"):noremap():set()
-	map("<C-g>", _open_lazygit) -- luacheck: ignore
-		:mode("n")
-		:noremap()
-		:desc("tool: Toggle lazygit")
-		:set()
+	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set()
 
 	-- Plugin: ranger
 	-- map("R", "Ranger"):mode("n"):cmd():noremap():desc("tool: Toggle ranger"):set()

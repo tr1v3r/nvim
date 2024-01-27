@@ -164,7 +164,7 @@ return function()
 					GlanceListMatch = { fg = cp.lavender, style = { "bold" } },
 					GlanceFoldIcon = { fg = cp.green },
 
-					-- For nvim-treehopper
+					-- For treehopper
 					TSNodeKey = {
 						fg = cp.peach,
 						bg = transparent_background and cp.none or cp.base,
