@@ -88,9 +88,9 @@ editor["kevinhwang91/nvim-hlslens"] = {
 	event = "BufReadPost",
 	config = require("editor.hlslens"),
 }
-editor["gcmt/wildfire.vim"] = {
+editor["sustech-data/wildfire.nvim"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = "VeryLazy",
 	config = require("editor.wildfire"),
 	vsc = true,
 }

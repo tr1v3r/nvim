@@ -1,6 +1,3 @@
 return function()
-	vim.g.wildfire_objects = {
-		["*"] = { "i'", 'i"', "i)", "i]", "i}" },
-		["html,xml"] = { "at", "it" },
-	}
+	require("wildfire").setup()
 end
