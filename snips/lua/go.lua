@@ -2,7 +2,7 @@ local snippets = {}
 
 -- https://zjp-cn.github.io/neovim0.6-blogs/nvim/luasnip/doc1.html
 
-table.insert(snippets, s({ trig = "trigger", dscr = "lua snippets test" }, fmt("test {{\n\treturn {}\n}}", { i(1) })))
+table.insert(snippets, s({ trig = "trigger", dscr = "lua snippets test" }, fmt("test {{\n\treturn {}\n}}", { i(1) }))) -- luacheck: ignore
 
 -- table.insert(snippets, s("autotrig", t("autotriggered, if enabled")))
 
