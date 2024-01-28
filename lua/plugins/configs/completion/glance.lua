@@ -44,7 +44,7 @@ return function()
 				["c"] = actions.close_fold,
 				["o"] = actions.open_fold,
 				["i"] = actions.open_fold,
-				["right"] = actions.open_fold,
+				["<Right>"] = actions.open_fold,
 				["n"] = actions.enter_win("preview"), -- Focus preview window
 				["<Left>"] = actions.enter_win("preview"), -- Focus preview window
 				["q"] = actions.close,

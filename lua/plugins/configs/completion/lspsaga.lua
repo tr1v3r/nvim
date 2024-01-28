@@ -81,7 +81,7 @@ return function()
 		},
 		-- Diagnostics: https://nvimdev.github.io/lspsaga/diagnostic
 		diagnostic = {
-			max_width = 0.5,
+			max_width = 0.8,
 			max_height = 0.6,
 			text_hl_follow = true,
 			show_code_action = true,
@@ -109,8 +109,8 @@ return function()
 		},
 		-- Hover: https://nvimdev.github.io/lspsaga/hover
 		hover = {
-			max_width = 0.3,
-			max_height = 0.7,
+			max_width = 0.9,
+			max_height = 0.8,
 			open_link = "gl",
 			open_browser = "silent !" .. require("r1v3r.settings").external_browser,
 		},
@@ -135,25 +135,26 @@ return function()
 			separator = " " .. icons.ui.Separator,
 			hide_keyword = false,
 			show_file = false,
+			-- folder_level = 2,
 			color_mode = true,
 		},
 		-- Impl: https://nvimdev.github.io/lspsaga/implement/
 		implement = {
 			enable = true,
 			sign = true,
-			virtual_text = false,
+			virtual_text = true,
 		},
 		-- Callhierarchy: https://nvimdev.github.io/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
 			keys = {
-				edit = "e",
+				edit = "<CR>",
 				vsplit = "v",
 				split = "s",
 				tabe = "t",
 				quit = "q",
 				shuttle = "[]",
-				toggle_or_req = "u",
+				toggle_or_req = "o",
 				close = "<Esc>",
 			},
 		},
