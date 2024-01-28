@@ -4,9 +4,6 @@ return function()
 		type = require("r1v3r.icons").get("type"),
 		cmp = require("r1v3r.icons").get("cmp"),
 	}
-	local t = function(str)
-		return vim.api.nvim_replace_termcodes(str, true, true, true)
-	end
 
 	local border = function(hl)
 		return {
@@ -19,6 +16,12 @@ return function()
 			{ "└", hl },
 			{ "│", hl },
 		}
+	end
+
+	local has_words_before = function()
+		unpack = unpack or table.unpack
+		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 	end
 
 	local compare = require("cmp.config.compare")
@@ -67,6 +70,7 @@ return function()
 			compare.order,
 		}
 
+	local luasnip = require("luasnip")
 	local cmp = require("cmp")
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
@@ -139,8 +143,10 @@ return function()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif require("luasnip").expand_or_locally_jumpable() then
-					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"))
+				elseif luasnip.expand_or_locally_jumpable() then
+					luasnip.expand_or_jump()
+				elseif has_words_before() then
+					cmp.complete()
 				else
 					fallback()
 				end
@@ -148,15 +154,15 @@ return function()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("luasnip").jumpable(-1) then
-					vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<C-e>"] = cmp.mapping(function(fallback)
 				if require("luasnip").expand_or_locally_jumpable() then
-					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"))
+					luasnip.expand_or_jump()
 				else
 					fallback()
 				end
