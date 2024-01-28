@@ -1,5 +1,6 @@
 return function()
 	require("aerial").setup({
+		backends = { "lsp", "treesitter", "markdown", "man" },
 		lazy_load = false,
 		close_on_select = true,
 		highlight_on_jump = false,
@@ -29,8 +30,8 @@ return function()
 			["<2-LeftMouse>"] = "actions.jump",
 			["<C-v>"] = "actions.jump_vsplit",
 			["<C-s>"] = "actions.jump_split",
-			["<C-d>"] = "actions.down_and_scroll",
 			["<C-u>"] = "actions.up_and_scroll",
+			["<C-e>"] = "actions.down_and_scroll",
 			["{"] = "actions.prev",
 			["}"] = "actions.next",
 			["[["] = "actions.prev_up",
