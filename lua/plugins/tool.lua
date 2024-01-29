@@ -133,6 +133,7 @@ tool["mfussenegger/nvim-dap"] = {
 		},
 		{ "jay-babu/mason-nvim-dap.nvim" },
 		{ "leoluz/nvim-dap-go" },
+		{ "Weissle/persistent-breakpoints.nvim", config = require("tool.dap.persistent-breakpoints") },
 	},
 }
 

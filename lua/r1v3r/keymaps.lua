@@ -27,7 +27,7 @@ end
 -- Leader key
 vim.g.mapleader = " "
 
-local setGeneralKeys = function()
+local function setGeneralKeys()
 	-- map("s", "<nop>"):noremap():set()
 
 	-- Undo
@@ -238,7 +238,7 @@ local setGeneralKeys = function()
 end
 
 -- ==================== Plugins Keymaps ====================
-local setLazyKeys = function()
+local function setLazyKeys()
 	-- Package manager: lazy.nvim
 	map("<LEADER>LL", "Lazy"):mode("n"):cmd():noremap():nowait():desc("package: Show"):set()
 	map("<LEADER>Ls", "Lazy sync"):mode("n"):cmd():noremap():nowait():desc("package: Sync"):set()
@@ -252,11 +252,11 @@ local setLazyKeys = function()
 	map("<LEADER>Lx", "Lazy clean"):mode("n"):cmd():noremap():nowait():desc("package: Clean"):set()
 end
 
-local setCompletionPlugKeys = function()
+local function setCompletionPlugKeys()
 	-- map("<C-f>", "FormatToggle"):mode("n"):cmd()::noremap():desc("Formater: Toggle format on save"):set()
 end
 
-local setEditorPlugKeys = function()
+local function setEditorPlugKeys()
 	-- Plugin: accelerated-jk
 	map("u", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
 	map("e", "<Plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
@@ -331,12 +331,94 @@ local setEditorPlugKeys = function()
 	map("<A-s>", "SudaWrite"):mode("n"):cmd():noremap():desc("edit: Save file using sudo"):set()
 end
 
-local setLangPlugKeys = function()
+local function setLangPlugKeys()
 	-- Plugin MarkdownPreview
 	map("<F12>", "MarkdownPreviewToggle"):mode("n"):cmd():noremap():desc("tool: Preview markdown"):set()
 end
 
-local setToolPlugKeys = function()
+local function setDapPlugKeys()
+	-- Plugin: dap & dap-go
+	local dap_lazy_call = function(funcName, opts)
+		return lazy_call("dap", funcName, opts)
+	end
+	local dapui_lazy_call = function(funcName, opts)
+		return lazy_call("dapui", funcName, opts)
+	end
+	local persisted_lazy_call = function(funcName, opts)
+		return lazy_call("persistent-breakpoints.api", funcName, opts)
+	end
+	local go_lazy_call = function(funcName)
+		return lazy_call("dap-go", funcName)
+	end
+
+	map("<F4>", dap_lazy_call("terminate")):mode("n"):noremap():desc("debug: Stop"):set()
+	map("<F5>", dap_lazy_call("continue")):mode("n"):noremap():desc("debug: Run/Continue"):set()
+	map("<F6>", dap_lazy_call("pause")):mode("n"):noremap():desc("debug: Pause"):set()
+	map("<F10>", dap_lazy_call("step_over")):mode("n"):noremap():desc("debug: Step over"):set()
+	map("<F11>", dap_lazy_call("step_into")):mode("n"):noremap():desc("debug: Step into"):set()
+	map("<S-F11>", dap_lazy_call("step_out")):mode("n"):noremap():desc("debug: Step out"):set()
+	map("<LEADER>dc", dap_lazy_call("run_to_cursor")):mode("n"):noremap():desc("debug: Run to cursor"):set()
+	map("<LEADER>dn", dap_lazy_call("up"))
+		:mode("n")
+		:noremap()
+		:desc("debug: Go down in current stacktrace without stepping")
+		:set()
+	map("<LEADER>di", dap_lazy_call("down"))
+		:mode("n")
+		:noremap()
+		:desc("debug: Go up in current stacktrace without stepping")
+		:set()
+
+	map("<LEADER>db", persisted_lazy_call("toggle_breakpoint"))
+		:mode("n")
+		:noremap()
+		:desc("debug: Toggle breakpoint")
+		:set()
+	map("<LEADER>dC", persisted_lazy_call("clear_all_breakpoints"))
+		:mode("n")
+		:noremap()
+		:desc("debug: Clear all breakpoints")
+		:set()
+	map("<LEADER>dB", persisted_lazy_call("set_conditional_breakpoint"))
+		:mode("n")
+		:noremap()
+		:silent()
+		:desc("debug: Set breakpoint with condition")
+		:set()
+	-- require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	map("<LEADER>dP", function()
+			require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+		end)
+		:mode("n")
+		:noremap()
+		:silent()
+		:desc("debug: Set breakpoint with log")
+		:set()
+
+	map("<LEADER>du", go_lazy_call("debug_test")):mode("n"):noremap():desc("debug: Run Current Unit Test"):set()
+	map("<LEADER>dU", go_lazy_call("debug_last_test")):mode("n"):noremap():desc("debug: Run Last Unit Test"):set()
+	map("<LEADER>dl", dap_lazy_call("run_last")):mode("n"):noremap():desc("debug: Run last"):set()
+	map("<LEADER>do", function()
+			require("dap").repl.open()
+		end)
+		:mode("n")
+		:noremap()
+		:silent()
+		:desc("debug: Open REPL")
+		:set()
+
+	map("<LEADER>dL", "DapShowLog"):mode("n"):cmd():noremap():desc("debug: show log"):set()
+	map("<LEADER>dp", dapui_lazy_call("toggle")):mode("n"):cmd():noremap():desc("debug: toggle dapui"):set()
+	map("<LEADER>de", dapui_lazy_call("eval")):mode("nv"):cmd():noremap():desc("debug: inspect change value"):set()
+	map("<LEADER>dA", [[call VimuxRunCommand("dlv attach $(pidof dlv)")]])
+		:mode("nv")
+		:cmd()
+		:noremap()
+		:desc("debug: dlv attach")
+		:set()
+end
+
+local function setToolPlugKeys()
 	-- Plugin: vim-fugitive ; using lazggit
 	-- map("gps", "G push"):cmd():noremap():desc("git: Push"):set()
 	-- map("gpl", "G pull"):cmd():noremap():desc("git: Pull"):set()
@@ -451,41 +533,6 @@ local setToolPlugKeys = function()
 	map("<LEADER>th", tele("help_tags")):mode("n"):cmd():noremap():desc("help: Show helps"):set()
 	map("<LEADER>tG", tele("git_status")):mode("n"):cmd():append("<ESC>"):noremap():desc("help: Show helps"):set()
 
-	-- Plugin: dap & dap-go
-	local dap_lazy_call = function(funcName)
-		return lazy_call("dap", funcName)
-	end
-	local go_lazy_call = function(funcName)
-		return lazy_call("dap-go", funcName)
-	end
-
-	map("<LEADER>du", go_lazy_call("debug_test")):mode("n"):noremap():desc("debug: Run Current Unit Test"):set()
-	map("<LEADER>dU", go_lazy_call("debug_last_test")):mode("n"):noremap():desc("debug: Run Last Unit Test"):set()
-	map("<F5>", dap_lazy_call("continue")):mode("n"):noremap():desc("debug: Run/Continue"):set()
-	map("<F6>", dap_lazy_call("terminate")):mode("n"):noremap():desc("debug: Stop"):set()
-	map("<F8>", dap_lazy_call("toggle_breakpoint")):mode("n"):noremap():desc("debug: Toggle breakpoint"):set()
-	map("<F9>", dap_lazy_call("step_into")):mode("n"):noremap():desc("debug: Step into"):set()
-	map("<F10>", dap_lazy_call("step_out")):mode("n"):noremap():desc("debug: Step out"):set()
-	map("<F11>", dap_lazy_call("step_over")):mode("n"):noremap():desc("debug: Step over"):set()
-	map("<LEADER>db", function()
-			require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end)
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("debug: Set breakpoint with condition")
-		:set()
-	map("<LEADER>dc", dap_lazy_call("run_to_cursor")):mode("n"):noremap():desc("debug: Run to cursor"):set()
-	map("<LEADER>dl", dap_lazy_call("run_last")):mode("n"):noremap():desc("debug: Run last"):set()
-	map("<LEADER>do", function()
-			require("dap").repl.open()
-		end)
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("debug: Open REPL")
-		:set()
-
 	-- Plugin: spectre
 	-- map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]])
 	map("<LEADER>F", 'lua require("spectre").open()')
@@ -502,9 +549,11 @@ local setToolPlugKeys = function()
 		:noremap()
 		:desc("tool: find and replace")
 		:set()
+
+	setDapPlugKeys()
 end
 
-local setUIPlugKeys = function()
+local function setUIPlugKeys()
 	-- Plugin: bufferline
 	-- map("<A-w>", "BufDel!"):mode("n"):cmd():noremap():desc("buffer: Close current"):set()
 	-- map("<A-q>", "BufferLineCloseOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):set()
@@ -529,7 +578,7 @@ local setUIPlugKeys = function()
 	map("<A-o>", "BufDelOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):set()
 end
 
-local setNeovideKeys = function()
+local function setNeovideKeys()
 	-- Refer to https://neovide.dev/faq.html?highlight=paste#how-can-i-use-cmd-ccmd-v-to-copy-and-paste
 
 	map("<D-s>", "w"):mode("n"):cmd():set() -- Save
@@ -546,7 +595,7 @@ local setNeovideKeys = function()
 	map("<D-v>", "<C-R>+"):mode("v"):noremap():silent():set()
 end
 
-local setKeys = function()
+local function setKeys()
 	setGeneralKeys()
 
 	if vim.g.vscode then
