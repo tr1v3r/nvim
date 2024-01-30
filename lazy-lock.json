@@ -67,6 +67,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "b427ac5f9dff494f839e81441fb3f04a58cbcfbc" },
   "paint.nvim": { "branch": "main", "commit": "6ce64212804f425073c61ab0d9c2b034f0435260" },
   "persisted.nvim": { "branch": "main", "commit": "edd8aa41cd87f9da1b6ef0c584068dea192f65b7" },
+  "persistent-breakpoints.nvim": { "branch": "main", "commit": "01e43512ef8d137f2b9e5c1c74fd35c37e787b59" },
   "plenary.nvim": { "branch": "master", "commit": "663246936325062427597964d81d30eaa42ab1e4" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "rainbow": { "branch": "master", "commit": "61f719aebe0dc5c3048330c50db72cfee1afdd34" },
