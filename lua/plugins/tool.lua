@@ -133,8 +133,11 @@ tool["mfussenegger/nvim-dap"] = {
 		},
 		{ "jay-babu/mason-nvim-dap.nvim" },
 		{ "leoluz/nvim-dap-go" },
-		{ "Weissle/persistent-breakpoints.nvim", config = require("tool.dap.persistent-breakpoints") },
 	},
+}
+tool["Weissle/persistent-breakpoints.nvim"] = {
+	event = "BufReadPost",
+	config = require("tool.dap.persistent-breakpoints"),
 }
 
 -- 	-- Unmanaged plugin (manually installed and updated)
