@@ -82,18 +82,30 @@ return function()
 					corner = "└ ",
 					edge = "│ ",
 					item = "│ ",
+					bottom = "─",
 					none = "  ",
 				},
 			},
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
-				webdev_colors = true,
+				web_devicons = {
+					file = {
+						enable = true,
+						color = true,
+					},
+					folder = {
+						enable = false,
+						color = true,
+					},
+				},
 				git_placement = "after",
 				show = {
 					file = true,
 					folder = true,
 					folder_arrow = true,
 					git = true,
+					-- modified = true,
+					diagnostics = true,
 				},
 				padding = " ",
 				symlink_arrow = " 󰁔 ",
@@ -162,9 +174,14 @@ return function()
 			},
 		},
 		diagnostics = {
-			enable = false,
-			show_on_dirs = false,
+			enable = true,
+			show_on_dirs = true,
+			show_on_open_dirs = true,
 			debounce_delay = 50,
+			severity = {
+				min = vim.diagnostic.severity.HINT,
+				max = vim.diagnostic.severity.ERROR,
+			},
 			icons = {
 				hint = icons.diagnostics.Hint_alt,
 				info = icons.diagnostics.Information_alt,
