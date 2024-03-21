@@ -19,7 +19,7 @@ vim.api.nvim_create_user_command("FormatToggleForFt", function(opts)
 end, { nargs = 1, complete = "filetype" })
 
 function M.enable_format_on_save(from_config)
-	local opts = { pattern = "*", timeout = 3000 }
+	local opts = { pattern = "*", timeout = 1000 }
 	vim.api.nvim_create_augroup("format_on_save", { clear = true })
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = "format_on_save",
