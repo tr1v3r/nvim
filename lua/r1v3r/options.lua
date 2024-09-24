@@ -16,7 +16,7 @@ end
 function options.o()
 	return {
 		termguicolors = true,
-		t_Co = 256, -- vim-monokai now only support 256 colours in terminal.
+		-- t_Co = 256, -- vim-monokai now only support 256 colours in terminal.
 
 		-- Show command in status line
 		showcmd = true,
@@ -112,7 +112,7 @@ function options.o()
 		-- Set the format of grep output
 		grepformat = "%f:%l:%c:%m",
 		-- Set grep program to ripgrep
-		greprg = "rg --hidden --vimgrep --smart-case",
+		grepprg = "rg --hidden --vimgrep --smart-case",
 		-- Set command history recorded items
 		history = 2000,
 	}
