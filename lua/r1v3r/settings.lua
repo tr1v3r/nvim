@@ -37,6 +37,7 @@ settings["background"] = "dark"
 -- Parameters will be automatically completed as you type.
 -- Example: { sky = "#04A5E5" }
 ---@type palette
+---@diagnostic disable-next-line: missing-fields
 settings["palette_overwrite"] = {}
 
 -- Set the options for neovim's gui clients like `neovide` and `neovim-qt` here.
@@ -71,6 +72,10 @@ settings["neovide_config"] = {
 -- Set it to false if there are no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
+
+-- Set format timeout here (in ms).
+---@type number
+settings["format_timeout"] = 1000
 
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean

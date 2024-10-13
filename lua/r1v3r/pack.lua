@@ -19,7 +19,7 @@ local Lazy = {}
 
 -- check: check if lazy.nvim exists, if not, download it
 function Lazy.check()
-	if not vim.loop.fs_stat(lazy_path) then
+	if not vim.fn.isdirectory(lazy_path) then
 		local lazy_repo = use_ssh and "git@github.com:folke/lazy.nvim.git" or "https://github.com/folke/lazy.nvim.git"
 		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. " " .. lazy_path)
 	end

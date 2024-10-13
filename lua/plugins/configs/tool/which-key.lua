@@ -23,12 +23,12 @@ return function()
 			group = icons.misc.Add,
 		},
 
-		window = {
+		win = {
 			border = "none",
-			position = "bottom",
-			margin = { 1, 0, 1, 0 },
-			padding = { 1, 1, 1, 1 },
-			winblend = 0,
+			padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+			wo = {
+				winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+			},
 		},
 	})
 end

@@ -258,10 +258,10 @@ end
 
 local function setEditorPlugKeys()
 	-- Plugin: accelerated-jk
-	map("u", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
-	map("e", "<Plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
-	map("gu", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():set()
-	map("ge", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():set()
+	map("u", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():set()
+	map("e", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():set()
+	map("gu", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
+	map("ge", "<plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
 
 	-- Plugin: persisted.nvim
 	map("<LEADER>ss", "SessionSave"):mode("n"):cmd():noremap():desc("session: save"):set()

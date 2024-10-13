@@ -1,4 +1,5 @@
 return function()
+	local settings = require("r1v3r.settings")
 	local null_ls = require("null-ls")
 	local formatting = null_ls.builtins.formatting
 	local formatter_config_dir = "completion.formatters."
@@ -30,7 +31,7 @@ return function()
 			filetypes = { "lua" },
 			extra_args = require(formatter_config_dir .. "stylua"),
 		}),
-		formatting.rustfmt,
+		-- formatting.rustfmt, -- deprecated format plugin: https://github.com/nvimtools/none-ls.nvim/issues/58
 		formatting.goimports_reviser.with({
 			extra_args = require(formatter_config_dir .. "goimports-reviser"),
 		}),
@@ -42,6 +43,7 @@ return function()
 		log_level = "warn",
 		update_in_insert = false,
 		sources = sources,
+		default_timeout = settings.format_timeout,
 	})
 
 	require("completion.mason-null-ls").setup()
