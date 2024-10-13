@@ -89,7 +89,7 @@ function options.o()
 		-- Use visual bell instead of beeping sound
 		visualbell = true,
 		-- Set the time interval for writing swap and backup files
-		updatetime = 100,
+		updatetime = 300,
 		-- Enable blockwise virtual editing
 		virtualedit = "block",
 		-- Automatically change the current directory to the directory of the current file

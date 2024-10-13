@@ -168,15 +168,20 @@ return function()
 		lsp = {
 			function()
 				local buf_ft = vim.api.nvim_get_option_value("filetype", { scope = "local" })
-				local clients = vim.lsp.get_active_clients()
+				local clients = vim.lsp.get_clients()
 				local lsp_lists = {}
 				local available_servers = {}
+				-- 如果没有活跃的 LSP 客户端，直接返回提示
 				if next(clients) == nil then
 					return icons.misc.NoActiveLsp -- No server available
 				end
 				for _, client in ipairs(clients) do
-					local filetypes = client.config.filetypes
+					-- 确保 client.config 存在 filetypes
+					---@diagnostic disable-next-line: undefined-field
+					local filetypes = client.config and client.config.filetypes or {}
 					local client_name = client.name
+
+					-- 检查当前缓冲区的文件类型是否被该 LSP 客户端支持
 					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
 						-- Avoid adding servers that already exists.
 						if not lsp_lists[client_name] then
