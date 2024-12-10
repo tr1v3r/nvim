@@ -62,11 +62,14 @@ return function()
 	local function TwoCharJump(opts)
 		local Flash = require("flash")
 
+		---@diagnostic disable-next-line: undefined-doc-name
 		---@param fmt_opts Flash.Format
 		local function format(fmt_opts)
 			-- always show first and second label
 			return {
+				---@diagnostic disable-next-line: undefined-field
 				{ fmt_opts.match.label1, "FlashMatch" },
+				---@diagnostic disable-next-line: undefined-field
 				{ fmt_opts.match.label2, "FlashLabel" },
 			}
 		end

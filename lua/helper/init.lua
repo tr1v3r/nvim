@@ -155,18 +155,30 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	return hex
 end
 
----Extend a highlight group
+--- Extend a highlight group
 ---@param name string @Target highlight group name
 ---@param def table @Attributes to be extended
 function M.extend_hl(name, def)
-	local hlexists = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
-	if not hlexists then
-		-- Do nothing if highlight group not found
+	-- Validate inputs
+	if type(name) ~= "string" then
+		error("extend_hl: 'name' must be a string")
+	end
+	if type(def) ~= "table" then
+		error("extend_hl: 'def' must be a table")
+	end
+
+	-- Try to get the current highlight definition
+	local success, current_def = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
+	if not success or not current_def then
+		vim.notify("Highlight group '" .. name .. "' does not exist", vim.log.levels.WARN)
 		return
 	end
-	local current_def = vim.api.nvim_get_hl(0, { name = name, link = false })
+
+	-- Merge attributes
 	local combined_def = vim.tbl_deep_extend("force", current_def, def)
 
+	-- Apply the new highlight definition
+	---@diagnostic disable-next-line: param-type-mismatch
 	vim.api.nvim_set_hl(0, name, combined_def)
 end
 
@@ -272,14 +284,17 @@ end
 -- Create a new terminal in a floating window
 -- @param cmd string @The command to run in the terminal
 function M.float_terminal(cmd)
+	-- ex:
+	-- local cmd1 = "ls -l"
+	-- local cmd2 = { flags = { "ls", "-l", "/home/user" } }
 	if type(cmd) == "table" then
-		cmd = table.concat(cmd.fargs, " ")
+		cmd = table.concat(cmd.flags, " ")
 	end
 
 	-- 获取当前窗口的尺寸和位置
 	-- get current nvim size, set floating window size and position
-	local maxWidth = vim.api.nvim_get_option("columns") -- vim.api.nvim_win_get_width(0) -- vim.o.columns
-	local maxHeight = vim.api.nvim_get_option("lines") -- vim.api.nvim_win_get_height(0) -- vim.o.lines
+	local maxWidth = vim.o.columns -- vim.api.nvim_get_option_value("columns", {}) / vim.api.nvim_win_get_width(0)
+	local maxHeight = vim.o.lines -- vim.api.nvim_get_option_value("lines", {}) / vim.api.nvim_win_get_height(0)
 	local width = math.floor(maxWidth * 0.9)
 	local height = math.floor(maxHeight * 0.9)
 	local row = math.floor((maxHeight - height) / 2)
@@ -298,11 +313,13 @@ function M.float_terminal(cmd)
 	-- 创建一个新的空白缓冲区
 	-- create a new empty buffer
 	local buf = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_option(buf, "filetype", "terminal")
+	vim.bo[buf].filetype = "terminal"
+
 	local terminal_window = vim.api.nvim_open_win(buf, true, float_opts)
-	vim.api.nvim_win_set_option(terminal_window, "number", false)
-	vim.api.nvim_win_set_option(terminal_window, "relativenumber", false)
-	vim.api.nvim_win_set_option(terminal_window, "winhighlight", "Normal:Normal") -- 设置浮动窗口的选项，避免影响底层窗口内容
+	vim.wo[terminal_window].number = false
+	vim.wo[terminal_window].relativenumber = false
+	vim.wo[terminal_window].winhighlight = "Normal:Normal" -- 设置浮动窗口的选项，避免影响底层窗口内容
+
 	vim.fn.termopen(cmd, {
 		detach = 1,
 		on_exit = function(_, code)

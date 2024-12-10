@@ -138,7 +138,7 @@ function M.format(opts)
 
 	-- get formatters
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-	local formatters = vim.lsp.buf_get_clients(bufnr)
+	local formatters = vim.lsp.get_clients({ buffer = bufnr })
 
 	if opts.filter then
 		formatters = opts.filter(formatters)

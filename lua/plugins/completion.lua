@@ -14,6 +14,7 @@ completion["neovim/nvim-lspconfig"] = {
 		},
 	},
 }
+-- docs: https://nvimdev.github.io/lspsaga/
 completion["nvimdev/lspsaga.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
