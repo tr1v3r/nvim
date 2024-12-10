@@ -23,6 +23,10 @@ local function tele(cmd)
 	return cmdWithPrefix("Telescope", cmd)
 end
 
+local function teleExtensions()
+	return require("telescope").extensions
+end
+
 -- =============== Basic Key Mapping ================
 -- Leader key
 vim.g.mapleader = " "
@@ -504,20 +508,17 @@ local function setToolPlugKeys()
 	-- Plugin: telescope
 	map("<C-p>", _command_panel):mode("n"):noremap():desc("tool: Toggle command panel"):set()
 
-	local function extensions()
-		return require("telescope").extensions
-	end
 	local function undo()
-		extensions().undo.undo()
+		teleExtensions().undo.undo()
 	end
 	local function projects()
-		extensions().projects.projects({})
+		teleExtensions().projects.projects({})
 	end
 	local function frecency()
-		extensions().frecency.frecency({})
+		teleExtensions().frecency.frecency({})
 	end
 	local function grep()
-		extensions().live_grep_args.live_grep_args()
+		teleExtensions().live_grep_args.live_grep_args()
 	end
 	local function colorscheme()
 		require("telescope.builtin").colorscheme({ enable_preview = true })
@@ -630,9 +631,9 @@ function mapping.lsp(buf)
 	map("<LEADER>lr", "LspRestart"):mode("n"):cmd():buffer(buf):nowait():desc("lsp: Restart"):set()
 
 	-- AerialToggle! with ! toggle aesial outline window and do not move cursor to outline window
-	map("go", "AerialToggle"):mode("n"):cmd():buffer(buf):desc("lsp: Toggle outline"):set()
-	map("gO", function()
-			require("telescope").extensions.aerial.aerial()
+	map("gO", "AerialToggle"):mode("n"):cmd():buffer(buf):desc("lsp: Toggle outline"):set()
+	map("go", function()
+			teleExtensions().aerial.aerial()
 		end)
 		:mode("n")
 		:buffer(buf)
