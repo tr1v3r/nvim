@@ -8,7 +8,7 @@ local function GetAutocmdsForEvent(opts)
 		vim.print(autocmds)
 	else
 		-- 如果发生错误，打印错误消息
-		print("Error retrieving autocmds for event: " .. event_name)
+		vim.print("Error retrieving autocmds for event: " .. event_name)
 	end
 end
 vim.api.nvim_create_user_command(
@@ -24,7 +24,7 @@ local function GetAutocmdsForGroup(opts)
 	if status then
 		vim.print(autocmds)
 	else
-		print("Error retrieving autocmds for group: " .. group_name)
+		vim.print("Error retrieving autocmds for group: " .. group_name)
 	end
 end
 vim.api.nvim_create_user_command(

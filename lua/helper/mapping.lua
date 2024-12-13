@@ -104,9 +104,9 @@ end
 -- print keymap
 function mapOption:print()
 	if self.m ~= "" then
-		print(vim.inspect(vim.split(self.m, "")), self.lhs, self.rhs, vim.inspect(self.options))
+		vim.print(vim.inspect(vim.split(self.m, "")), self.lhs, self.rhs, vim.inspect(self.options))
 	else
-		print("n", self.lhs, self.rhs, vim.inspect(self.options))
+		vim.print("n", self.lhs, self.rhs, vim.inspect(self.options))
 	end
 end
 

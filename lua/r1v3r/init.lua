@@ -16,7 +16,7 @@ local create_dir = function()
 		os.execute("mkdir -p " .. global.cache_dir)
 		local success, _, code = os.execute("mkdir -p " .. global.cache_dir)
 		if not success then
-			print("Error: Unable to create directory " .. global.cache_dir .. ". Exit code:", code)
+			vim.print("Error: Unable to create directory " .. global.cache_dir .. ". Exit code:", code)
 		end
 		for _, v in pairs(dataDir) do
 			if vim.fn.isdirectory(v) == 0 then
@@ -123,7 +123,7 @@ end
 local device_config = function()
 	local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
 	if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
-		print("device lua not found")
+		vim.notify("device config file not found")
 	else
 		dofile(deviceConfig)
 	end
