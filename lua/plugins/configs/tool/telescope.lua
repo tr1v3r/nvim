@@ -4,6 +4,15 @@ return function()
 	local telescope = require("telescope")
 	local actions = require("telescope.actions")
 
+	-- check if rg exists
+	if vim.fn.executable("rg") == 0 then
+		vim.notify(
+			"Ripgrep (rg) is not installed.\nPlease install it to use live grep feature.",
+			vim.log.levels.ERROR,
+			{ title = "Dependency missing" }
+		)
+	end
+
 	telescope.setup({
 		defaults = {
 			mappings = {
@@ -57,15 +66,15 @@ return function()
 			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
 				horizontal = {
-					prompt_position = "top",
-					preview_width = 0.55,
+					prompt_position = "bottom",
+					preview_width = 0.45,
 					results_width = 0.8,
 				},
 				vertical = {
 					mirror = false,
 				},
-				width = 0.85,
-				height = 0.92,
+				width = vim.o.columns > 100 and 0.85 or 0.6,
+				height = vim.o.lines > 40 and 0.92 or 0.7,
 				preview_cutoff = 120,
 			},
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
@@ -74,6 +83,20 @@ return function()
 			file_sorter = require("telescope.sorters").get_fuzzy_file,
 			generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+		},
+		pickers = {
+			buffers = {
+				sort_mru = true, -- 最近使用的缓冲区排在前面
+				select_current = true,
+				mappings = {
+					i = {
+						["<C-d>"] = actions.delete_buffer,
+					},
+					n = {
+						["dd"] = actions.delete_buffer,
+					},
+				},
+			},
 		},
 		extensions = {
 			aerial = {

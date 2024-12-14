@@ -123,7 +123,7 @@ end
 local device_config = function()
 	local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
 	if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
-		vim.notify("device config file not found")
+		vim.notify("device config file not found", vim.log.levels.WARN, { title = "Configuration missing" })
 	else
 		dofile(deviceConfig)
 	end
