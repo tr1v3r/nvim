@@ -135,6 +135,7 @@ local data = {
 		Tab = "",
 		Table = "",
 		Telescope = "",
+		HandPointRight = "",
 	},
 	diagnostics = {
 		Error = "",

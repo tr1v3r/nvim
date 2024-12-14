@@ -306,7 +306,7 @@ function M.float_terminal(cmd)
 		row = row,
 		col = col,
 		style = "minimal",
-		border = "single",
+		border = "none", -- none/single/double/rounded/solid/shadow/{ "x" }/{ "", "", "", ">", "", "", "", "<" }
 		zindex = 50, -- 保证terminal在最上层 Ensure the terminal is at the top level.
 	}
 
@@ -315,6 +315,7 @@ function M.float_terminal(cmd)
 	local buf = vim.api.nvim_create_buf(false, true)
 	vim.bo[buf].filetype = "terminal"
 
+	-- docs: https://neovim.io/doc/user/api.html#nvim_open_win()
 	local terminal_window = vim.api.nvim_open_win(buf, true, float_opts)
 	vim.wo[terminal_window].number = false
 	vim.wo[terminal_window].relativenumber = false

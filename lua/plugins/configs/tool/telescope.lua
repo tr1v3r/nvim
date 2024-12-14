@@ -15,6 +15,9 @@ return function()
 
 	telescope.setup({
 		defaults = {
+			initial_mode = "insert",
+			prompt_prefix = " " .. icons.ui.Telescope .. " ",
+			selection_caret = icons.ui.HandPointRight,
 			mappings = {
 				-- below is default keymaps
 				-- `<c-v>`: opens a diff in a vertical split
@@ -23,6 +26,16 @@ return function()
 				-- ["<C-v>"] = actions.select_vertical,
 				-- ["<C-x>"] = actions.select_horizontal,
 				-- ["<C-t>"] = actions.select_tab,
+				i = {
+					["<A-u>"] = actions.cycle_history_prev,
+					["<A-e>"] = actions.cycle_history_next,
+
+					["<C-d>"] = false,
+					["<C-u>"] = actions.preview_scrolling_up,
+					["<C-e>"] = actions.preview_scrolling_down,
+					["<C-n>"] = actions.preview_scrolling_left,
+					["<C-i>"] = actions.preview_scrolling_right,
+				},
 				n = {
 					["u"] = actions.move_selection_previous,
 					["e"] = actions.move_selection_next,
@@ -32,17 +45,12 @@ return function()
 					["I"] = actions.preview_scrolling_right,
 
 					["<C-d>"] = false,
+					["<C-u>"] = actions.preview_scrolling_up,
 					["<C-e>"] = actions.preview_scrolling_down,
 					["<C-n>"] = actions.preview_scrolling_left,
 					["<C-i>"] = actions.preview_scrolling_right,
 
 					["q"] = actions.close,
-				},
-				i = {
-					["<C-d>"] = false,
-					["<C-e>"] = actions.preview_scrolling_down,
-					["<C-n>"] = actions.preview_scrolling_left,
-					["<C-i>"] = actions.preview_scrolling_right,
 				},
 			},
 			vimgrep_arguments = {
@@ -53,9 +61,6 @@ return function()
 				"--column",
 				"--smart-case",
 			},
-			initial_mode = "insert",
-			prompt_prefix = " " .. icons.ui.Telescope .. " ",
-			selection_caret = icons.ui.ChevronRight,
 			scroll_strategy = "limit",
 			results_title = false,
 			layout_strategy = "horizontal",
