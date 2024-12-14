@@ -3,15 +3,25 @@ return function()
 	local dap = require("dap")
 	local helper = require("helper.dap")
 
+	-- should be loaded after LspAttach, so vim notify can be used
+	local codelldb_path = vim.fn.exepath("codelldb") -- Find codelldb on $PATH
+	if codelldb_path == "" then
+		vim.notify("codelldb not found", vim.log.levels.ERROR, { title = "DAP Debuggers" })
+		return
+	elseif vim.fn.executable(codelldb_path) == 0 then
+		vim.notify("codelldb is not executable", vim.log.levels.ERROR, { title = "DAP Debuggers" })
+		return
+	end
+
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "${port}",
 		executable = {
-			command = vim.fn.exepath("codelldb"), -- Find codelldb on $PATH
+			command = codelldb_path,
 			args = { "--port", "${port}" },
 		},
 	}
-	dap.adapters.c = {
+	dap.configurations.c = {
 		{
 			name = "Debug",
 			type = "codelldb",

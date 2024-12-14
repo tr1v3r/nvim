@@ -137,7 +137,7 @@ tool["mfussenegger/nvim-dap"] = {
 	},
 }
 tool["Weissle/persistent-breakpoints.nvim"] = {
-	event = "BufReadPost",
+	event = "LspAttach",
 	config = require("tool.dap.persistent-breakpoints"),
 }
 
