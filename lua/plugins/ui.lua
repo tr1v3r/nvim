@@ -15,6 +15,11 @@ ui["shaunsingh/nord.nvim"] = {
 	priority = 1000,
 	config = require("ui.nord"),
 }
+ui["loctvl842/monokai-pro.nvim"] = {
+	lazy = false,
+	priority = 1000,
+	config = require("ui.monokai"),
+}
 -- ui["nanozuki/tabby.nvim"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
