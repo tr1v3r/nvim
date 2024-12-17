@@ -6,13 +6,11 @@ ui["goolord/alpha-nvim"] = {
 	config = require("ui.alpha"),
 }
 ui["marko-cerovac/material.nvim"] = {
-	lazy = false,
-	priority = 1000,
+	lazy = true,
 	config = require("ui.material"),
 }
 ui["shaunsingh/nord.nvim"] = {
-	lazy = false,
-	priority = 1000,
+	lazy = true,
 	config = require("ui.nord"),
 }
 ui["loctvl842/monokai-pro.nvim"] = {
@@ -33,8 +31,7 @@ ui["akinsho/bufferline.nvim"] = {
 	config = require("ui.bufferline"),
 }
 ui["Jint-lzxy/nvim"] = {
-	lazy = false,
-	branch = "refactor/syntax-highlighting",
+	lazy = true,
 	name = "catppuccin",
 	config = require("ui.catppuccin"),
 }
