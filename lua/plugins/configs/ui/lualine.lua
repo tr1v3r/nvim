@@ -325,7 +325,8 @@ return function()
 				winbar = { "terminal", "toggleterm", "prompt", "NvimTree" },
 			},
 			component_separators = "",
-			section_separators = { left = "", right = "" },
+			section_separators = { left = "", right = "" },
+			-- section_separators = { left = "", right = "" },
 			refresh = {
 				tabline = 1000,
 				winbar = 100,

@@ -20,7 +20,7 @@ settings["use_copilot"] = true
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`,
 -- `catppuccin-macchiato`, `edge`, `nord`, `material`.
 ---@type string
-settings["colorscheme"] = "monokai-pro-ristretto"
+settings["colorscheme"] = "monokai-pro-spectrum"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
