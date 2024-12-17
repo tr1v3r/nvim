@@ -5,6 +5,11 @@ return function()
 		ui = require("r1v3r.icons").get("ui"),
 	}
 
+	local hl = vim.api.nvim_get_hl(0, { name = "NotifyBackground" })
+	if not hl.bg then
+		vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#403e41" })
+	end
+
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "fade_in_slide_out",
