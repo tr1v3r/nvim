@@ -5,10 +5,10 @@ return function()
 		ui = require("r1v3r.icons").get("ui"),
 	}
 
-	local hl = vim.api.nvim_get_hl(0, { name = "NotifyBackground" })
-	if not hl.bg then
-		vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#403e41" })
-	end
+	-- local hl = vim.api.nvim_get_hl(0, { name = "NotifyBackground" })
+	-- if not hl.bg then
+	-- 	vim.api.nvim_set_hl(0, "NotifyBackground", { bg = "#403e41" })
+	-- end
 
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
@@ -27,7 +27,8 @@ return function()
 		-- Render function for notifications. See notify-render()
 		render = "default",
 		---@usage highlight behind the window for stages that change opacity
-		background_colour = "NotifyBackground",
+		background_colour = "#403e41",
+		-- background_colour = "NotifyBackground",
 		---@usage minimum width for notification windows
 		minimum_width = 50,
 		---@usage notifications with level lower than this would be ignored. [ERROR > WARN > INFO > DEBUG > TRACE]

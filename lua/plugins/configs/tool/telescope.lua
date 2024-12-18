@@ -159,4 +159,5 @@ return function()
 	telescope.load_extension("zoxide")
 	telescope.load_extension("persisted")
 	telescope.load_extension("aerial")
+	telescope.load_extension("notify")
 end
