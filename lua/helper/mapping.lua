@@ -86,7 +86,7 @@ function mapOption:exec()
 end
 
 ---@return mapOption
-function mapOption:vscCall()
+function mapOption:vsc_call()
 	self.rhs = ("call VSCodeCall('%s')"):format(self.rhs)
 	return self:cmd()
 end
@@ -94,11 +94,14 @@ end
 -- set keymap
 function mapOption:set()
 	-- vim.keymap doc: https://neovim.io/doc/user/lua.html#vim.keymap
-	if self.m == "" then
-		vim.keymap.set("", self.lhs, self.rhs, self.options)
-	else
-		vim.keymap.set(vim.split(self.m, ""), self.lhs, self.rhs, self.options)
-	end
+	vim.keymap.set(self.m ~= "" and vim.split(self.m, "") or "", self.lhs, self.rhs, self.options)
+end
+
+-- convert to lazy.nvim keys, format: LazyKeysSpec
+function mapOption:to_lazy_key()
+	local lazy_key = { self.lhs, self.rhs } -- 构造 LazyKeysSpec 表
+	local mode = self.m ~= "" and (type(self.m) == "string" and vim.split(self.m, "") or self.m) or nil -- 处理 mode
+	return vim.tbl_extend("force", lazy_key, mode and { mode = mode } or {}, self.options or {})
 end
 
 -- print keymap

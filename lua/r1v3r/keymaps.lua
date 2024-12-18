@@ -260,81 +260,6 @@ local function setCompletionPlugKeys()
 	-- map("<C-f>", "FormatToggle"):mode("n"):cmd()::noremap():desc("Formater: Toggle format on save"):set()
 end
 
-local function setEditorPlugKeys()
-	-- Plugin: accelerated-jk
-	map("u", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():set()
-	map("e", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():set()
-	map("gu", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():set()
-	map("ge", "<plug>(accelerated_jk_gj)"):mode("n"):noremap():set()
-
-	-- Plugin: persisted.nvim
-	map("<LEADER>ss", "SessionSave"):mode("n"):cmd():noremap():desc("session: save"):set()
-	map("<LEADER>sl", "SessionLoad"):mode("n"):cmd():noremap():desc("session: load current"):set()
-	map("<LEADER>sd", "SessionDelete"):mode("n"):cmd():noremap():desc("session: delete"):set()
-
-	-- Plugin: gcmt/wildfire.vim
-	-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):set()
-
-	-- Plugin: comment.nvim
-	map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>")
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("edit: Toggle comment for line")
-		:set()
-	map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_curent)")
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("edit: Toggle comment for block")
-		:set()
-	map("<C-/>", "<Plug>(comment_toggle_linewise_visual)")
-		:mode("x")
-		:noremap()
-		:silent()
-		:desc("edit: Toggle comment for line with selection")
-		:set()
-	map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_visual)")
-		:mode("x")
-		:noremap()
-		:silent()
-		:desc("edit: Toggle comment for block with selection")
-		:set()
-	-- map("gcc"):mode("n"):callback(function()
-	--	 return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or
-	--				et("<Plug>(comment_toggle_linewise_count)")
-	-- end):noremap():silent():expr():desc("edit: Toggle comment for line"):set()
-	-- map("gbc"):mode("n"):callback(function()
-	--	 return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
-	--				et("<Plug>(comment_toggle_blockwise_count)")
-	-- end):noremap():silent():expr():desc("edit: Toggle comment for block"):set()
-
-	-- Plugin: diffview
-	map("<LEADER>dd", "DiffviewOpen"):mode("n"):cmd():noremap():desc("git: Show diff"):set()
-	map("<LEADER>dw", "DiffviewClose"):mode("n"):cmd():noremap():desc("git: Close diff"):set()
-
-	-- Plugin: vim-easy-align
-	map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):set()
-
-	-- Plugin: flash
-	local flash_lazy_call = function(funcName, opts)
-		return lazy_call("flash", funcName, opts)
-	end
-
-	map("<LEADER>f", flash_lazy_call("jump")):mode("nv"):noremap():desc("jump: Goto word"):set()
-	map("<LEADER>w", [[TwoCharJump \<]]):mode("nv"):cmd():noremap():desc("jump: 2 char goto word"):set()
-	map("<LEADER>k", [[TwoCharJump ^]]):mode("nv"):cmd():noremap():desc("jump: Goto line"):set()
-	map("m", flash_lazy_call("treesitter")):mode("o"):desc("edit: select by treesitter"):set()
-	map("M", flash_lazy_call("treesitter_search")):mode("o"):desc("edit: select by treesitter"):set()
-
-	-- Plugin: tabout
-	-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):set()
-	map("<C-i>", "<Plug>(TaboutMulti)"):mode("i"):noremap():desc("edit: Goto end of pair"):set()
-
-	-- Plugin suda.vim
-	map("<A-s>", "SudaWrite"):mode("n"):cmd():noremap():desc("edit: Save file using sudo"):set()
-end
-
 local function setLangPlugKeys()
 	-- Plugin MarkdownPreview
 	map("<F12>", "MarkdownPreviewToggle"):mode("n"):cmd():noremap():desc("tool: Preview markdown"):set()
@@ -606,7 +531,7 @@ local function setNeovideKeys()
 	map("<D-v>", "<C-R>+"):mode("v"):noremap():silent():set()
 end
 
-local function setKeys()
+local function initBasicKeys()
 	setGeneralKeys()
 
 	if vim.g.vscode then
@@ -617,19 +542,20 @@ local function setKeys()
 		setNeovideKeys()
 	end
 
+	-- init for plugins in neovim
 	setLazyKeys()
+
 	setCompletionPlugKeys()
-	setEditorPlugKeys()
 	setLangPlugKeys()
 	setToolPlugKeys()
 	setUIPlugKeys()
 end
 
-setKeys()
+initBasicKeys()
 
-local mapping = {}
+local keymaps = {}
 
-function mapping.lsp(buf)
+function keymaps.lsp(buf)
 	-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 	map("<LEADER>li", "LspInfo"):mode("n"):cmd():buffer(buf):desc("lsp: Info"):set()
 	map("<LEADER>lr", "LspRestart"):mode("n"):cmd():buffer(buf):nowait():desc("lsp: Restart"):set()
@@ -679,7 +605,7 @@ function mapping.lsp(buf)
 		:set()
 end
 
-function mapping.gitsigns(buf)
+function keymaps.gitsigns(buf)
 	local actions = require("gitsigns.actions")
 	map("]g", function()
 			if vim.wo.diff then
@@ -739,4 +665,111 @@ function mapping.gitsigns(buf)
 	-- map("kn", actions.text_object):mode("ox"):buffer(buf):set()
 end
 
-return mapping
+-- Plugin: accelerated-jk
+function keymaps.accelerated_jk()
+	return {
+		map("u", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():to_lazy_key(),
+		map("e", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():to_lazy_key(),
+		map("gu", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():to_lazy_key(),
+		map("ge", "<plug>(accelerated_jk_gj)"):mode("n"):noremap():to_lazy_key(),
+	}
+end
+
+-- Plugin: persisted.nvim
+function keymaps.persisted()
+	return {
+		map("<LEADER>ss", "SessionSave"):mode("n"):cmd():noremap():desc("session: save"):to_lazy_key(),
+		map("<LEADER>sl", "SessionLoad"):mode("n"):cmd():noremap():desc("session: load current"):to_lazy_key(),
+		map("<LEADER>sd", "SessionDelete"):mode("n"):cmd():noremap():desc("session: delete"):to_lazy_key(),
+	}
+end
+
+-- Plugin: comment.nvim
+function keymaps.comment()
+	return {
+		map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>")
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("edit: Toggle comment for line")
+			:to_lazy_key(),
+		map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_curent)")
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("edit: Toggle comment for block")
+			:to_lazy_key(),
+		map("<C-/>", "<Plug>(comment_toggle_linewise_visual)")
+			:mode("x")
+			:noremap()
+			:silent()
+			:desc("edit: Toggle comment for line with selection")
+			:to_lazy_key(),
+		map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_visual)")
+			:mode("x")
+			:noremap()
+			:silent()
+			:desc("edit: Toggle comment for block with selection")
+			:to_lazy_key(),
+		-- map("gcc"):mode("n"):callback(function()
+		--	 return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)") or
+		--				et("<Plug>(comment_toggle_linewise_count)")
+		-- end):noremap():silent():expr():desc("edit: Toggle comment for line"):to_lazy_key()
+		-- map("gbc"):mode("n"):callback(function()
+		--	 return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)") or
+		--				et("<Plug>(comment_toggle_blockwise_count)")
+		-- end):noremap():silent():expr():desc("edit: Toggle comment for block"):to_lazy_key()
+	}
+end
+
+-- Plugin: diffview
+function keymaps.diffview()
+	return {
+		map("<LEADER>dd", "DiffviewOpen"):mode("n"):cmd():noremap():desc("git: Show diff"):to_lazy_key(),
+		map("<LEADER>dw", "DiffviewClose"):mode("n"):cmd():noremap():desc("git: Close diff"):to_lazy_key(),
+	}
+end
+
+-- Plugin: vim-easy-align
+function keymaps.easy_align()
+	return {
+		map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):to_lazy_key(),
+	}
+end
+
+-- Plugin: flash
+function keymaps.flash()
+	local flash_lazy_call = function(funcName, opts)
+		return lazy_call("flash", funcName, opts)
+	end
+
+	return {
+		map("<LEADER>f", flash_lazy_call("jump")):mode("nv"):noremap():desc("jump: Goto word"):to_lazy_key(),
+		map("<LEADER>w", [[TwoCharJump \<]]):mode("nv"):cmd():noremap():desc("jump: 2 char goto word"):to_lazy_key(),
+		map("<LEADER>k", [[TwoCharJump ^]]):mode("nv"):cmd():noremap():desc("jump: Goto line"):to_lazy_key(),
+		map("m", flash_lazy_call("treesitter")):mode("o"):desc("edit: select by treesitter"):to_lazy_key(),
+		map("M", flash_lazy_call("treesitter_search")):mode("o"):desc("edit: select by treesitter"):to_lazy_key(),
+	}
+end
+
+-- Plugin: tabout
+function keymaps.tabout()
+	return {
+		-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):to_lazy_key()
+		map("<C-i>", "<Plug>(TaboutMulti)"):mode("i"):noremap():desc("edit: Goto end of pair"):to_lazy_key(),
+	}
+end
+
+-- Plugin suda.vim
+function keymaps.suda()
+	map("<A-s>", "SudaWrite"):mode("n"):cmd():noremap():desc("edit: Save file using sudo"):to_lazy_key()
+end
+
+-- Plugin: gcmt/wildfire.vim
+function keymaps.wildfire()
+	return {
+		-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):to_lazy_key()
+	}
+end
+
+return keymaps

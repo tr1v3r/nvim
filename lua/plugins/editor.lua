@@ -1,8 +1,10 @@
 local editor = {}
+local keymaps = require("r1v3r.keymaps")
 
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
+	keys = keymaps.accelerated_jk(),
 	config = require("editor.accelerated-jk"),
 }
 -- editor["rmagatti/auto-session"] = {
@@ -22,6 +24,7 @@ editor["olimorris/persisted.nvim"] = {
 		"SessionLoadFromFile",
 		"SessionDelete",
 	},
+	keys = keymaps.persisted(),
 	config = require("editor.persisted"),
 }
 editor["m4xshen/autoclose.nvim"] = {
@@ -54,20 +57,24 @@ editor["ojroques/nvim-bufdel"] = {
 editor["folke/flash.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
+	keys = keymaps.flash(),
 	config = require("editor.flash"),
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
+	keys = keymaps.comment(),
 	config = require("editor.comment"),
 }
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
 	cmd = { "DiffviewOpen", "DiffviewClose" },
+	keys = keymaps.diffview(),
 }
 editor["junegunn/vim-easy-align"] = {
 	lazy = true,
 	cmd = "EasyAlign",
+	keys = keymaps.easy_align(),
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
@@ -91,6 +98,7 @@ editor["kevinhwang91/nvim-hlslens"] = {
 editor["sustech-data/wildfire.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
+	keys = keymaps.wildfire(),
 	config = require("editor.wildfire"),
 	vsc = true,
 }
@@ -121,6 +129,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{
 			"abecodes/tabout.nvim",
+			keys = keymaps.tabout(),
 			config = require("editor.tabout"),
 		},
 		{
