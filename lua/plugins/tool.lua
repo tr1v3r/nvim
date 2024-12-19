@@ -1,4 +1,5 @@
 local tool = {}
+local keymaps = require("r1v3r.keymaps")
 
 tool["dstein64/vim-startuptime"] = {
 	-- lazy-load on a command
@@ -11,10 +12,12 @@ tool["dstein64/vim-startuptime"] = {
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeFindFileToggle", "NvimTreeRefresh" },
+	keys = keymaps.nvim_tree(),
 	config = require("tool.nvim-tree"),
 }
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
+	keys = keymaps.vim_fugitive(),
 	cmd = { "Git", "G" },
 }
 tool["gelguy/wilder.nvim"] = {
@@ -26,6 +29,7 @@ tool["gelguy/wilder.nvim"] = {
 tool["kdheepak/lazygit.nvim"] = {
 	lazy = true,
 	cmd = "LazyGit",
+	keys = keymaps.lazygit(),
 	config = require("tool.lazygit"),
 	-- optional for floating window border decoration
 	dependencies = { "nvim-lua/plenary.nvim" },
@@ -41,17 +45,26 @@ tool["michaelb/sniprun"] = {
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
+	keys = keymaps.sniprun(),
 	config = require("tool.sniprun"),
 }
 -- tool["akinsho/toggleterm.nvim"] = {
---	 lazy = true,
---	 cmd = {"ToggleTerm", "ToggleTermSetName", "ToggleTermToggleAll", "ToggleTermSendVisualLines",
---			"ToggleTermSendCurrentLine", "ToggleTermSendVisualSelection"},
---	 config = require("tool.toggleterm")
+-- 	lazy = true,
+-- 	cmd = {
+-- 		"ToggleTerm",
+-- 		"ToggleTermSetName",
+-- 		"ToggleTermToggleAll",
+-- 		"ToggleTermSendVisualLines",
+-- 		"ToggleTermSendCurrentLine",
+-- 		"ToggleTermSendVisualSelection",
+-- 	},
+-- 	keys = keymaps.toggleterm(),
+-- 	config = require("tool.toggleterm"),
 -- }
 tool["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
+	keys = keymaps.trouble(),
 	config = require("tool.trouble"),
 }
 tool["folke/which-key.nvim"] = {
@@ -62,6 +75,7 @@ tool["folke/which-key.nvim"] = {
 tool["nvim-pack/nvim-spectre"] = {
 	lazy = true,
 	dependencies = { { "nvim-lua/plenary.nvim" } },
+	keys = keymaps.spectre(),
 	config = require("tool.spectre"),
 }
 -- general writing
@@ -81,6 +95,7 @@ tool["ron89/thesaurus_query.vim"] = {
 tool["kevinhwang91/rnvimr"] = {
 	lazy = false,
 	-- cmd = { "RnvimrToggle" },
+	keys = keymaps.rnvimr(),
 	config = require("tool.ranger"),
 }
 -- kevinhwang91/rnvimr another plugin for ranger
@@ -92,6 +107,7 @@ tool["kevinhwang91/rnvimr"] = {
 tool["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
+	keys = keymaps.telescope(),
 	config = require("tool.telescope"),
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
@@ -125,6 +141,7 @@ tool["mfussenegger/nvim-dap"] = {
 		"DapStepOut",
 		"DapTerminate",
 	},
+	keys = keymaps.dap(),
 	config = require("tool.dap"),
 	dependencies = {
 		{

@@ -1,4 +1,5 @@
 local ui = {}
+local keymaps = require("r1v3r.keymaps")
 
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
@@ -28,6 +29,7 @@ ui["akinsho/bufferline.nvim"] = {
 	version = "*",
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	dependencies = "nvim-tree/nvim-web-devicons",
+	keys = keymaps.bufferline(),
 	config = require("ui.bufferline"),
 }
 ui["Jint-lzxy/nvim"] = {

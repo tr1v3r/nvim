@@ -28,7 +28,8 @@ local function teleExtensions()
 end
 
 -- =============== Basic Key Mapping ================
--- Leader key
+
+-- set Leader key
 vim.g.mapleader = " "
 
 local function setGeneralKeys()
@@ -239,9 +240,11 @@ local function setGeneralKeys()
 
 	-- Call figlet
 	map("tx", "r !figlet"):space():noremap():desc("tool: call figlet"):set()
+
+	-- call lazygit in floating window
+	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
 end
 
--- ==================== Plugins Keymaps ====================
 local function setLazyKeys()
 	-- Package manager: lazy.nvim
 	map("<LEADER>LL", "Lazy"):mode("n"):cmd():noremap():nowait():desc("package: Show"):set()
@@ -254,264 +257,6 @@ local function setLazyKeys()
 	map("<LEADER>Lp", "Lazy profile"):mode("n"):cmd():noremap():nowait():desc("package: Profile"):set()
 	map("<LEADER>Lr", "Lazy restore"):mode("n"):cmd():noremap():nowait():desc("package: Restore"):set()
 	map("<LEADER>Lx", "Lazy clean"):mode("n"):cmd():noremap():nowait():desc("package: Clean"):set()
-end
-
-local function setCompletionPlugKeys()
-	-- map("<C-f>", "FormatToggle"):mode("n"):cmd()::noremap():desc("Formater: Toggle format on save"):set()
-end
-
-local function setLangPlugKeys()
-	-- Plugin MarkdownPreview
-	map("<F12>", "MarkdownPreviewToggle"):mode("n"):cmd():noremap():desc("tool: Preview markdown"):set()
-end
-
-local function setDapPlugKeys()
-	-- Plugin: dap & dap-go
-	local dap_lazy_call = function(funcName, opts)
-		return lazy_call("dap", funcName, opts)
-	end
-	local dapui_lazy_call = function(funcName, opts)
-		return lazy_call("dapui", funcName, opts)
-	end
-	local persisted_lazy_call = function(funcName, opts)
-		return lazy_call("persistent-breakpoints.api", funcName, opts)
-	end
-	local go_lazy_call = function(funcName)
-		return lazy_call("dap-go", funcName)
-	end
-
-	map("<F4>", dap_lazy_call("terminate")):mode("n"):noremap():desc("debug: Stop"):set()
-	map("<F5>", dap_lazy_call("continue")):mode("n"):noremap():desc("debug: Run/Continue"):set()
-	map("<F6>", dap_lazy_call("pause")):mode("n"):noremap():desc("debug: Pause"):set()
-	map("<F10>", dap_lazy_call("step_over")):mode("n"):noremap():desc("debug: Step over"):set()
-	map("<F11>", dap_lazy_call("step_into")):mode("n"):noremap():desc("debug: Step into"):set()
-	map("<S-F11>", dap_lazy_call("step_out")):mode("n"):noremap():desc("debug: Step out"):set()
-	map("<LEADER>dc", dap_lazy_call("run_to_cursor")):mode("n"):noremap():desc("debug: Run to cursor"):set()
-	map("<LEADER>dn", dap_lazy_call("up"))
-		:mode("n")
-		:noremap()
-		:desc("debug: Go down in current stacktrace without stepping")
-		:set()
-	map("<LEADER>di", dap_lazy_call("down"))
-		:mode("n")
-		:noremap()
-		:desc("debug: Go up in current stacktrace without stepping")
-		:set()
-
-	map("<LEADER>db", persisted_lazy_call("toggle_breakpoint"))
-		:mode("n")
-		:noremap()
-		:desc("debug: Toggle breakpoint")
-		:set()
-	map("<LEADER>dC", persisted_lazy_call("clear_all_breakpoints"))
-		:mode("n")
-		:noremap()
-		:desc("debug: Clear all breakpoints")
-		:set()
-	map("<LEADER>dB", persisted_lazy_call("set_conditional_breakpoint"))
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("debug: Set breakpoint with condition")
-		:set()
-	-- require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-	map("<LEADER>dP", function()
-			require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-		end)
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("debug: Set breakpoint with log")
-		:set()
-
-	map("<LEADER>du", go_lazy_call("debug_test")):mode("n"):noremap():desc("debug: Run Current Unit Test"):set()
-	map("<LEADER>dU", go_lazy_call("debug_last_test")):mode("n"):noremap():desc("debug: Run Last Unit Test"):set()
-	map("<LEADER>dl", dap_lazy_call("run_last")):mode("n"):noremap():desc("debug: Run last"):set()
-	map("<LEADER>do", function()
-			require("dap").repl.open()
-		end)
-		:mode("n")
-		:noremap()
-		:silent()
-		:desc("debug: Open REPL")
-		:set()
-
-	map("<LEADER>dL", "DapShowLog"):mode("n"):cmd():noremap():desc("debug: show log"):set()
-	map("<LEADER>dp", dapui_lazy_call("toggle")):mode("n"):cmd():noremap():desc("debug: toggle dapui"):set()
-	map("<LEADER>de", dapui_lazy_call("eval")):mode("nv"):cmd():noremap():desc("debug: inspect change value"):set()
-	map("<LEADER>dA", [[call VimuxRunCommand("dlv attach $(pidof dlv)")]])
-		:mode("nv")
-		:cmd()
-		:noremap()
-		:desc("debug: dlv attach")
-		:set()
-end
-
-local function setToolPlugKeys()
-	-- Plugin: vim-fugitive ; using lazggit
-	-- map("gps", "G push"):cmd():noremap():desc("git: Push"):set()
-	-- map("gpl", "G pull"):cmd():noremap():desc("git: Pull"):set()
-	-- map("<LEADER>G", "Git"):cmd():noremap():desc("git: Open git-fugitive"):set()
-
-	-- Plugin: nvim-tree
-	map("tt", "NvimTreeFindFileToggle"):mode("n"):cmd():noremap():desc("tool: Locate file in nvim-tree"):set()
-	map("tr", "NvimTreeRefresh"):mode("n"):cmd():noremap():desc("tool: Refresh nvim-Tree"):set()
-	-- map("tf", "NvimTreeFocus"):mode("n"):cmd():noremap():desc("tree: Focus tree"):set()
-
-	--  Plugin: lazygit
-	-- map("<C-G>", "LazyGit"):noremap():set()
-	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
-
-	-- Plugin: ranger
-	-- map("R", "Ranger"):mode("n"):cmd():noremap():desc("tool: Toggle ranger"):set()
-	map("R", "RnvimrToggle<CR><C-\\><C-n>:RnvimrResize 2")
-		:mode("n")
-		:cmd()
-		:noremap()
-		:silent()
-		:desc("tool: Toggle ranger")
-		:set()
-	map("<A-=>", "<C-\\><C-n>:RnvimrResize<CR>")
-		:mode("t")
-		:noremap()
-		:silent()
-		:desc("tool: Resize ranger float window")
-		:set()
-
-	-- Plugin: sniprun
-	map("<LEADER>r", "SnipRun"):mode("v"):cmd():noremap():desc("tool: Run code by range"):set()
-	map("<LEADER>r", "SnipRun"):mode("n"):cmd():noremap():desc("tool: Run code by file"):set()
-
-	-- -- Plugin: toggleterm
-	-- map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"'):mode("n"):noremap():silent():desc(
-	--	 "terminal: Toggle horizontal"):set()
-	-- map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>"):mode("i"):noremap():silent():desc(
-	--	 "terminal: Toggle horizontal"):set()
-	-- map("<C-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle horizontal"):set()
-	-- map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):cmd():noremap():silent():desc(
-	--	 "terminal: Toggle vertical"):set()
-	-- map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
-	--	 "terminal: Toggle vertical"):set()
-	-- map("<A-\\>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
-	-- map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]]):mode("n"):noremap():silent():desc(
-	--	 "terminal: Toggle vertical"):set()
-	-- map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>"):mode("i"):noremap():silent():desc(
-	--	 "terminal: Toggle vertical"):set()
-	-- map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):set()
-	-- map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]]):mode("n"):noremap():silent():desc(
-	--	 "terminal: Toggle float"):set()
-	-- map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>"):mode("i"):noremap():silent():desc("terminal: Toggle float")
-	--	 :set()
-	-- map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):set()
-
-	-- Plugin: trouble
-	map("tl", "TroubleToggle"):mode("n"):cmd():noremap():desc("lsp: Toggle trouble list"):set()
-	map("<LEADER>ta", "TroubleToggle lsp_references")
-		:mode("n")
-		:cmd()
-		:noremap()
-		:silent()
-		:desc("lsp: Show lsp references")
-		:set()
-	map("<LEADER>td", "TroubleToggle document_diagnostics")
-		:mode("n")
-		:cmd()
-		:noremap()
-		:silent()
-		:desc("lsp: Show document diagnostics")
-		:set()
-	map("<LEAEDR>ta", "TroubleToggle workspace_diagnostics")
-		:mode("n")
-		:cmd()
-		:noremap()
-		:silent()
-		:desc("lsp: Show workspace diagnostics")
-		:set()
-	map("<LEADER>tq", "TroubleToggle quickfix"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):set()
-	map("<LEADER>tl", "TroubleToggle loclist"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):set()
-
-	-- Plugin: telescope
-	map("<C-p>", _command_panel):mode("n"):noremap():desc("tool: Toggle command panel"):set()
-
-	local function undo()
-		teleExtensions().undo.undo()
-	end
-	local function projects()
-		teleExtensions().projects.projects({})
-	end
-	local function frecency()
-		teleExtensions().frecency.frecency({})
-	end
-	local function grep()
-		teleExtensions().live_grep_args.live_grep_args()
-	end
-	local function notify()
-		teleExtensions().notify.notify()
-	end
-	local function colorscheme()
-		require("telescope.builtin").colorscheme({ enable_preview = true })
-	end
-
-	map("<LEADER>U", undo):mode("n"):noremap():desc("edit: Show undo history"):set()
-	map("<LEADER>tp", projects):mode("n"):noremap():desc("find: Project"):set()
-	map("<LEADER>tr", frecency):mode("n"):noremap():desc("find: File by frecency"):set()
-	map("<LEADER>tw", grep):mode("n"):noremap():desc("find: Word in project"):set()
-	map("<LEADER>te", tele("oldfiles")):mode("n"):cmd():noremap():desc("find: File by history"):set()
-	map("<LEADER>tf", tele("find_files")):mode("n"):cmd():noremap():desc("find: File in project"):set()
-	map("<LEADER>tc", colorscheme):mode("n"):noremap():desc("ui: Change colorscheme for current session"):set()
-	map("<LEADER>tn", notify):mode("n"):noremap():desc("notify: List history notifications"):set()
-	map("<LEADER>tN", "enew"):mode("n"):cmd():noremap():desc("buffer: New"):set()
-	map("<LEADER>tg", tele("git_files")):mode("n"):cmd():noremap():desc("find: File in git project"):set()
-	map("<LEADER>tz", tele("zoxide list")):mode("n"):cmd():noremap():desc("edit: Change current dir by zoxide"):set()
-	map("<LEADER>tb", tele("buffers")):mode("n"):cmd():noremap():desc("find: Buffer opened"):set()
-	map("<LEADER>t*", tele("grep_string")):mode("n"):cmd():noremap():desc("find: Current word"):set()
-	map("<LEADER>ts", tele("persisted")):mode("n"):cmd():noremap():desc("find: Session"):set()
-	map("<LEADER>th", tele("help_tags")):mode("n"):cmd():noremap():desc("help: Show helps"):set()
-	map("<LEADER>tG", tele("git_status")):mode("n"):cmd():append("<ESC>"):noremap():desc("help: Show helps"):set()
-
-	-- Plugin: spectre
-	-- map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]])
-	map("<LEADER>F", 'lua require("spectre").open()')
-		:cmd()
-		:append("i")
-		:mode("n")
-		:noremap()
-		:desc("tool: find and replace")
-		:set()
-	map("<LEADER>F", 'lua require("spectre").open_visual()')
-		:cmd()
-		:append("i")
-		:mode("v")
-		:noremap()
-		:desc("tool: find and replace")
-		:set()
-
-	setDapPlugKeys()
-end
-
-local function setUIPlugKeys()
-	-- Plugin: bufferline
-	-- map("<A-w>", "BufDel!"):mode("n"):cmd():noremap():desc("buffer: Close current"):set()
-	-- map("<A-q>", "BufferLineCloseOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):set()
-	map("<A-i>", "BufferLineCycleNext"):mode("n"):cmd():noremap():desc("buffer: Switch to next"):set()
-	map("<A-n>", "BufferLineCyclePrev"):mode("n"):cmd():noremap():desc("buffer: Switch to prev"):set()
-	map("<A-I>", "BufferLineMoveNext"):mode("n"):cmd():noremap():desc("buffer: Move current to next"):set()
-	map("<A-N>", "BufferLineMovePrev"):mode("n"):cmd():noremap():desc("buffer: Move current to prev"):set()
-	map("<LEADER>be", "BufferLineSortByExtension"):mode("n"):cmd():noremap():desc("buffer: Sort by extension"):set()
-	map("<LEADER>bd", "BufferLineSortByDirectory"):mode("n"):cmd():noremap():desc("buffer: Sort by direrctory"):set()
-	map("<A-1>", "BufferLineGoToBuffer 1"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 1"):set()
-	map("<A-2>", "BufferLineGoToBuffer 2"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 2"):set()
-	map("<A-3>", "BufferLineGoToBuffer 3"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 3"):set()
-	map("<A-4>", "BufferLineGoToBuffer 4"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 4"):set()
-	map("<A-5>", "BufferLineGoToBuffer 5"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 5"):set()
-	map("<A-6>", "BufferLineGoToBuffer 6"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 6"):set()
-	map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 7"):set()
-	map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 8"):set()
-	map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 9"):set()
-
-	-- Plugin: nvim-bufdel
-	map("<A-w>", "BufDel"):mode("n"):cmd():noremap():desc("buffer: Close current"):set()
-	map("<A-o>", "BufDelOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):set()
 end
 
 local function setNeovideKeys()
@@ -542,17 +287,12 @@ local function initBasicKeys()
 		setNeovideKeys()
 	end
 
-	-- init for plugins in neovim
 	setLazyKeys()
-
-	setCompletionPlugKeys()
-	setLangPlugKeys()
-	setToolPlugKeys()
-	setUIPlugKeys()
 end
 
 initBasicKeys()
 
+-- ==================== Plugins Keymaps ====================
 local keymaps = {}
 
 function keymaps.lsp(buf)
@@ -665,7 +405,7 @@ function keymaps.gitsigns(buf)
 	-- map("kn", actions.text_object):mode("ox"):buffer(buf):set()
 end
 
--- Plugin: accelerated-jk
+-- Plugin: rainbowhxch/accelerated-jk.nvim
 function keymaps.accelerated_jk()
 	return {
 		map("u", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():to_lazy_key(),
@@ -675,7 +415,7 @@ function keymaps.accelerated_jk()
 	}
 end
 
--- Plugin: persisted.nvim
+-- Plugin: olimorris/persisted.nvim
 function keymaps.persisted()
 	return {
 		map("<LEADER>ss", "SessionSave"):mode("n"):cmd():noremap():desc("session: save"):to_lazy_key(),
@@ -684,7 +424,7 @@ function keymaps.persisted()
 	}
 end
 
--- Plugin: comment.nvim
+-- Plugin: numToStr/Comment.nvim
 function keymaps.comment()
 	return {
 		map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>")
@@ -722,7 +462,7 @@ function keymaps.comment()
 	}
 end
 
--- Plugin: diffview
+-- Plugin: sindrets/diffview.nvim
 function keymaps.diffview()
 	return {
 		map("<LEADER>dd", "DiffviewOpen"):mode("n"):cmd():noremap():desc("git: Show diff"):to_lazy_key(),
@@ -730,14 +470,14 @@ function keymaps.diffview()
 	}
 end
 
--- Plugin: vim-easy-align
+-- Plugin: junegunn/vim-easy-align
 function keymaps.easy_align()
 	return {
 		map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):to_lazy_key(),
 	}
 end
 
--- Plugin: flash
+-- Plugin: folke/flash.nvim
 function keymaps.flash()
 	local flash_lazy_call = function(funcName, opts)
 		return lazy_call("flash", funcName, opts)
@@ -752,7 +492,7 @@ function keymaps.flash()
 	}
 end
 
--- Plugin: tabout
+-- Plugin: abecodes/tabout.nvim
 function keymaps.tabout()
 	return {
 		-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):to_lazy_key()
@@ -760,15 +500,404 @@ function keymaps.tabout()
 	}
 end
 
--- Plugin suda.vim
+-- Plugin lambdalisue/suda.vim
 function keymaps.suda()
-	map("<A-s>", "SudaWrite"):mode("n"):cmd():noremap():desc("edit: Save file using sudo"):to_lazy_key()
+	return {
+		map("<A-s>", "SudaWrite"):mode("n"):cmd():noremap():desc("edit: Save file using sudo"):to_lazy_key(),
+	}
 end
 
--- Plugin: gcmt/wildfire.vim
+-- Plugin: sustech-data/wildfire.nvim
 function keymaps.wildfire()
+	-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):to_lazy_key()
+	return nil
+end
+
+-- Plugin iamcco/markdown-preview.nvim
+function keymaps.markdown_preview()
 	return {
-		-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):to_lazy_key()
+		map("<F12>", "MarkdownPreviewToggle"):mode("n"):cmd():noremap():desc("tool: Preview markdown"):to_lazy_key(),
+	}
+end
+
+-- Plugin: tpope/vim-fugitive ; using lazggit
+function keymaps.vim_fugitive()
+	return {
+		map("gps", "G push"):cmd():noremap():desc("git: Push"):to_lazy_key(),
+		map("gpl", "G pull"):cmd():noremap():desc("git: Pull"):to_lazy_key(),
+		map("<LEADER>G", "Git"):cmd():noremap():desc("git: Open git-fugitive"):to_lazy_key(),
+	}
+end
+
+-- Plugin: nvim-tree/nvim-tree.lua
+function keymaps.nvim_tree()
+	return {
+		map("tt", "NvimTreeFindFileToggle")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("tool: Locate file in nvim-tree")
+			:to_lazy_key(),
+		map("tr", "NvimTreeRefresh"):mode("n"):cmd():noremap():desc("tool: Refresh nvim-Tree"):to_lazy_key(),
+		-- map("tf", "NvimTreeFocus"):mode("n"):cmd():noremap():desc("tree: Focus tree"):to_lazy_key()
+	}
+end
+
+-- Plugin: kdheepak/lazygit.nvim
+function keymaps.lazygit()
+	-- map("<C-g>", "LazyGit"):noremap():to_lazy_key(),
+	return nil
+end
+
+-- Plugin: kevinhwang91/rnvimr
+function keymaps.rnvimr()
+	-- map("R", "Ranger"):mode("n"):cmd():noremap():desc("tool: Toggle ranger"):to_lazy_key()
+	return {
+		map("R", "RnvimrToggle<CR><C-\\><C-n>:RnvimrResize 2")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:silent()
+			:desc("tool: Toggle ranger")
+			:to_lazy_key(),
+		map("<A-=>", "<C-\\><C-n>:RnvimrResize<CR>")
+			:mode("t")
+			:noremap()
+			:silent()
+			:desc("tool: Resize ranger float window")
+			:to_lazy_key(),
+	}
+end
+
+-- Plugin: michaelb/sniprun
+function keymaps.sniprun()
+	return {
+		map("<LEADER>r", "SnipRun"):mode("v"):cmd():noremap():desc("tool: Run code by range"):to_lazy_key(),
+		map("<LEADER>r", "SnipRun"):mode("n"):cmd():noremap():desc("tool: Run code by file"):to_lazy_key(),
+	}
+end
+
+-- Plugin: akinsho/toggleterm.nvim
+function keymaps.toggleterm()
+	return {
+		map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"')
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle horizontal")
+			:to_lazy_key(),
+		map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
+			:mode("i")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle horizontal")
+			:to_lazy_key(),
+		map("<C-\\>", "<Cmd>ToggleTerm<CR>")
+			:mode("t")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle horizontal")
+			:to_lazy_key(),
+		map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]])
+			:mode("n")
+			:cmd()
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle vertical")
+			:to_lazy_key(),
+		map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+			:mode("i")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle vertical")
+			:to_lazy_key(),
+		map("<A-\\>", "<Cmd>ToggleTerm<CR>")
+			:mode("t")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle vertical")
+			:to_lazy_key(),
+		map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]])
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle vertical")
+			:to_lazy_key(),
+		map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+			:mode("i")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle vertical")
+			:to_lazy_key(),
+		map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):to_lazy_key(),
+		map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]])
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle float")
+			:to_lazy_key(),
+		map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>")
+			:mode("i")
+			:noremap()
+			:silent()
+			:desc("terminal: Toggle float")
+			:to_lazy_key(),
+		map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):to_lazy_key(),
+	}
+end
+
+-- Plugin: folke/trouble.nvim
+function keymaps.trouble()
+	return {
+		map("tl", "TroubleToggle"):mode("n"):cmd():noremap():desc("lsp: Toggle trouble list"):to_lazy_key(),
+		map("<LEADER>ta", "TroubleToggle lsp_references")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:silent()
+			:desc("lsp: Show lsp references")
+			:to_lazy_key(),
+		map("<LEADER>td", "TroubleToggle document_diagnostics")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:silent()
+			:desc("lsp: Show document diagnostics")
+			:to_lazy_key(),
+		map("<LEAEDR>ta", "TroubleToggle workspace_diagnostics")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:silent()
+			:desc("lsp: Show workspace diagnostics")
+			:to_lazy_key(),
+		map("<LEADER>tq", "TroubleToggle quickfix"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):to_lazy_key(),
+		map("<LEADER>tl", "TroubleToggle loclist"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):to_lazy_key(),
+	}
+end
+
+-- Plugin: nvim-telescope/telescope.nvim
+function keymaps.telescope()
+	local function undo()
+		teleExtensions().undo.undo()
+	end
+	local function projects()
+		teleExtensions().projects.projects({})
+	end
+	local function frecency()
+		teleExtensions().frecency.frecency({})
+	end
+	local function grep()
+		teleExtensions().live_grep_args.live_grep_args()
+	end
+	local function notify()
+		teleExtensions().notify.notify()
+	end
+	local function colorscheme()
+		require("telescope.builtin").colorscheme({ enable_preview = true })
+	end
+
+	return {
+		map("<C-p>", _command_panel):mode("n"):noremap():desc("tool: Toggle command panel"):to_lazy_key(),
+		map("<LEADER>U", undo):mode("n"):noremap():desc("edit: Show undo history"):to_lazy_key(),
+		map("<LEADER>tp", projects):mode("n"):noremap():desc("find: Project"):to_lazy_key(),
+		map("<LEADER>tr", frecency):mode("n"):noremap():desc("find: File by frecency"):to_lazy_key(),
+		map("<LEADER>tw", grep):mode("n"):noremap():desc("find: Word in project"):to_lazy_key(),
+		map("<LEADER>te", tele("oldfiles")):mode("n"):cmd():noremap():desc("find: File by history"):to_lazy_key(),
+		map("<LEADER>tf", tele("find_files")):mode("n"):cmd():noremap():desc("find: File in project"):to_lazy_key(),
+		map("<LEADER>tc", colorscheme)
+			:mode("n")
+			:noremap()
+			:desc("ui: Change colorscheme for current session")
+			:to_lazy_key(),
+		map("<LEADER>tn", notify):mode("n"):noremap():desc("notify: List history notifications"):to_lazy_key(),
+		map("<LEADER>tN", "enew"):mode("n"):cmd():noremap():desc("buffer: New"):to_lazy_key(),
+		map("<LEADER>tg", tele("git_files")):mode("n"):cmd():noremap():desc("find: File in git project"):to_lazy_key(),
+		map("<LEADER>tz", tele("zoxide list"))
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("edit: Change current dir by zoxide")
+			:to_lazy_key(),
+		map("<LEADER>tb", tele("buffers")):mode("n"):cmd():noremap():desc("find: Buffer opened"):to_lazy_key(),
+		map("<LEADER>t*", tele("grep_string")):mode("n"):cmd():noremap():desc("find: Current word"):to_lazy_key(),
+		map("<LEADER>ts", tele("persisted")):mode("n"):cmd():noremap():desc("find: Session"):to_lazy_key(),
+		map("<LEADER>th", tele("help_tags")):mode("n"):cmd():noremap():desc("help: Show helps"):to_lazy_key(),
+		map("<LEADER>tG", tele("git_status"))
+			:mode("n")
+			:cmd()
+			:append("<ESC>")
+			:noremap()
+			:desc("help: Show helps")
+			:to_lazy_key(),
+	}
+end
+
+-- Plugin: nvim-pack/nvim-spectre
+function keymaps.spectre()
+	-- map("<LEADER>F", [[<Cmd>lua require("spectre").open()<CR>i]])
+	return {
+		map("<LEADER>F", 'lua require("spectre").open()')
+			:cmd()
+			:append("i")
+			:mode("n")
+			:noremap()
+			:desc("tool: find and replace")
+			:to_lazy_key(),
+		map("<LEADER>F", 'lua require("spectre").open_visual()')
+			:cmd()
+			:append("i")
+			:mode("v")
+			:noremap()
+			:desc("tool: find and replace")
+			:to_lazy_key(),
+	}
+end
+
+-- Plugin: dap & dap-go
+function keymaps.dap()
+	local dap_lazy_call = function(funcName, opts)
+		return lazy_call("dap", funcName, opts)
+	end
+	local dapui_lazy_call = function(funcName, opts)
+		return lazy_call("dapui", funcName, opts)
+	end
+	local persisted_lazy_call = function(funcName, opts)
+		return lazy_call("persistent-breakpoints.api", funcName, opts)
+	end
+	local go_lazy_call = function(funcName)
+		return lazy_call("dap-go", funcName)
+	end
+
+	return {
+		map("<F4>", dap_lazy_call("terminate")):mode("n"):noremap():desc("debug: Stop"):to_lazy_key(),
+		map("<F5>", dap_lazy_call("continue")):mode("n"):noremap():desc("debug: Run/Continue"):to_lazy_key(),
+		map("<F6>", dap_lazy_call("pause")):mode("n"):noremap():desc("debug: Pause"):to_lazy_key(),
+		map("<F10>", dap_lazy_call("step_over")):mode("n"):noremap():desc("debug: Step over"):to_lazy_key(),
+		map("<F11>", dap_lazy_call("step_into")):mode("n"):noremap():desc("debug: Step into"):to_lazy_key(),
+		map("<S-F11>", dap_lazy_call("step_out")):mode("n"):noremap():desc("debug: Step out"):to_lazy_key(),
+		map("<LEADER>dc", dap_lazy_call("run_to_cursor"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Run to cursor")
+			:to_lazy_key(),
+		map("<LEADER>dn", dap_lazy_call("up"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Go down in current stacktrace without stepping")
+			:to_lazy_key(),
+		map("<LEADER>di", dap_lazy_call("down"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Go up in current stacktrace without stepping")
+			:to_lazy_key(),
+
+		map("<LEADER>db", persisted_lazy_call("toggle_breakpoint"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Toggle breakpoint")
+			:to_lazy_key(),
+		map("<LEADER>dC", persisted_lazy_call("clear_all_breakpoints"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Clear all breakpoints")
+			:to_lazy_key(),
+		map("<LEADER>dB", persisted_lazy_call("set_conditional_breakpoint"))
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("debug: Set breakpoint with condition")
+			:to_lazy_key(),
+		-- require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+		map("<LEADER>dP", function()
+				require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+			end)
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("debug: Set breakpoint with log")
+			:to_lazy_key(),
+
+		map("<LEADER>du", go_lazy_call("debug_test"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Run Current Unit Test")
+			:to_lazy_key(),
+		map("<LEADER>dU", go_lazy_call("debug_last_test"))
+			:mode("n")
+			:noremap()
+			:desc("debug: Run Last Unit Test")
+			:to_lazy_key(),
+		map("<LEADER>dl", dap_lazy_call("run_last")):mode("n"):noremap():desc("debug: Run last"):to_lazy_key(),
+		map("<LEADER>do", function()
+				require("dap").repl.open()
+			end)
+			:mode("n")
+			:noremap()
+			:silent()
+			:desc("debug: Open REPL")
+			:to_lazy_key(),
+
+		map("<LEADER>dL", "DapShowLog"):mode("n"):cmd():noremap():desc("debug: show log"):to_lazy_key(),
+		map("<LEADER>dp", dapui_lazy_call("toggle"))
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("debug: toggle dapui")
+			:to_lazy_key(),
+		map("<LEADER>de", dapui_lazy_call("eval"))
+			:mode("nv")
+			:cmd()
+			:noremap()
+			:desc("debug: inspect change value")
+			:to_lazy_key(),
+		map("<LEADER>dA", [[call VimuxRunCommand("dlv attach $(pidof dlv)")]])
+			:mode("nv")
+			:cmd()
+			:noremap()
+			:desc("debug: dlv attach")
+			:to_lazy_key(),
+	}
+end
+
+-- Plugin: akinsho/bufferline.nvim
+function keymaps.bufferline()
+	return {
+		-- map("<A-w>", "BufDel!"):mode("n"):cmd():noremap():desc("buffer: Close current"):to_lazy_key(),
+		-- map("<A-q>", "BufferLineCloseOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):to_lazy_key(),
+		map("<A-i>", "BufferLineCycleNext"):mode("n"):cmd():noremap():desc("buffer: Switch to next"):to_lazy_key(),
+		map("<A-n>", "BufferLineCyclePrev"):mode("n"):cmd():noremap():desc("buffer: Switch to prev"):to_lazy_key(),
+		map("<A-I>", "BufferLineMoveNext"):mode("n"):cmd():noremap():desc("buffer: Move current to next"):to_lazy_key(),
+		map("<A-N>", "BufferLineMovePrev"):mode("n"):cmd():noremap():desc("buffer: Move current to prev"):to_lazy_key(),
+		map("<LEADER>be", "BufferLineSortByExtension")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("buffer: Sort by extension")
+			:to_lazy_key(),
+		map("<LEADER>bd", "BufferLineSortByDirectory")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("buffer: Sort by direrctory")
+			:to_lazy_key(),
+		map("<A-1>", "BufferLineGoToBuffer 1"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 1"):to_lazy_key(),
+		map("<A-2>", "BufferLineGoToBuffer 2"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 2"):to_lazy_key(),
+		map("<A-3>", "BufferLineGoToBuffer 3"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 3"):to_lazy_key(),
+		map("<A-4>", "BufferLineGoToBuffer 4"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 4"):to_lazy_key(),
+		map("<A-5>", "BufferLineGoToBuffer 5"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 5"):to_lazy_key(),
+		map("<A-6>", "BufferLineGoToBuffer 6"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 6"):to_lazy_key(),
+		map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 7"):to_lazy_key(),
+		map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 8"):to_lazy_key(),
+		map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 9"):to_lazy_key(),
+	}
+end
+
+-- Plugin: ojroques/nvim-bufdel
+function keymaps.bufdel()
+	return {
+		map("<A-w>", "BufDel"):mode("n"):cmd():noremap():desc("buffer: Close current"):to_lazy_key(),
+		map("<A-o>", "BufDelOthers"):mode("n"):cmd():noremap():desc("buffer: Close others"):to_lazy_key(),
 	}
 end
 

@@ -1,4 +1,5 @@
 local lang = {}
+local keymaps = require("r1v3r.keymaps")
 
 lang["kevinhwang91/nvim-bqf"] = {
 	lazy = true,
@@ -30,6 +31,7 @@ lang["Saecki/crates.nvim"] = {
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
 	ft = "markdown",
+	keys = keymaps.markdown_preview(),
 	build = ":call mkdp#util#install()",
 }
 lang["chrisbra/csv.vim"] = {

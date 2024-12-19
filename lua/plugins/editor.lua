@@ -45,6 +45,7 @@ editor["LunarVim/bigfile.nvim"] = {
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
+	keys = keymaps.bufdel(),
 	config = require("editor.nvim-bufdel"),
 }
 -- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
@@ -88,6 +89,7 @@ editor["RRethy/vim-illuminate"] = {
 editor["lambdalisue/suda.vim"] = {
 	lazy = true,
 	cmd = { "SudaRead", "SudaWrite" },
+	keys = keymaps.suda(),
 	config = require("editor.suda"),
 }
 editor["kevinhwang91/nvim-hlslens"] = {
