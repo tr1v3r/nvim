@@ -155,6 +155,7 @@ autocmd.init()
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
+		vim.notify("LspAttach buffer: " .. event.buf, vim.log.levels.DEBUG)
 		if not _G._debugging then
 			require("r1v3r.keymaps").lsp(event.buf)
 		end
