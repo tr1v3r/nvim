@@ -92,12 +92,18 @@ tool["ron89/thesaurus_query.vim"] = {
 		"ThesaurusQueryReset",
 	},
 }
-tool["kevinhwang91/rnvimr"] = {
-	lazy = false,
-	-- cmd = { "RnvimrToggle" },
-	keys = keymaps.rnvimr(),
-	config = require("tool.ranger"),
+tool["mikavilpas/yazi.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	keys = keymaps.yazi(),
+	config = require("tool.yazi"),
 }
+-- tool["kevinhwang91/rnvimr"] = {
+-- 	lazy = false,
+-- 	-- cmd = { "RnvimrToggle" },
+-- 	keys = keymaps.rnvimr(),
+-- 	config = require("tool.ranger"),
+-- }
 -- kevinhwang91/rnvimr another plugin for ranger
 -- kelly-lin/ranger.nvim toggle with command: Ranger
 

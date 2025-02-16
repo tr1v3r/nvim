@@ -550,6 +550,12 @@ function keymaps.lazygit()
 	return nil
 end
 
+function keymaps.yazi()
+	return {
+		map("R", "Yazi"):cmd():desc("Open yazi at the current file"):to_lazy_key(),
+	}
+end
+
 -- Plugin: kevinhwang91/rnvimr
 function keymaps.rnvimr()
 	-- map("R", "Ranger"):mode("n"):cmd():noremap():desc("tool: Toggle ranger"):to_lazy_key()
