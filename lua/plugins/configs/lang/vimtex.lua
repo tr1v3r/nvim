@@ -11,11 +11,15 @@ return function()
 	-- Viewer options: One may configure the viewer either by specifying a built-in
 	-- viewer method:
 	-- let g:vimtex_view_method = 'zathura'
-	-- for skim
-	vim.g.vimtex_view_method = "skim"
-	vim.g.vimtex_view_skim_activate = 1
-	vim.g.vimtex_view_skim_sync = 1
-	vim.g.vimtex_view_skim_reading_bar = 1
+
+	if require("r1v3r.global").is_mac then
+		-- for skim
+		vim.g.vimtex_view_method = "skim"
+		vim.g.vimtex_view_skim_activate = 1
+		vim.g.vimtex_view_skim_sync = 1
+		vim.g.vimtex_view_skim_reading_bar = 1
+	end
+
 	-- config for skim to inverse search
 	-- nvim --headless -c "VimtexInverseSearch %line '%file'"
 
