@@ -96,7 +96,8 @@ tool["mikavilpas/yazi.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
 	keys = keymaps.yazi(),
-	config = require("tool.yazi"),
+	opts = require("tool.yazi").opts,
+	init = require("tool.yazi").init,
 }
 -- tool["kevinhwang91/rnvimr"] = {
 -- 	lazy = false,
