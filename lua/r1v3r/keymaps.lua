@@ -173,7 +173,8 @@ local function setGeneralKeys()
 	map("srh", "<C-w>b<C-w>K"):mode("n"):noremap():desc("window: rotate windows"):set()
 	map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():desc("window: rotate windows"):set()
 
-	map("<LEADER>q", "<C-w>j<Cmd>q<CR>"):noremap():desc("window: close current window"):set()
+	-- map("<LEADER>q", "<C-w>j<Cmd>q<CR>"):noremap():desc("window: close current window"):set()
+	map("<LEADER>q", "q!"):cmd():noremap():desc("window: close current window"):set()
 
 	-- Opening a terminal window
 	local newTermCmd = "<Cmd>term<CR><Cmd>set filetype=terminal<CR><Cmd>set norelativenumber<CR><Cmd>set nonumber<CR>"
@@ -242,7 +243,7 @@ local function setGeneralKeys()
 	map("tx", "r !figlet"):space():noremap():desc("tool: call figlet"):set()
 
 	-- call lazygit in floating window
-	map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
+	-- map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
 end
 
 local function setLazyKeys()
@@ -552,7 +553,33 @@ end
 
 function keymaps.yazi()
 	return {
-		map("R", "Yazi"):cmd():desc("Open yazi at the current file"):to_lazy_key(),
+		map("R", "Yazi"):cmd():desc("tools: Open yazi at the current file"):to_lazy_key(),
+	}
+end
+
+function keymaps.snacks()
+	return {
+		map("<C-g>", function()
+				Snacks.lazygit()
+			end)
+			:mode("n")
+			:noremap()
+			:desc("tool: Toggle lazygit")
+			:to_lazy_key(),
+		map("<LEADER>.", function()
+				Snacks.scratch()
+			end)
+			:mode("n")
+			:noremap()
+			:desc("tool: Toggle Scratch Buffer")
+			:to_lazy_key(),
+		map("<LEADER>S", function()
+				Snacks.scratch.select()
+			end)
+			:mode("n")
+			:noremap()
+			:desc("tool: Select Scratch Buffer")
+			:to_lazy_key(),
 	}
 end
 

@@ -108,6 +108,13 @@ tool["mikavilpas/yazi.nvim"] = {
 -- kevinhwang91/rnvimr another plugin for ranger
 -- kelly-lin/ranger.nvim toggle with command: Ranger
 
+tool["folke/snacks.nvim"] = {
+	priority = 1000,
+	lazy = false,
+	keys = keymaps.snacks(),
+	opts = require("tool.snacks").opts,
+}
+
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------
