@@ -9,6 +9,12 @@ tools["dstein64/vim-startuptime"] = {
 		vim.g.startuptime_tries = 10
 	end,
 }
+tools["folke/snacks.nvim"] = {
+	priority = 1000,
+	lazy = false,
+	keys = keymaps.snacks(),
+	opts = require("tools.snacks").opts,
+}
 tools["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeFindFileToggle", "NvimTreeRefresh" },
@@ -107,13 +113,6 @@ tools["mikavilpas/yazi.nvim"] = {
 -- }
 -- kevinhwang91/rnvimr another plugin for ranger
 -- kelly-lin/ranger.nvim toggle with command: Ranger
-
-tools["folke/snacks.nvim"] = {
-	priority = 1000,
-	lazy = false,
-	keys = keymaps.snacks(),
-	opts = require("tools.snacks").opts,
-}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
