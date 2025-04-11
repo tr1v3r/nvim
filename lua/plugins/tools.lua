@@ -1,7 +1,7 @@
-local tool = {}
+local tools = {}
 local keymaps = require("r1v3r.keymaps")
 
-tool["dstein64/vim-startuptime"] = {
+tools["dstein64/vim-startuptime"] = {
 	-- lazy-load on a command
 	cmd = "StartupTime",
 	-- init is called during startup. Configuration for vim plugins typically should be set in an init function
@@ -9,44 +9,44 @@ tool["dstein64/vim-startuptime"] = {
 		vim.g.startuptime_tries = 10
 	end,
 }
-tool["nvim-tree/nvim-tree.lua"] = {
+tools["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeFindFileToggle", "NvimTreeRefresh" },
 	keys = keymaps.nvim_tree(),
-	config = require("tool.nvim-tree"),
+	config = require("tools.nvim-tree"),
 }
-tool["tpope/vim-fugitive"] = {
+tools["tpope/vim-fugitive"] = {
 	lazy = true,
 	keys = keymaps.vim_fugitive(),
 	cmd = { "Git", "G" },
 }
-tool["gelguy/wilder.nvim"] = {
+tools["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
-	config = require("tool.wilder"),
+	config = require("tools.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
-tool["kdheepak/lazygit.nvim"] = {
+tools["kdheepak/lazygit.nvim"] = {
 	lazy = true,
 	cmd = "LazyGit",
 	keys = keymaps.lazygit(),
-	config = require("tool.lazygit"),
+	config = require("tools.lazygit"),
 	-- optional for floating window border decoration
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
-tool["ibhagwan/smartyank.nvim"] = {
+tools["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("tool.smartyank"),
+	config = require("tools.smartyank"),
 }
-tool["michaelb/sniprun"] = {
+tools["michaelb/sniprun"] = {
 	lazy = true,
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	keys = keymaps.sniprun(),
-	config = require("tool.sniprun"),
+	config = require("tools.sniprun"),
 }
 -- tool["akinsho/toggleterm.nvim"] = {
 -- 	lazy = true,
@@ -59,31 +59,31 @@ tool["michaelb/sniprun"] = {
 -- 		"ToggleTermSendVisualSelection",
 -- 	},
 -- 	keys = keymaps.toggleterm(),
--- 	config = require("tool.toggleterm"),
+-- 	config = require("tools.toggleterm"),
 -- }
-tool["folke/trouble.nvim"] = {
+tools["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	keys = keymaps.trouble(),
-	config = require("tool.trouble"),
+	config = require("tools.trouble"),
 }
-tool["folke/which-key.nvim"] = {
+tools["folke/which-key.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("tool.which-key"),
+	config = require("tools.which-key"),
 }
-tool["nvim-pack/nvim-spectre"] = {
+tools["nvim-pack/nvim-spectre"] = {
 	lazy = true,
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 	keys = keymaps.spectre(),
-	config = require("tool.spectre"),
+	config = require("tools.spectre"),
 }
 -- general writing
-tool["reedes/vim-wordy"] = {
+tools["reedes/vim-wordy"] = {
 	lazy = true,
 	cmd = { "Wordy", "NoWordy", "NextWordy", "PrevWordy" },
 }
-tool["ron89/thesaurus_query.vim"] = {
+tools["ron89/thesaurus_query.vim"] = {
 	lazy = true,
 	cmd = {
 		"ThesaurusQueryReplaceCurrentWord",
@@ -92,37 +92,37 @@ tool["ron89/thesaurus_query.vim"] = {
 		"ThesaurusQueryReset",
 	},
 }
-tool["mikavilpas/yazi.nvim"] = {
+tools["mikavilpas/yazi.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
 	keys = keymaps.yazi(),
-	opts = require("tool.yazi").opts,
-	init = require("tool.yazi").init,
+	opts = require("tools.yazi").opts,
+	init = require("tools.yazi").init,
 }
 -- tool["kevinhwang91/rnvimr"] = {
 -- 	lazy = false,
 -- 	-- cmd = { "RnvimrToggle" },
 -- 	keys = keymaps.rnvimr(),
--- 	config = require("tool.ranger"),
+-- 	config = require("tools.ranger"),
 -- }
 -- kevinhwang91/rnvimr another plugin for ranger
 -- kelly-lin/ranger.nvim toggle with command: Ranger
 
-tool["folke/snacks.nvim"] = {
+tools["folke/snacks.nvim"] = {
 	priority = 1000,
 	lazy = false,
 	keys = keymaps.snacks(),
-	opts = require("tool.snacks").opts,
+	opts = require("tools.snacks").opts,
 }
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------
-tool["nvim-telescope/telescope.nvim"] = {
+tools["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
 	keys = keymaps.telescope(),
-	config = require("tool.telescope"),
+	config = require("tools.telescope"),
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
@@ -130,7 +130,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{
 			"ahmedkhalf/project.nvim",
 			event = { "CursorHold", "CursorHoldI" },
-			config = require("tool.project"),
+			config = require("tools.project"),
 		},
 		{ "jvgrootveld/telescope-zoxide" },
 		{ "nvim-telescope/telescope-frecency.nvim" },
@@ -142,7 +142,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 ----------------------------------------------------------------------
 --                           DAP Plugins                            --
 ----------------------------------------------------------------------
-tool["mfussenegger/nvim-dap"] = {
+tools["mfussenegger/nvim-dap"] = {
 	lazy = true,
 	cmd = {
 		"DapSetLogLevel",
@@ -156,26 +156,26 @@ tool["mfussenegger/nvim-dap"] = {
 		"DapTerminate",
 	},
 	keys = keymaps.dap(),
-	config = require("tool.dap"),
+	config = require("tools.dap"),
 	dependencies = {
 		{
 			"rcarriga/nvim-dap-ui",
-			config = require("tool.dap.dapui"),
+			config = require("tools.dap.dapui"),
 		},
 		{ "nvim-neotest/nvim-nio" },
 		{ "jay-babu/mason-nvim-dap.nvim" },
 		{ "leoluz/nvim-dap-go" },
 	},
 }
-tool["Weissle/persistent-breakpoints.nvim"] = {
+tools["Weissle/persistent-breakpoints.nvim"] = {
 	event = "LspAttach",
-	config = require("tool.dap.persistent-breakpoints"),
+	config = require("tools.dap.persistent-breakpoints"),
 }
 
 -- 	-- Unmanaged plugin (manually installed and updated)
 -- 	{ dir = "~/my-prototype-plugin" },
 
-tool["work.nvim"] = {
+tools["work.nvim"] = {
 	lazy = true,
 	-- dev = true,
 	dir = require("r1v3r.settings").private_plugins_dir .. "/work.nvim",
@@ -185,6 +185,6 @@ tool["work.nvim"] = {
 	end,
 }
 
-return tool
+return tools
 
 -- mbbill/undotree undotree for select or revert undo operation

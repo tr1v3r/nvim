@@ -5,7 +5,7 @@ return function()
 
 	local icons = { dap = require("r1v3r.icons").get("dap") }
 	local colors = require("helper").get_palette()
-	local mappings = require("tool.dap.dap-keymaps")
+	local mappings = require("tools.dap.dap-keymaps")
 
 	-- Initialize debug hooks
 	_G._debugging = false
@@ -48,7 +48,7 @@ return function()
 	---@param config table
 	local function mason_dap_handler(config)
 		local dap_name = config.name
-		local ok, custom_handler = pcall(require, "tool.dap.debuggers." .. dap_name)
+		local ok, custom_handler = pcall(require, "tools.dap.debuggers." .. dap_name)
 		if not ok then
 			-- Default to use factory config for clients(s) that doesn't include a spec
 			mason_dap.default_setup(config)
