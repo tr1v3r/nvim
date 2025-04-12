@@ -1,12 +1,13 @@
 local editor = {}
 local keymaps = require("r1v3r.keymaps")
 
-editor["rainbowhxch/accelerated-jk.nvim"] = {
-	lazy = true,
-	event = "VeryLazy",
-	keys = keymaps.accelerated_jk(),
-	config = require("editor.accelerated-jk"),
-}
+-- Disabled for performance reasons: accelerated-jk.nvim provides faster j/k motions but may conflict with other motion plugins or recording macros.
+-- editor["rainbowhxch/accelerated-jk.nvim"] = {
+-- 	lazy = true,
+-- 	event = "VeryLazy",
+-- 	keys = keymaps.accelerated_jk(),
+-- 	config = require("editor.accelerated-jk"),
+-- }
 -- editor["rmagatti/auto-session"] = {
 -- 	lazy = true,
 -- 	cmd = { "SessionSave", "SessionRestore", "SessionDelete" },
