@@ -174,7 +174,7 @@ local function setGeneralKeys()
 	map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():desc("window: rotate windows"):set()
 
 	-- map("<LEADER>q", "<C-w>j<Cmd>q<CR>"):noremap():desc("window: close current window"):set()
-	map("<LEADER>q", "q!"):cmd():noremap():desc("window: close current window"):set()
+	map("<LEADER>q", "x"):cmd():noremap():desc("window: close current window"):set()
 
 	-- Opening a terminal window
 	local newTermCmd = "<Cmd>term<CR><Cmd>set filetype=terminal<CR><Cmd>set norelativenumber<CR><Cmd>set nonumber<CR>"

@@ -99,7 +99,7 @@ return function()
 
 				vim_item.menu = setmetatable({
 					cmp_tabnine = "[TN]",
-					copilot = "[CPLT]",
+					copilot = "[]",
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
 					nvim_lsp = "[LSP]",
@@ -167,6 +167,17 @@ return function()
 					fallback()
 				end
 			end, { "i", "s" }),
+			["<C-i>"] = cmp.mapping(function(fallback) -- quick choose copilot suggestion
+				cmp.complete({
+					config = {
+						sources = {
+							{ name = "copilot" },
+						},
+					},
+				})
+				cmp.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
+				fallback()
+			end, { "i", "s" }),
 		}),
 		snippet = {
 			expand = function(args)
@@ -176,11 +187,11 @@ return function()
 		-- You should specify your *installed* sources.
 		sources = {
 			{ name = "nvim_lsp", max_item_count = 350 },
-			{ name = "nvim_lua" },
+			{ name = "copilot" },
 			{ name = "luasnip" },
+			{ name = "nvim_lua" },
 			{ name = "path" },
 			{ name = "treesitter" },
-			{ name = "copilot" },
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
