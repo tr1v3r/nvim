@@ -475,7 +475,7 @@ end
 -- Plugin: junegunn/vim-easy-align
 function keymaps.easy_align()
 	return {
-		map("<LEADER>a", "EasyAlign"):mode("nx"):cmd():desc("edit: Align with delimiter"):to_lazy_key(),
+		map("ga", "<Plug>(EasyAlign)"):mode("nx"):noremap():desc("edit: Align with delimiter"):to_lazy_key(),
 	}
 end
 
