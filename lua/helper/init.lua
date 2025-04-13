@@ -321,7 +321,8 @@ function M.float_terminal(cmd)
 	vim.wo[terminal_window].relativenumber = false
 	vim.wo[terminal_window].winhighlight = "Normal:Normal" -- 设置浮动窗口的选项，避免影响底层窗口内容
 
-	vim.fn.termopen(cmd, {
+	vim.fn.jobstart(cmd, {
+		term = true,
 		detach = 1,
 		on_exit = function(_, code)
 			-- 在退出终端时关闭浮动窗口
