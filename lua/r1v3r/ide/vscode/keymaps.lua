@@ -177,9 +177,9 @@ local function setGeneralKeys()
 end
 
 local function setPluginsKeys()
-	-- Plugin: gcmt/wildfire.vim
-	map("<CR><CR>", "<Plug>(wildfire-fuel)"):mode("n"):noremap():silent():desc("edit: select closet"):set()
-	map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: quick select"):set()
+	-- -- Plugin: gcmt/wildfire.vim
+	-- map("<CR><CR>", "<Plug>(wildfire-fuel)"):mode("n"):noremap():silent():desc("edit: select closet"):set()
+	-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: quick select"):set()
 
 	-- Plugin: hop
 	map("<LEADER>w", "<Cmd>HopWord<CR>"):mode("nv"):noremap():desc("jump: Goto word"):set()

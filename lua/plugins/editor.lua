@@ -98,13 +98,13 @@ editor["kevinhwang91/nvim-hlslens"] = {
 	event = "BufReadPost",
 	config = require("editor.hlslens"),
 }
-editor["sustech-data/wildfire.nvim"] = {
-	lazy = true,
-	event = "VeryLazy",
-	keys = keymaps.wildfire(),
-	config = require("editor.wildfire"),
-	vsc = true,
-}
+-- editor["sustech-data/wildfire.nvim"] = { -- use nvim-treesitter instead
+-- 	lazy = true,
+-- 	event = "VeryLazy",
+-- 	keys = keymaps.wildfire(),
+-- 	config = require("editor.wildfire"),
+-- 	vsc = true,
+-- }
 -- tpope/vim-surround old version by vimscript
 editor["kylechui/nvim-surround"] = {
 	lazy = true,

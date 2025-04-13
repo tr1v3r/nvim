@@ -16,41 +16,51 @@ return vim.schedule_wrap(function()
 			end,
 			additional_vim_regex_highlighting = false,
 		},
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<CR>",
+				node_incremental = "<CR>",
+				-- scope_incremental = "<CR>",
+				node_decremental = "<BS>",
+			},
+		},
 		textobjects = {
+			-- docs: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 			select = {
 				enable = true,
 				keymaps = {
 					["af"] = "@function.outer",
-					["if"] = "@function.inner",
+					["kf"] = "@function.inner",
 					["ac"] = "@class.outer",
-					["ic"] = "@class.inner",
+					["kc"] = "@class.inner",
 				},
 			},
 			move = {
 				enable = true,
 				set_jumps = true, -- whether to set jumps in the jumplist
 				goto_next_start = {
-					["]["] = "@function.outer",
+					["]["] = "@block.outer",
+					["]f"] = "@function.outer",
 					["]m"] = "@class.outer",
 				},
 				goto_next_end = {
-					["]]"] = "@function.outer",
+					["]]"] = "@block.outer",
+					["]F"] = "@function.outer",
 					["]M"] = "@class.outer",
 				},
 				goto_previous_start = {
-					["[["] = "@function.outer",
+					["[["] = "@block.outer",
+					["[f"] = "@function.outer",
 					["[m"] = "@class.outer",
 				},
 				goto_previous_end = {
-					["[]"] = "@function.outer",
+					["[]"] = "@block.outer",
+					["[F"] = "@function.outer",
 					["[M"] = "@class.outer",
 				},
 			},
 		},
-		-- context_commentstring = { @deprecated at 2023.11.21, can be delete after 3 month(after 2024.1.21)
-		-- 	enable = true,
-		-- 	enable_autocmd = false
-		-- },
 		indent = { enable = true },
 		matchup = { enable = true },
 	})
