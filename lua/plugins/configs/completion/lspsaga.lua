@@ -63,6 +63,7 @@ return function()
 		-- },
 		-- Code Action: https://nvimdev.github.io/lspsaga/codeaction/
 		code_action = {
+			enable = false,
 			num_shortcut = true,
 			only_in_cursor = false,
 			show_server_name = true,

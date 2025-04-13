@@ -297,6 +297,12 @@ initBasicKeys()
 local keymaps = {}
 
 function keymaps.lsp(buf)
+	-- unmap default keymaps (slient unmap)
+	pcall(vim.keymap.del, "", "grr")
+	pcall(vim.keymap.del, "", "grn")
+	pcall(vim.keymap.del, "", "gra")
+	pcall(vim.keymap.del, "", "gri")
+
 	-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 	map("<LEADER>li", "LspInfo"):mode("n"):cmd():buffer(buf):desc("lsp: Info"):set()
 	map("<LEADER>lr", "LspRestart"):mode("n"):cmd():buffer(buf):nowait():desc("lsp: Restart"):set()
