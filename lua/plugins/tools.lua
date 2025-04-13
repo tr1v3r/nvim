@@ -61,6 +61,17 @@ tools["yetone/avante.nvim"] = {
 		},
 	},
 }
+tools["jackMort/ChatGPT.nvim"] = {
+	event = "VeryLazy",
+	config = require("tools.chatgpt"),
+	-- opts = require("tools.chatgpt").deepseek_opts,
+	dependencies = {
+		"MunifTanjim/nui.nvim",
+		"nvim-lua/plenary.nvim",
+		"folke/trouble.nvim", -- optional
+		"nvim-telescope/telescope.nvim",
+	},
+}
 tools["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeFindFileToggle", "NvimTreeRefresh" },
