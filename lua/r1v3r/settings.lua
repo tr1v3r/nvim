@@ -119,7 +119,16 @@ settings["format_block_filetypes"] = {
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
-settings["lsp_deps"] = { "bashls", "clangd", "html", "jsonls", "lua_ls", "pylsp", "gopls" }
+settings["lsp_deps"] = {
+	"bashls",
+	"clangd",
+	"html",
+	"jsonls",
+	"lua_ls",
+	"pylsp",
+	"gopls",
+	-- "gopls@v0.15.3", -- for go 1.19-
+}
 
 -- Set the Treesitter deps that will be installed and configured during boot.
 -- Check the below link for all supported languages:
