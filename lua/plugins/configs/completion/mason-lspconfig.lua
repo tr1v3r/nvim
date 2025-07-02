@@ -36,8 +36,13 @@ M.setup = function()
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
 	local function mason_lsp_handler(lsp_name)
-		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
+		-- vim.notify("Setting up LSP: " .. lsp_name, vim.log.levels.INFO, { title = "nvim-lspconfig" })
 
+		-- vim.lsp docs:
+		-- https://neovim.io/doc/user/lsp.html
+		-- https://neovim.io/doc/user/lsp.html#vim.lsp.config()
+
+		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			vim.lsp.config(lsp_name, opts)
@@ -70,6 +75,8 @@ M.setup = function()
 				{ title = "nvim-lspconfig" }
 			)
 		end
+
+		-- vim.inspect(vim.lsp.config["gopls"])
 	end
 
 	for _, lsp in ipairs(lsp_deps) do
