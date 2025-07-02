@@ -12,11 +12,11 @@ M.setup = function()
 		ensure_installed = require("r1v3r.settings").lsp_deps,
 	})
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	vim.diagnostic.config({
 		signs = true,
 		underline = true,
 		virtual_text = diagnostics_virtual_text and {
-			min = diagnostics_level,
+			severity = { min = diagnostics_level },
 		} or false,
 		-- set update_in_insert to false bacause it was enabled by lspsaga
 		update_in_insert = false,
