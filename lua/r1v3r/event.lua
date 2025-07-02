@@ -175,6 +175,8 @@ function autocmd.group_init()
 				function()
 					vim.keymap.set("n", "<up>", "<up>", { buffer = true, silent = true })
 					vim.keymap.set("n", "<down>", "<down>", { buffer = true, silent = true })
+					vim.keymap.set("n", "<left>", "<left>", { buffer = true, silent = true })
+					vim.keymap.set("n", "<right>", "<right>", { buffer = true, silent = true })
 				end,
 			},
 		},
