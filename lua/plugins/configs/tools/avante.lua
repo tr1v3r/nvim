@@ -8,21 +8,25 @@ M.opts = {
 	-- Of course, you can reduce the request frequency by increasing `suggestion.debounce`.
 	auto_suggestions_provider = "copilot",
 
-	openai = { -- user env OPENAI_API_KEY
-		endpoint = "https://api.openai.com/v1",
-		model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-		timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-		temperature = 0,
-		max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-		--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-	},
-	claude = { -- use env ANTHROPIC_API_KEY
-		endpoint = "https://api.anthropic.com",
-		model = "claude-3-5-sonnet-20241022",
-		temperature = 0,
-		max_tokens = 4096,
-	},
-	vendors = {
+	providers = {
+		openai = { -- user env OPENAI_API_KEY
+			endpoint = "https://api.openai.com/v1",
+			model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+			timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+			extra_request_body = {
+				temperature = 0,
+				max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+				--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+			},
+		},
+		claude = { -- use env ANTHROPIC_API_KEY
+			endpoint = "https://api.anthropic.com",
+			model = "claude-3-5-sonnet-20241022",
+			extra_request_body = {
+				temperature = 0,
+				max_tokens = 4096,
+			},
+		},
 		deepseek = { -- use env DEEPSEEK_API_KEY
 			__inherited_from = "openai",
 			api_key_name = "DEEPSEEK_API_KEY",

@@ -11,15 +11,48 @@ function autocmd.cmd(cmds)
 	end
 end
 
+-- deprecated: vimscript version
+-- function autocmd.group(definitions)
+-- 	for group_name, definition in pairs(definitions) do
+-- 		vim.api.nvim_command("augroup " .. group_name)
+-- 		vim.api.nvim_command("autocmd!")
+-- 		for _, def in ipairs(definition) do
+-- 			local command = table.concat(vim.list_extend({ "autocmd" }, def), " ")
+-- 			vim.api.nvim_command(command)
+-- 		end
+-- 		vim.api.nvim_command("augroup END")
+-- 	end
+-- end
+
 function autocmd.group(definitions)
 	for group_name, definition in pairs(definitions) do
-		vim.api.nvim_command("augroup " .. group_name)
-		vim.api.nvim_command("autocmd!")
+		local group_id = vim.api.nvim_create_augroup(group_name, { clear = true })
+
 		for _, def in ipairs(definition) do
-			local command = table.concat(vim.list_extend({ "autocmd" }, def), " ")
-			vim.api.nvim_command(command)
+			local event, pattern, action = def[1], def[2], def[3]
+			local opts = def[4] or {} -- 可选的额外选项
+
+			if action and action ~= "" then
+				local autocmd_opts = {
+					group = group_id,
+					pattern = pattern,
+				}
+
+				-- combine opts into autocmd_opts
+				for k, v in pairs(opts) do
+					autocmd_opts[k] = v
+				end
+
+				-- check if action is a function or a string
+				if type(action) == "function" then
+					autocmd_opts.callback = action
+				else
+					autocmd_opts.command = action
+				end
+
+				vim.api.nvim_create_autocmd(event, autocmd_opts)
+			end
 		end
-		vim.api.nvim_command("augroup END")
 	end
 end
 
@@ -97,7 +130,7 @@ function autocmd.group_init()
 			{ "BufWritePost", [[$VIM_PATH/{*.vim,*.yaml,vimrc} nested source $MYVIMRC | redraw]] },
 			-- Reload Vim script automatically if setlocal autoread
 			{
-				"BufWritePost,FileWritePost",
+				{ "BufWritePost", "FileWritePost" },
 				"*.vim",
 				[[nested if &l:autoread > 0 | source <afile> | echo 'source ' . bufname('%') | endif]],
 			},
@@ -114,12 +147,12 @@ function autocmd.group_init()
 		},
 		wins = { -- Highlight current line only on focused window
 			{
-				"WinEnter,BufEnter,InsertLeave",
+				{ "WinEnter", "BufEnter", "InsertLeave" },
 				"*",
 				[[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
 			},
 			{
-				"WinLeave,BufLeave,InsertEnter",
+				{ "WinLeave", "BufLeave", "InsertEnter" },
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
@@ -136,6 +169,14 @@ function autocmd.group_init()
 			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 			{ "FileType", "*", [[setlocal formatoptions-=cro]] },
 			{ "FileType", "c,cpp", "nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>" },
+			{
+				"FileType",
+				"lazy",
+				function()
+					vim.keymap.set("n", "<up>", "<up>", { buffer = true, silent = true })
+					vim.keymap.set("n", "<down>", "<down>", { buffer = true, silent = true })
+				end,
+			},
 		},
 		yank = { { "TextYankPost", "*", [[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]] } },
 	}

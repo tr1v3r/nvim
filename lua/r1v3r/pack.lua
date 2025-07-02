@@ -1,6 +1,5 @@
 local fn, api = vim.fn, vim.api
 local global = require("r1v3r.global")
-local is_mac = global.is_mac
 local plugins_dir, data_dir = global.plugins_dir, global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 
@@ -68,13 +67,12 @@ end
 
 -- opts: get lazy opts
 function Lazy.opts()
-	local clone_prefix = use_ssh and "git@github.com:%s.git" or "https://github.com/%s.git"
 	local opts = {
 		root = data_dir .. "lazy", -- directory where plugins will be installed
 		git = {
-			-- log = { "-10" }, -- show the last 10 commits
-			timeout = 300,
-			url_format = clone_prefix,
+			log = { "-8" }, -- show the last 8 commits
+			timeout = 300, -- kill processes that take more than 5 minutes
+			url_format = use_ssh and "git@github.com:%s.git" or "https://github.com/%s.git",
 		},
 		install = {
 			-- install missing plugins on startup. This doesn't increase startup time.
@@ -109,6 +107,19 @@ function Lazy.opts()
 				},
 			},
 		},
+		-- Output options for headless mode
+		headless = {
+			-- show the output from process commands like git
+			process = true,
+			-- show log messages
+			log = true,
+			-- show task start/end
+			task = true,
+			-- use ansi colors
+			colors = true,
+		},
+		---@diagnostic disable-next-line: undefined-field
+		concurrency = vim.uv.available_parallelism() * 2,
 		performance = {
 			cache = {
 				enabled = true,
@@ -126,10 +137,6 @@ function Lazy.opts()
 			},
 		},
 	}
-
-	if is_mac then
-		opts.concurrency = 20
-	end
 
 	return opts
 end
