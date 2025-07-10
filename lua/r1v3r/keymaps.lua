@@ -310,7 +310,7 @@ function keymaps.lsp(buf)
 	-- AerialToggle! with ! toggle aesial outline window and do not move cursor to outline window
 	map("gO", "AerialToggle"):mode("n"):cmd():buffer(buf):desc("lsp: Toggle outline"):set()
 	map("go", function()
-			teleExtensions().aerial.aerial()
+			teleExtensions().aerial.aerial({ previewer = false })
 		end)
 		:mode("n")
 		:buffer(buf)

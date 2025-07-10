@@ -105,10 +105,97 @@ return function()
 		},
 		extensions = {
 			aerial = {
-				show_lines = false,
+				-- Set the width of the first two columns (the second
+				-- is relevant only when show_columns is set to 'both')
+				col1_width = 2,
+				col2_width = 30,
+				-- How to format the symbols
+				format_symbol = function(symbol_path, filetype)
+					-- 不同文件类型的自定义格式
+					local formatters = {
+						json = function(path)
+							return table.concat(path, ".")
+						end,
+
+						yaml = function(path)
+							return table.concat(path, ".")
+						end,
+
+						lua = function(path)
+							-- 显示模块.函数格式
+							if #path > 1 then
+								return table.concat({ path[1], path[#path] }, ".")
+							end
+							return path[#path]
+						end,
+
+						go = function(path)
+							-- 处理方法：只显示方法名，添加简短的接收器标识
+							local symbol_name = path[#path]
+
+							local method_name, receiver_type, is_pointer, type_name
+
+							if symbol_name:match("^%(.*%)%s+(.+)") then -- 格式1: (s *HandleServer) Run (treesitter)
+								local receiver = symbol_name:match("^%((.-)%)")
+								method_name = symbol_name:match("^%(.*%)%s+(.+)")
+
+								if receiver then
+									receiver_type = receiver:match("([^%s]+)$") or receiver
+									is_pointer = receiver_type:match("^%*") ~= nil
+									type_name = receiver_type:gsub("^%*", "")
+								end
+							elseif symbol_name:match("^%((.-)%)%.(.+)") then -- 格式2: (*HandleServer).Run (lsp)
+								receiver_type = symbol_name:match("^%((.-)%)%.(.+)")
+								method_name = symbol_name:match("^%(.-%)%.(.+)")
+
+								if receiver_type then
+									is_pointer = receiver_type:match("^%*") ~= nil
+									type_name = receiver_type:gsub("^%*", "")
+								end
+							else
+								return symbol_name
+							end
+
+							-- 统一处理接收器标识
+							local receiver_initial = ""
+							if type_name then
+								receiver_initial = type_name:sub(1, 1):upper()
+								if is_pointer then
+									receiver_initial = "*" .. receiver_initial
+								end
+							end
+
+							return string.format("%s.%s", receiver_initial, method_name)
+						end,
+
+						python = function(path)
+							-- 显示类.方法，但限制长度
+							local result = #path > 1 and table.concat({ path[#path - 1], path[#path] }, ".")
+								or path[#path]
+							return #result > 50 and (result:sub(1, 47) .. "...") or result
+						end,
+
+						javascript = function(path)
+							-- 显示最后两级
+							if #path > 1 then
+								return table.concat({ path[#path - 1], path[#path] }, ".")
+							end
+							return path[#path]
+						end,
+					}
+
+					local formatter = formatters[filetype] or function(path)
+						return path[#path]
+					end
+					return formatter(symbol_path)
+				end,
+				-- Available modes: symbols, lines, both
+				show_columns = "both",
+				-- show_lines = false,
 				show_nesting = {
 					["_"] = false, -- This key will be the default
 					lua = true, -- You can set the option for specific filetypes
+					go = true,
 				},
 			},
 			fzf = {
