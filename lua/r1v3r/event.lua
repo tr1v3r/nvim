@@ -171,7 +171,7 @@ function autocmd.group_init()
 			{ "FileType", "c,cpp", "nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>" },
 			{
 				"FileType",
-				"lazy",
+				{ "lazy", "mason" },
 				function()
 					vim.keymap.set("n", "<up>", "<up>", { buffer = true, silent = true })
 					vim.keymap.set("n", "<down>", "<down>", { buffer = true, silent = true })

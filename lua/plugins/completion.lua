@@ -3,7 +3,7 @@ local use_copilot = require("r1v3r.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "mason-org/mason.nvim" },

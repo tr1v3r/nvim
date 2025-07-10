@@ -224,6 +224,8 @@ tools["mfussenegger/nvim-dap"] = {
 	},
 }
 tools["Weissle/persistent-breakpoints.nvim"] = {
+	lazy = true,
+	priority = 1,
 	event = "LspAttach",
 	config = require("tools.dap.persistent-breakpoints"),
 }

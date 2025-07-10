@@ -7,6 +7,9 @@ return function()
 	local colors = require("helper").get_palette()
 	local mappings = require("tools.dap.dap-keymaps")
 
+	-- vim.print("nvim-dap is loading! Stack trace:")
+	-- vim.print(debug.traceback())
+
 	-- Initialize debug hooks
 	_G._debugging = false
 	local function debug_init_cb()
