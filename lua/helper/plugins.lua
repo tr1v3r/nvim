@@ -4,8 +4,8 @@ _G._command_panel = function()
 			return not string.find(lhs, "Þ")
 		end,
 		layout_config = {
-			width = 0.6,
-			height = 0.6,
+			width = 0.8,
+			height = 0.8,
 			prompt_position = "top",
 		},
 	})

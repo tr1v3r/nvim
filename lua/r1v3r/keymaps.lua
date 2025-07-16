@@ -302,6 +302,7 @@ function keymaps.lsp(buf)
 	pcall(vim.keymap.del, "", "grn")
 	pcall(vim.keymap.del, "", "gra")
 	pcall(vim.keymap.del, "", "gri")
+	pcall(vim.keymap.del, "", "grt") -- vim.lsp.buf.type_definition
 
 	-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 	map("<LEADER>li", "LspInfo"):mode("n"):cmd():buffer(buf):desc("lsp: Info"):set()
@@ -343,8 +344,17 @@ function keymaps.lsp(buf)
 	map("gn", "Glance type_definitions"):mode("n"):cmd():buffer(buf):desc("lsp: Show type_definitions"):set()
 	map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
 	map("<LEADER>co", "Lspsaga outgoing_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show outgoing calls"):set()
+
+	map("gt", function()
+			vim.lsp.buf.type_definition()
+		end)
+		:mode("n")
+		:desc("lsp: Go to Type Definition")
+		:set()
+
 	-- map("<LEADER>ci", tele("lsp_incoming_calls")):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
 	-- map("<LEADER>co", tele("lsp_outgoing_calls")):mode("n"):cmd():buffer(buf):desc("lsp: Show outgoing calls"):set()
+
 	map("<LEADER>tS", tele("lsp_dynamic_workspace_symbols"))
 		:mode("n")
 		:cmd()
