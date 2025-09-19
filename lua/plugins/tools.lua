@@ -16,6 +16,7 @@ tools["folke/snacks.nvim"] = {
 	opts = require("tools.snacks").opts,
 }
 tools["yetone/avante.nvim"] = {
+	enabled = false,
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	opts = require("tools.avante").opts,
@@ -62,6 +63,7 @@ tools["yetone/avante.nvim"] = {
 	},
 }
 tools["jackMort/ChatGPT.nvim"] = {
+	enabled = false,
 	event = "VeryLazy",
 	config = require("tools.chatgpt"),
 	-- opts = require("tools.chatgpt").deepseek_opts,
