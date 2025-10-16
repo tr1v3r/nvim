@@ -6,7 +6,13 @@ M.setup = function()
 	local lsp_deps = require("r1v3r.settings").lsp_deps
 
 	local mason_lspconfig = require("mason-lspconfig")
-	require("lspconfig.ui.windows").default_options.border = "rounded"
+	vim.lsp.util.open_floating_preview = (function(orig)
+		return function(contents, syntax, opts, ...)
+			opts = opts or {}
+			opts.border = opts.border or "rounded"
+			return orig(contents, syntax, opts, ...)
+		end
+	end)(vim.lsp.util.open_floating_preview)
 
 	mason_lspconfig.setup({
 		ensure_installed = lsp_deps,

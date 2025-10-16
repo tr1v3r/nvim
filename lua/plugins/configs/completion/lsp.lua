@@ -1,6 +1,4 @@
 return function()
-	local nvim_lsp = require("lspconfig")
-
 	require("completion.mason").setup()
 	require("completion.mason-lspconfig").setup()
 
@@ -12,7 +10,7 @@ return function()
 	if vim.fn.executable("dart") == 1 then
 		local _opts = require("completion.servers.dartls")
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-		nvim_lsp.dartls.setup(final_opts)
+		vim.lsp.config.dartls.setup(final_opts)
 	end
 
 	vim.cmd([[LspStart]]) -- Start LSPs
