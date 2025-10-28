@@ -237,6 +237,7 @@ tools["jackMort/ChatGPT.nvim"] = {
 	},
 }
 tools["olimorris/codecompanion.nvim"] = {
+	enabled = false,
 	lazy = true,
 	event = "VeryLazy",
 	config = require("tools.codecompanion").setup,

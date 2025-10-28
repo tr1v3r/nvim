@@ -178,7 +178,7 @@ local function setGeneralKeys()
 
 	-- Opening a terminal window
 	local newTermCmd = "<Cmd>term<CR><Cmd>set filetype=terminal<CR><Cmd>set norelativenumber<CR><Cmd>set nonumber<CR>"
-	map("<LEADER>/", "<Cmd>set splitbelow<CR><Cmd>split<CR><Cmd>res -5<CR>" .. newTermCmd .. "i")
+	map("<C-\\>", "<Cmd>set splitbelow<CR><Cmd>split<CR><Cmd>res -5<CR>" .. newTermCmd .. "i")
 		:noremap()
 		:desc("window: open terminal window")
 		:set()
@@ -186,7 +186,7 @@ local function setGeneralKeys()
 		:noremap()
 		:desc("window: open terminal window")
 		:set()
-	map("<C-\\>", "<Cmd>set nosplitbelow<CR><Cmd>vsplit<CR><Cmd>vertical resize-30<CR>" .. newTermCmd .. "i")
+	map("<LEADER>/", "<Cmd>set nosplitbelow<CR><Cmd>vsplit<CR><Cmd>vertical resize-30<CR>" .. newTermCmd .. "i")
 		:noremap()
 		:desc("window: open terminal window")
 		:set()
@@ -194,7 +194,11 @@ local function setGeneralKeys()
 	-- nnoremap \t :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 	-- Open a new terminal tab
 	map([[\t]], "<Cmd>tabe<CR><Cmd>term<CR>i"):noremap():desc("window: open terminal window in new tab"):set()
-	map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode"):set() -- switch to normal mode in terminal.
+	-- Terminal mode switching - multiple options to avoid ESC conflicts
+	map("<C-[>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Ctrl+[)"):set() -- Primary: Ctrl+[
+	-- map("<C-q>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Ctrl+q)"):set() -- Alternative: Ctrl+q
+	map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Esc+Esc)"):set() -- Fallback: Esc+Esc
+	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (jk)"):set() -- Alternative: jk
 	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():set() -- switch to normal mode in terminal.
 
 	-- ==================== Tab management ====================
@@ -951,23 +955,11 @@ function keymaps.codecompanion()
 
 	return {
 		-- Open chat interface
-		map("<LEADER>ac", cc_lazy_call("chat"))
-			:mode("n")
-			:noremap()
-			:desc("ai: Open chat")
-			:to_lazy_key(),
+		map("<LEADER>ac", cc_lazy_call("chat")):mode("n"):noremap():desc("ai: Open chat"):to_lazy_key(),
 		-- Toggle inline suggestions
-		map("<LEADER>ai", cc_lazy_call("inline"))
-			:mode("n")
-			:noremap()
-			:desc("ai: Toggle inline")
-			:to_lazy_key(),
+		map("<LEADER>ai", cc_lazy_call("inline")):mode("n"):noremap():desc("ai: Toggle inline"):to_lazy_key(),
 		-- Code assistance
-		map("<LEADER>aa", cc_lazy_call("assist"))
-			:mode("n")
-			:noremap()
-			:desc("ai: Code assistance")
-			:to_lazy_key(),
+		map("<LEADER>aa", cc_lazy_call("assist")):mode("n"):noremap():desc("ai: Code assistance"):to_lazy_key(),
 		-- Ask about current code
 		map("<LEADER>aq", function()
 				require("codecompanion").ask()
