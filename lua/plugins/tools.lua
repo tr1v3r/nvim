@@ -16,7 +16,7 @@ tools["folke/snacks.nvim"] = {
 	opts = require("tools.snacks").opts,
 }
 tools["yetone/avante.nvim"] = {
-	enabled = false,
+	-- enabled = false,
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	opts = require("tools.avante").opts,
@@ -29,10 +29,11 @@ tools["yetone/avante.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
 		--- The below dependencies are optional,
-		"echasnovski/mini.pick", -- for file_selector provider mini.pick
-		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+		-- Remove unused file selector providers if not needed
+		-- "echasnovski/mini.pick", -- for file_selector provider mini.pick
+		-- "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-		"ibhagwan/fzf-lua", -- for file_selector provider fzf
+		-- "ibhagwan/fzf-lua", -- for file_selector provider fzf
 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 		"zbirenbaum/copilot.lua", -- for providers='copilot'
 		-- {
