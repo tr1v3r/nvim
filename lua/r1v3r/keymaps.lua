@@ -943,6 +943,42 @@ function keymaps.bufferline()
 	}
 end
 
+-- Plugin: olimorris/codecompanion.nvim
+function keymaps.codecompanion()
+	local cc_lazy_call = function(funcName, opts)
+		return lazy_call("codecompanion", funcName, opts)
+	end
+
+	return {
+		-- Open chat interface
+		map("<LEADER>ac", cc_lazy_call("chat"))
+			:mode("n")
+			:noremap()
+			:desc("ai: Open chat")
+			:to_lazy_key(),
+		-- Toggle inline suggestions
+		map("<LEADER>ai", cc_lazy_call("inline"))
+			:mode("n")
+			:noremap()
+			:desc("ai: Toggle inline")
+			:to_lazy_key(),
+		-- Code assistance
+		map("<LEADER>aa", cc_lazy_call("assist"))
+			:mode("n")
+			:noremap()
+			:desc("ai: Code assistance")
+			:to_lazy_key(),
+		-- Ask about current code
+		map("<LEADER>aq", function()
+				require("codecompanion").ask()
+			end)
+			:mode("n")
+			:noremap()
+			:desc("ai: Ask about code")
+			:to_lazy_key(),
+	}
+end
+
 -- Plugin: ojroques/nvim-bufdel
 function keymaps.bufdel()
 	return {
