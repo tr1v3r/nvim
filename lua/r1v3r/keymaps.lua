@@ -195,11 +195,9 @@ local function setGeneralKeys()
 	-- Open a new terminal tab
 	map([[\t]], "<Cmd>tabe<CR><Cmd>term<CR>i"):noremap():desc("window: open terminal window in new tab"):set()
 	-- Terminal mode switching - multiple options to avoid ESC conflicts
-	map("<C-[>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Ctrl+[)"):set() -- Primary: Ctrl+[
-	-- map("<C-q>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Ctrl+q)"):set() -- Alternative: Ctrl+q
 	map("<Esc><Esc>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Esc+Esc)"):set() -- Fallback: Esc+Esc
+	-- map("<C-[>", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (Ctrl+[)"):set() -- Primary: Ctrl+[
 	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():desc("edit: switch to normal mode (jk)"):set() -- Alternative: jk
-	-- map("jk", [[<C-\><C-n>]]):mode("t"):noremap():set() -- switch to normal mode in terminal.
 
 	-- ==================== Tab management ====================
 	-- Create a new tab with tu
