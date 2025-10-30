@@ -177,7 +177,7 @@ tools["Weissle/persistent-breakpoints.nvim"] = {
 --                        AI Assistant Plugins                      --
 ----------------------------------------------------------------------
 tools["yetone/avante.nvim"] = {
-	-- enabled = false,
+	enabled = false,
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	opts = require("tools.avante").opts,
@@ -244,6 +244,15 @@ tools["olimorris/codecompanion.nvim"] = {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
+	},
+}
+tools["NickvanDyke/opencode.nvim"] = {
+	lazy = true,
+	cmd = "OpencodePrompt",
+	keys = keymaps.opencode(),
+	config = require("tools.opencode"),
+	dependencies = {
+		{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
 	},
 }
 

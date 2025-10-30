@@ -969,6 +969,54 @@ function keymaps.codecompanion()
 	}
 end
 
+-- Plugin: NickvanDyke/opencode.nvim
+function keymaps.opencode()
+	local opencode_lazy_call = function(funcName, opts)
+		return lazy_call("opencode", funcName, opts)
+	end
+
+	return {
+		-- Ask opencode with current context
+		map("<LEADER>aa", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end)
+			:mode("nx")
+			:noremap()
+			:desc("opencode: Ask with context")
+			:to_lazy_key(),
+		-- Select opencode action
+		map("<LEADER>as", opencode_lazy_call("select"))
+			:mode("nx")
+			:noremap()
+			:desc("opencode: Execute action")
+			:to_lazy_key(),
+		-- Add to opencode
+		map("<LEADER>ap", opencode_lazy_call("prompt", "@this"))
+			:mode("nx")
+			:noremap()
+			:desc("opencode: Add to prompt")
+			:to_lazy_key(),
+		-- Toggle opencode window
+		map("<LEADER>aw", opencode_lazy_call("toggle"))
+			:mode("n")
+			:noremap()
+			:desc("opencode: Toggle window")
+			:to_lazy_key(),
+		-- Scroll opencode messages up
+		map("<LEADER>au", opencode_lazy_call("command", "messages_half_page_up"))
+			:mode("n")
+			:noremap()
+			:desc("opencode: Scroll up")
+			:to_lazy_key(),
+		-- Scroll opencode messages down
+		map("<LEADER>ae", opencode_lazy_call("command", "messages_half_page_down"))
+			:mode("n")
+			:noremap()
+			:desc("opencode: Scroll down")
+			:to_lazy_key(),
+	}
+end
+
 -- Plugin: ojroques/nvim-bufdel
 function keymaps.bufdel()
 	return {
