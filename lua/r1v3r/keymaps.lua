@@ -77,7 +77,7 @@ local function setGeneralKeys()
 	map("=", "nzz"):noremap():desc("move to next find result"):set()
 	map("-", "Nzz"):noremap():desc("move to last find result"):set()
 
-	map("<LEADER>R", "e!"):mode("n"):noremap():cmd():desc("edit: reload current file"):set()
+	map("<LEADER>r", "e!"):mode("n"):noremap():cmd():desc("edit: reload current file"):set()
 
 	-- Quit key
 	map("S", "w"):mode("n"):cmd():noremap():desc("edit: save file"):set()
@@ -571,7 +571,7 @@ end
 
 function keymaps.yazi()
 	return {
-		map("R", "Yazi"):cmd():desc("tools: Open yazi at the current file"):to_lazy_key(),
+		map("<LEADER>R", "Yazi"):cmd():desc("tools: Open yazi at the current file"):to_lazy_key(),
 	}
 end
 

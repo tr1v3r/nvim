@@ -46,6 +46,7 @@ tools["ibhagwan/smartyank.nvim"] = {
 	config = require("tools.smartyank"),
 }
 tools["michaelb/sniprun"] = {
+	enabled = false,
 	lazy = true,
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
