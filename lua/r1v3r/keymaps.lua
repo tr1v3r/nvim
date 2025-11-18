@@ -226,11 +226,11 @@ local function setGeneralKeys()
 	map("to", "tabonly"):noremap():cmd():desc("tab: close all other tabs"):set()
 
 	-- ==================== Other useful stuff ====================
-	map("<LEADER><LEADER>", "<Esc>/<++><CR><Cmd>nohlsearch<CR>c4l")
-		:noremap()
-		:silent()
-		:desc("edit: jump to the next '<++>' and edit it")
-		:set()
+	-- map("<LEADER><LEADER>", "<Esc>/<++><CR><Cmd>nohlsearch<CR>c4l")
+	-- 	:noremap()
+	-- 	:silent()
+	-- 	:desc("edit: jump to the next '<++>' and edit it")
+	-- 	:set()
 
 	-- Spelling Check with <space>sc
 	map("<LEADER>sc", "set spell!"):noremap():cmd():desc("edit: spelling check"):set()
