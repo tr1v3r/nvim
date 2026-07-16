@@ -12,7 +12,7 @@ There is no build step. Neovim 0.12.4 and tree-sitter CLI 0.26.1+ are required. 
 - `nvim --headless "+Lazy! sync" +qa` synchronizes plugins and refreshes the lockfile when specifications change.
 - `stylua --config-path .stylua.toml .` formats all Lua files.
 - `stylua --check --config-path .stylua.toml .` reproduces the style CI check.
-- `luacheck . --std luajit --globals vim _toggle_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config` reproduces lint CI.
+- `luacheck . --std luajit --globals vim _open_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config` reproduces lint CI.
 - `nvim --headless +qa` is the minimum startup check; CI also opens Lua and Markdown fixtures from `tests/`.
 
 ## Coding Style & Naming Conventions
@@ -29,4 +29,4 @@ History follows Conventional Commits, for example `feat: add plugin integration`
 
 ## Local Configuration
 
-Do not commit machine-specific settings, secrets, or paths. Put overrides in the table returned by `_device.lua`; it is intentionally ignored by Git and loaded before plugin setup.
+Do not commit machine-specific settings, secrets, or paths. Put overrides in the table returned by `_device.lua`; it is intentionally ignored by Git and loaded before plugin setup. Language tooling is selected by the `lsp_deps`, `treesitter_deps`, `null_ls_deps`, and `dap_deps` tables in `lua/r1v3r/settings.lua`; override them per-machine via `_device.lua` (CI's smoke job does the same to install only `lua`/`markdown` parsers).
