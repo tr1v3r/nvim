@@ -24,14 +24,28 @@ jobs:
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         with:
           neovim: true
+          version: v0.12.4
+      - name: Install tree-sitter CLI
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        run: bash .github/scripts/install-tree-sitter.sh
+      - name: Prepare Neovim configuration
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+        run: |
+          mkdir -p "${HOME}/.config"
+          ln -s "${GITHUB_WORKSPACE}" "${HOME}/.config/nvim"
+          printf '%s\n' \
+            'return {' \
+            '  use_ssh = false,' \
+            '  use_copilot = false,' \
+            '  lsp_deps = {},' \
+            '  treesitter_deps = {},' \
+            '  null_ls_deps = {},' \
+            '  dap_deps = {},' \
+            '}' > _device.lua
       - name: Run lockfile-autoupdate
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         timeout-minutes: 5
-        run: |
-          mkdir -p "${HOME}/.config" && cd "${HOME}/.config" && git clone https://github.com/tr1v3r/nvim.git
-          sed -i 's/settings\["use_ssh"\] = true/settings["use_ssh"] = false/' "${HOME}/.config/nvim/lua/r1v3r/settings.lua"
-          nvim --headless "+Lazy! update" +qa
-          cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
+        run: nvim --headless "+Lazy! update" +qa
       - uses: stefanzweifel/git-auto-commit-action@v5
         if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
         with:

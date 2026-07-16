@@ -100,7 +100,7 @@ function M.formatter_filter(formatters)
 		end
 
 		local status_ok, formatting_supported = pcall(function()
-			return formatter.supports_method("textDocument/formatting")
+			return formatter:supports_method("textDocument/formatting")
 		end)
 		return status_ok and formatting_supported
 	end, formatters)
@@ -153,7 +153,7 @@ function M.format(opts)
 	end
 
 	formatters = vim.tbl_filter(function(formatter)
-		return formatter.supports_method("textDocument/formatting")
+		return formatter:supports_method("textDocument/formatting")
 	end, formatters)
 
 	if #formatters == 0 then

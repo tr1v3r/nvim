@@ -14,5 +14,5 @@ jobs:
       - uses: JohnnyMorganz/stylua-action@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          version: latest
+          version: "2.3.0"
           args: --check --config-path=.stylua.toml .

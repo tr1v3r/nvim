@@ -283,4 +283,16 @@ settings["dashboard_image"] = {
 --	  [[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣞⡿⣗⣧⢣⢣⢳⣿⣿⣿⣿⢇⢇⢇⢇⢇⢇⢧⣿⣿⣿⣿⣿⣿⣿]],
 --	  [[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⢮⡪⣾⣿⣿⣿⢱⢱⢱⢑⢕⣵⣿⣿⣿⣿⣿⣿⣿⣿]],
 --	  [[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣻⣿⣿⣿⣿⣿⣿⣻⣾⣿⣿⣿⢸⢸⣸⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]]}
+local device_config = vim.fs.joinpath(vim.fn.stdpath("config"), "_device.lua")
+if vim.fn.filereadable(device_config) == 1 then
+	local ok, device_settings = pcall(dofile, device_config)
+	if not ok then
+		error("Failed to load _device.lua: " .. device_settings)
+	end
+	if device_settings ~= nil then
+		assert(type(device_settings) == "table", "_device.lua must return a table")
+		settings = vim.tbl_extend("force", settings, device_settings)
+	end
+end
+
 return settings

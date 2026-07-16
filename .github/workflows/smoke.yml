@@ -1,0 +1,44 @@
+name: smoke test
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches-ignore:
+      - "gh-pages"
+
+jobs:
+  neovim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.12.4
+      - name: Install tree-sitter CLI
+        run: bash .github/scripts/install-tree-sitter.sh
+      - name: Prepare Neovim configuration
+        run: |
+          mkdir -p "${HOME}/.config"
+          ln -s "${GITHUB_WORKSPACE}" "${HOME}/.config/nvim"
+          printf '%s\n' \
+            'return {' \
+            '  use_ssh = false,' \
+            '  use_copilot = false,' \
+            '  lsp_deps = {},' \
+            '  treesitter_deps = { "lua", "markdown", "markdown_inline" },' \
+            '  null_ls_deps = {},' \
+            '  dap_deps = {},' \
+            '}' > _device.lua
+      - name: Restore plugins
+        run: nvim --headless "+Lazy! restore" +qa
+      - name: Install smoke-test parsers
+        run: >-
+          nvim --headless
+          "+lua require('nvim-treesitter').install(require('r1v3r.settings').treesitter_deps):wait(300000)"
+          +qa
+      - name: Test Lua startup
+        run: nvim --headless init.lua "+luafile ${GITHUB_WORKSPACE}/tests/smoke.lua" +qa
+      - name: Test Markdown injections
+        run: nvim --headless tests/fixtures/treesitter.md "+luafile ${GITHUB_WORKSPACE}/tests/smoke.lua" +qa

@@ -5,3 +5,4 @@ view/
 tmp/
 _device.vim
 _device.lua
+nvim.log

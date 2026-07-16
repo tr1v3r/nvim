@@ -4,25 +4,17 @@ local settings = require("r1v3r.settings")
 
 -- create_dir cache dir and data dirs
 local create_dir = function()
-	local dataDir = {
+	local data_dirs = {
+		global.cache_dir,
 		global.cache_dir .. "backup",
 		global.cache_dir .. "undo",
 		global.cache_dir .. "session",
 		global.cache_dir .. "swap",
 		global.cache_dir .. "tags",
 	}
-	-- Only check whether cache_dir exists, this would be enough.
-	if vim.fn.isdirectory(global.cache_dir) == 0 then
-		os.execute("mkdir -p " .. global.cache_dir)
-		local success, _, code = os.execute("mkdir -p " .. global.cache_dir)
-		if not success then
-			vim.print("Error: Unable to create directory " .. global.cache_dir .. ". Exit code:", code)
-		end
-		for _, v in pairs(dataDir) do
-			if vim.fn.isdirectory(v) == 0 then
-				os.execute("mkdir -p " .. v)
-			end
-		end
+
+	for _, path in ipairs(data_dirs) do
+		vim.fn.mkdir(path, "p")
 	end
 end
 
@@ -119,16 +111,6 @@ local clipboard_config = function()
 	end
 end
 
--- device_config load device config
-local device_config = function()
-	local deviceConfig = os.getenv("HOME") .. "/.config/nvim/_device.lua"
-	if vim.fn.empty(vim.fn.glob(deviceConfig)) == 1 then
-		vim.notify("device config file not found", vim.log.levels.WARN, { title = "Configuration missing" })
-	else
-		dofile(deviceConfig)
-	end
-end
-
 local init = function()
 	create_dir()
 	disable_distribution_plugins()
@@ -145,8 +127,6 @@ local init = function()
 
 	vim.api.nvim_command("set background=" .. settings.background)
 	vim.cmd.colorscheme(settings.colorscheme)
-
-	device_config()
 end
 
 init()

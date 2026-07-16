@@ -70,8 +70,7 @@ return function()
 				return
 			end
 
-			local ok, is_large_file =
-				pcall(vim.api.nvim_buf_get_var, args.buf, "bigfile_disable_treesitter")
+			local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, args.buf, "bigfile_disable_treesitter")
 			if ok and is_large_file then
 				return
 			end
