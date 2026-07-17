@@ -300,11 +300,12 @@ local keymaps = {}
 
 function keymaps.lsp(buf)
 	-- unmap default keymaps (slient unmap)
-	pcall(vim.keymap.del, "", "grr")
-	pcall(vim.keymap.del, "", "grn")
-	pcall(vim.keymap.del, "", "gra")
-	pcall(vim.keymap.del, "", "gri")
-	pcall(vim.keymap.del, "", "grt") -- vim.lsp.buf.type_definition
+	pcall(vim.keymap.del, "", "grr") -- vim.lsp.buf.references()
+	pcall(vim.keymap.del, "", "grn") -- vim.lsp.buf.rename()
+	pcall(vim.keymap.del, "", "gra") -- vim.lsp.buf.code_action()
+	pcall(vim.keymap.del, "", "gri") -- vim.lsp.buf.implementation()
+	pcall(vim.keymap.del, "", "grt") -- vim.lsp.buf.type_definition()
+	pcall(vim.keymap.del, "", "grx") -- vim.lsp.codelens.run()
 
 	-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 	map("<LEADER>li", "LspInfo"):mode("n"):cmd():buffer(buf):desc("lsp: Info"):set()
@@ -341,7 +342,7 @@ function keymaps.lsp(buf)
 	map("gD", "Lspsaga peek_definition"):mode("n"):cmd():buffer(buf):desc("lsp: Preview definition"):set()
 	map("ge", "Lspsaga goto_definition"):mode("n"):cmd():buffer(buf):desc("lsp: Goto definition"):set()
 	map("gd", "Glance definitions"):mode("n"):cmd():buffer(buf):desc("lsp: Preview definition"):set()
-	map("gr", "Glance references"):mode("n"):cmd():buffer(buf):desc("lsp: Show reference"):set()
+	map("gr", "Glance references"):mode("n"):cmd():buffer(buf):desc("lsp: Show references"):set()
 	map("gi", "Glance implementations"):mode("n"):cmd():buffer(buf):desc("lsp: Show implementations"):set()
 	map("gn", "Glance type_definitions"):mode("n"):cmd():buffer(buf):desc("lsp: Show type_definitions"):set()
 	map("<LEADER>ci", "Lspsaga incoming_calls"):mode("n"):cmd():buffer(buf):desc("lsp: Show incoming calls"):set()
