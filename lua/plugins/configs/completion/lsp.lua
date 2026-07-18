@@ -13,5 +13,5 @@ return function()
 		vim.lsp.config.dartls.setup(final_opts)
 	end
 
-	vim.cmd([[LspStart]]) -- Start LSPs
+	-- Servers are started automatically by `vim.lsp.enable()` in `mason_lsp_handler`.
 end
