@@ -60,15 +60,7 @@ M.setup = function()
 			custom_handler(opts)
 			vim.lsp.enable(lsp_name)
 		elseif type(custom_handler) == "table" then
-			vim.lsp.config(
-				lsp_name,
-				vim.tbl_deep_extend(
-					"force",
-					opts,
-					type(default_handler) == "table" and default_handler or {},
-					custom_handler
-				)
-			)
+			vim.lsp.config(lsp_name, vim.tbl_deep_extend("force", opts, custom_handler))
 			vim.lsp.enable(lsp_name)
 		else
 			vim.notify(

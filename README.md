@@ -35,7 +35,7 @@ Values returned from `_device.lua` override the defaults in `lua/r1v3r/settings.
 
 ```sh
 stylua --check --config-path .stylua.toml .
-luacheck . --std luajit --globals vim _toggle_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config
+luacheck . --std luajit --globals vim Snacks _open_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config
 nvim --headless +qa
 nvim --headless tests/fixtures/treesitter.md "+luafile ${PWD}/tests/smoke.lua" +qa
 ```

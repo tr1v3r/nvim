@@ -14,7 +14,7 @@ There is no build step. Neovim 0.12.4 and tree-sitter CLI 0.26.1+ are required. 
 - `nvim --headless "+Lazy! sync" +qa` synchronizes plugins and refreshes the lockfile when specifications change.
 - `stylua --config-path .stylua.toml .` formats all Lua files.
 - `stylua --check --config-path .stylua.toml .` reproduces the style CI check.
-- `luacheck . --std luajit --globals vim _open_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config` reproduces lint CI.
+- `luacheck . --std luajit --globals vim Snacks _open_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config` reproduces lint CI.
 - `nvim --headless +qa` is the minimum startup check; CI's smoke job runs `tests/smoke.lua` against the root `init.lua` and `tests/fixtures/treesitter.md` to assert Treesitter highlighting starts cleanly.
 
 ## Coding Style & Naming Conventions

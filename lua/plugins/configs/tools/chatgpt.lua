@@ -39,10 +39,10 @@ M.chatgpt_opts = {
 }
 
 setmetatable(M, {
-	__call = function(self)
+	__call = function(_)
 		-- Hook os.getenv to return empty string for OPENAI_API_KEY, forcing the ChatGPT plugin to use Deepseek configuration instead
 		local original_getenv = os.getenv
-		os.getenv = function(var)
+		os.getenv = function(var) -- luacheck: ignore
 			if var == "OPENAI_API_KEY" then
 				return ""
 			end
@@ -51,7 +51,7 @@ setmetatable(M, {
 
 		require("chatgpt").setup(M.deepseek_opts)
 
-		os.getenv = original_getenv
+		os.getenv = original_getenv -- luacheck: ignore
 	end,
 })
 
