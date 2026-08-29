@@ -194,6 +194,16 @@ end
 autocmd.init()
 
 -- ================ LSP ================
+-- bootstrap the native LSP setup (vim.lsp.config/enable + diagnostics) on the
+-- first real buffer, see `plugins/configs/completion/lsp.lua`
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+	group = vim.api.nvim_create_augroup("LspBootstrap", { clear = true }),
+	once = true,
+	callback = function()
+		require("completion.lsp")()
+	end,
+})
+
 -- defer setting LSP-related keymaps till LspAttach
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),

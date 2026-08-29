@@ -8,10 +8,10 @@ return function()
 	}
 
 	local cmp = {
-		name = "nvim-cmp",
+		name = "blink.cmp",
 		opts = { defer = true },
 		disable = function()
-			require("cmp").setup.buffer({ enabled = false })
+			vim.b.completion_disabled = true
 		end,
 	}
 

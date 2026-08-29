@@ -46,8 +46,6 @@ return function()
 		default_timeout = settings.format_timeout,
 	})
 
-	require("completion.mason-null-ls").setup()
-
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
 		local sources_cont = null_ls.get_source({

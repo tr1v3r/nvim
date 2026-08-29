@@ -193,51 +193,6 @@ function M.get_palette(overwrite)
 	end
 end
 
--- Generate highlight groups for lspsaga. Existing attributes will NOT be overwritten
-function M.gen_lspkind_hl()
-	local colors = M.get_palette()
-	local dat = {
-		Class = colors.yellow,
-		Constant = colors.peach,
-		Constructor = colors.sapphire,
-		Enum = colors.yellow,
-		EnumMember = colors.teal,
-		Event = colors.yellow,
-		Field = colors.teal,
-		File = colors.rosewater,
-		Function = colors.blue,
-		Interface = colors.yellow,
-		Key = colors.red,
-		Method = colors.blue,
-		Module = colors.blue,
-		Namespace = colors.blue,
-		Number = colors.peach,
-		Operator = colors.sky,
-		Package = colors.blue,
-		Property = colors.teal,
-		Struct = colors.yellow,
-		TypeParameter = colors.blue,
-		Variable = colors.peach,
-		Array = colors.peach,
-		Boolean = colors.peach,
-		Null = colors.yellow,
-		Object = colors.yellow,
-		String = colors.green,
-		TypeAlias = colors.green,
-		Parameter = colors.blue,
-		StaticMethod = colors.peach,
-		Text = colors.green,
-		Snippet = colors.mauve,
-		Folder = colors.blue,
-		Unit = colors.green,
-		Value = colors.peach,
-	}
-
-	for kind, color in pairs(dat) do
-		set_global_hl("LspKind" .. kind, color)
-	end
-end
-
 -- Generate highlight groups for alpha. Existing attributes will NOT be overwritten
 function M.gen_alpha_hl()
 	local colors = M.get_palette()

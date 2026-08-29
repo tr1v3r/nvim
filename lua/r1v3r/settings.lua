@@ -115,8 +115,14 @@ settings["format_block_filetypes"] = {
 --                          Deps Settings                           --
 ----------------------------------------------------------------------
 
--- Set the language servers that will be installed during bootstrap here.
--- check the below link for all the supported LSPs:
+-- Language servers enabled at bootstrap via `vim.lsp.enable()`.
+-- NOTE: They are NOT installed automatically anymore (mason only manages DAP
+-- adapters now). Install them as system packages, e.g. on macOS:
+--   brew install bash-language-server vscode-langservers-extracted lua-language-server python-lsp-server
+--   (clangd ships with Xcode CLT / llvm, gopls via `go install`, dartls ships with the Dart SDK)
+-- pylsp (NOT brew — plugins must share its venv):
+--   uv tool install --system-certs --with python-lsp-black --with python-lsp-ruff --with pylsp-rope python-lsp-server
+-- Check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
 settings["lsp_deps"] = {
@@ -157,7 +163,9 @@ settings["treesitter_deps"] = {
 	"yaml",
 }
 
--- Set the general-purpose servers that will be installed during bootstrap here.
+-- Set the external formatter binaries used by none-ls here.
+-- NOTE: Install them with your system package manager (brew / go install / cargo install);
+-- mason-null-ls no longer auto-installs them.
 -- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/nvimtools/none-ls.nvim/tree/main/lua/null-ls/builtins

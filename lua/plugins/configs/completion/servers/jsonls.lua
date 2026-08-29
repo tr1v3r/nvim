@@ -1,5 +1,8 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/jsonls.lua
 return {
+	cmd = { "vscode-json-language-server", "--stdio" },
+	filetypes = { "json", "jsonc" },
+	root_markers = { ".git", "package.json" },
 	flags = { debounce_text_changes = 500 },
 	settings = {
 		json = {

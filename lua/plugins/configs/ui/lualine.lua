@@ -287,7 +287,7 @@ return function()
 			cond = conditionals.has_enough_room,
 		},
 
-		lspsaga_symbols = {
+		aerial_symbols = {
 			function()
 				local exclude = {
 					["terminal"] = true,
@@ -300,11 +300,11 @@ return function()
 					return "" -- Excluded filetypes
 				end
 
-				local symbols = require("lspsaga.symbol.winbar").get_bar()
-				if symbols == nil then
+				local ok, aerial = pcall(require, "aerial")
+				if not ok then
 					return ""
 				end
-				return symbols
+				return aerial.get_location(true)
 			end,
 		},
 	}
@@ -424,7 +424,7 @@ return function()
 		-- winbar = { lualine_c = {'filename', path = 1 } }, cannot ignore filetype NvimTree
 		winbar = {
 			lualine_a = { components.file_path },
-			lualine_b = { components.lspsaga_symbols },
+			lualine_b = { components.aerial_symbols },
 		},
 		inactive_winbar = { lualine_a = { components.file_path } },
 		extensions = {

@@ -163,6 +163,12 @@ tools["mfussenegger/nvim-dap"] = {
 			config = require("tools.dap.dapui"),
 		},
 		{ "nvim-neotest/nvim-nio" },
+		-- mason is kept ONLY for DAP adapter management; LSP servers and
+		-- formatters moved to system packages (brew/go/cargo).
+		{
+			"mason-org/mason.nvim",
+			config = require("tools.mason"),
+		},
 		{ "jay-babu/mason-nvim-dap.nvim" },
 		{ "leoluz/nvim-dap-go" },
 	},

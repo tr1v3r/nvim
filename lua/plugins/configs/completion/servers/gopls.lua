@@ -5,8 +5,7 @@ return {
 	flags = { debounce_text_changes = 500 },
 	cmd = { "gopls", "-remote=auto" },
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	root_dir = vim.fs.dirname(vim.fs.find({ "go.work", "go.mod" }, { upward = true })[1]),
-	single_file_support = true,
+	root_markers = { "go.work", "go.mod", ".git" },
 	settings = {
 		gopls = {
 			usePlaceholders = true,

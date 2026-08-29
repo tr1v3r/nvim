@@ -1,16 +1,12 @@
 return function()
 	vim.defer_fn(function()
 		require("copilot").setup({
-			cmp = {
-				enabled = true,
-				method = "getCompletionsCycling",
-			},
+			-- panel/suggestion must stay disabled: completions are surfaced
+			-- inside blink.cmp via `blink-cmp-copilot`.
 			panel = {
-				-- if true, it can interfere with completions in copilot-cmp
 				enabled = false,
 			},
 			suggestion = {
-				-- if true, it can interfere with completions in copilot-cmp
 				enabled = false,
 			},
 			filetypes = {

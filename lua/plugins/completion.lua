@@ -1,26 +1,34 @@
 local completion = {}
 local use_copilot = require("r1v3r.settings").use_copilot
 
-completion["neovim/nvim-lspconfig"] = {
+-- Completion engine, replaces nvim-cmp and its source plugins.
+-- Docs: https://cmp.saghen.dev
+completion["saghen/blink.cmp"] = {
 	lazy = true,
+	-- Load on the first buffer: the LSP bootstrap (see `event.lua`) calls
+	-- `get_lsp_capabilities()` before servers attach to that buffer.
 	event = { "BufReadPre", "BufNewFile" },
-	config = require("completion.lsp"),
+	-- Stay on the stable v1 line; v2 (main) needs `blink.lib` and is a moving target.
+	version = "1.*",
+	config = require("completion.blink"),
 	dependencies = {
-		{ "mason-org/mason.nvim" },
-		{ "mason-org/mason-lspconfig.nvim" },
 		{
-			"ray-x/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
+			"L3MON4D3/LuaSnip",
+			version = "v2.*",
+			dependencies = { "rafamadriz/friendly-snippets" },
+			config = require("completion.luasnip"),
 		},
+		-- nvim-cmp source compatibility layer (v2.* pairs with blink.cmp v1.*)
+		{ "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
+		-- upstream f3fora/cmp-latex-symbols was deleted; kdheepak's is maintained
+		{ "kdheepak/cmp-latex-symbols" },
 	},
 }
--- docs: https://nvimdev.github.io/lspsaga/
-completion["nvimdev/lspsaga.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.lspsaga"),
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-}
+if use_copilot then
+	-- Community source exposing copilot.lua suggestions inside the blink menu.
+	table.insert(completion["saghen/blink.cmp"].dependencies, { "giuxtaposition/blink-cmp-copilot" })
+end
+
 completion["dnlhc/glance.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
@@ -36,45 +44,12 @@ completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
 }
-completion["hrsh7th/nvim-cmp"] = {
-	lazy = true,
-	event = "InsertEnter",
-	config = require("completion.cmp"),
-	dependencies = {
-		{
-			"L3MON4D3/LuaSnip",
-			dependencies = { "rafamadriz/friendly-snippets" },
-			version = "v2.*",
-			config = require("completion.luasnip"),
-		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "hrsh7th/cmp-nvim-lua" },
-		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
-		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
-		{ "kdheepak/cmp-latex-symbols" },
-		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
-		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
-		-- {
-		-- 	"jcdickinson/codeium.nvim",
-		-- 	dependencies = {
-		-- 		"nvim-lua/plenary.nvim",
-		-- 		"MunifTanjim/nui.nvim",
-		-- 	},
-		-- 	config = require("completion.codeium"),
-		-- },
-	},
-}
 completion["nvimtools/none-ls.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.null-ls"),
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"jay-babu/mason-null-ls.nvim",
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
@@ -83,12 +58,6 @@ completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
 	event = "InsertEnter",
 	config = require("completion.copilot"),
-	dependencies = {
-		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
-		},
-	},
 }
 
 return completion
