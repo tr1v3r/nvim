@@ -580,12 +580,6 @@ function keymaps.suda()
 	}
 end
 
--- Plugin: sustech-data/wildfire.nvim
-function keymaps.wildfire()
-	-- map("<LEADER><Tab>", "<Plug>(wildfire-quick-select)"):mode("n"):noremap():silent():desc("edit: select"):to_lazy_key()
-	return nil
-end
-
 -- Plugin iamcco/markdown-preview.nvim
 function keymaps.markdown_preview()
 	return {
@@ -614,12 +608,6 @@ function keymaps.nvim_tree()
 		map("tr", "NvimTreeRefresh"):mode("n"):cmd():noremap():desc("tool: Refresh nvim-Tree"):to_lazy_key(),
 		-- map("tf", "NvimTreeFocus"):mode("n"):cmd():noremap():desc("tree: Focus tree"):to_lazy_key()
 	}
-end
-
--- Plugin: kdheepak/lazygit.nvim
-function keymaps.lazygit()
-	-- map("<C-g>", "LazyGit"):noremap():to_lazy_key(),
-	return nil
 end
 
 function keymaps.yazi()
@@ -671,83 +659,6 @@ function keymaps.rnvimr()
 			:silent()
 			:desc("tool: Resize ranger float window")
 			:to_lazy_key(),
-	}
-end
-
--- Plugin: michaelb/sniprun
-function keymaps.sniprun()
-	return {
-		map("<LEADER>xr", "SnipRun"):mode("v"):cmd():noremap():desc("tool: Run code by range"):to_lazy_key(),
-		map("<LEADER>xr", "SnipRun"):mode("n"):cmd():noremap():desc("tool: Run code by file"):to_lazy_key(),
-	}
-end
-
--- Plugin: akinsho/toggleterm.nvim
-function keymaps.toggleterm()
-	return {
-		map("<C-\\>", 'execute v:count . "ToggleTerm direction=horizontal"')
-			:mode("n")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle horizontal")
-			:to_lazy_key(),
-		map("<C-\\>", "<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
-			:mode("i")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle horizontal")
-			:to_lazy_key(),
-		map("<C-\\>", "<Cmd>ToggleTerm<CR>")
-			:mode("t")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle horizontal")
-			:to_lazy_key(),
-		map("<A-\\>", [[execute v:count . "ToggleTerm direction=vertical"]])
-			:mode("n")
-			:cmd()
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle vertical")
-			:to_lazy_key(),
-		map("<A-\\>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-			:mode("i")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle vertical")
-			:to_lazy_key(),
-		map("<A-\\>", "<Cmd>ToggleTerm<CR>")
-			:mode("t")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle vertical")
-			:to_lazy_key(),
-		map("<F7>", [[execute v:count . "ToggleTerm direction=vertical"]])
-			:mode("n")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle vertical")
-			:to_lazy_key(),
-		map("<F7>", "<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-			:mode("i")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle vertical")
-			:to_lazy_key(),
-		map("<F7>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle vertical"):to_lazy_key(),
-		map("<A-d>", [[execute v:count . "ToggleTerm direction=float"]])
-			:mode("n")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle float")
-			:to_lazy_key(),
-		map("<A-d>", "<Esc><Cmd>ToggleTerm direction=float<CR>")
-			:mode("i")
-			:noremap()
-			:silent()
-			:desc("terminal: Toggle float")
-			:to_lazy_key(),
-		map("<A-d>", "<Cmd>ToggleTerm<CR>"):mode("t"):noremap():silent():desc("terminal: Toggle float"):to_lazy_key(),
 	}
 end
 

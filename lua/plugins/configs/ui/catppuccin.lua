@@ -56,7 +56,7 @@ return function()
 			dap = true,
 			dap_ui = true,
 			dashboard = false,
-			dropbar = { enbale = true, color_mode = true },
+			dropbar = { enabled = true, color_mode = true },
 			fern = false,
 			fidget = true,
 			flash = true,

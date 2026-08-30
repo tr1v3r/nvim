@@ -154,33 +154,6 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	return hex
 end
 
---- Extend a highlight group
----@param name string @Target highlight group name
----@param def table @Attributes to be extended
-function M.extend_hl(name, def)
-	-- Validate inputs
-	if type(name) ~= "string" then
-		error("extend_hl: 'name' must be a string")
-	end
-	if type(def) ~= "table" then
-		error("extend_hl: 'def' must be a table")
-	end
-
-	-- Try to get the current highlight definition
-	local success, current_def = pcall(vim.api.nvim_get_hl, 0, { name = name, link = false })
-	if not success or not current_def then
-		vim.notify("Highlight group '" .. name .. "' does not exist", vim.log.levels.WARN)
-		return
-	end
-
-	-- Merge attributes
-	local combined_def = vim.tbl_deep_extend("force", current_def, def)
-
-	-- Apply the new highlight definition
-	---@diagnostic disable-next-line: param-type-mismatch
-	vim.api.nvim_set_hl(0, name, combined_def)
-end
-
 ---Generate universal highlight groups
 ---@param overwrite palette? @The color to be overwritten | highest priority
 ---@return palette

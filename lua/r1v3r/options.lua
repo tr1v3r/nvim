@@ -4,10 +4,11 @@ local global = require("r1v3r.global")
 
 local options = {}
 
+-- Extension point: return a table of `vim.g` globals to set at startup.
+-- Kept empty on purpose; fill it in when a plugin needs early globals.
 function options.g()
 	return {}
 end
-
 function options.o()
 	return {
 		termguicolors = true,
