@@ -51,7 +51,17 @@ function autocmd.cmd_init()
 		},
 		BufReadPost = { -- Jump to last cursor position when opening a file
 			pattern = "*",
-			command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
+			callback = function(event)
+				-- Skip special buffers (quickfix, terminal, commit messages, ...)
+				if vim.bo[event.buf].buftype ~= "" or vim.bo[event.buf].filetype == "gitcommit" then
+					return
+				end
+				local mark = vim.api.nvim_buf_get_mark(event.buf, '"')
+				local line_count = vim.api.nvim_buf_line_count(event.buf)
+				if mark[1] > 1 and mark[1] <= line_count then
+					vim.api.nvim_win_set_cursor(0, mark)
+				end
+			end,
 		},
 		-- [{'TextChanged', 'InsertLeave'}] = { -- Save file on TextChanged and InsertLeave events
 		--	 pattern = "<buffer>",
