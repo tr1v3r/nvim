@@ -304,7 +304,15 @@ return function()
 				if not ok then
 					return ""
 				end
-				return aerial.get_location(true)
+				local loc = aerial.get_location({ exact = true })
+				if type(loc) == "table" then
+					local parts = {}
+					for _, sym in ipairs(loc) do
+						parts[#parts + 1] = type(sym) == "table" and (sym.name or sym.kind or "") or tostring(sym)
+					end
+					loc = table.concat(parts, " > ")
+				end
+				return tostring(loc)
 			end,
 		},
 	}
