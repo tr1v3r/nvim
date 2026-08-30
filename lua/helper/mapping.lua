@@ -51,6 +51,14 @@ function mapOption:noremap()
 	return self
 end
 
+-- Explicit opt-in for recursive mappings; the default is noremap semantics.
+-- Needed when the rhs intentionally triggers other user mappings.
+---@return mapOption
+function mapOption:remap()
+	self.options.remap = true
+	return self
+end
+
 ---@return mapOption
 function mapOption:expr()
 	self.options.expr = true
@@ -122,7 +130,7 @@ function mapOption.map(lhs, rhs)
 		lhs = lhs,
 		rhs = rhs,
 		options = {
-			remap = true,
+			remap = false,
 			nowait = false,
 			silent = false,
 			expr = false,
