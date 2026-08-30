@@ -79,8 +79,6 @@ function options.o()
 		inccommand = "split",
 		-- Set completion options
 		completeopt = "noinsert,longest,menuone,noselect,preview",
-		-- Enable lazy redraw
-		lazyredraw = true,
 		-- Use visual bell instead of beeping sound
 		visualbell = true,
 		-- Set the time interval for writing swap and backup files
@@ -92,10 +90,6 @@ function options.o()
 		-- Automatically write all buffers when executing certain commands
 		autowriteall = true,
 		-- signcolumn = 'nubmer'
-		-- Set backup file dir
-		backupdir = global.cache_dir .. "backup//",
-		-- Set swap file dir
-		directory = global.cache_dir .. "swap//",
 		-- Set undo file dir
 		undodir = global.cache_dir .. "undo//",
 		-- Save undo history

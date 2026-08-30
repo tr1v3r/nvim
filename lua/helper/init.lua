@@ -50,7 +50,6 @@ local function init_palette()
 				init_palette()
 				-- Also refresh hard-coded hl groups
 				M.gen_alpha_hl()
-				M.gen_lspkind_hl()
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
