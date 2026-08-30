@@ -18,9 +18,10 @@ settings["use_copilot"] = true
 
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`,
--- `catppuccin-macchiato`, `edge`, `nord`, `material`.
+-- `catppuccin-macchiato`, `edge`, `nord`, `material`, `tokyonight-night`, `tokyonight-storm`,
+-- `tokyonight-moon`, `tokyonight-day`, `monokai-pro-spectrum`.
 ---@type string
-settings["colorscheme"] = "monokai-pro-spectrum"
+settings["colorscheme"] = "tokyonight-night"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean

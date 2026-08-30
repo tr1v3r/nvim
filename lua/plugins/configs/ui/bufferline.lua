@@ -89,6 +89,39 @@ return function()
 		}
 
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
+	else
+		-- Follow the universal palette (e.g. tokyonight) for non-catppuccin colorschemes.
+		local c = require("helper").get_palette()
+		local sep_fg = c.surface1
+
+		local palette_hl = {
+			highlights = {
+				fill = { fg = c.subtext0, bg = c.base },
+				background = { fg = c.subtext0, bg = c.base },
+				tab = { fg = c.subtext0, bg = c.surface0 },
+				tab_selected = { fg = c.text, bg = c.base, bold = true },
+				tab_close = { fg = c.red, bg = c.base },
+				close_button = { fg = c.subtext0, bg = c.base },
+				close_button_visible = { fg = c.subtext0, bg = c.base },
+				close_button_selected = { fg = c.red, bg = c.base },
+				buffer = { fg = c.subtext0, bg = c.base },
+				buffer_visible = { fg = c.subtext0, bg = c.base },
+				buffer_selected = { fg = c.text, bg = c.base, bold = true, italic = true },
+				modified = { fg = c.green, bg = c.base },
+				modified_visible = { fg = c.green, bg = c.base },
+				modified_selected = { fg = c.green, bg = c.base },
+				duplicate_selected = { fg = c.text, bg = c.base, italic = true },
+				duplicate_visible = { fg = c.subtext0, bg = c.base, italic = true },
+				duplicate = { fg = c.subtext0, bg = c.base, italic = true },
+				separator = { fg = sep_fg, bg = c.base },
+				separator_visible = { fg = sep_fg, bg = c.base },
+				separator_selected = { fg = c.blue, bg = c.base },
+				indicator_selected = { fg = c.blue, bg = c.base, bold = true },
+				offset_separator = { fg = c.overlay0, bg = c.base },
+			},
+		}
+
+		opts = vim.tbl_deep_extend("force", opts, palette_hl)
 	end
 
 	require("bufferline").setup(opts)

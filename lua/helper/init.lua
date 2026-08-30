@@ -56,8 +56,50 @@ local function init_palette()
 	end
 
 	if not palette then
-		palette = vim.g.colors_name:find("catppuccin") and require("catppuccin.palettes").get_palette()
-			or {
+		local scheme = vim.g.colors_name or ""
+		if scheme:find("catppuccin") then
+			palette = require("catppuccin.palettes").get_palette()
+		elseif scheme:find("tokyonight") then
+			-- Map the tokyonight palette onto the universal (catppuccin-style) palette,
+			-- so that lualine/alpha/bufferline/dap colors follow the active colorscheme.
+			local ok, tn = pcall(require, "tokyonight.colors")
+			if ok then
+				local c = tn.setup()
+				palette = {
+					rosewater = c.orange,
+					flamingo = c.purple,
+					mauve = c.purple,
+					pink = c.magenta or c.orange,
+					red = c.red,
+					maroon = c.red,
+					peach = c.orange,
+					yellow = c.yellow,
+					green = c.green,
+					sapphire = c.blue,
+					blue = c.blue,
+					sky = c.cyan,
+					teal = c.teal,
+					lavender = c.blue,
+
+					text = c.fg,
+					subtext1 = c.fg_dark,
+					subtext0 = c.fg_gutter,
+					overlay2 = c.fg_gutter,
+					overlay1 = c.comment,
+					overlay0 = c.comment,
+					surface2 = c.dark5 or c.comment,
+					surface1 = c.bg_highlight,
+					surface0 = c.bg_highlight,
+
+					base = c.bg,
+					mantle = c.bg_dark,
+					crust = c.bg_dark,
+				}
+			end
+		end
+
+		if not palette then
+			palette = {
 				rosewater = "#DC8A78",
 				flamingo = "#DD7878",
 				mauve = "#CBA6F7",
@@ -87,6 +129,7 @@ local function init_palette()
 				mantle = "#1C1C19",
 				crust = "#161320",
 			}
+		end
 
 		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("r1v3r.settings").palette_overwrite)
 	end

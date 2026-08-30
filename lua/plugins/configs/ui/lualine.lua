@@ -282,7 +282,7 @@ return function()
 			end,
 			-- color = utils.gen_hl("blue", true, true, nil, "bold"),
 			color = function()
-				return { fg = "#61AFEF", gui = "bold" }
+				return { fg = colors.blue, gui = "bold" }
 			end,
 			cond = conditionals.has_enough_room,
 		},

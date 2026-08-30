@@ -32,6 +32,10 @@ ui["akinsho/bufferline.nvim"] = {
 	keys = keymaps.bufferline(),
 	config = require("ui.bufferline"),
 }
+ui["folke/tokyonight.nvim"] = {
+	lazy = true,
+	config = require("ui.tokyonight"),
+}
 ui["Jint-lzxy/nvim"] = {
 	lazy = true,
 	name = "catppuccin",
