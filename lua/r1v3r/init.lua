@@ -125,7 +125,7 @@ local init = function()
 	require("r1v3r.pack")
 	require("r1v3r.method")
 
-	vim.api.nvim_command("set background=" .. settings.background)
+	vim.o.background = settings.background
 	vim.cmd.colorscheme(settings.colorscheme)
 end
 

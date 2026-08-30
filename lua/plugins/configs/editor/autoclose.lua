@@ -16,7 +16,7 @@ return function()
 			["'"] = { escape = true, close = true, pair = "''", disabled_filetypes = { "rust" } },
 		},
 		options = {
-			disabled_filetypes = { "big_file_disabled_ft" },
+			disabled_filetypes = { "bigfile" },
 			disable_when_touch = false,
 		},
 	})

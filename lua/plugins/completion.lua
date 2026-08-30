@@ -46,7 +46,7 @@ completion["joechrisellis/lsp-format-modifications.nvim"] = {
 }
 completion["nvimtools/none-ls.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPost", "BufNewFile", "BufNew" },
 	config = require("completion.null-ls"),
 	dependencies = {
 		"nvim-lua/plenary.nvim",

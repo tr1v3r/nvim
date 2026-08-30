@@ -44,14 +44,14 @@ ui["j-hui/fidget.nvim"] = {
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "BufReadPre",
 	config = require("ui.gitsigns"),
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
 	main = "ibl",
 	opts = {},
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPost", "BufNewFile" },
 	config = require("ui.indent-blankline"),
 }
 ui["nvim-lualine/lualine.nvim"] = {
@@ -67,7 +67,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["folke/paint.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	ft = { "lua", "python" },
 	config = require("ui.paint"),
 }
 -- scroll ui movement
@@ -86,20 +86,9 @@ ui["petertriho/nvim-scrollbar"] = {
 		{ "lewis6991/gitsigns.nvim" },
 	},
 }
-ui["edluffy/specs.nvim"] = {
-	lazy = true,
-	-- event = "CursorMoved",
-	config = require("ui.specs"),
-}
 ui["nvim-tree/nvim-web-devicons"] = {
 	lazy = true,
 }
-ui["luochen1990/rainbow"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = require("ui.rainbow"),
-}
-
 return ui
 
 -- backup

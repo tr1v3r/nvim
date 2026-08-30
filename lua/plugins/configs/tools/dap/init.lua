@@ -11,15 +11,15 @@ return function()
 	-- vim.print(debug.traceback())
 
 	-- Initialize debug hooks
-	_G._debugging = false
+	local debugging = false
 	local function debug_init_cb()
-		_G._debugging = true
+		debugging = true
 		mappings.load_extras()
 		dapui.open({ reset = true })
 	end
 	local function debug_terminate_cb()
-		if _debugging then
-			_G._debugging = false
+		if debugging then
+			debugging = false
 			dapui.close()
 		end
 	end

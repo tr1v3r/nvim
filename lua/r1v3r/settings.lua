@@ -99,7 +99,7 @@ settings["format_disabled_dirs"] = { "~/format_disabled_dir" }
 ---@type table<string, boolean>
 settings["format_block_formatters"] = {
 	lua_ls = true,
-	tsserver = true,
+	ts_ls = true,
 	clangd = true,
 	pylsp = true,
 	gopls = true,
@@ -205,7 +205,7 @@ settings["diagnostics_virtual_lines"] = true
 -- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 --  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
--- NOTE: This entry only works when `diagnostics_virtual_text` is true.
+-- NOTE: This entry only affects diagnostic virtual lines.
 ---@type "Error"|"Warning"|"Information"|"Hint"
 settings["diagnostics_level"] = "Hint"
 
@@ -214,7 +214,7 @@ settings["diagnostics_level"] = "Hint"
 ---@type string
 settings["external_browser"] = "chrome-cli open"
 
--- Set it to false if you don't use nvim to open big files.
+-- Set it to false to disable Snacks' large-file optimizations.
 ---@type boolean
 settings["load_big_files_faster"] = true
 

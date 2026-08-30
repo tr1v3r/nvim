@@ -2,7 +2,7 @@ local M = {}
 
 ---@type snacks.Config
 M.opts = {
-	bigfile = { enabled = true },
+	bigfile = { enabled = require("r1v3r.settings").load_big_files_faster },
 	-- dashboard = { enabled = true },
 	-- explorer = { enabled = true },
 	-- indent = { enabled = true },

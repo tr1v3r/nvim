@@ -61,5 +61,5 @@ return function()
 	-- Most VimTeX mappings rely on localleader and this can be changed with the
 	-- following line. The default is usually fine and is the symbol "\".
 	-- let maplocalleader = " "
-	vim.api.nvim_set_var("maplocalleader", " ")
+	vim.g.maplocalleader = " "
 end

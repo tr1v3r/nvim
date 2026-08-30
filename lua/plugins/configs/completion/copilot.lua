@@ -11,7 +11,7 @@ return function()
 			},
 			filetypes = {
 				["dap-repl"] = false,
-				["big_file_disabled_ft"] = false,
+				bigfile = false,
 			},
 		})
 	end, 100)

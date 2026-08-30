@@ -11,19 +11,6 @@ function autocmd.cmd(cmds)
 	end
 end
 
--- deprecated: vimscript version
--- function autocmd.group(definitions)
--- 	for group_name, definition in pairs(definitions) do
--- 		vim.api.nvim_command("augroup " .. group_name)
--- 		vim.api.nvim_command("autocmd!")
--- 		for _, def in ipairs(definition) do
--- 			local command = table.concat(vim.list_extend({ "autocmd" }, def), " ")
--- 			vim.api.nvim_command(command)
--- 		end
--- 		vim.api.nvim_command("augroup END")
--- 	end
--- end
-
 function autocmd.group(definitions)
 	for group_name, definition in pairs(definitions) do
 		local group_id = vim.api.nvim_create_augroup(group_name, { clear = true })
@@ -66,10 +53,6 @@ function autocmd.cmd_init()
 			pattern = "*",
 			command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
 		},
-		BufEnter = { -- Auto change directory to current dir
-			pattern = "*",
-			command = "silent! lcd %:p:h",
-		},
 		-- [{'TextChanged', 'InsertLeave'}] = { -- Save file on TextChanged and InsertLeave events
 		--	 pattern = "<buffer>",
 		--	 command = 'silent write'
@@ -86,13 +69,13 @@ function autocmd.cmd_init()
 				}),
 				pattern = "NvimTree_*",
 				callback = function()
-					local layout = vim.api.nvim_call_function("winlayout", {})
+					local layout = vim.fn.winlayout()
 					if
 						layout[1] == "leaf"
 						and vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(layout[2]) }) == "NvimTree"
 						and layout[3] == nil
 					then
-						vim.api.nvim_command([[confirm quit]])
+						vim.cmd("confirm quit")
 					end
 				end,
 			},
@@ -126,8 +109,7 @@ end
 function autocmd.group_init()
 	local definitions = {
 		lazy = {},
-		bufs = { -- Reload vim config automatically
-			{ "BufWritePost", [[$VIM_PATH/{*.vim,*.yaml,vimrc} nested source $MYVIMRC | redraw]] },
+		bufs = {
 			-- Reload Vim script automatically if setlocal autoread
 			{
 				{ "BufWritePost", "FileWritePost" },
@@ -138,8 +120,7 @@ function autocmd.group_init()
 			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
 			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
-			{ "BufWritePre", "*.bak", "setlocal noundofile" }, -- auto place to last edit
-			{ "BufReadPost", "*", [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]] }, -- Auto toggle fcitx5
+			{ "BufWritePre", "*.bak", "setlocal noundofile" },
 			-- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
 			-- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
 			-- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
@@ -156,10 +137,9 @@ function autocmd.group_init()
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
-			-- Attempt to write shada when leaving nvim
-			{ "VimLeave", "*", [[if has('nvim') | wshada | else | wviminfo! | endif]] },
-			-- Check if file changed when its window is focus, more eager than 'autoread'
-			{ "FocusGained", "* checktime" }, -- Equalize window dimensions when resizing vim window
+			-- Check if files changed when Neovim regains focus, more eager than 'autoread'.
+			{ "FocusGained", "*", "checktime" },
+			-- Equalize window dimensions when resizing the UI.
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 		},
 		ft = {
@@ -180,7 +160,15 @@ function autocmd.group_init()
 				end,
 			},
 		},
-		yank = { { "TextYankPost", "*", [[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]] } },
+		yank = {
+			{
+				"TextYankPost",
+				"*",
+				function()
+					vim.hl.on_yank({ higroup = "IncSearch", timeout = 300 })
+				end,
+			},
+		},
 	}
 
 	autocmd.group(definitions)
@@ -208,10 +196,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
-		vim.notify("LspAttach buffer: " .. event.buf, vim.log.levels.DEBUG)
-		if not _G._debugging then
-			require("r1v3r.keymaps").lsp(event.buf)
-		end
+		require("r1v3r.keymaps").lsp(event.buf)
 	end,
 })
 

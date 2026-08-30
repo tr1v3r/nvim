@@ -2,11 +2,6 @@
 local o, wo, g = vim.o, vim.wo, vim.g
 local global = require("r1v3r.global")
 
--- Syntax highlighting, affect lsp load
--- vim.cmd('syntax on')
--- Disable search highlighting after executing a search
-vim.cmd([[exec "nohlsearch"]])
-
 local options = {}
 
 function options.g()
@@ -58,8 +53,8 @@ function options.o()
 		viewoptions = "cursor,folds,curdir,slash,unix",
 		-- Disable text width
 		tw = 0,
-		-- Set fold method to syntax
-		foldmethod = "syntax",
+		-- Use cheap manual folds by default; Treesitter buffers opt into foldexpr.
+		foldmethod = "manual",
 		-- Set fold level to maximum
 		foldlevel = 99,
 		-- Enable folding
@@ -92,8 +87,8 @@ function options.o()
 		updatetime = 300,
 		-- Enable blockwise virtual editing
 		virtualedit = "block",
-		-- Automatically change the current directory to the directory of the current file
-		autochdir = true,
+		-- Keep the project root stable; project.nvim manages directory changes.
+		autochdir = false,
 		-- Automatically write all buffers when executing certain commands
 		autowriteall = true,
 		-- signcolumn = 'nubmer'
@@ -165,6 +160,9 @@ function options.init()
 	for k, v in pairs(options.wo()) do
 		wo[k] = v
 	end
+
+	-- Do not restore search highlighting from ShaDa on startup.
+	vim.cmd.nohlsearch()
 end
 
 options.init()

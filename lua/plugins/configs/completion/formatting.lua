@@ -19,7 +19,7 @@ vim.api.nvim_create_user_command("FormatToggleForFt", function(opts)
 end, { nargs = 1, complete = "filetype" })
 
 function M.enable_format_on_save(from_config)
-	local opts = { pattern = "*", timeout = 1000 }
+	local opts = { pattern = "*", timeout = settings.format_timeout }
 	vim.api.nvim_create_augroup("format_on_save", { clear = true })
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = "format_on_save",
@@ -110,12 +110,10 @@ function M.format(opts)
 	-- check workspaces
 	local filedir = vim.fn.expand("%:p:h")
 	for i = 1, #disabled_workspaces do
-		if vim.regex(vim.fs.normalize(disabled_workspaces[i])):match_str(filedir) ~= nil then
+		local disabled_dir = vim.fs.normalize(disabled_workspaces[i])
+		if filedir == disabled_dir or vim.startswith(filedir, disabled_dir .. "/") then
 			vim.notify(
-				string.format(
-					"[LSP] Formatting for all files under [%s] has been disabled.",
-					vim.fs.normalize(disabled_workspaces[i])
-				),
+				string.format("[LSP] Formatting for all files under [%s] has been disabled.", disabled_dir),
 				vim.log.levels.WARN,
 				{ title = "LSP Formatter Warning" }
 			)

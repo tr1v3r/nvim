@@ -23,16 +23,15 @@ return function()
 		providers.copilot = {
 			name = "copilot",
 			module = "blink-cmp-copilot",
-			kind = "Copilot",
 			score_offset = 100,
 			async = true,
 		}
 	end
 
-	-- `sources.default` also accepts a context function: bigfile.nvim kills
-	-- completion by retagging the buffer / setting vim.b.completion_disabled.
+	-- `sources.default` also accepts a context function: snacks.bigfile marks
+	-- large buffers with the `bigfile` filetype and disables completion.
 	local function resolve_sources()
-		if vim.b.completion_disabled or vim.bo.filetype == "big_file_disabled_ft" then
+		if vim.b.completion == false or vim.bo.filetype == "bigfile" then
 			return {}
 		end
 		return sources

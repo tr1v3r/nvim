@@ -20,7 +20,7 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 			vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
 			return
 		end
-		vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+		vim.cmd(splitcmd .. " " .. vim.fn.fnameescape(vim.uri_to_fname(result)))
 	end)
 end
 

@@ -35,13 +35,8 @@ editor["m4xshen/autoclose.nvim"] = {
 }
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "InsertEnter",
 	config = require("editor.better-escape"),
-}
-editor["LunarVim/bigfile.nvim"] = {
-	cond = require("r1v3r.settings").load_big_files_faster,
-	lazy = false,
-	config = require("editor.bigfile"),
 }
 editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
@@ -58,13 +53,12 @@ editor["ojroques/nvim-bufdel"] = {
 -- But as usual, you can always tweak the plugin to your liking.
 editor["folke/flash.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "VeryLazy",
 	keys = keymaps.flash(),
 	config = require("editor.flash"),
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
 	keys = keymaps.comment(),
 	config = require("editor.comment"),
 }
@@ -80,7 +74,7 @@ editor["junegunn/vim-easy-align"] = {
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPost", "BufNewFile" },
 	config = require("editor.vim-illuminate"),
 }
 -- editor["romainl/vim-cool"] = { -- auto no highlight
@@ -118,35 +112,43 @@ editor["kylechui/nvim-surround"] = {
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
 -- nvim-treesitter/playground Run :TSPlaygroundToggle show AST of current file
+editor["andymass/vim-matchup"] = {
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" },
+}
+editor["abecodes/tabout.nvim"] = {
+	lazy = true,
+	event = "InsertEnter",
+	keys = keymaps.tabout(),
+	config = require("editor.tabout"),
+}
+editor["windwp/nvim-ts-autotag"] = {
+	lazy = true,
+	ft = { "html", "javascript", "javascriptreact", "typescriptreact", "vue", "xml" },
+	config = require("editor.autotag"),
+}
+editor["NvChad/nvim-colorizer.lua"] = {
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" },
+	config = require("editor.colorizer"),
+}
+editor["hiphish/rainbow-delimiters.nvim"] = {
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" },
+	config = require("editor.rainbow_delims"),
+}
+editor["nvim-treesitter/nvim-treesitter-context"] = {
+	lazy = true,
+	event = { "BufReadPost", "BufNewFile" },
+	config = require("editor.ts-context"),
+}
 editor["nvim-treesitter/nvim-treesitter"] = {
 	branch = "main",
 	lazy = false,
 	build = ":TSUpdate",
 	config = require("editor.treesitter"),
 	dependencies = {
-		{ "andymass/vim-matchup" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
-		{
-			"abecodes/tabout.nvim",
-			keys = keymaps.tabout(),
-			config = require("editor.tabout"),
-		},
-		{
-			"windwp/nvim-ts-autotag",
-			config = require("editor.autotag"),
-		},
-		{
-			"NvChad/nvim-colorizer.lua",
-			config = require("editor.colorizer"),
-		},
-		{
-			"hiphish/rainbow-delimiters.nvim",
-			config = require("editor.rainbow_delims"),
-		},
-		{
-			"nvim-treesitter/nvim-treesitter-context",
-			config = require("editor.ts-context"),
-		},
 	},
 }
 

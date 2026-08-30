@@ -166,7 +166,7 @@ local function setGeneralKeys()
 	map("<up>", "res +5"):noremap():cmd():desc("window: expand window size"):set()
 	map("<down>", "res -5"):noremap():cmd():desc("window: shorten window size"):set()
 	map("<left>", "vertical resize-5"):noremap():cmd():desc("window: vertical expand window size"):set()
-	map("<right>", "vertical resize+5>"):noremap():cmd():desc("window: vertical shorten window size"):set()
+	map("<right>", "vertical resize +5"):noremap():cmd():desc("window: vertical shorten window size"):set()
 
 	map("sh", "<C-w>t<C-w>K"):mode("n"):noremap():desc("window: place the two windows up and down"):set()
 	map("sv", "<C-w>t<C-w>H"):mode("n"):noremap():desc("window: Place the two windows side by side"):set()
@@ -270,7 +270,7 @@ local function setNeovideKeys()
 	map("<D-v>", '"+P'):mode("n"):set() -- Paste normal mode
 	map("<D-v>", '"+P'):mode("v"):set() -- Paste visual mode
 	map("<D-v>", "<C-R>+"):mode("c"):set() -- Paste command mode
-	map("<D-v>", '<ESC>i"+Pik'):mode("i"):set() -- Paste insert mode
+	map("<D-v>", '<ESC>i"+Pik'):mode("i"):noremap():set() -- Paste insert mode
 
 	-- Allow clipboard copy paste in neovim
 	map("<D-v>", "+p<CR>"):mode(""):noremap():silent():set()
@@ -346,6 +346,7 @@ function keymaps.lsp(buf)
 			vim.lsp.buf.signature_help()
 		end)
 		:mode("n")
+		:buffer(buf)
 		:desc("lsp: Signature help")
 		:set()
 	map("<LEADER>cw", function()
@@ -362,7 +363,7 @@ function keymaps.lsp(buf)
 		:buffer(buf)
 		:desc("lsp: Show doc")
 		:set()
-	map("ca", function()
+	map("<LEADER>ca", function()
 			vim.lsp.buf.code_action()
 		end)
 		:mode("nv")
@@ -406,6 +407,7 @@ function keymaps.lsp(buf)
 			vim.lsp.buf.type_definition()
 		end)
 		:mode("n")
+		:buffer(buf)
 		:desc("lsp: Go to Type Definition")
 		:set()
 
@@ -483,9 +485,9 @@ end
 -- Plugin: rainbowhxch/accelerated-jk.nvim
 function keymaps.accelerated_jk()
 	return {
-		map("u", "<Plug>(accelerated_jk_k)"):mode("n"):noremap():to_lazy_key(),
-		map("e", "<Plug>(accelerated_jk_j)"):mode("n"):noremap():to_lazy_key(),
-		map("gu", "<Plug>(accelerated_jk_gk)"):mode("n"):noremap():to_lazy_key(),
+		map("u", "<Plug>(accelerated_jk_k)"):mode("n"):to_lazy_key(),
+		map("e", "<Plug>(accelerated_jk_j)"):mode("n"):to_lazy_key(),
+		map("gu", "<Plug>(accelerated_jk_gk)"):mode("n"):to_lazy_key(),
 		map("ge", "<plug>(accelerated_jk_gj)"):mode("n"):noremap():to_lazy_key(),
 	}
 end
@@ -502,27 +504,23 @@ end
 -- Plugin: numToStr/Comment.nvim
 function keymaps.comment()
 	return {
-		map("<C-/>", "<Plug>(comment_toggle_linewise_current)<CR>")
+		map("<C-/>", "<Plug>(comment_toggle_linewise_current)")
 			:mode("n")
-			:noremap()
 			:silent()
 			:desc("edit: Toggle comment for line")
 			:to_lazy_key(),
-		map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_curent)")
+		map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_current)")
 			:mode("n")
-			:noremap()
 			:silent()
 			:desc("edit: Toggle comment for block")
 			:to_lazy_key(),
 		map("<C-/>", "<Plug>(comment_toggle_linewise_visual)")
 			:mode("x")
-			:noremap()
 			:silent()
 			:desc("edit: Toggle comment for line with selection")
 			:to_lazy_key(),
 		map("<LEADER>cc", "<Plug>(comment_toggle_blockwise_visual)")
 			:mode("x")
-			:noremap()
 			:silent()
 			:desc("edit: Toggle comment for block with selection")
 			:to_lazy_key(),
@@ -548,7 +546,7 @@ end
 -- Plugin: junegunn/vim-easy-align
 function keymaps.easy_align()
 	return {
-		map("ga", "<Plug>(EasyAlign)"):mode("nx"):noremap():desc("edit: Align with delimiter"):to_lazy_key(),
+		map("ga", "<Plug>(EasyAlign)"):mode("nx"):desc("edit: Align with delimiter"):to_lazy_key(),
 	}
 end
 
@@ -571,7 +569,7 @@ end
 function keymaps.tabout()
 	return {
 		-- map("<C-n>", "<Plug>(TaboutBackMulti)"):mode("i"):noremap():silent():desc("edit: Goto begin of pair"):to_lazy_key()
-		map("<C-i>", "<Plug>(TaboutMulti)"):mode("i"):noremap():desc("edit: Goto end of pair"):to_lazy_key(),
+		map("<C-i>", "<Plug>(TaboutMulti)"):mode("i"):desc("edit: Goto end of pair"):to_lazy_key(),
 	}
 end
 
@@ -679,8 +677,8 @@ end
 -- Plugin: michaelb/sniprun
 function keymaps.sniprun()
 	return {
-		map("<LEADER>r", "SnipRun"):mode("v"):cmd():noremap():desc("tool: Run code by range"):to_lazy_key(),
-		map("<LEADER>r", "SnipRun"):mode("n"):cmd():noremap():desc("tool: Run code by file"):to_lazy_key(),
+		map("<LEADER>xr", "SnipRun"):mode("v"):cmd():noremap():desc("tool: Run code by range"):to_lazy_key(),
+		map("<LEADER>xr", "SnipRun"):mode("n"):cmd():noremap():desc("tool: Run code by file"):to_lazy_key(),
 	}
 end
 
@@ -756,30 +754,40 @@ end
 -- Plugin: folke/trouble.nvim
 function keymaps.trouble()
 	return {
-		map("tl", "TroubleToggle"):mode("n"):cmd():noremap():desc("lsp: Toggle trouble list"):to_lazy_key(),
-		map("<LEADER>ta", "TroubleToggle lsp_references")
+		map("tl", "Trouble diagnostics toggle filter.buf=0")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("lsp: Toggle buffer diagnostics")
+			:to_lazy_key(),
+		map("<LEADER>ta", "Trouble lsp_references toggle")
 			:mode("n")
 			:cmd()
 			:noremap()
 			:silent()
-			:desc("lsp: Show lsp references")
+			:desc("lsp: Show references")
 			:to_lazy_key(),
-		map("<LEADER>td", "TroubleToggle document_diagnostics")
+		map("<LEADER>td", "Trouble diagnostics toggle filter.buf=0")
 			:mode("n")
 			:cmd()
 			:noremap()
 			:silent()
-			:desc("lsp: Show document diagnostics")
+			:desc("lsp: Show buffer diagnostics")
 			:to_lazy_key(),
-		map("<LEAEDR>ta", "TroubleToggle workspace_diagnostics")
+		map("<LEADER>tD", "Trouble diagnostics toggle")
 			:mode("n")
 			:cmd()
 			:noremap()
 			:silent()
 			:desc("lsp: Show workspace diagnostics")
 			:to_lazy_key(),
-		map("<LEADER>tq", "TroubleToggle quickfix"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):to_lazy_key(),
-		map("<LEADER>tl", "TroubleToggle loclist"):mode("n"):cmd():noremap():desc("lsp: Show loclist"):to_lazy_key(),
+		map("<LEADER>tq", "Trouble qflist toggle"):mode("n"):cmd():noremap():desc("list: Show quickfix"):to_lazy_key(),
+		map("<LEADER>tl", "Trouble loclist toggle")
+			:mode("n")
+			:cmd()
+			:noremap()
+			:desc("list: Show location list")
+			:to_lazy_key(),
 	}
 end
 

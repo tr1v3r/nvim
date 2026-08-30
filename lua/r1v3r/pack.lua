@@ -1,4 +1,4 @@
-local fn, api = vim.fn, vim.api
+local fn = vim.fn
 local global = require("r1v3r.global")
 local plugins_dir, data_dir = global.plugins_dir, global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
@@ -20,7 +20,17 @@ local Lazy = {}
 function Lazy.check()
 	if vim.fn.isdirectory(lazy_path) ~= 1 then
 		local lazy_repo = use_ssh and "git@github.com:folke/lazy.nvim.git" or "https://github.com/folke/lazy.nvim.git"
-		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. " " .. lazy_path)
+		local output = vim.fn.system({
+			"git",
+			"clone",
+			"--filter=blob:none",
+			"--branch=stable",
+			lazy_repo,
+			lazy_path,
+		})
+		if vim.v.shell_error ~= 0 then
+			error("Failed to clone lazy.nvim:\n" .. output)
+		end
 	end
 	vim.opt.rtp:prepend(lazy_path)
 end

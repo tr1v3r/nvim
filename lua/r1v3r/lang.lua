@@ -1,7 +1,7 @@
 -- ============ Language ============
 
--- Compile function
-local function CompileRunGcc()
+-- Compile or run the current file with its language toolchain.
+local function compile_run()
 	vim.cmd("w")
 	local filetype = vim.bo.filetype
 	if filetype == "c" then
@@ -59,4 +59,4 @@ local function CompileRunGcc()
 	end
 end
 
-require("helper.mapping").map("<LEADER>r", CompileRunGcc):mode("n"):noremap():desc("compile and run"):set()
+require("helper.mapping").map("<LEADER>cr", compile_run):mode("n"):noremap():desc("code: compile and run"):set()

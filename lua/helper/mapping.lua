@@ -63,10 +63,10 @@ function mapOption:nowait()
 	return self
 end
 
----@param num number
+---@param num integer
 ---@return mapOption
 function mapOption:buffer(num)
-	self.buf = num
+	self.options.buffer = num
 	return self
 end
 

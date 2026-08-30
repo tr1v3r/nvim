@@ -70,13 +70,13 @@ tools["michaelb/sniprun"] = {
 -- }
 tools["folke/trouble.nvim"] = {
 	lazy = true,
-	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
+	cmd = "Trouble",
 	keys = keymaps.trouble(),
 	config = require("tools.trouble"),
 }
 tools["folke/which-key.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "VeryLazy",
 	config = require("tools.which-key"),
 }
 tools["nvim-pack/nvim-spectre"] = {
@@ -129,7 +129,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 		{ "debugloop/telescope-undo.nvim" },
 		{
 			"ahmedkhalf/project.nvim",
-			event = { "CursorHold", "CursorHoldI" },
+			event = { "BufReadPost", "BufNewFile" },
 			config = require("tools.project"),
 		},
 		{ "jvgrootveld/telescope-zoxide" },
@@ -163,6 +163,10 @@ tools["mfussenegger/nvim-dap"] = {
 			config = require("tools.dap.dapui"),
 		},
 		{ "nvim-neotest/nvim-nio" },
+		{
+			"Weissle/persistent-breakpoints.nvim",
+			config = require("tools.dap.persistent-breakpoints"),
+		},
 		-- mason is kept ONLY for DAP adapter management; LSP servers and
 		-- formatters moved to system packages (brew/go/cargo).
 		{
@@ -173,14 +177,6 @@ tools["mfussenegger/nvim-dap"] = {
 		{ "leoluz/nvim-dap-go" },
 	},
 }
-tools["Weissle/persistent-breakpoints.nvim"] = {
-	lazy = true,
-	priority = 1,
-	event = "LspAttach",
-	config = require("tools.dap.persistent-breakpoints"),
-	dependencies = { "mfussenegger/nvim-dap" },
-}
-
 ----------------------------------------------------------------------
 --                        AI Assistant Plugins                      --
 ----------------------------------------------------------------------

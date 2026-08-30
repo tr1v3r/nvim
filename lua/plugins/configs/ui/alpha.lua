@@ -91,7 +91,7 @@ return function()
 			silent = true,
 			nowait = true,
 			callback = function()
-				vim.api.nvim_command("enew")
+				vim.cmd.enew()
 			end,
 		}),
 		button("space tw", " Word find", leader, nil, {

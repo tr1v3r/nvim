@@ -70,11 +70,6 @@ return function()
 				return
 			end
 
-			local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, args.buf, "bigfile_disable_treesitter")
-			if ok and is_large_file then
-				return
-			end
-
 			local language = vim.treesitter.language.get_lang(args.match)
 			if not language or not vim.treesitter.language.add(language) then
 				return
