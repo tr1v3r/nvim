@@ -15,8 +15,7 @@ ui["shaunsingh/nord.nvim"] = {
 	config = require("ui.nord"),
 }
 ui["loctvl842/monokai-pro.nvim"] = {
-	lazy = false,
-	priority = 1000,
+	lazy = true,
 	config = require("ui.monokai"),
 }
 -- ui["nanozuki/tabby.nvim"] = {

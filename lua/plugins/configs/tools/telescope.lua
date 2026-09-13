@@ -199,7 +199,7 @@ return function()
 				},
 			},
 			fzf = {
-				fuzzy = false,
+				fuzzy = true,
 				override_generic_sorter = true,
 				override_file_sorter = true,
 				case_mode = "smart_case",
@@ -246,5 +246,4 @@ return function()
 	telescope.load_extension("zoxide")
 	telescope.load_extension("persisted")
 	telescope.load_extension("aerial")
-	telescope.load_extension("notify")
 end

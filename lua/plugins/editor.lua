@@ -129,7 +129,20 @@ editor["windwp/nvim-ts-autotag"] = {
 }
 editor["NvChad/nvim-colorizer.lua"] = {
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
+	ft = {
+		"css",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"lua",
+		"sass",
+		"scss",
+		"svelte",
+		"typescript",
+		"typescriptreact",
+		"vue",
+	},
 	config = require("editor.colorizer"),
 }
 editor["hiphish/rainbow-delimiters.nvim"] = {
@@ -144,7 +157,8 @@ editor["nvim-treesitter/nvim-treesitter-context"] = {
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
 	branch = "main",
-	lazy = false,
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
 	config = require("editor.treesitter"),
 	dependencies = {

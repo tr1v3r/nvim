@@ -1,42 +1,8 @@
 return function()
 	local settings = require("r1v3r.settings")
 	local null_ls = require("null-ls")
-	local formatting = null_ls.builtins.formatting
-	local formatter_config_dir = "completion.formatters."
+	local sources = require("completion.none-ls-sources").build(settings.null_ls_deps, null_ls)
 
-	-- Please set additional flags for the supported servers here
-	-- Don't specify any config here if you are using the default one.
-	local sources = {
-		formatting.prettier.with({
-			filetypes = {
-				"vue",
-				"typescript",
-				"javascript",
-				"typescriptreact",
-				"javascriptreact",
-				"yaml",
-				"html",
-				"css",
-				"scss",
-				"sh",
-				"markdown",
-				"thrift",
-			},
-		}),
-		formatting.clang_format.with({
-			filetypes = { "c", "cpp" },
-			extra_args = require(formatter_config_dir .. "clang_format"),
-		}),
-		formatting.stylua.with({
-			filetypes = { "lua" },
-			extra_args = require(formatter_config_dir .. "stylua"),
-		}),
-		-- formatting.rustfmt, -- deprecated format plugin: https://github.com/nvimtools/none-ls.nvim/issues/58
-		formatting.goimports_reviser.with({
-			extra_args = require(formatter_config_dir .. "goimports-reviser"),
-		}),
-		formatting.goimports,
-	}
 	null_ls.setup({
 		border = "rounded",
 		debug = false,

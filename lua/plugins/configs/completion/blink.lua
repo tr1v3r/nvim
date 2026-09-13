@@ -6,7 +6,7 @@ return function()
 		type = require("r1v3r.icons").get("type"),
 	}
 
-	local sources = { "lsp", "path", "snippets", "buffer", "latex_symbols" }
+	local sources = { "lsp", "path", "snippets", "buffer" }
 	if use_copilot then
 		table.insert(sources, 1, "copilot")
 	end
@@ -34,7 +34,12 @@ return function()
 		if vim.b.completion == false or vim.bo.filetype == "bigfile" then
 			return {}
 		end
-		return sources
+
+		local resolved = vim.list_extend({}, sources)
+		if vim.bo.filetype == "plaintex" or vim.bo.filetype == "tex" then
+			table.insert(resolved, "latex_symbols")
+		end
+		return resolved
 	end
 
 	require("blink.cmp").setup({

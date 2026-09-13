@@ -1,5 +1,6 @@
 local completion = {}
-local use_copilot = require("r1v3r.settings").use_copilot
+local settings = require("r1v3r.settings")
+local use_copilot = settings.use_copilot
 
 -- Completion engine, replaces nvim-cmp and its source plugins.
 -- Docs: https://cmp.saghen.dev
@@ -20,14 +21,14 @@ completion["saghen/blink.cmp"] = {
 		},
 		-- nvim-cmp source compatibility layer (v2.* pairs with blink.cmp v1.*)
 		{ "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
-		-- upstream f3fora/cmp-latex-symbols was deleted; kdheepak's is maintained
-		{ "kdheepak/cmp-latex-symbols" },
+		-- Keep the spec present when disabled so lockfile updates do not remove it.
+		{ "giuxtaposition/blink-cmp-copilot", enabled = use_copilot },
 	},
 }
-if use_copilot then
-	-- Community source exposing copilot.lua suggestions inside the blink menu.
-	table.insert(completion["saghen/blink.cmp"].dependencies, { "giuxtaposition/blink-cmp-copilot" })
-end
+completion["kdheepak/cmp-latex-symbols"] = {
+	lazy = true,
+	ft = { "plaintex", "tex" },
+}
 
 completion["dnlhc/glance.nvim"] = {
 	lazy = true,
@@ -46,7 +47,7 @@ completion["joechrisellis/lsp-format-modifications.nvim"] = {
 }
 completion["nvimtools/none-ls.nvim"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufNewFile", "BufNew" },
+	ft = require("completion.none-ls-sources").filetypes(settings.null_ls_deps),
 	config = require("completion.null-ls"),
 	dependencies = {
 		"nvim-lua/plenary.nvim",

@@ -100,10 +100,8 @@ function autocmd.cmd_init()
 				"lspinfo",
 				"terminal",
 				"prompt",
-				"toggleterm",
 				"copilot",
 				"startuptime",
-				"tsplayground",
 				"PlenaryTestPopup",
 			},
 			callback = function(event)
@@ -140,12 +138,12 @@ function autocmd.group_init()
 			{
 				{ "WinEnter", "BufEnter", "InsertLeave" },
 				"*",
-				[[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
+				[[if ! &cursorline && &filetype !=# 'alpha' && ! &pvw | setlocal cursorline | endif]],
 			},
 			{
 				{ "WinLeave", "BufLeave", "InsertEnter" },
 				"*",
-				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
+				[[if &cursorline && &filetype !=# 'alpha' && ! &pvw | setlocal nocursorline | endif]],
 			},
 			-- Check if files changed when Neovim regains focus, more eager than 'autoread'.
 			{ "FocusGained", "*", "checktime" },

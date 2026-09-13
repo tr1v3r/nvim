@@ -174,7 +174,7 @@ local function setGeneralKeys()
 	map("srv", "<C-w>b<C-w>H"):mode("n"):noremap():desc("window: rotate windows"):set()
 
 	-- map("<LEADER>q", "<C-w>j<Cmd>q<CR>"):noremap():desc("window: close current window"):set()
-	map("<LEADER>q", "x!"):cmd():noremap():desc("window: close current window"):set()
+	map("<LEADER>q", "quit"):cmd():noremap():desc("window: close current window or quit Neovim"):set()
 
 	-- Opening a terminal window
 	local newTermCmd = "<Cmd>term<CR><Cmd>set filetype=terminal<CR><Cmd>set norelativenumber<CR><Cmd>set nonumber<CR>"
@@ -211,16 +211,10 @@ local function setGeneralKeys()
 	map("tI", "+tabmove"):noremap():cmd():desc("tab: move tab to right"):set()
 
 	-- Tab switch
-	map("", ":nn <Leader>1 1gt"):exec()
-	map("", ":nn <Leader>2 2gt"):exec()
-	map("", ":nn <Leader>3 3gt"):exec()
-	map("", ":nn <Leader>4 4gt"):exec()
-	map("", ":nn <Leader>5 5gt"):exec()
-	map("", ":nn <Leader>6 6gt"):exec()
-	map("", ":nn <Leader>7 7gt"):exec()
-	map("", ":nn <Leader>8 8gt"):exec()
-	map("", ":nn <Leader>9 9gt"):exec()
-	map("", ":nn <Leader>0 <Cmd>tablast<CR>"):exec()
+	for index = 1, 9 do
+		map("<LEADER>" .. index, index .. "gt"):noremap():desc("tab: go to tab " .. index):set()
+	end
+	map("<LEADER>0", "tablast"):cmd():noremap():desc("tab: go to last tab"):set()
 
 	map("tw", "tabclose"):noremap():cmd():desc("tab: close current tab"):set()
 	map("to", "tabonly"):noremap():cmd():desc("tab: close all other tabs"):set()
@@ -245,7 +239,6 @@ local function setGeneralKeys()
 	map("tx", "r !figlet"):space():noremap():desc("tool: call figlet"):set()
 
 	-- call lazygit in floating window
-	-- map("<C-g>", _open_lazygit):mode("n"):noremap():desc("tool: Toggle lazygit"):set() -- luacheck: ignore
 end
 
 local function setLazyKeys()
@@ -447,6 +440,7 @@ function keymaps.gitsigns(buf)
 		end)
 		:mode("n")
 		:buffer(buf)
+		:expr()
 		:desc("git: Goto next hunk")
 		:set()
 	map("[g", function()
@@ -460,6 +454,7 @@ function keymaps.gitsigns(buf)
 		end)
 		:mode("n")
 		:buffer(buf)
+		:expr()
 		:desc("git: Goto prev hunk")
 		:set()
 	map("<LEADER>hs", actions.stage_hunk):mode("n"):buffer(buf):desc("git: Stage hunk"):set()
@@ -766,7 +761,7 @@ function keymaps.telescope()
 			:cmd()
 			:append("<ESC>")
 			:noremap()
-			:desc("help: Show helps")
+			:desc("git: Show status")
 			:to_lazy_key(),
 	}
 end
@@ -877,15 +872,9 @@ function keymaps.dap()
 			:to_lazy_key(),
 
 		map("<LEADER>dL", "DapShowLog"):mode("n"):cmd():noremap():desc("debug: show log"):to_lazy_key(),
-		map("<LEADER>dp", dapui_lazy_call("toggle"))
-			:mode("n")
-			:cmd()
-			:noremap()
-			:desc("debug: toggle dapui")
-			:to_lazy_key(),
+		map("<LEADER>dp", dapui_lazy_call("toggle")):mode("n"):noremap():desc("debug: toggle dapui"):to_lazy_key(),
 		map("<LEADER>de", dapui_lazy_call("eval"))
 			:mode("nv")
-			:cmd()
 			:noremap()
 			:desc("debug: inspect change value")
 			:to_lazy_key(),
@@ -928,30 +917,6 @@ function keymaps.bufferline()
 		map("<A-7>", "BufferLineGoToBuffer 7"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 7"):to_lazy_key(),
 		map("<A-8>", "BufferLineGoToBuffer 8"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 8"):to_lazy_key(),
 		map("<A-9>", "BufferLineGoToBuffer 9"):mode("n"):cmd():noremap():desc("buffer: Goto buffer 9"):to_lazy_key(),
-	}
-end
-
--- Plugin: olimorris/codecompanion.nvim
-function keymaps.codecompanion()
-	local cc_lazy_call = function(funcName, opts)
-		return lazy_call("codecompanion", funcName, opts)
-	end
-
-	return {
-		-- Open chat interface
-		map("<LEADER>ac", cc_lazy_call("chat")):mode("n"):noremap():desc("ai: Open chat"):to_lazy_key(),
-		-- Toggle inline suggestions
-		map("<LEADER>ai", cc_lazy_call("inline")):mode("n"):noremap():desc("ai: Toggle inline"):to_lazy_key(),
-		-- Code assistance
-		map("<LEADER>aa", cc_lazy_call("assist")):mode("n"):noremap():desc("ai: Code assistance"):to_lazy_key(),
-		-- Ask about current code
-		map("<LEADER>aq", function()
-				require("codecompanion").ask()
-			end)
-			:mode("n")
-			:noremap()
-			:desc("ai: Ask about code")
-			:to_lazy_key(),
 	}
 end
 

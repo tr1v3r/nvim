@@ -28,6 +28,9 @@ end
 
 ---@return mapOption
 function mapOption:cmd()
+	if type(self.rhs) ~= "string" then
+		error("mapOption:cmd() requires a string rhs", 2)
+	end
 	self.rhs = ("<Cmd>%s<CR>"):format(self.rhs)
 	return self
 end

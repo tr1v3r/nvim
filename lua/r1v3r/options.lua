@@ -47,9 +47,10 @@ function options.o()
 		listchars = "tab:| ,trail:☒",
 		-- Set the number of lines to keep above and below the cursor in scroll off
 		scrolloff = 4,
-		-- Disable the time delay for key codes
+		-- Keep multi-key mappings and which-key responsive without indefinite waits.
+		timeout = true,
+		timeoutlen = 500,
 		ttimeoutlen = 0,
-		timeout = false,
 		-- Set view options for saving and restoring folds, slash search, Unix line endings
 		viewoptions = "cursor,folds,curdir,slash,unix",
 		-- Disable text width

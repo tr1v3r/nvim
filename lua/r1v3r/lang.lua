@@ -35,13 +35,10 @@ local function compile_run()
 	elseif filetype == "html" then
 		vim.cmd("silent! exec '!'.g:mkdp_browser.' % &'")
 	elseif filetype == "markdown" then
-		vim.cmd("InstantMarkdownPreview")
+		vim.cmd("MarkdownPreviewToggle")
 	elseif filetype == "tex" then
 		vim.cmd("silent! exec 'VimtexStop'")
 		vim.cmd("silent! exec 'VimtexCompile'")
-	elseif filetype == "dart" then
-		vim.cmd([[CocCommand flutter.run -d ".g:flutter_default_device." ".g:flutter_run_args]])
-		vim.cmd("silent! exec 'CocCommand flutter.dev.openDevLog'")
 	elseif filetype == "javascript" then
 		vim.o.splitbelow = true
 		vim.cmd("sp")

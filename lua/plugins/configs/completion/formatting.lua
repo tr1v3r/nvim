@@ -163,38 +163,42 @@ function M.format(opts)
 		return
 	end
 
-	local timeout_ms = opts.timeout_ms
-	for _, formatter in pairs(formatters) do
-		if format_modifications_only then
-			local success = require("lsp-format-modifications").format_modifications(formatter, bufnr).success
-			if success and format_notify then
+	local formatter = formatters[1]
+	if format_modifications_only then
+		local success = require("lsp-format-modifications").format_modifications(formatter, bufnr).success
+		if success then
+			if format_notify then
 				vim.notify(
 					string.format("[LSP] Format changed lines successfully with %s!", formatter.name),
 					vim.log.levels.INFO,
 					{ title = "LSP Range Format Success" }
 				)
-				return
 			end
+			return
 		end
+	end
 
-		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
-		local result, err = formatter.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
-		if result and result.result then
-			vim.lsp.util.apply_text_edits(result.result, bufnr, formatter.offset_encoding)
-			if format_notify then
-				vim.notify(
-					string.format("[LSP] Format successfully with %s!", formatter.name),
-					vim.log.levels.INFO,
-					{ title = "LSP Format Success" }
-				)
-			end
-		elseif err then
-			vim.notify(
-				string.format("[LSP][%s] %s", formatter.name, err),
-				vim.log.levels.ERROR,
-				{ title = "LSP Format Error" }
-			)
-		end
+	local ok, err = pcall(vim.lsp.buf.format, {
+		async = false,
+		bufnr = bufnr,
+		formatting_options = opts.formatting_options,
+		timeout_ms = opts.timeout_ms,
+		filter = function(client)
+			return client.id == formatter.id
+		end,
+	})
+	if not ok then
+		vim.notify(
+			string.format("[LSP][%s] %s", formatter.name, err),
+			vim.log.levels.ERROR,
+			{ title = "LSP Format Error" }
+		)
+	elseif format_notify then
+		vim.notify(
+			string.format("[LSP] Format successfully with %s!", formatter.name),
+			vim.log.levels.INFO,
+			{ title = "LSP Format Success" }
+		)
 	end
 end
 

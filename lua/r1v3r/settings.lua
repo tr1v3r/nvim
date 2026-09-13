@@ -164,7 +164,7 @@ settings["treesitter_deps"] = {
 	"yaml",
 }
 
--- Set the external formatter binaries used by none-ls here.
+-- Set the external formatter and diagnostic sources used by none-ls here.
 -- NOTE: Install them with your system package manager (brew / go install / cargo install);
 -- mason-null-ls no longer auto-installs them.
 -- Check the below link for all supported sources.
@@ -209,11 +209,6 @@ settings["diagnostics_virtual_lines"] = true
 -- NOTE: This entry only affects diagnostic virtual lines.
 ---@type "Error"|"Warning"|"Information"|"Hint"
 settings["diagnostics_level"] = "Hint"
-
--- Set the command for handling external URLs here. The executable must be available on your $PATH.
--- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
----@type string
-settings["external_browser"] = "chrome-cli open"
 
 -- Set it to false to disable Snacks' large-file optimizations.
 ---@type boolean
