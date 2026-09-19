@@ -39,9 +39,9 @@ lang["chrisbra/csv.vim"] = {
 	ft = "csv",
 }
 lang["lervag/vimtex"] = {
-	lazy = true,
-	ft = "tex",
-	config = require("lang.vimtex"),
+	-- PDF viewers call VimtexInverseSearch in a fresh Neovim without a tex buffer.
+	lazy = false,
+	init = require("lang.vimtex"),
 }
 
 return lang

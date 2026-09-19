@@ -13,15 +13,10 @@ return function()
 	-- let g:vimtex_view_method = 'zathura'
 
 	if require("r1v3r.global").is_mac then
-		-- for skim
-		vim.g.vimtex_view_method = "skim"
-		vim.g.vimtex_view_skim_activate = 1
-		vim.g.vimtex_view_skim_sync = 1
-		vim.g.vimtex_view_skim_reading_bar = 1
+		-- VimTeX passes forward/inverse SyncTeX options to the sioyek CLI wrapper.
+		-- Its native callback routes back to the Neovim instance owning the document.
+		vim.g.vimtex_view_method = "sioyek"
 	end
-
-	-- config for skim to inverse search
-	-- nvim --headless -c "VimtexInverseSearch %line '%file'"
 
 	-- ======== for MacOS
 	-- $ brew tap zegervdv/zathura
