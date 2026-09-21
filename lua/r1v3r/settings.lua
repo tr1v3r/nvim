@@ -214,6 +214,17 @@ settings["diagnostics_level"] = "Hint"
 ---@type boolean
 settings["load_big_files_faster"] = true
 
+-- LeetCode defaults. Override these in `_device.lua` when switching accounts or regions.
+---@type "cn"|"com"
+settings["leetcode_domain"] = "cn"
+
+---@type string
+settings["leetcode_lang"] = "golang"
+
+-- Keep this aligned with the browser used to obtain LeetCode cookies.
+---@type string
+settings["leetcode_user_agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:155.0) Gecko/20100101 Firefox/155.0"
+
 -- settings["dashboard_image"] = {
 -- 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⢄⢢⢒⢤⢠⣐⢠⢠⡀⡄⡠⡀⡄⡀⠄⡀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
 -- 	[[⠀⠀⠀⠀⠀⠀⠀⠠⢐⢨⢔⢜⢭⢪⢪⢪⢪⢪⢪⢪⢲⢱⢱⢱⢱⢱⢍⢇⢇⢗⢜⢔⢔⣀⠀⠀⠀⠀⠀⠀]],

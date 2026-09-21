@@ -623,6 +623,12 @@ function keymaps.yazi()
 	}
 end
 
+function keymaps.leetcode()
+	return {
+		map("tC", "Leet"):mode("n"):cmd():noremap():desc("tool: Open LeetCode"):to_lazy_key(),
+	}
+end
+
 function keymaps.snacks()
 	return {
 		map("<C-g>", function()

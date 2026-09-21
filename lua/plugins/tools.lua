@@ -96,6 +96,16 @@ tools["mikavilpas/yazi.nvim"] = {
 	opts = require("tools.yazi").opts,
 	init = require("tools.yazi").init,
 }
+tools["kawre/leetcode.nvim"] = {
+	cmd = "Leet",
+	keys = keymaps.leetcode(),
+	opts = require("tools.leetcode").opts,
+	config = require("tools.leetcode").config,
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"MunifTanjim/nui.nvim",
+	},
+}
 -- tool["kevinhwang91/rnvimr"] = {
 -- 	lazy = false,
 -- 	-- cmd = { "RnvimrToggle" },
