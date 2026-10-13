@@ -275,7 +275,7 @@ return function()
 					.. vim
 						.fs
 						.normalize(path)
-						:gsub("^" .. vim.fs.normalize(vim.fn.getcwd()) .. "/", "")
+						:gsub("^" .. vim.pesc(vim.fs.normalize(vim.fn.getcwd())) .. "/", "")
 						-- :gsub("/", icons.ui.ArrowClosed)
 						:gsub("/", icons.ui.Separator)
 				-- :gsub("/", "> ")
