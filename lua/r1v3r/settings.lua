@@ -119,7 +119,8 @@ settings["format_block_filetypes"] = {
 -- Language servers enabled at bootstrap via `vim.lsp.enable()`.
 -- NOTE: They are NOT installed automatically anymore (mason only manages DAP
 -- adapters now). Install them as system packages, e.g. on macOS:
---   brew install bash-language-server vscode-langservers-extracted lua-language-server python-lsp-server
+--   brew install bash-language-server vscode-langservers-extracted lua-language-server
+--   npm install -g typescript@6 typescript-language-server
 --   (clangd ships with Xcode CLT / llvm, gopls via `go install`, dartls ships with the Dart SDK)
 -- pylsp (NOT brew — plugins must share its venv):
 --   uv tool install --system-certs --with python-lsp-black --with python-lsp-ruff --with pylsp-rope python-lsp-server
@@ -134,6 +135,7 @@ settings["lsp_deps"] = {
 	"lua_ls",
 	"pylsp",
 	"gopls",
+	"ts_ls",
 	-- "gopls@v0.15.3", -- for go 1.19-
 }
 
