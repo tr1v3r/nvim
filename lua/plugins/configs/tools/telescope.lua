@@ -68,7 +68,8 @@ return function()
 			selection_strategy = "reset",
 			sorting_strategy = "ascending",
 			color_devicons = true,
-			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
+			-- Lua patterns: a bare dot also matches '/' and hides ordinary cache/ packages (including symbols).
+			file_ignore_patterns = { "%.git/", "%.cache/", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
 				horizontal = {
 					prompt_position = "top",
