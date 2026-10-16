@@ -55,7 +55,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "ec309a0eaff6ea967e58c275996155ab5c16938d" },
   "opencode.nvim": { "branch": "main", "commit": "4d3580a0ebb060cfdd41fa93784a046706a728cf" },
   "paint.nvim": { "branch": "main", "commit": "07ffa7e0e41f8d5b4ee7aa1531a33812db7595ac" },
-  "persisted.nvim": { "branch": "main", "commit": "f276b33befabbe92796605eaeb191e8058da95c9" },
+  "persisted.nvim": { "branch": "main", "commit": "b865adb40cf43ace229f09cd4051d8d03b3f6fa8" },
   "persistent-breakpoints.nvim": { "branch": "main", "commit": "d1656221836207787b8a7969cc2dc72668c4742a" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
@@ -84,5 +84,5 @@
   "vimtex": { "branch": "master", "commit": "98615cefc441aaa5721c144ecfeacddcdf78816d" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" },
-  "yazi.nvim": { "branch": "main", "commit": "ba594d97021f9f033045b7ff3a2515199fb85272" }
+  "yazi.nvim": { "branch": "main", "commit": "39a28c41545a4624ba591cc7ade91a11e0de069d" }
 }
