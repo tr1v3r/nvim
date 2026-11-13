@@ -10,7 +10,19 @@ local function test()
 	for _, path in ipairs({ "ordinary/main.go", "cache/cache.go", "cache/benchmark_test.go" }) do
 		local source = project .. "/" .. path
 		vim.fn.mkdir(vim.fn.fnamemodify(source, ":h"), "p")
-		vim.fn.writefile({ "package symbols", "", "func Symbol() {}" }, source)
+		vim.fn.writefile({
+			"package symbols",
+			"",
+			"func First() {}",
+			"",
+			"func Symbol() {",
+			'\tprintln("inside Symbol")',
+			"}",
+			"",
+			"func Last() {",
+			'\tprintln("inside Last")',
+			"}",
+		}, source)
 		vim.cmd.edit(vim.fn.fnameescape(source))
 		local bufnr = vim.api.nvim_get_current_buf()
 		assert(
@@ -32,18 +44,31 @@ local function test()
 
 		local keymap = vim.fn.maparg("go", "n", false, true)
 		assert(type(keymap.callback) == "function", "go keymap was not installed")
-		keymap.callback()
-		local picker = require("telescope.actions.state").get_current_picker(vim.api.nvim_get_current_buf())
-		assert(picker.prompt_title == "Document Symbols", "go opened the wrong picker")
-		assert(
-			vim.wait(3000, function()
-				return picker.manager and picker.manager:num_results() == #symbols
-			end, 20),
-			"Telescope filtered out document symbols for " .. path
-		)
-		assert(picker:get_selection().name == "Symbol", "Wrong symbol selected for " .. path)
-		require("telescope.actions").close(picker.prompt_bufnr)
-		print(path .. ": gopls, Aerial and go picker OK")
+		-- Reopen from different symbols to catch first-row resets and stale cursor positions.
+		for _, target in ipairs({
+			{ name = "Symbol", line = 6, signature = 5 },
+			{ name = "Last", line = 10, signature = 9 },
+		}) do
+			vim.api.nvim_win_set_cursor(0, { target.line, 0 })
+			vim.api.nvim_exec_autocmds("CursorMoved", { buffer = bufnr })
+			keymap.callback()
+			local picker = require("telescope.actions.state").get_current_picker(vim.api.nvim_get_current_buf())
+			assert(picker.prompt_title == "Document Symbols", "go opened the wrong picker")
+			assert(
+				vim.wait(3000, function()
+					return picker.manager and picker.manager:num_results() == #symbols
+				end, 20),
+				"Telescope filtered out document symbols for " .. path
+			)
+			assert(
+				picker:get_selection().name == target.name,
+				string.format("go did not follow cursor to %s (selected %s)", target.name, picker:get_selection().name)
+			)
+			require("telescope.actions").select_default(picker.prompt_bufnr)
+			assert(vim.api.nvim_get_current_buf() == bufnr, "go jumped to the wrong buffer")
+			assert(vim.api.nvim_win_get_cursor(0)[1] == target.signature, "go did not jump to the function signature")
+		end
+		print(path .. ": gopls, Aerial and cursor-following go picker OK")
 	end
 
 	local patterns = require("telescope.config").values.file_ignore_patterns

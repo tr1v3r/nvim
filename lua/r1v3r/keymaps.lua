@@ -307,19 +307,8 @@ function keymaps.lsp(buf)
 	-- AerialToggle! with ! toggle aesial outline window and do not move cursor to outline window
 	map("gO", "AerialToggle"):mode("n"):cmd():buffer(buf):desc("lsp: Toggle outline"):set()
 	map("go", function()
+			-- Keep Aerial's cursor-based selection so Enter jumps to the current symbol's signature.
 			teleExtensions().aerial.aerial({ previewer = false })
-			-- aerial 会把 default_selection_index 设为离光标最近的符号（大纲跟随行为），
-			-- 且 selection_strategy = "reset" 在每次过滤后仍会重新选中该符号。
-			-- 清空它并把高亮复位到首行，与其他 telescope picker 行为一致。
-			vim.schedule(function()
-				local ok, picker = pcall(function()
-					return require("telescope.actions.state").get_current_picker(vim.api.nvim_win_get_buf(0))
-				end)
-				if ok and picker then
-					picker.default_selection_index = nil
-					picker:set_selection(picker:get_reset_row())
-				end
-			end)
 		end)
 		:mode("n")
 		:buffer(buf)
