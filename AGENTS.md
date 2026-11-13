@@ -27,7 +27,7 @@ No dedicated test framework is present. Every change should pass formatting, Lua
 
 ## Commit & Pull Request Guidelines
 
-History follows Conventional Commits, for example `feat: add plugin integration`, `fix(treesitter): support Neovim APIs`, and `chore(plugins): update plugins`. Keep each commit focused. Pull requests should explain the behavior change, list validation performed, link relevant issues, and include screenshots only for visible UI changes. Work lands directly on `master` (there is no `dev` branch here, unlike the parent dotfiles repo); CI runs on pushes to `master` and on PRs.
+History follows Conventional Commits, for example `feat: add plugin integration`, `fix(treesitter): support Neovim APIs`, and `chore(plugins): update plugins`. Keep each commit focused. Pull requests should explain the behavior change, list validation performed, link relevant issues, and include screenshots only for visible UI changes. Use `dev` for day-to-day development; `master` remains the default/stable branch and rejects force pushes for everyone, including administrators (an active GitHub ruleset has no bypass actors). Integrate `dev` into `master` without rewriting history. CI runs on pushes to both `dev` and `master` and on PRs; scheduled lockfile updates check out and push to `dev`.
 
 ## Local Configuration
 
