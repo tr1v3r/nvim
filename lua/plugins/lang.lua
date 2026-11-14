@@ -34,6 +34,15 @@ lang["iamcco/markdown-preview.nvim"] = {
 	keys = keymaps.markdown_preview(),
 	build = ":call mkdp#util#install()",
 }
+lang["MeanderingProgrammer/render-markdown.nvim"] = {
+	lazy = true,
+	ft = "markdown",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+	},
+	opts = {},
+}
 lang["chrisbra/csv.vim"] = {
 	lazy = true,
 	ft = "csv",
