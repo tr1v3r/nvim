@@ -24,6 +24,18 @@ return function()
 		),
 	})
 
+	-- Lua user-command completions expose a Funcref as cmdline.expand. Wilder's
+	-- file columns assign it to a lowercase Vimscript variable, causing E704.
+	local function file_column(component)
+		return function(ctx, result)
+			local expand = result.data and result.data["cmdline.expand"]
+			if type(expand) ~= "string" then
+				return ""
+			end
+			return component(ctx, result)
+		end
+	end
+
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
 		highlights = {
@@ -35,11 +47,11 @@ return function()
 		highlighter = wilder.lua_fzy_highlighter(),
 		left = {
 			" ",
-			wilder.popupmenu_devicons(),
-			wilder.popupmenu_buffer_flags({
+			file_column(wilder.popupmenu_devicons()),
+			file_column(wilder.popupmenu_buffer_flags({
 				flags = " a + ",
 				icons = { ["+"] = icons.ui.Pencil, a = icons.ui.Indicator, h = icons.ui.File },
-			}),
+			})),
 		},
 		right = {
 			" ",
